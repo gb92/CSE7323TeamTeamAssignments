@@ -17,6 +17,8 @@
 	<string>Assignment2.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>85AE0401-D6E5-4798-BF55-E23DCFCCAEDD</key>
+		<string>../../../../../../Downloads/PlayRollingStones</string>
 		<key>E79C87A7-68A6-433E-BD07-423096013488</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +37,14 @@
 			<string>E79C87A7-68A6-433E-BD07-423096013488</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CSE7323TeamTeamAssignments</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>85AE0401-D6E5-4798-BF55-E23DCFCCAEDD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlayRollingStones</string>
 		</dict>
 	</array>
 </dict>
