@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 
-@interface Assignment2ViewController : UIViewController
+@interface Assignment2ViewController : GLKViewController
 
 @end
