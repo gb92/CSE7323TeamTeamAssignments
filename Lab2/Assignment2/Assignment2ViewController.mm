@@ -13,10 +13,14 @@
 #import "SMUGraphHelper.h"
 #import "SMUFFTHelper.h"
 
+#include <vector>
 
 #define kBufferLength 4096
 
 @interface Assignment2ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *topFrequencyLabel1;
+
+@property (weak, nonatomic) IBOutlet UILabel *topFrequencyLabel2;
 
 @end
 
@@ -31,6 +35,12 @@ float *fftMagnitudeBuffer;
 float *fftPhaseBuffer;
 SMUFFTHelper *fftHelper;
 
+struct IndexMagnitudePair
+{
+    int index;
+    float magnitude;
+} ;
+
 //  override the GLKView draw function, from OpenGLES
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
     graphHelper->draw(); // draw the graph
@@ -43,10 +53,21 @@ SMUFFTHelper *fftHelper;
     // plot
     ringBuffer->FetchFreshData2(audioData, kBufferLength, 0, 1);
     fftHelper->forward(0,audioData, fftMagnitudeBuffer, fftPhaseBuffer);
+    float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,10);
+    std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
+    if(sortedMaximaFrequencies.size() > 0)
+    {
+        self.topFrequencyLabel1.text = [NSString stringWithFormat:@"Freq 1: %f", sortedMaximaFrequencies[0].index*(44100.0f/(kBufferLength))];
+    }
+    if(sortedMaximaFrequencies.size() > 1)
+    {
+        self.topFrequencyLabel2.text = [NSString stringWithFormat:@"Freq 2: %f", sortedMaximaFrequencies[1].index*(44100.0f/(kBufferLength))];
+    }
     graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
     graphHelper->setGraphData(1,fftMagnitudeBuffer,kBufferLength/2,sqrt(kBufferLength/2));
-    graphHelper->setGraphData(2,maximaDetection(fftMagnitudeBuffer,kBufferLength/2,100),kBufferLength/2,sqrt(kBufferLength/2));
+    graphHelper->setGraphData(2,freqMaximaArray,kBufferLength/2,sqrt(kBufferLength/2));
     graphHelper->update(); // update the graph
+    delete [] freqMaximaArray;
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
@@ -96,15 +117,15 @@ SMUFFTHelper *fftHelper;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"satisfaction" withExtension:@"mp3"];
-    
-    fileReader = [[AudioFileReader alloc]
-                  initWithAudioFileURL:inputFileURL
-                  samplingRate:audioManager.samplingRate
-                  numChannels:audioManager.numOutputChannels];
-    
-    [fileReader play];
-    fileReader.currentTime = 0.0;
+//    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"satisfaction" withExtension:@"mp3"];
+//    
+//    fileReader = [[AudioFileReader alloc]
+//                  initWithAudioFileURL:inputFileURL
+//                  samplingRate:audioManager.samplingRate
+//                  numChannels:audioManager.numOutputChannels];
+//    
+//    [fileReader play];
+//    fileReader.currentTime = 0.0;
     
     [audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
@@ -113,8 +134,10 @@ SMUFFTHelper *fftHelper;
     
 }
 
+
+//Moving window of local maxima amplitudes
 float* maximaDetection(float* freqSeries, int size, int wsize){
-    float maxima[size];
+    float *maxima = new float[size];
     float max = 0;
     
     for (int i=0; i<size; i++) {
@@ -142,6 +165,40 @@ float* maximaDetection(float* freqSeries, int size, int wsize){
     }
     
     return maxima;
+}
+
+bool compareIndexMagnitudePairs(IndexMagnitudePair a, IndexMagnitudePair b)
+{
+    return a.magnitude>b.magnitude;
+}
+
+//This function takes a filtered (moving window maxima) fft magnitude array and returns a sorted vector of index magnitude pairs
+std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries, int size){
+    std::vector<IndexMagnitudePair> indexMags;
+    
+    int count = 0;
+    
+    for (int i=0; i<(size-1); i++) {
+        if(filteredFreqSeries[i] == filteredFreqSeries[i+1]){
+            for (int j=i; j<size; j++) {
+                if(filteredFreqSeries[i] == filteredFreqSeries[j]){
+                    count++;
+                }
+                else{
+                        IndexMagnitudePair temp;
+                        temp.index = i + (j-i)/2;
+                        temp.magnitude = filteredFreqSeries[i];
+                        indexMags.push_back(temp);
+                        i = j;
+                        break;
+                }
+            }
+        }
+    }
+    
+    std::sort(indexMags.begin(), indexMags.end(), compareIndexMagnitudePairs);
+    
+    return indexMags;
 }
 
 -(BOOL)prefersStatusBarHidden{
