@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99F419DB18B4349A00EA1D42 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99F419D418B4349A00EA1D42 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		99F419DC18B4349A00EA1D42 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F419D618B4349A00EA1D42 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		99F419DD18B4349A00EA1D42 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F419D818B4349A00EA1D42 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		99F419DE18B4349A00EA1D42 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99F419DA18B4349A00EA1D42 /* RingBuffer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF9604AA18AC318000E51248 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9604A918AC318000E51248 /* Foundation.framework */; };
 		EF9604AC18AC318000E51248 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9604AB18AC318000E51248 /* CoreGraphics.framework */; };
 		EF9604AE18AC318000E51248 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9604AD18AC318000E51248 /* UIKit.framework */; };
@@ -21,12 +25,7 @@
 		EF9604CB18AC318000E51248 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9604AD18AC318000E51248 /* UIKit.framework */; };
 		EF9604D318AC318000E51248 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF9604D118AC318000E51248 /* InfoPlist.strings */; };
 		EF9604D518AC318000E51248 /* Assignment2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9604D418AC318000E51248 /* Assignment2Tests.m */; };
-		EF9604E618AC31FA00E51248 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF9604DF18AC31FA00E51248 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		EF9604E718AC31FA00E51248 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9604E118AC31FA00E51248 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		EF9604E818AC31FA00E51248 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9604E318AC31FA00E51248 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		EF9604E918AC31FA00E51248 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF9604E518AC31FA00E51248 /* RingBuffer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF9604F418AC33F300E51248 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9604F318AC33F300E51248 /* GLKit.framework */; };
-		EF9604F618AC35B100E51248 /* satisfaction.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF9604F518AC35B100E51248 /* satisfaction.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +39,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		99F419D318B4349A00EA1D42 /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileReader.h; path = Assignment2/AudioFileReader.h; sourceTree = "<group>"; };
+		99F419D418B4349A00EA1D42 /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioFileReader.mm; path = Assignment2/AudioFileReader.mm; sourceTree = "<group>"; };
+		99F419D518B4349A00EA1D42 /* AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileWriter.h; path = Assignment2/AudioFileWriter.h; sourceTree = "<group>"; };
+		99F419D618B4349A00EA1D42 /* AudioFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioFileWriter.m; path = Assignment2/AudioFileWriter.m; sourceTree = "<group>"; };
+		99F419D718B4349A00EA1D42 /* Novocaine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Novocaine.h; path = Assignment2/Novocaine.h; sourceTree = "<group>"; };
+		99F419D818B4349A00EA1D42 /* Novocaine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Novocaine.m; path = Assignment2/Novocaine.m; sourceTree = "<group>"; };
+		99F419D918B4349A00EA1D42 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingBuffer.h; path = Assignment2/RingBuffer.h; sourceTree = "<group>"; };
+		99F419DA18B4349A00EA1D42 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RingBuffer.mm; path = Assignment2/RingBuffer.mm; sourceTree = "<group>"; };
+		99F419DF18B434FF00EA1D42 /* SMUFFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUFFTHelper.h; sourceTree = "<group>"; };
+		99F419E018B434FF00EA1D42 /* SMUGraphHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
 		EF9604A618AC318000E51248 /* Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9604A918AC318000E51248 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF9604AB18AC318000E51248 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,18 +68,7 @@
 		EF9604D018AC318000E51248 /* Assignment2Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment2Tests-Info.plist"; sourceTree = "<group>"; };
 		EF9604D218AC318000E51248 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EF9604D418AC318000E51248 /* Assignment2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment2Tests.m; sourceTree = "<group>"; };
-		EF9604DE18AC31FA00E51248 /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileReader.h; path = ../PlayRollingStones/AudioFileReader.h; sourceTree = "<group>"; };
-		EF9604DF18AC31FA00E51248 /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AudioFileReader.mm; path = ../PlayRollingStones/AudioFileReader.mm; sourceTree = "<group>"; };
-		EF9604E018AC31FA00E51248 /* AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileWriter.h; path = ../PlayRollingStones/AudioFileWriter.h; sourceTree = "<group>"; };
-		EF9604E118AC31FA00E51248 /* AudioFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioFileWriter.m; path = ../PlayRollingStones/AudioFileWriter.m; sourceTree = "<group>"; };
-		EF9604E218AC31FA00E51248 /* Novocaine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Novocaine.h; path = ../PlayRollingStones/Novocaine.h; sourceTree = "<group>"; };
-		EF9604E318AC31FA00E51248 /* Novocaine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Novocaine.m; path = ../PlayRollingStones/Novocaine.m; sourceTree = "<group>"; };
-		EF9604E418AC31FA00E51248 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingBuffer.h; path = ../PlayRollingStones/RingBuffer.h; sourceTree = "<group>"; };
-		EF9604E518AC31FA00E51248 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RingBuffer.mm; path = ../PlayRollingStones/RingBuffer.mm; sourceTree = "<group>"; };
-		EF9604EF18AC334400E51248 /* SMUGraphHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMUGraphHelper.h; path = ../../PlayRollingStones/PlayRollingStones/SMUGraphHelper.h; sourceTree = "<group>"; };
-		EF9604F018AC334400E51248 /* SMUFFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMUFFTHelper.h; path = ../../PlayRollingStones/PlayRollingStones/SMUFFTHelper.h; sourceTree = "<group>"; };
 		EF9604F318AC33F300E51248 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		EF9604F518AC35B100E51248 /* satisfaction.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = satisfaction.mp3; path = ../../PlayRollingStones/PlayRollingStones/satisfaction.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,13 +131,13 @@
 		EF9604AF18AC318000E51248 /* Assignment2 */ = {
 			isa = PBXGroup;
 			children = (
+				99F419DF18B434FF00EA1D42 /* SMUFFTHelper.h */,
+				99F419E018B434FF00EA1D42 /* SMUGraphHelper.h */,
 				EF9604B818AC318000E51248 /* Assignment2AppDelegate.h */,
 				EF9604B918AC318000E51248 /* Assignment2AppDelegate.m */,
 				EF9604BB18AC318000E51248 /* Main.storyboard */,
 				EF9604BE18AC318000E51248 /* Assignment2ViewController.h */,
 				EF9604BF18AC318000E51248 /* Assignment2ViewController.mm */,
-				EF9604EF18AC334400E51248 /* SMUGraphHelper.h */,
-				EF9604F018AC334400E51248 /* SMUFFTHelper.h */,
 				EF9604C118AC318000E51248 /* Images.xcassets */,
 				EF9604B018AC318000E51248 /* Supporting Files */,
 			);
@@ -149,7 +147,6 @@
 		EF9604B018AC318000E51248 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF9604F518AC35B100E51248 /* satisfaction.mp3 */,
 				EF9604B118AC318000E51248 /* Assignment2-Info.plist */,
 				EF9604B218AC318000E51248 /* InfoPlist.strings */,
 				EF9604B518AC318000E51248 /* main.m */,
@@ -179,14 +176,14 @@
 		EF9604EA18AC321000E51248 /* Novocaine */ = {
 			isa = PBXGroup;
 			children = (
-				EF9604DE18AC31FA00E51248 /* AudioFileReader.h */,
-				EF9604DF18AC31FA00E51248 /* AudioFileReader.mm */,
-				EF9604E018AC31FA00E51248 /* AudioFileWriter.h */,
-				EF9604E118AC31FA00E51248 /* AudioFileWriter.m */,
-				EF9604E218AC31FA00E51248 /* Novocaine.h */,
-				EF9604E318AC31FA00E51248 /* Novocaine.m */,
-				EF9604E418AC31FA00E51248 /* RingBuffer.h */,
-				EF9604E518AC31FA00E51248 /* RingBuffer.mm */,
+				99F419D318B4349A00EA1D42 /* AudioFileReader.h */,
+				99F419D418B4349A00EA1D42 /* AudioFileReader.mm */,
+				99F419D518B4349A00EA1D42 /* AudioFileWriter.h */,
+				99F419D618B4349A00EA1D42 /* AudioFileWriter.m */,
+				99F419D718B4349A00EA1D42 /* Novocaine.h */,
+				99F419D818B4349A00EA1D42 /* Novocaine.m */,
+				99F419D918B4349A00EA1D42 /* RingBuffer.h */,
+				99F419DA18B4349A00EA1D42 /* RingBuffer.mm */,
 			);
 			name = Novocaine;
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 			files = (
 				EF9604C218AC318000E51248 /* Images.xcassets in Resources */,
 				EF9604B418AC318000E51248 /* InfoPlist.strings in Resources */,
-				EF9604F618AC35B100E51248 /* satisfaction.mp3 in Resources */,
 				EF9604BD18AC318000E51248 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,11 +288,11 @@
 			files = (
 				EF9604C018AC318000E51248 /* Assignment2ViewController.mm in Sources */,
 				EF9604BA18AC318000E51248 /* Assignment2AppDelegate.m in Sources */,
-				EF9604E818AC31FA00E51248 /* Novocaine.m in Sources */,
-				EF9604E918AC31FA00E51248 /* RingBuffer.mm in Sources */,
-				EF9604E718AC31FA00E51248 /* AudioFileWriter.m in Sources */,
+				99F419DC18B4349A00EA1D42 /* AudioFileWriter.m in Sources */,
+				99F419DD18B4349A00EA1D42 /* Novocaine.m in Sources */,
 				EF9604B618AC318000E51248 /* main.m in Sources */,
-				EF9604E618AC31FA00E51248 /* AudioFileReader.mm in Sources */,
+				99F419DE18B4349A00EA1D42 /* RingBuffer.mm in Sources */,
+				99F419DB18B4349A00EA1D42 /* AudioFileReader.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +501,7 @@
 				EF9604DA18AC318000E51248 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF9604DB18AC318000E51248 /* Build configuration list for PBXNativeTarget "Assignment2Tests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +510,7 @@
 				EF9604DD18AC318000E51248 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

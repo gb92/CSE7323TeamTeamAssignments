@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EB33E4CE-141B-4646-8E43-3D6DE598F86B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Assignment2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>10C090AA-909E-4350-974B-508516F583ED</key>
+		<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lab2/Assignment2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>10C090AA-909E-4350-974B-508516F583ED</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>10C090AA-909E-4350-974B-508516F583ED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>10C090AA-909E-4350-974B-508516F583ED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CSE7323TeamTeamAssignments</string>
+		</dict>
+	</array>
+</dict>
+</plist>
