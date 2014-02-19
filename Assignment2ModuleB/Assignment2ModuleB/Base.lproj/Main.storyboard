@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="xER-RS-8xK">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--GLKit View Controller-->
+        <scene sceneID="zZk-dY-YkO">
+            <objects>
+                <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="xER-RS-8xK" customClass="A2MBViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pvj-FS-UPA"/>
+                        <viewControllerLayoutGuide type="bottom" id="M5N-c6-B91"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KU3-yg-pM9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C33-oV-ZhS">
+                                <rect key="frame" x="37" y="476" width="118" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyK-8Q-FDq">
+                                <rect key="frame" x="192" y="479" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play Tone">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ToneButtonPressed:" destination="xER-RS-8xK" eventType="touchUpInside" id="gq4-Ze-LOZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="YyK-8Q-FDq" firstAttribute="leading" secondItem="C33-oV-ZhS" secondAttribute="trailing" constant="39" id="6FT-41-zdc"/>
+                            <constraint firstItem="M5N-c6-B91" firstAttribute="top" secondItem="YyK-8Q-FDq" secondAttribute="bottom" constant="59" id="E6N-JN-vso"/>
+                            <constraint firstItem="M5N-c6-B91" firstAttribute="top" secondItem="C33-oV-ZhS" secondAttribute="bottom" constant="59" id="Olv-lt-tif"/>
+                            <constraint firstItem="C33-oV-ZhS" firstAttribute="leading" secondItem="KU3-yg-pM9" secondAttribute="leading" constant="39" id="c0s-El-4QZ"/>
+                            <constraint firstAttribute="trailing" secondItem="YyK-8Q-FDq" secondAttribute="trailing" constant="53" id="y3u-Ks-MQf"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="xER-RS-8xK" id="uLf-dn-8H8"/>
+                        </connections>
+                    </glkView>
+                    <connections>
+                        <outlet property="toneFrequencySlider" destination="C33-oV-ZhS" id="mVQ-1K-skx"/>
+                    </connections>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sdB-bI-Bcx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-116" y="7"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
