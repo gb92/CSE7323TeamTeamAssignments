@@ -30,12 +30,22 @@
                                     <action selector="ToneButtonPressed:" destination="xER-RS-8xK" eventType="touchUpInside" id="gq4-Ze-LOZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVw-R2-x1q">
+                                <rect key="frame" x="139" y="440" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="YyK-8Q-FDq" firstAttribute="leading" secondItem="C33-oV-ZhS" secondAttribute="trailing" constant="39" id="6FT-41-zdc"/>
                             <constraint firstItem="M5N-c6-B91" firstAttribute="top" secondItem="YyK-8Q-FDq" secondAttribute="bottom" constant="59" id="E6N-JN-vso"/>
                             <constraint firstItem="M5N-c6-B91" firstAttribute="top" secondItem="C33-oV-ZhS" secondAttribute="bottom" constant="59" id="Olv-lt-tif"/>
+                            <constraint firstItem="bVw-R2-x1q" firstAttribute="leading" secondItem="KU3-yg-pM9" secondAttribute="leading" constant="139" id="R8a-Ts-zss"/>
                             <constraint firstItem="C33-oV-ZhS" firstAttribute="leading" secondItem="KU3-yg-pM9" secondAttribute="leading" constant="39" id="c0s-El-4QZ"/>
+                            <constraint firstItem="C33-oV-ZhS" firstAttribute="top" secondItem="bVw-R2-x1q" secondAttribute="bottom" constant="36" id="j28-wV-ZLe"/>
+                            <constraint firstAttribute="trailing" secondItem="bVw-R2-x1q" secondAttribute="trailing" constant="139" id="mXX-fU-fj4"/>
                             <constraint firstAttribute="trailing" secondItem="YyK-8Q-FDq" secondAttribute="trailing" constant="53" id="y3u-Ks-MQf"/>
                         </constraints>
                         <connections>
@@ -43,6 +53,7 @@
                         </connections>
                     </glkView>
                     <connections>
+                        <outlet property="movementLabel" destination="bVw-R2-x1q" id="ZEb-qG-Mps"/>
                         <outlet property="toneFrequencySlider" destination="C33-oV-ZhS" id="mVQ-1K-skx"/>
                     </connections>
                 </glkViewController>

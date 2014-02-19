@@ -21,6 +21,7 @@
 
 @interface A2MBViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *movementLabel;
 
 @property (weak, nonatomic) IBOutlet UISlider *toneFrequencySlider;
 
