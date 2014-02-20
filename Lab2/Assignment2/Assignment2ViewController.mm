@@ -15,7 +15,7 @@
 
 #include <vector>
 
-#define kBufferLength 4096
+#define kBufferLength 8192 //4096
 
 @interface Assignment2ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *topFrequencyLabel1;
@@ -53,7 +53,7 @@ struct IndexMagnitudePair
     // plot
     ringBuffer->FetchFreshData2(audioData, kBufferLength, 0, 1);
     fftHelper->forward(0,audioData, fftMagnitudeBuffer, fftPhaseBuffer);
-    float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,10);
+    float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,5);
     std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
     if(sortedMaximaFrequencies.size() > 0)
     {
@@ -178,7 +178,10 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
     
     int count = 0;
     
-    for (int i=0; i<(size-1); i++) {
+    int freqThresholdindex = (int) ceil(500.0f/(44100.0f/(kBufferLength))); //ignore everything under 500 Hz
+    printf("Threshold Index: %d\n", freqThresholdindex);
+    
+    for (int i=freqThresholdindex; i<(size-1); i++) {
         if(filteredFreqSeries[i] == filteredFreqSeries[i+1]){
             for (int j=i; j<size; j++) {
                 if(filteredFreqSeries[i] == filteredFreqSeries[j]){
@@ -190,6 +193,7 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
                         temp.magnitude = filteredFreqSeries[i];
                         indexMags.push_back(temp);
                         i = j;
+                        printf("Index added: %d\n", temp.index);
                         break;
                 }
             }
