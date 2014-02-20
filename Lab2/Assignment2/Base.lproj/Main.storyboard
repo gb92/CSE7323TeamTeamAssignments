@@ -17,14 +17,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS A LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLo-lq-5Mq">
-                                <rect key="frame" x="20" y="420" width="280" height="21"/>
+                                <rect key="frame" x="20" y="478" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="bK5-Yw-CKd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSz-3D-SBg">
-                                <rect key="frame" x="20" y="475" width="280" height="0.0"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS ANOTHER LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSz-3D-SBg">
+                                <rect key="frame" x="20" y="515" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,13 +37,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dSz-3D-SBg" secondAttribute="trailing" constant="20" id="0Gp-LX-vUN"/>
-                            <constraint firstAttribute="trailing" secondItem="OLo-lq-5Mq" secondAttribute="trailing" constant="20" id="1HQ-OQ-wCW"/>
-                            <constraint firstItem="230-IY-OVU" firstAttribute="top" secondItem="dSz-3D-SBg" secondAttribute="bottom" constant="93" id="7JU-hd-ZhY"/>
-                            <constraint firstItem="OLo-lq-5Mq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="F6W-2X-Zye"/>
-                            <constraint firstItem="dSz-3D-SBg" firstAttribute="top" secondItem="OLo-lq-5Mq" secondAttribute="bottom" constant="34" id="SLZ-d2-CUX"/>
+                            <constraint firstItem="OLo-lq-5Mq" firstAttribute="trailing" secondItem="dSz-3D-SBg" secondAttribute="trailing" id="6mw-wh-ghA"/>
+                            <constraint firstItem="OLo-lq-5Mq" firstAttribute="leading" secondItem="dSz-3D-SBg" secondAttribute="leading" id="NLT-Yl-pMN"/>
+                            <constraint firstItem="230-IY-OVU" firstAttribute="top" secondItem="dSz-3D-SBg" secondAttribute="bottom" constant="32" id="VDd-tR-2CJ"/>
+                            <constraint firstItem="dSz-3D-SBg" firstAttribute="top" secondItem="OLo-lq-5Mq" secondAttribute="bottom" constant="16" id="ffs-Nc-TMj"/>
                             <constraint firstItem="dSz-3D-SBg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="v9G-Yq-t8X"/>
-                            <constraint firstItem="dSz-3D-SBg" firstAttribute="width" secondItem="OLo-lq-5Mq" secondAttribute="width" id="wWj-Qb-Oii"/>
-                            <constraint firstItem="dSz-3D-SBg" firstAttribute="top" secondItem="OLo-lq-5Mq" secondAttribute="bottom" constant="34" id="yM9-tj-Nh8"/>
                         </constraints>
                     </view>
                     <connections>

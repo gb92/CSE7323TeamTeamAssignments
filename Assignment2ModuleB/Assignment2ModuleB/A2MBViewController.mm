@@ -17,7 +17,7 @@
 
 #include <vector>
 
-#define kBufferLength 16384
+#define kBufferLength 8192
 
 @interface A2MBViewController ()
 
@@ -38,6 +38,7 @@ float *audioData;
 float *fftMagnitudeBuffer;
 float *fftPhaseBuffer;
 SMUFFTHelper *fftHelper;
+std::vector<int> previousStates;
 
 struct IndexMagnitudePair
 {
@@ -60,7 +61,7 @@ struct IndexMagnitudePair
     // plot
     ringBuffer->FetchFreshData2(audioData, kBufferLength, 0, 1);
     fftHelper->forward(0,audioData, fftMagnitudeBuffer, fftPhaseBuffer);
-    float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,10);
+    float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,5);
     
     std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
     checkForMovement(sortedMaximaFrequencies, (A2MBViewController *) self);
@@ -171,7 +172,7 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
     int count = 0;
     
     int freqThresholdindex = (int) ceil(12000.0f/(44100.0f/(kBufferLength))); //ignore everything under 500 Hz
-    printf("Threshold Index: %d\n", freqThresholdindex);
+    //printf("Threshold Index: %d\n", freqThresholdindex);
     
     for (int i=freqThresholdindex; i<(size-1); i++){
         if(filteredFreqSeries[i] == filteredFreqSeries[i+1]){
@@ -200,24 +201,65 @@ void checkForMovement(std::vector<IndexMagnitudePair> sortedMaximaFrequencies, A
 {
     if(This.isPlayingTone)
     {
-        //for(int i=0; i<sortedMaximaFrequencies.size(); i++)
-        //{
-        float freq=sortedMaximaFrequencies[1].index*(audioManager.samplingRate/(kBufferLength));
-        float currentPlayingFrequency=15000+(This.toneFrequencySlider.value*5000);
-        float threshold=10;
-        if(freq!=currentPlayingFrequency)
+        if(sortedMaximaFrequencies.size() > 0)
         {
-            if(freq > currentPlayingFrequency && freq-currentPlayingFrequency>=threshold)
+            float currentPlayingFrequency=15000+(This.toneFrequencySlider.value*5000);
+            float lower_threshold=5;
+            float higher_threshold=100;
+            float amplitude_threshold=sortedMaximaFrequencies[0].magnitude*0.25;
+            
+            float freq=sortedMaximaFrequencies[1].index*(audioManager.samplingRate/(kBufferLength));
+            float distance = abs(freq-currentPlayingFrequency);
+            if(freq>currentPlayingFrequency && distance>=lower_threshold && distance<=higher_threshold && sortedMaximaFrequencies[1].magnitude>=amplitude_threshold)
+            {
+                previousStates.push_back(1);
+                //[This.movementLabel setText:@"Moving Towards"];
+            }
+            else if(freq<currentPlayingFrequency && distance>=lower_threshold && distance<=higher_threshold && sortedMaximaFrequencies[1].magnitude>=amplitude_threshold)
+            {
+                previousStates.push_back(-1);
+                //[This.movementLabel setText:@"Moving Away"];
+
+            }else{
+                previousStates.push_back(0);
+                
+                //[This.movementLabel setText:@"Not Moving"];
+            }
+            
+            if(previousStates.size()>5)
+            {
+                previousStates.erase(previousStates.begin());
+            }
+            
+            float avg=0.0f;
+            
+            for(int i=0; i<previousStates.size();i++)
+            {
+                avg+=previousStates.at(i);
+            }
+            
+            avg=avg/previousStates.size();
+            
+            int roundedAvg=rintf(avg);
+            
+            if(roundedAvg==1)
             {
                 [This.movementLabel setText:@"Moving Towards"];
             }
-            else if(freq < currentPlayingFrequency && currentPlayingFrequency-freq>=threshold)
+            else if(roundedAvg == -1)
             {
                 [This.movementLabel setText:@"Moving Away"];
             }
-        }
+            else
+            {
+                [This.movementLabel setText:@"Not Moving"];
+            }
         
-        //}
+        }else{
+            [This.movementLabel setText:@"Not Moving"];
+        }
+    }else{
+        [This.movementLabel setText:@"Not Playing Tone"];
     }
 }
 

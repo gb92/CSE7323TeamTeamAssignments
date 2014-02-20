@@ -64,6 +64,9 @@ struct IndexMagnitudePair
         self.topFrequencyLabel2.text = [NSString stringWithFormat:@"Freq 2: %f", sortedMaximaFrequencies[1].index*(44100.0f/(kBufferLength))];
     }
     graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
+//    float maxVal = 0;
+//    vDSP_maxv(fftMagnitudeBuffer, 1, &maxVal, kBufferLength);
+//    vDSP_vdbcon(fftMagnitudeBuffer, 1, &maxVal , fftMagnitudeBuffer, 1, kBufferLength, 1);
     graphHelper->setGraphData(1,fftMagnitudeBuffer,kBufferLength/2,sqrt(kBufferLength/2));
     graphHelper->setGraphData(2,freqMaximaArray,kBufferLength/2,sqrt(kBufferLength/2));
     graphHelper->update(); // update the graph
@@ -109,7 +112,7 @@ struct IndexMagnitudePair
                                   numDataArraysToGraph,
                                   PlotStyleSeparated);//drawing starts immediately after call
     
-    graphHelper->SetBounds(-0.9,0.9,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
+    graphHelper->SetBounds(-0.4,0.9,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
     
     
 }
@@ -135,27 +138,28 @@ struct IndexMagnitudePair
 }
 
 
-//Moving window of local maxima amplitudes
+//Moving window of local maxima amplitudes. Window of size wsize moves accross the entire array, setting each element to the max in the window
 float* maximaDetection(float* freqSeries, int size, int wsize){
     float *maxima = new float[size];
     float max = 0;
     
     for (int i=0; i<size; i++) {
         max = 0;
+        //case when dealing with the first several elements, cutting off the first element(s) of the window (not considering a full window of elements
         if(i<((wsize+1)/2)){
             for(int j=0; j<i+1; j++) {
                 if(max < freqSeries[j])
                     max = freqSeries[j];
             }
             maxima[i] = max;
-        }
+        }//Normal case when the full window size is being considered
         else if(i>size-1-((wsize-1)/2)){
             for(int j=i-((wsize-1)/2); j<size; j++) {
                 if(max < freqSeries[j])
                     max = freqSeries[j];
             }
             maxima[i] = max;
-        }else{
+        }else{//case when dealing with the last several elements, cutting off the end element(s) of the window (not considering a full window of elements
             for(int j=i-((wsize-1)/2); j<i+((wsize-1)/2)+1; j++) {
                 if(max < freqSeries[j])
                     max = freqSeries[j];
@@ -179,8 +183,9 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
     int count = 0;
     
     int freqThresholdindex = (int) ceil(500.0f/(44100.0f/(kBufferLength))); //ignore everything under 500 Hz
-    printf("Threshold Index: %d\n", freqThresholdindex);
+    //printf("Threshold Index: %d\n", freqThresholdindex);
     
+    //Iterating through the array of freq amplitudes looking for duplicates (indicating maxima)
     for (int i=freqThresholdindex; i<(size-1); i++) {
         if(filteredFreqSeries[i] == filteredFreqSeries[i+1]){
             for (int j=i; j<size; j++) {
@@ -189,18 +194,18 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
                 }
                 else{
                         IndexMagnitudePair temp;
-                        temp.index = i + (j-i)/2;
+                        temp.index = i + (j-i)/2; //choose the center of the maxima range because we expect good noise suppression, resulting in a near impulse
                         temp.magnitude = filteredFreqSeries[i];
                         indexMags.push_back(temp);
                         i = j;
-                        printf("Index added: %d\n", temp.index);
+                        //printf("Index added: %d\n", temp.index);
                         break;
                 }
             }
         }
     }
     
-    std::sort(indexMags.begin(), indexMags.end(), compareIndexMagnitudePairs);
+    std::sort(indexMags.begin(), indexMags.end(), compareIndexMagnitudePairs); //Sorting the vector of index/magnitude pairs (highest magnitudes first.
     
     return indexMags;
 }
