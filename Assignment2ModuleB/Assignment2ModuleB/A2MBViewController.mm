@@ -17,13 +17,15 @@
 
 #include <vector>
 
-#define kBufferLength 4096
+#define kBufferLength 16384
 
 @interface A2MBViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *movementLabel;
 
 @property (weak, nonatomic) IBOutlet UISlider *toneFrequencySlider;
+
+@property (nonatomic) bool isPlayingTone;
 
 @end
 
@@ -59,7 +61,9 @@ struct IndexMagnitudePair
     ringBuffer->FetchFreshData2(audioData, kBufferLength, 0, 1);
     fftHelper->forward(0,audioData, fftMagnitudeBuffer, fftPhaseBuffer);
     float *freqMaximaArray = maximaDetection(fftMagnitudeBuffer,kBufferLength/2,10);
-    //std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
+    
+    std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
+    checkForMovement(sortedMaximaFrequencies, (A2MBViewController *) self);
     
     graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
     graphHelper->setGraphData(1,fftMagnitudeBuffer,kBufferLength/2,sqrt(kBufferLength/2));
@@ -166,7 +170,10 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
     
     int count = 0;
     
-    for (int i=0; i<(size-1); i++) {
+    int freqThresholdindex = (int) ceil(12000.0f/(44100.0f/(kBufferLength))); //ignore everything under 500 Hz
+    printf("Threshold Index: %d\n", freqThresholdindex);
+    
+    for (int i=freqThresholdindex; i<(size-1); i++){
         if(filteredFreqSeries[i] == filteredFreqSeries[i+1]){
             for (int j=i; j<size; j++) {
                 if(filteredFreqSeries[i] == filteredFreqSeries[j]){
@@ -189,6 +196,31 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
     return indexMags;
 }
 
+void checkForMovement(std::vector<IndexMagnitudePair> sortedMaximaFrequencies, A2MBViewController * This)
+{
+    if(This.isPlayingTone)
+    {
+        //for(int i=0; i<sortedMaximaFrequencies.size(); i++)
+        //{
+        float freq=sortedMaximaFrequencies[1].index*(audioManager.samplingRate/(kBufferLength));
+        float currentPlayingFrequency=15000+(This.toneFrequencySlider.value*5000);
+        float threshold=10;
+        if(freq!=currentPlayingFrequency)
+        {
+            if(freq > currentPlayingFrequency && freq-currentPlayingFrequency>=threshold)
+            {
+                [This.movementLabel setText:@"Moving Towards"];
+            }
+            else if(freq < currentPlayingFrequency && currentPlayingFrequency-freq>=threshold)
+            {
+                [This.movementLabel setText:@"Moving Away"];
+            }
+        }
+        
+        //}
+    }
+}
+
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
@@ -196,7 +228,7 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
 - (IBAction)ToneButtonPressed:(id)sender {
     UIButton *button=(UIButton *)sender;
     
-    if([button.titleLabel.text isEqual:@"Play Tone"])
+    if(!self.isPlayingTone)
     {
         [button setTitle:@"Stop Tone" forState:UIControlStateNormal];
         
@@ -210,7 +242,7 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
             for (int i=0; i < numFrames; ++i)
             {
                 for(int j=0;j<numChannels;j++){
-                    data[i*numChannels+j] = 0.8*sin(phase);
+                    data[i*numChannels+j] = sin(phase);
                     
                 }
                 phase += phaseIncrement;
@@ -220,12 +252,15 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
             }
 
         }];
+        self.isPlayingTone=YES;
     }
     else
     {
         [button setTitle:@"Play Tone" forState:UIControlStateNormal];
         
         [audioManager setOutputBlock:nil];
+        
+        self.isPlayingTone=NO;
     }
 }
 
