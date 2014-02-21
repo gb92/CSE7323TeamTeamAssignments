@@ -66,9 +66,14 @@ struct IndexMagnitudePair
     std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
     checkForMovement(sortedMaximaFrequencies, (A2MBViewController *) self);
     
-    graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
-    graphHelper->setGraphData(1,fftMagnitudeBuffer,kBufferLength/2,sqrt(kBufferLength/2));
-    graphHelper->setGraphData(2,freqMaximaArray,kBufferLength/2,sqrt(kBufferLength/2));
+    //graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
+    
+    float maxVal = 0;
+    vDSP_maxv(fftMagnitudeBuffer, 1, &maxVal, kBufferLength);
+    vDSP_vdbcon(fftMagnitudeBuffer, 1, &maxVal , fftMagnitudeBuffer, 1, kBufferLength, 1);
+    
+    graphHelper->setGraphData(0,fftMagnitudeBuffer,kBufferLength/2,sqrt(kBufferLength/2));
+    //graphHelper->setGraphData(2,freqMaximaArray,kBufferLength/2,sqrt(kBufferLength/2));
     graphHelper->update(); // update the graph
     delete [] freqMaximaArray;
 }
@@ -106,13 +111,13 @@ struct IndexMagnitudePair
     
     // start animating the graph
     int framesPerSecond = 15;
-    int numDataArraysToGraph = 3;
+    int numDataArraysToGraph = 1;
     graphHelper = new GraphHelper(self,
                                   framesPerSecond,
                                   numDataArraysToGraph,
                                   PlotStyleSeparated);//drawing starts immediately after call
     
-    graphHelper->SetBounds(-0.9,0.9,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
+    graphHelper->SetBounds(-0.6,1,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
     
     
 }
@@ -199,63 +204,76 @@ std::vector<IndexMagnitudePair> sortMaximaFrequencies(float* filteredFreqSeries,
 
 void checkForMovement(std::vector<IndexMagnitudePair> sortedMaximaFrequencies, A2MBViewController * This)
 {
+    //if the tone is being played
     if(This.isPlayingTone)
     {
-        if(sortedMaximaFrequencies.size() > 0)
+        //and there is actually more than 1 maxima frequencies
+        if(sortedMaximaFrequencies.size() > 1)
         {
+            //calculate the current playing frequency
+            //(should have made this a variable, that was modified when slider updates)
             float currentPlayingFrequency=15000+(This.toneFrequencySlider.value*5000);
+            
+            //set the thresholds
             float lower_threshold=5;
             float higher_threshold=100;
             float amplitude_threshold=sortedMaximaFrequencies[0].magnitude*0.25;
             
+            //calculate the freque
             float freq=sortedMaximaFrequencies[1].index*(audioManager.samplingRate/(kBufferLength));
             float distance = abs(freq-currentPlayingFrequency);
+            
+            //add the current state to the vector
             if(freq>currentPlayingFrequency && distance>=lower_threshold && distance<=higher_threshold && sortedMaximaFrequencies[1].magnitude>=amplitude_threshold)
             {
                 previousStates.push_back(1);
-                //[This.movementLabel setText:@"Moving Towards"];
             }
             else if(freq<currentPlayingFrequency && distance>=lower_threshold && distance<=higher_threshold && sortedMaximaFrequencies[1].magnitude>=amplitude_threshold)
             {
                 previousStates.push_back(-1);
-                //[This.movementLabel setText:@"Moving Away"];
 
             }else{
                 previousStates.push_back(0);
                 
-                //[This.movementLabel setText:@"Not Moving"];
             }
             
-            if(previousStates.size()>5)
-            {
-                previousStates.erase(previousStates.begin());
-            }
             
-            float avg=0.0f;
-            
-            for(int i=0; i<previousStates.size();i++)
-            {
-                avg+=previousStates.at(i);
-            }
-            
-            avg=avg/previousStates.size();
-            
-            int roundedAvg=rintf(avg);
-            
-            if(roundedAvg==1)
-            {
-                [This.movementLabel setText:@"Moving Towards"];
-            }
-            else if(roundedAvg == -1)
-            {
-                [This.movementLabel setText:@"Moving Away"];
-            }
-            else
-            {
-                [This.movementLabel setText:@"Not Moving"];
-            }
-        
         }else{
+            previousStates.push_back(0);
+        }
+
+        //dequeue states from the beginning of the vector
+        if(previousStates.size()>5)
+        {
+            //it's -6 to make sure that it's begin->begin for size=6
+            previousStates.erase(previousStates.begin(), previousStates.begin()+(previousStates.size()-6));
+        }
+
+        //calculate the average of the previous states
+        float avg=0.0f;
+        
+        for(int i=0; i<previousStates.size();i++)
+        {
+            avg+=previousStates.at(i);
+        }
+        
+        avg=avg/previousStates.size();
+        
+        //round the average to the nearest state
+        //only possible problem is that 0 has a larger range of values...
+        int roundedAvg=rintf(avg);
+        
+        //set the label based on the
+        if(roundedAvg==1)
+        {
+            [This.movementLabel setText:@"Moving Towards"];
+        }
+        else if(roundedAvg == -1)
+        {
+            [This.movementLabel setText:@"Moving Away"];
+        }
+        else
+        {
             [This.movementLabel setText:@"Not Moving"];
         }
     }else{

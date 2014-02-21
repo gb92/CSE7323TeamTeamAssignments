@@ -35,6 +35,8 @@ float *fftMagnitudeBuffer;
 float *fftPhaseBuffer;
 SMUFFTHelper *fftHelper;
 
+float magnitudeThreshold;
+
 struct IndexMagnitudePair
 {
     int index;
@@ -57,11 +59,17 @@ struct IndexMagnitudePair
     std::vector<IndexMagnitudePair> sortedMaximaFrequencies = sortMaximaFrequencies(freqMaximaArray,kBufferLength/2);
     if(sortedMaximaFrequencies.size() > 0)
     {
-        self.topFrequencyLabel1.text = [NSString stringWithFormat:@"Freq 1: %f", sortedMaximaFrequencies[0].index*(44100.0f/(kBufferLength))];
+        if(sortedMaximaFrequencies[0].magnitude > magnitudeThreshold)
+        {
+            self.topFrequencyLabel1.text = [NSString stringWithFormat:@"Freq 1: %f", sortedMaximaFrequencies[0].index*(44100.0f/(kBufferLength))];
+        }
     }
     if(sortedMaximaFrequencies.size() > 1)
     {
-        self.topFrequencyLabel2.text = [NSString stringWithFormat:@"Freq 2: %f", sortedMaximaFrequencies[1].index*(44100.0f/(kBufferLength))];
+        if(sortedMaximaFrequencies[1].magnitude > magnitudeThreshold)
+        {
+            self.topFrequencyLabel2.text = [NSString stringWithFormat:@"Freq 2: %f", sortedMaximaFrequencies[1].index*(44100.0f/(kBufferLength))];
+        }
     }
     graphHelper->setGraphData(0,audioData,kBufferLength); // set graph channel
 //    float maxVal = 0;
@@ -95,6 +103,8 @@ struct IndexMagnitudePair
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    magnitudeThreshold=25.0f;
     
     audioManager = [Novocaine audioManager];
     ringBuffer = new RingBuffer(kBufferLength,2);
