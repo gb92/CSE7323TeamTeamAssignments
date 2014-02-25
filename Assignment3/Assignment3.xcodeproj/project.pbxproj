@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF975B6D18BD2EF400CB8D3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B6C18BD2EF400CB8D3C /* Foundation.framework */; };
+		EF975B6F18BD2EF400CB8D3C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B6E18BD2EF400CB8D3C /* CoreGraphics.framework */; };
+		EF975B7118BD2EF400CB8D3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B7018BD2EF400CB8D3C /* UIKit.framework */; };
+		EF975B7718BD2EF400CB8D3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF975B7518BD2EF400CB8D3C /* InfoPlist.strings */; };
+		EF975B7918BD2EF400CB8D3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF975B7818BD2EF400CB8D3C /* main.m */; };
+		EF975B7D18BD2EF400CB8D3C /* Assignment3AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF975B7C18BD2EF400CB8D3C /* Assignment3AppDelegate.m */; };
+		EF975B8018BD2EF400CB8D3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF975B7E18BD2EF400CB8D3C /* Main.storyboard */; };
+		EF975B8318BD2EF400CB8D3C /* Assignment3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF975B8218BD2EF400CB8D3C /* Assignment3ViewController.m */; };
+		EF975B8518BD2EF400CB8D3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF975B8418BD2EF400CB8D3C /* Images.xcassets */; };
+		EF975B8C18BD2EF400CB8D3C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B8B18BD2EF400CB8D3C /* XCTest.framework */; };
+		EF975B8D18BD2EF400CB8D3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B6C18BD2EF400CB8D3C /* Foundation.framework */; };
+		EF975B8E18BD2EF400CB8D3C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF975B7018BD2EF400CB8D3C /* UIKit.framework */; };
+		EF975B9618BD2EF400CB8D3C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF975B9418BD2EF400CB8D3C /* InfoPlist.strings */; };
+		EF975B9818BD2EF400CB8D3C /* Assignment3Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF975B9718BD2EF400CB8D3C /* Assignment3Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF975B8F18BD2EF400CB8D3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF975B6118BD2EF400CB8D3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF975B6818BD2EF400CB8D3C;
+			remoteInfo = Assignment3;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF975B6918BD2EF400CB8D3C /* Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF975B6C18BD2EF400CB8D3C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EF975B6E18BD2EF400CB8D3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EF975B7018BD2EF400CB8D3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EF975B7418BD2EF400CB8D3C /* Assignment3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment3-Info.plist"; sourceTree = "<group>"; };
+		EF975B7618BD2EF400CB8D3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EF975B7818BD2EF400CB8D3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF975B7A18BD2EF400CB8D3C /* Assignment3-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Assignment3-Prefix.pch"; sourceTree = "<group>"; };
+		EF975B7B18BD2EF400CB8D3C /* Assignment3AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assignment3AppDelegate.h; sourceTree = "<group>"; };
+		EF975B7C18BD2EF400CB8D3C /* Assignment3AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment3AppDelegate.m; sourceTree = "<group>"; };
+		EF975B7F18BD2EF400CB8D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF975B8118BD2EF400CB8D3C /* Assignment3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assignment3ViewController.h; sourceTree = "<group>"; };
+		EF975B8218BD2EF400CB8D3C /* Assignment3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment3ViewController.m; sourceTree = "<group>"; };
+		EF975B8418BD2EF400CB8D3C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EF975B8A18BD2EF400CB8D3C /* Assignment3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF975B8B18BD2EF400CB8D3C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		EF975B9318BD2EF400CB8D3C /* Assignment3Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment3Tests-Info.plist"; sourceTree = "<group>"; };
+		EF975B9518BD2EF400CB8D3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EF975B9718BD2EF400CB8D3C /* Assignment3Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment3Tests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF975B6618BD2EF400CB8D3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B6F18BD2EF400CB8D3C /* CoreGraphics.framework in Frameworks */,
+				EF975B7118BD2EF400CB8D3C /* UIKit.framework in Frameworks */,
+				EF975B6D18BD2EF400CB8D3C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF975B8718BD2EF400CB8D3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B8C18BD2EF400CB8D3C /* XCTest.framework in Frameworks */,
+				EF975B8E18BD2EF400CB8D3C /* UIKit.framework in Frameworks */,
+				EF975B8D18BD2EF400CB8D3C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF975B6018BD2EF400CB8D3C = {
+			isa = PBXGroup;
+			children = (
+				EF975B7218BD2EF400CB8D3C /* Assignment3 */,
+				EF975B9118BD2EF400CB8D3C /* Assignment3Tests */,
+				EF975B6B18BD2EF400CB8D3C /* Frameworks */,
+				EF975B6A18BD2EF400CB8D3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF975B6A18BD2EF400CB8D3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B6918BD2EF400CB8D3C /* Assignment3.app */,
+				EF975B8A18BD2EF400CB8D3C /* Assignment3Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF975B6B18BD2EF400CB8D3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B6C18BD2EF400CB8D3C /* Foundation.framework */,
+				EF975B6E18BD2EF400CB8D3C /* CoreGraphics.framework */,
+				EF975B7018BD2EF400CB8D3C /* UIKit.framework */,
+				EF975B8B18BD2EF400CB8D3C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF975B7218BD2EF400CB8D3C /* Assignment3 */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B7B18BD2EF400CB8D3C /* Assignment3AppDelegate.h */,
+				EF975B7C18BD2EF400CB8D3C /* Assignment3AppDelegate.m */,
+				EF975B7E18BD2EF400CB8D3C /* Main.storyboard */,
+				EF975B8118BD2EF400CB8D3C /* Assignment3ViewController.h */,
+				EF975B8218BD2EF400CB8D3C /* Assignment3ViewController.m */,
+				EF975B8418BD2EF400CB8D3C /* Images.xcassets */,
+				EF975B7318BD2EF400CB8D3C /* Supporting Files */,
+			);
+			path = Assignment3;
+			sourceTree = "<group>";
+		};
+		EF975B7318BD2EF400CB8D3C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B7418BD2EF400CB8D3C /* Assignment3-Info.plist */,
+				EF975B7518BD2EF400CB8D3C /* InfoPlist.strings */,
+				EF975B7818BD2EF400CB8D3C /* main.m */,
+				EF975B7A18BD2EF400CB8D3C /* Assignment3-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF975B9118BD2EF400CB8D3C /* Assignment3Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B9718BD2EF400CB8D3C /* Assignment3Tests.m */,
+				EF975B9218BD2EF400CB8D3C /* Supporting Files */,
+			);
+			path = Assignment3Tests;
+			sourceTree = "<group>";
+		};
+		EF975B9218BD2EF400CB8D3C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF975B9318BD2EF400CB8D3C /* Assignment3Tests-Info.plist */,
+				EF975B9418BD2EF400CB8D3C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF975B6818BD2EF400CB8D3C /* Assignment3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF975B9B18BD2EF400CB8D3C /* Build configuration list for PBXNativeTarget "Assignment3" */;
+			buildPhases = (
+				EF975B6518BD2EF400CB8D3C /* Sources */,
+				EF975B6618BD2EF400CB8D3C /* Frameworks */,
+				EF975B6718BD2EF400CB8D3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Assignment3;
+			productName = Assignment3;
+			productReference = EF975B6918BD2EF400CB8D3C /* Assignment3.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF975B8918BD2EF400CB8D3C /* Assignment3Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF975B9E18BD2EF400CB8D3C /* Build configuration list for PBXNativeTarget "Assignment3Tests" */;
+			buildPhases = (
+				EF975B8618BD2EF400CB8D3C /* Sources */,
+				EF975B8718BD2EF400CB8D3C /* Frameworks */,
+				EF975B8818BD2EF400CB8D3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF975B9018BD2EF400CB8D3C /* PBXTargetDependency */,
+			);
+			name = Assignment3Tests;
+			productName = Assignment3Tests;
+			productReference = EF975B8A18BD2EF400CB8D3C /* Assignment3Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF975B6118BD2EF400CB8D3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Assignment3;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "ch484-mac7";
+				TargetAttributes = {
+					EF975B8918BD2EF400CB8D3C = {
+						TestTargetID = EF975B6818BD2EF400CB8D3C;
+					};
+				};
+			};
+			buildConfigurationList = EF975B6418BD2EF400CB8D3C /* Build configuration list for PBXProject "Assignment3" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF975B6018BD2EF400CB8D3C;
+			productRefGroup = EF975B6A18BD2EF400CB8D3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF975B6818BD2EF400CB8D3C /* Assignment3 */,
+				EF975B8918BD2EF400CB8D3C /* Assignment3Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF975B6718BD2EF400CB8D3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B8518BD2EF400CB8D3C /* Images.xcassets in Resources */,
+				EF975B7718BD2EF400CB8D3C /* InfoPlist.strings in Resources */,
+				EF975B8018BD2EF400CB8D3C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF975B8818BD2EF400CB8D3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B9618BD2EF400CB8D3C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF975B6518BD2EF400CB8D3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B7918BD2EF400CB8D3C /* main.m in Sources */,
+				EF975B7D18BD2EF400CB8D3C /* Assignment3AppDelegate.m in Sources */,
+				EF975B8318BD2EF400CB8D3C /* Assignment3ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF975B8618BD2EF400CB8D3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF975B9818BD2EF400CB8D3C /* Assignment3Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF975B9018BD2EF400CB8D3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF975B6818BD2EF400CB8D3C /* Assignment3 */;
+			targetProxy = EF975B8F18BD2EF400CB8D3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF975B7518BD2EF400CB8D3C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF975B7618BD2EF400CB8D3C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EF975B7E18BD2EF400CB8D3C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF975B7F18BD2EF400CB8D3C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF975B9418BD2EF400CB8D3C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF975B9518BD2EF400CB8D3C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF975B9918BD2EF400CB8D3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF975B9A18BD2EF400CB8D3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF975B9C18BD2EF400CB8D3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
+				INFOPLIST_FILE = "Assignment3/Assignment3-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EF975B9D18BD2EF400CB8D3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
+				INFOPLIST_FILE = "Assignment3/Assignment3-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EF975B9F18BD2EF400CB8D3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Assignment3.app/Assignment3";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Assignment3Tests/Assignment3Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EF975BA018BD2EF400CB8D3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Assignment3.app/Assignment3";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
+				INFOPLIST_FILE = "Assignment3Tests/Assignment3Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF975B6418BD2EF400CB8D3C /* Build configuration list for PBXProject "Assignment3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF975B9918BD2EF400CB8D3C /* Debug */,
+				EF975B9A18BD2EF400CB8D3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF975B9B18BD2EF400CB8D3C /* Build configuration list for PBXNativeTarget "Assignment3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF975B9C18BD2EF400CB8D3C /* Debug */,
+				EF975B9D18BD2EF400CB8D3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EF975B9E18BD2EF400CB8D3C /* Build configuration list for PBXNativeTarget "Assignment3Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF975B9F18BD2EF400CB8D3C /* Debug */,
+				EF975BA018BD2EF400CB8D3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF975B6118BD2EF400CB8D3C /* Project object */;
+}
