@@ -144,7 +144,7 @@
              if (dotProduct < -0.2f)
              {
                  //@TODO Start queary stair time.
-                 NSLog(@"The phone is moving up! %ld", stairStep);
+                 NSLog(@"The phone is moving up! %ld", (long)stairStep);
                  
                  bMovingUp = YES;
                  
