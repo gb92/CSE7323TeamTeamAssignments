@@ -26,10 +26,28 @@
 
 @property (strong, nonatomic) NSString *currentActivityLabelText;
 
+@property (strong,nonatomic) CMMotionManager *cmMotionManager;
+
 @end
 
 @implementation Assignment3ViewController
+{
+    NSInteger stairStep;
+    BOOL bMovingUp;
+}
 
+
+-(CMMotionManager*)cmMotionManager{
+    if(!_cmMotionManager){
+        _cmMotionManager = [[CMMotionManager alloc] init];
+        
+        if(![_cmMotionManager isDeviceMotionAvailable]){
+            _cmMotionManager = nil;
+        }
+    }
+    return _cmMotionManager;
+    
+}
 
 -(NSString *) currentActivityLabelText
 {
@@ -94,9 +112,7 @@
                                     }];
 //
     
-    //Test
-    int a = 0;
-    
+
     
 }
 
@@ -104,6 +120,46 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) startMotionUpdates{
+    
+    static unsigned int stairCountingActiveDuration = 1000;
+    static unsigned int currentTime = 0;
+    
+    if(self.cmMotionManager){
+        NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+        myQueue.maxConcurrentOperationCount = 1;
+        
+        [self.cmMotionManager setDeviceMotionUpdateInterval:1.0/100.0];
+        [self.cmMotionManager
+         startDeviceMotionUpdatesToQueue:myQueue
+         withHandler:^(CMDeviceMotion *motion, NSError *error) {
+             
+             float dotProduct =
+             motion.gravity.x*motion.userAcceleration.x +
+             motion.gravity.y*motion.userAcceleration.y +
+             motion.gravity.z*motion.userAcceleration.z;
+             
+             if (dotProduct < -0.2f)
+             {
+                 //@TODO Start queary stair time.
+                 NSLog(@"The phone is moving up! %ld", stairStep);
+                 
+                 bMovingUp = YES;
+                 
+             }
+             else
+             {
+                 if( currentTime > stairCountingActiveDuration )
+                 {
+                     //@TODO End Query stair time.
+                     bMovingUp = NO;
+                 }
+             }
+             
+         }];
+    }
 }
 
 @end
