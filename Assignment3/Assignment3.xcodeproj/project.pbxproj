@@ -117,8 +117,8 @@
 				EF975B7E18BD2EF400CB8D3C /* Main.storyboard */,
 				EF975B8118BD2EF400CB8D3C /* Assignment3ViewController.h */,
 				EF975B8218BD2EF400CB8D3C /* Assignment3ViewController.m */,
-				EF975B8418BD2EF400CB8D3C /* Images.xcassets */,
 				EF975B7318BD2EF400CB8D3C /* Supporting Files */,
+				EF975B8418BD2EF400CB8D3C /* Images.xcassets */,
 			);
 			path = Assignment3;
 			sourceTree = "<group>";
@@ -200,6 +200,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "ch484-mac7";
 				TargetAttributes = {
+					EF975B6818BD2EF400CB8D3C = {
+						DevelopmentTeam = APD62CDC25;
+					};
 					EF975B8918BD2EF400CB8D3C = {
 						TestTargetID = EF975B6818BD2EF400CB8D3C;
 					};
@@ -379,10 +382,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
 				INFOPLIST_FILE = "Assignment3/Assignment3-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -392,10 +398,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment3/Assignment3-Prefix.pch";
 				INFOPLIST_FILE = "Assignment3/Assignment3-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -461,6 +470,7 @@
 				EF975B9D18BD2EF400CB8D3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF975B9E18BD2EF400CB8D3C /* Build configuration list for PBXNativeTarget "Assignment3Tests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +479,7 @@
 				EF975BA018BD2EF400CB8D3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
