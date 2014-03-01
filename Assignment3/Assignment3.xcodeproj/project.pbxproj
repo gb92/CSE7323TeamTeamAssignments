@@ -201,7 +201,7 @@
 				ORGANIZATIONNAME = "ch484-mac7";
 				TargetAttributes = {
 					EF975B6818BD2EF400CB8D3C = {
-						DevelopmentTeam = APD62CDC25;
+						DevelopmentTeam = ELJL6XCWJA;
 					};
 					EF975B8918BD2EF400CB8D3C = {
 						TestTargetID = EF975B6818BD2EF400CB8D3C;

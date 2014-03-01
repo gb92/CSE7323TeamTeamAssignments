@@ -26,13 +26,13 @@
 
 @property (strong, nonatomic) NSString *currentActivityLabelText;
 
-<<<<<<< HEAD
 @property (strong,nonatomic) CMMotionManager *cmMotionManager;
 
-=======
+@property (strong, nonatomic) NSDate *timeStartStairs;
+@property (strong, nonatomic) NSDate *timeStopStairs;
+
 @property long numberOfStepsToday;
 @property long numberOfSteps;
->>>>>>> WrokFrom2_26_14
 @end
 
 @implementation Assignment3ViewController
@@ -156,6 +156,7 @@
 //
     
 
+    [self startMotionUpdates];
     
 }
 
@@ -165,7 +166,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-<<<<<<< HEAD
 -(void) startMotionUpdates{
     
     static unsigned int stairCountingActiveDuration = 1000;
@@ -185,26 +185,70 @@
              motion.gravity.y*motion.userAcceleration.y +
              motion.gravity.z*motion.userAcceleration.z;
              
-             if (dotProduct < -0.2f)
+             if (dotProduct < -0.35f)
              {
-                 //@TODO Start queary stair time.
+                 //@TODO Start query stair time.
                  NSLog(@"The phone is moving up! %ld", (long)stairStep);
                  
                  bMovingUp = YES;
                  
+                 if(self.timeStopStairs != nil)
+                 {
+                     self.timeStopStairs = nil;
+                 }
+                 if(self.timeStartStairs == nil)
+                 {
+                     self.timeStartStairs=[NSDate date];
+                 }
+                 else
+                 {
+                     NSDate *now=[NSDate date];
+                     
+                     [self.cmStepCounter queryStepCountStartingFrom:self.timeStartStairs
+                                                                 to:now
+                                                            toQueue:[NSOperationQueue mainQueue]
+                                                        withHandler:^(NSInteger numberOfSteps,
+                                                                      NSError *error) {
+                                                            //stairStep=numberOfSteps;
+                                                            
+                                                            self.stairsClimbedLabel.text=[NSString stringWithFormat:@"Stairs Climbed: %ld", stairStep+numberOfSteps];
+                                                        }];
+
+                     
+                 }
              }
              else
              {
-                 if( currentTime > stairCountingActiveDuration )
+                 if(self.timeStartStairs !=nil && self.timeStopStairs == nil)
+                 {
+                     self.timeStopStairs=[NSDate date];
+                 }
+                 NSTimeInterval timeDifference=[self.timeStopStairs timeIntervalSinceNow];
+                 
+                 NSLog(@"Time Difference: %0.2f", timeDifference);
+                 if( timeDifference < -2.25 )
                  {
                      //@TODO End Query stair time.
                      bMovingUp = NO;
+                     
+                     [self.cmStepCounter queryStepCountStartingFrom:self.timeStartStairs
+                                                                 to:self.timeStopStairs
+                                                            toQueue:[NSOperationQueue mainQueue]
+                                                        withHandler:^(NSInteger numberOfSteps,
+                                                                      NSError *error) {
+                                                            stairStep+=numberOfSteps;
+                                                            
+                                                            self.stairsClimbedLabel.text=[NSString stringWithFormat:@"Stairs Climbed: %ld", stairStep];
+                                                        }];
+                     self.timeStartStairs=nil;
+                     self.timeStopStairs=nil;                    
                  }
              }
              
          }];
     }
-=======
+}
+
 - (IBAction)updateDailyGoal:(id)sender {
     UITextField *dailyGoalTextField=(UITextField*)sender;
     
@@ -220,7 +264,6 @@
     self.dailyStepGoal=[[NSNumber alloc] initWithInteger:self.dailyStepGoalTextField.text.integerValue];
     
     [self.stepsToDailyGoalProgressBar setProgress: (self.numberOfStepsToday+self.numberOfSteps)/[self.dailyStepGoal floatValue]];
->>>>>>> WrokFrom2_26_14
 }
 
 @end
