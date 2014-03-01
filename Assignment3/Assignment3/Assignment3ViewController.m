@@ -19,15 +19,14 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *stepsToDailyGoalProgressBar;
 @property (weak, nonatomic) IBOutlet UILabel *stairsClimbedLabel;
 
+@property (strong, nonatomic) NSString *currentActivityLabelText;
 
 @property (strong,nonatomic) CMMotionActivityManager *cmActivityManager;
 @property (strong,nonatomic) CMStepCounter *cmStepCounter;
 @property (strong,nonatomic) NSNumber *dailyStepGoal;
 
-@property (strong, nonatomic) NSString *currentActivityLabelText;
 
 @property (strong,nonatomic) CMMotionManager *cmMotionManager;
-
 @property (strong, nonatomic) NSDate *timeStartStairs;
 @property (strong, nonatomic) NSDate *timeStopStairs;
 
@@ -167,9 +166,6 @@
 }
 
 -(void) startMotionUpdates{
-    
-    static unsigned int stairCountingActiveDuration = 1000;
-    static unsigned int currentTime = 0;
     
     if(self.cmMotionManager){
         NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
