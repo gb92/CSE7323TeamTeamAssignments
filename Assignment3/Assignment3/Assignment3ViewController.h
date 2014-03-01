@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Assignment3ViewController : UIViewController
+@interface Assignment3ViewController : UIViewController <UITextFieldDelegate>
 
 @end
