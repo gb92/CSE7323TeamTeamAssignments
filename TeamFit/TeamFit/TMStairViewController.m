@@ -30,8 +30,6 @@
 
 @implementation TMStairViewController
 {
-    int currentStep;
-    int tempStep;
     
     NSInteger stairStep;
     BOOL bMovingUp;
@@ -76,7 +74,6 @@
 {
     [super viewDidLoad];
 	
-    currentStep = 0;
     self.isActivated = NO;
     
     self.motionThreshold = -0.35f;
@@ -155,67 +152,22 @@
              
              if (dotProduct < self.motionThreshold)
              {
-                 
-                 bMovingUp = YES;
-                 
-                 if(self.timeStopStairs != nil)
-                 {
-                     self.timeStopStairs = nil;
-                 }
-                 if(self.timeStartStairs == nil)
-                 {
-                     self.timeStartStairs=[NSDate date];
-                 }
-                 else
-                 {
-                     NSDate *now=[NSDate date];
-                     
-                     [self.cmStepCounter queryStepCountStartingFrom:self.timeStartStairs
-                                                                 to:now
-                                                            toQueue:[NSOperationQueue mainQueue]
-                                                        withHandler:^(NSInteger numberOfSteps,
-                                                                      NSError *error) {
-                                                            
-                                                            [self updateUI];
-                                                            
-                                                            /* Hacking! */
-                                                            tempStep = (int)numberOfSteps;
-                                                            [self.stepLabel setText:[NSString stringWithFormat:@"%d", tempStep + currentStep]];
-                                                           
-                                            
-                                                        }];
-                     
-                     
-                 }
+                 if( !bMovingUp )
+                     bMovingUp = YES;
+
              }
              else
              {
-                 if(self.timeStartStairs !=nil && self.timeStopStairs == nil)
-                 {
-                     self.timeStopStairs=[NSDate date];
-                 }
-                 NSTimeInterval timeDifference=[self.timeStopStairs timeIntervalSinceNow];
-
-                 if( timeDifference < -2.25 )
+                 if (bMovingUp)
                  {
                      bMovingUp = NO;
+                     stairStep ++;
                      
-                     [self.cmStepCounter queryStepCountStartingFrom:self.timeStartStairs
-                                                                 to:self.timeStopStairs
-                                                            toQueue:[NSOperationQueue mainQueue]
-                                                        withHandler:^(NSInteger numberOfSteps,
-                                                                      NSError *error) {
-                                                            
-                                                            currentStep+=numberOfSteps;
-                                                            tempStep = 0;
-                                                            
-                                                            [self updateUI];
-                                                            
-                                                        }];
-                     
-                     self.timeStartStairs=nil;
-                     self.timeStopStairs=nil;
+                     dispatch_async(dispatch_get_main_queue(),^{
+                         [self updateUI];
+                     });
                  }
+
              }
              
          }];
@@ -226,7 +178,7 @@
 
 -(void)reset
 {
-    currentStep = 0;
+    stairStep = 0;
     
     if( self.isActivated )
         [self deactivate];
@@ -249,8 +201,6 @@
         [self.cmMotionManager stopDeviceMotionUpdates];
     }
     
-    currentStep += tempStep;
-    
     [self.playButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     
     [self.stairIndicator deactivate];
@@ -259,7 +209,7 @@
 
 -(void)updateUI
 {
-    [self.stepLabel setText:[NSString stringWithFormat:@"%d",currentStep]];
+    [self.stepLabel setText:[NSString stringWithFormat:@"%ld",(long)stairStep]];
 }
 
 @end
