@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TMStairSettingViewController.h"
 
-@interface TMStairViewController : UIViewController
+@interface TMStairViewController : UIViewController<TMStairSettingViewControllerDelegate>
+
 @property(nonatomic)BOOL isActivated;
+
 @end

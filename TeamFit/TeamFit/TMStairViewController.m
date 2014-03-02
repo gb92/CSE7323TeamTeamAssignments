@@ -8,6 +8,8 @@
 
 #import "TMStairViewController.h"
 #import "TMUIStairImageView.h"
+#import "TMStairSettingViewController.h"
+
 #import <CoreMotion/CoreMotion.h>
 
 
@@ -23,11 +25,13 @@
 @property (strong, nonatomic) NSDate *timeStartStairs;
 @property (strong, nonatomic) NSDate *timeStopStairs;
 
+@property (nonatomic) float motionThreshold;
 @end
 
 @implementation TMStairViewController
 {
     int currentStep;
+    int tempStep;
     
     NSInteger stairStep;
     BOOL bMovingUp;
@@ -75,6 +79,8 @@
     currentStep = 0;
     self.isActivated = NO;
     
+    self.motionThreshold = -0.35f;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -85,6 +91,16 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [self deactivate];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"toSettingView"])
+    {
+        TMStairSettingViewController* settingView = segue.destinationViewController;
+        [settingView setThresholdValue:self.motionThreshold];
+        settingView.delegate = self;
+    }
 }
 
 - (IBAction)onPlayButtonPressed:(id)sender
@@ -102,6 +118,17 @@
 - (IBAction)onResetButtonPressed:(id)sender
 {
     [self reset];
+}
+
+-(void)TMStairSettingViewControllerSetButtonPressed:(TMStairSettingViewController *)controller withThresholdValue:(float)thresholdValue
+{
+    self.motionThreshold = thresholdValue;
+    NSLog(@"New Threshold is %f", self.motionThreshold);
+}
+
+-(void)TMStairSettingViewControllerCancelButtonPressed:(TMStairSettingViewController *)controller
+{
+    // Do nothing for now.
 }
 
 /*----------------------------------------------------------------*/
@@ -126,7 +153,7 @@
              motion.gravity.y*motion.userAcceleration.y +
              motion.gravity.z*motion.userAcceleration.z;
              
-             if (dotProduct < -0.35f)
+             if (dotProduct < self.motionThreshold)
              {
                  
                  bMovingUp = YES;
@@ -151,9 +178,11 @@
                                                             
                                                             [self updateUI];
                                                             
-                                                            /*Hacking!*/
-                                                            [self.stepLabel setText:[NSString stringWithFormat:@"%ld", currentStep + numberOfSteps]];
-                                                            
+                                                            /* Hacking! */
+                                                            tempStep = (int)numberOfSteps;
+                                                            [self.stepLabel setText:[NSString stringWithFormat:@"%d", tempStep + currentStep]];
+                                                           
+                                            
                                                         }];
                      
                      
@@ -169,7 +198,6 @@
 
                  if( timeDifference < -2.25 )
                  {
-                     //@TODO End Query stair time.
                      bMovingUp = NO;
                      
                      [self.cmStepCounter queryStepCountStartingFrom:self.timeStartStairs
@@ -179,10 +207,12 @@
                                                                       NSError *error) {
                                                             
                                                             currentStep+=numberOfSteps;
+                                                            tempStep = 0;
                                                             
                                                             [self updateUI];
                                                             
                                                         }];
+                     
                      self.timeStartStairs=nil;
                      self.timeStopStairs=nil;
                  }
@@ -218,6 +248,8 @@
     if ([self.cmMotionManager isDeviceMotionActive]) {
         [self.cmMotionManager stopDeviceMotionUpdates];
     }
+    
+    currentStep += tempStep;
     
     [self.playButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     

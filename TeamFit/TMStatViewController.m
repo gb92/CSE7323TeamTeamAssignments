@@ -1,4 +1,4 @@
-//
+///Users/redeian/Documents/Xcode Project/GavinGitHub/TeamFit/TeamFit/TMStairSettingViewController.m
 //  TMStatViewController.m
 //  TeamFit
 //
