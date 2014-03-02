@@ -29,6 +29,14 @@ static const int SI_ARC_PADDING = 40;
     int radius;
 }
 
+-(UIColor*)barColor
+{
+    if (_barColor == nil) {
+        _barColor = [UIColor grayColor];
+    }
+    
+    return _barColor;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -83,9 +91,9 @@ static const int SI_ARC_PADDING = 40;
                     ToRad(90+SI_START_OFFSET),
                     ToRad( (90-SI_START_OFFSET - (319 * ( 1.0 -  (self.value/self.maxValue) ) ) ) ) , 0);
     
-    [[UIColor grayColor] setStroke];
+    [self.barColor setStroke];
     
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, [UIColor grayColor].CGColor);
+    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
     
     CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
     CGContextSetLineCap(ctx, kCGLineCapButt);

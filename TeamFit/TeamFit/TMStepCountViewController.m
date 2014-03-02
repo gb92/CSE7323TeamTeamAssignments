@@ -12,7 +12,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-#define DEBUG_UI
+static unsigned int DEFAULT_GOAL_STEPS = 4000;
 
 @interface TMStepCountViewController ()
 
@@ -25,7 +25,6 @@
 @property (nonatomic) SIActivityType activityType;
 - (IBAction)onButtonTestActivityPressed:(id)sender;
 
-/*-----------------------------------*/
 // Motion Attribute section //
 
 @property (strong,nonatomic) CMMotionActivityManager *cmActivityManager;
@@ -34,25 +33,26 @@
 @property (nonatomic) unsigned int numberOfSteps;
 @property (nonatomic) unsigned int numberOfStepsSinceMorningUntilOpenApp;
 @property (nonatomic) unsigned int numberOfYesterdaySteps;
-// End Motion Attribute Section //
-/*-----------------------------------*/
+
+
+@property ( strong, nonatomic ) NSUserDefaults* userDefault;
 
 @end
 
 @implementation TMStepCountViewController
 {
-    unsigned int goalStep;
-    /*-----------------------------------*/
-    // Motion Attribute section //
-    
-    
-    // End Motion Attribute Section //
-    /*-----------------------------------*/
+    unsigned int numberOfGoalSteps;
 }
 
-
-/*-----------------------------------*/
-// Lazy instantiation Motion Attribute section //
+-(NSUserDefaults *)userDefault
+{
+    if(!_userDefault)
+    {
+        _userDefault = [NSUserDefaults standardUserDefaults];
+    }
+    
+    return _userDefault;
+}
 
 -(CMMotionActivityManager*)cmActivityManager{
     if(!_cmActivityManager){
@@ -71,7 +71,6 @@
     return _cmStepCounter;
 }
 
-// End Motion Attribute Section //
 /*-----------------------------------*/
 
 -(void)initActivityMotion
@@ -102,10 +101,13 @@
                                            
                                        }];
     
+    
     [self.cmStepCounter queryStepCountStartingFrom:today to:now toQueue:[NSOperationQueue mainQueue]
                                        withHandler:^(NSInteger numberOfSteps, NSError *error) {
                                            
                                            self.numberOfStepsSinceMorningUntilOpenApp = numberOfSteps;
+                                           self.numberOfSteps = numberOfSteps;
+                                           
                                            [self updateUI];
                                        }];
     
@@ -152,16 +154,16 @@
     [self setUpViewForOrientation:interfaceOrientation];
 
     self.numberOfSteps = 0;
-    goalStep = 100;
+    numberOfGoalSteps = (unsigned int)[self.userDefault integerForKey:@"numberOfGoalSteps"];
     
-    /*-----------------------------------*/
-    // Motion Attribute section //
+    if( numberOfGoalSteps <= 0 )
+    {
+        numberOfGoalSteps = DEFAULT_GOAL_STEPS;
+    }
     
     [self initActivityMotion];
     
-    // End Motion Attribute Section //
-    /*-----------------------------------*/
-    
+    [self updateUI];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -199,13 +201,14 @@
     {
         TMStatViewController *statView = segue.destinationViewController;
         [statView setCurrentStep:self.numberOfSteps];
+        [statView setYesterdayStep:self.numberOfYesterdaySteps];
     }
     else if( [segue.identifier isEqualToString:@"toSetGoalView"])
     {
         TMSetGoalStepViewController *setGoalView = segue.destinationViewController;
         //[setGoalView setCurrentGoal:[NSNumber numberWithInt:goalStep]];
 
-        setGoalView.currentGoal = goalStep;
+        setGoalView.currentGoal = numberOfGoalSteps;
         setGoalView.delegate = self;
 
     }
@@ -215,7 +218,8 @@
 
 -(void)SetGoalSetpViewControllerDidSet:(TMSetGoalStepViewController *)controller newGoal:(unsigned int)newGoal
 {
-    goalStep = newGoal;
+    numberOfGoalSteps = newGoal;
+    [self.userDefault setInteger:newGoal forKey:@"numberOfGoalSteps"];
     
     [UIView transitionWithView:self.goalStepLabel duration:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.goalStepLabel.textColor = [UIColor colorWithRed:1.0 green:0.3 blue:0.0 alpha:1.0];
@@ -236,27 +240,28 @@
 /*----------------------------------------------------------------------------*/
 -(void)updateUI
 {
-    if( self.numberOfSteps >= goalStep )
+    if( self.numberOfSteps >= numberOfGoalSteps )
     {
         
-        [UIView transitionWithView:self.currentStepLabel duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [self.currentStepLabel setText:@"CONGRATULATIONS!"];
-            self.currentStepLabel.font = [UIFont boldSystemFontOfSize:20];
-        } completion:^(BOOL finished) {
+//        [UIView transitionWithView:self.currentStepLabel duration:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//            [self.currentStepLabel setText:@"CONGRATULATIONS!"];
+//            self.currentStepLabel.font = [UIFont boldSystemFontOfSize:20];
+//        } completion:^(BOOL finished) {
+//
+//        }];
 
-        }];
-        
+        self.stepIndicaterView.barColor = [UIColor redColor];
     }
     else
     {
-        [self.currentStepLabel setText:[NSString stringWithFormat:@"%d",self.numberOfSteps]];
-        self.currentStepLabel.font = [UIFont boldSystemFontOfSize:50];
+        self.stepIndicaterView.barColor = [UIColor grayColor];
     }
     
-    [self.goalStepLabel setText:[NSString stringWithFormat:@"%d",goalStep]];
+    [self.currentStepLabel setText:[NSString stringWithFormat:@"%d",self.numberOfSteps]];
+    [self.goalStepLabel setText:[NSString stringWithFormat:@"%d",numberOfGoalSteps]];
     
     // Make sure you set max before set current value!
-    [self.stepIndicaterView setMaxValue:goalStep];
+    [self.stepIndicaterView setMaxValue:numberOfGoalSteps];
     [self.stepIndicaterView setStepValue:self.numberOfSteps];
     
 }
@@ -299,21 +304,9 @@
     _activityType = activityType;
 }
 
-static int activityTest = 0;
-
-//--For Debuging Activity notification. -----------
-
 - (IBAction)onButtonTestActivityPressed:(id)sender
 {
-    [self setActivityType:activityTest];
-    
-    activityTest++;
-    if( activityTest > 4 )
-    {
-        activityTest = 0;
-    }
-}
 
-//--END For Debuging Activity notification. -----------
+}
 
 @end

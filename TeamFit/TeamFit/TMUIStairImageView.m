@@ -35,9 +35,6 @@
     
     if (self) {
         
-        //[self setBackgroundColor:[UIColor blackColor]];
-       // [[self layer] setBackgroundColor:[UIColor redColor].CGColor];
-        
         // Create layers.
         UIImage *gateImage = [UIImage imageNamed:@"activeRing"];
         CGImageRef gateImageRef = [gateImage CGImage];
@@ -94,9 +91,8 @@
     [gateAnimation setToValue:[NSValue valueWithCATransform3D:rotationTransform]];
     [gateAnimation setDuration:1.0/4.0];
     [gateAnimation setCumulative:YES];
-    [gateAnimation setRepeatCount:100];
+    [gateAnimation setRepeatCount: INT_MAX];
     
-    //[self.gateLayer setPosition:CGPointMake(0, 0)];
     [self.gateLayer addAnimation:gateAnimation forKey:@"rotation"];
     
 }

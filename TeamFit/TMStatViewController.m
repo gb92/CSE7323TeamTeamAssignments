@@ -18,11 +18,17 @@
 @implementation TMStatViewController
 {
     int currentStep;
+    int yesterdayStep;
 }
 
 -(void)setCurrentStep:(int)value
 {
     currentStep = value;
+}
+
+-(void)setYesterdayStep:(int)value
+{
+    yesterdayStep = value;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,14 +49,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.currentStepsLabel setText:[NSString stringWithFormat:@"%d", currentStep]];
-    
-    //@TODO Set Yesterday step here!!
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.yesterdayStepsLabel setText:[NSString stringWithFormat:@"%d", yesterdayStep]];
 }
 
 - (IBAction)onBackButtonPressed:(id)sender {

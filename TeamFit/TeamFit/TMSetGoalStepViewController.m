@@ -8,8 +8,10 @@
 
 #import "TMSetGoalStepViewController.h"
 
+static const int PICKER_COMPONENT = 6;
 
 @interface TMSetGoalStepViewController ()
+
 @property (weak, nonatomic) IBOutlet UIPickerView *goalPicker;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
 
@@ -31,7 +33,7 @@
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 5;
+    return PICKER_COMPONENT;
 }
 
 
@@ -100,13 +102,13 @@
 /*-----------------------------------*/
 -(void)setValueToPicker:( unsigned int )value
 {
-    for( int i=4; i>=0; i-- )
+    for( int i=PICKER_COMPONENT-1; i>=0; i-- )
     {
         unsigned int divider = pow(10, i);
         unsigned int tempValue = value / divider;
         value %= divider;
         
-        [self.goalPicker selectRow:tempValue inComponent:(4-i) animated:YES];
+        [self.goalPicker selectRow:tempValue inComponent:(PICKER_COMPONENT-(i+1)) animated:YES];
     }
 }
 
@@ -114,11 +116,11 @@
 {
     unsigned int result = 0;
     
-    result = (unsigned int)( [self.goalPicker selectedRowInComponent:4] +
-    [self.goalPicker selectedRowInComponent:3] * 10 +
-    [self.goalPicker selectedRowInComponent:2] * 100 +
-    [self.goalPicker selectedRowInComponent:1] * 1000 +
-    [self.goalPicker selectedRowInComponent:0] * 10000 );
+    for( int i=0; i<PICKER_COMPONENT; i++ )
+    {
+        unsigned int multiplier = pow(10, i );
+        result += [self.goalPicker selectedRowInComponent: (PICKER_COMPONENT - (i+1)) ] * multiplier;
+    }
     
     return result;
 }

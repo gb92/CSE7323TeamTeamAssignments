@@ -12,5 +12,6 @@
 @interface TMStatViewController : UIViewController
 
 -(void)setCurrentStep:(int)value;
+-(void)setYesterdayStep:(int)value;
 
 @end

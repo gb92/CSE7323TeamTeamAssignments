@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -35,7 +35,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNQ-34-GoW">
-                                        <rect key="frame" x="20" y="20" width="46" height="36"/>
+                                        <rect key="frame" x="20" y="37" width="46" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Back">
@@ -52,20 +52,20 @@
                                     <constraint firstAttribute="height" constant="219" id="KbN-8M-4fZ"/>
                                     <constraint firstItem="nNQ-34-GoW" firstAttribute="leading" secondItem="RWR-Hf-gEP" secondAttribute="leading" constant="20" id="gu8-kd-V02"/>
                                     <constraint firstAttribute="trailing" secondItem="nNQ-34-GoW" secondAttribute="trailing" constant="254" id="lLj-tQ-99H"/>
-                                    <constraint firstItem="nNQ-34-GoW" firstAttribute="top" secondItem="RWR-Hf-gEP" secondAttribute="top" constant="20" id="q0W-R8-ewK"/>
+                                    <constraint firstItem="nNQ-34-GoW" firstAttribute="top" secondItem="RWR-Hf-gEP" secondAttribute="top" constant="37" id="q0W-R8-ewK"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXf-JO-Es4">
-                                <rect key="frame" x="55" y="311" width="210" height="67"/>
+                                <rect key="frame" x="55" y="313" width="210" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="56"/>
                                 <color key="textColor" red="0.20282095949948498" green="0.31260108552364291" blue="0.34259406887755106" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TODAY STEPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmM-dP-ZU8">
-                                <rect key="frame" x="75" y="292" width="170" height="21"/>
+                                <rect key="frame" x="75" y="292" width="170" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
