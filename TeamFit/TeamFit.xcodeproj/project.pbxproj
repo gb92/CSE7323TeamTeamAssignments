@@ -27,6 +27,8 @@
 		5C5A0B5F18C1A92C0092293D /* TMStatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */; };
 		5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */; };
 		5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */; };
+		5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */; };
+		5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,10 @@
 		5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMStairSettingViewController.m; sourceTree = "<group>"; };
 		5CEF5CD918C059C000F87969 /* TMSetGoalStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSetGoalStepViewController.h; sourceTree = "<group>"; };
 		5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMSetGoalStepViewController.m; sourceTree = "<group>"; };
+		5CFC7D0818C3CBD8008AE082 /* APLGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLGraphView.h; sourceTree = "<group>"; };
+		5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLGraphView.m; sourceTree = "<group>"; };
+		5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMVibrationViewController.h; sourceTree = "<group>"; };
+		5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMVibrationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +136,8 @@
 		5C37520218BE5662000CBE77 /* TeamFit */ = {
 			isa = PBXGroup;
 			children = (
-				5C37523418BE7363000CBE77 /* ArcView */,
+				5CFC7D0B18C3CBE6008AE082 /* ThirdPaties */,
+				5C37523418BE7363000CBE77 /* CustomViews */,
 				5C37523118BE6DDA000CBE77 /* TMStepCountViewController.h */,
 				5C37523218BE6DDA000CBE77 /* TMStepCountViewController.m */,
 				5C37520E18BE5662000CBE77 /* Main.storyboard */,
@@ -142,6 +149,8 @@
 				5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */,
 				5C5A0B5D18C1A92C0092293D /* TMStatViewController.h */,
 				5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */,
+				5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */,
+				5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */,
 				5C37521418BE5662000CBE77 /* Images.xcassets */,
 				5C37520318BE5662000CBE77 /* Supporting Files */,
 			);
@@ -179,7 +188,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5C37523418BE7363000CBE77 /* ArcView */ = {
+		5C37523418BE7363000CBE77 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
 				5C37523518BE7394000CBE77 /* TMStepIndicaterView.h */,
@@ -187,7 +196,16 @@
 				5C5A0B5618C127F20092293D /* TMUIStairImageView.h */,
 				5C5A0B5718C127F20092293D /* TMUIStairImageView.m */,
 			);
-			name = ArcView;
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		5CFC7D0B18C3CBE6008AE082 /* ThirdPaties */ = {
+			isa = PBXGroup;
+			children = (
+				5CFC7D0818C3CBD8008AE082 /* APLGraphView.h */,
+				5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */,
+			);
+			name = ThirdPaties;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,12 +312,14 @@
 				5C37523718BE7394000CBE77 /* TMStepIndicaterView.m in Sources */,
 				5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */,
 				5C37520918BE5662000CBE77 /* main.m in Sources */,
+				5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */,
 				5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */,
 				5C5A0B5818C127F20092293D /* TMUIStairImageView.m in Sources */,
 				5C5A0B5B18C143FA0092293D /* TMStairViewController.m in Sources */,
 				5C5A0B5F18C1A92C0092293D /* TMStatViewController.m in Sources */,
 				5C37520D18BE5662000CBE77 /* TMAppDelegate.m in Sources */,
 				5C37523318BE6DDA000CBE77 /* TMStepCountViewController.m in Sources */,
+				5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
