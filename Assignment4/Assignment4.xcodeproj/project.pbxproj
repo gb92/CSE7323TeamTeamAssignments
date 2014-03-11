@@ -21,6 +21,8 @@
 		992A95B818C7E3310055C8E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A959A18C7E3310055C8E8 /* UIKit.framework */; };
 		992A95C018C7E3310055C8E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 992A95BE18C7E3310055C8E8 /* InfoPlist.strings */; };
 		992A95C218C7E3310055C8E8 /* Assignment4Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95C118C7E3310055C8E8 /* Assignment4Tests.m */; };
+		9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6218CFC9E40064DED3 /* TTViewController.m */; };
+		9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		992A95BD18C7E3310055C8E8 /* Assignment4Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment4Tests-Info.plist"; sourceTree = "<group>"; };
 		992A95BF18C7E3310055C8E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		992A95C118C7E3310055C8E8 /* Assignment4Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment4Tests.m; sourceTree = "<group>"; };
+		9F9E0E6118CFC9E40064DED3 /* TTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTViewController.h; sourceTree = "<group>"; };
+		9F9E0E6218CFC9E40064DED3 /* TTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
+		9F9E0E6418CFC9F40064DED3 /* VideoAnalgesic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnalgesic.h; sourceTree = "<group>"; };
+		9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnalgesic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +122,11 @@
 				992A95A618C7E3310055C8E8 /* A4AppDelegate.m */,
 				992A95A818C7E3310055C8E8 /* Main.storyboard */,
 				992A95AB18C7E3310055C8E8 /* A4ViewController.h */,
+				9F9E0E6418CFC9F40064DED3 /* VideoAnalgesic.h */,
+				9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */,
 				992A95AC18C7E3310055C8E8 /* A4ViewController.m */,
+				9F9E0E6118CFC9E40064DED3 /* TTViewController.h */,
+				9F9E0E6218CFC9E40064DED3 /* TTViewController.m */,
 				992A95AE18C7E3310055C8E8 /* Images.xcassets */,
 				992A959D18C7E3310055C8E8 /* Supporting Files */,
 			);
@@ -250,7 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */,
 				992A95A318C7E3310055C8E8 /* main.m in Sources */,
+				9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */,
 				992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */,
 				992A95AD18C7E3310055C8E8 /* A4ViewController.m in Sources */,
 			);
@@ -461,6 +473,7 @@
 				992A95C718C7E3310055C8E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		992A95C818C7E3310055C8E8 /* Build configuration list for PBXNativeTarget "Assignment4Tests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +482,7 @@
 				992A95CA18C7E3310055C8E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
