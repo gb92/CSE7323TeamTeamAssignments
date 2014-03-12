@@ -29,6 +29,17 @@
 		5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */; };
 		5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */; };
 		5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */; };
+		9F99DC6A18D0F723003086CF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC6918D0F723003086CF /* opencv2.framework */; };
+		9F99DC6B18D0F723003086CF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC6918D0F723003086CF /* opencv2.framework */; };
+		9F99DC6E18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */; };
+		9F99DC6F18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */; };
+		9F99DC7118D10460003086CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7018D10460003086CF /* QuartzCore.framework */; };
+		9F99DC7318D1047C003086CF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7218D1047C003086CF /* CoreImage.framework */; };
+		9F99DC7518D10485003086CF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7418D10485003086CF /* CoreMedia.framework */; };
+		9F99DC7718D10491003086CF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7618D10491003086CF /* CoreVideo.framework */; };
+		9F99DC7918D104A5003086CF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7818D104A5003086CF /* AVFoundation.framework */; };
+		9F99DC7B18D104AF003086CF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7A18D104AF003086CF /* AssetsLibrary.framework */; };
+		9F99DC7D18D104C8003086CF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7C18D104C8003086CF /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +88,16 @@
 		5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLGraphView.m; sourceTree = "<group>"; };
 		5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMVibrationViewController.h; sourceTree = "<group>"; };
 		5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMVibrationViewController.m; sourceTree = "<group>"; };
+		9F99DC6918D0F723003086CF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		9F99DC6C18D0F7C2003086CF /* TMHeartbeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHeartbeatViewController.h; sourceTree = "<group>"; };
+		9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TMHeartbeatViewContoller.mm; sourceTree = "<group>"; };
+		9F99DC7018D10460003086CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9F99DC7218D1047C003086CF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		9F99DC7418D10485003086CF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9F99DC7618D10491003086CF /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		9F99DC7818D104A5003086CF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9F99DC7A18D104AF003086CF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		9F99DC7C18D104C8003086CF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +105,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F99DC7D18D104C8003086CF /* Accelerate.framework in Frameworks */,
+				9F99DC7B18D104AF003086CF /* AssetsLibrary.framework in Frameworks */,
+				9F99DC7918D104A5003086CF /* AVFoundation.framework in Frameworks */,
+				9F99DC7718D10491003086CF /* CoreVideo.framework in Frameworks */,
+				9F99DC7518D10485003086CF /* CoreMedia.framework in Frameworks */,
+				9F99DC7318D1047C003086CF /* CoreImage.framework in Frameworks */,
+				9F99DC7118D10460003086CF /* QuartzCore.framework in Frameworks */,
 				5C3751FF18BE5662000CBE77 /* CoreGraphics.framework in Frameworks */,
 				5C37520118BE5662000CBE77 /* UIKit.framework in Frameworks */,
+				9F99DC6A18D0F723003086CF /* opencv2.framework in Frameworks */,
 				5C3751FD18BE5662000CBE77 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +125,7 @@
 			files = (
 				5C37521C18BE5662000CBE77 /* XCTest.framework in Frameworks */,
 				5C37521E18BE5662000CBE77 /* UIKit.framework in Frameworks */,
+				9F99DC6B18D0F723003086CF /* opencv2.framework in Frameworks */,
 				5C37521D18BE5662000CBE77 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +155,14 @@
 		5C3751FB18BE5662000CBE77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F99DC7C18D104C8003086CF /* Accelerate.framework */,
+				9F99DC7A18D104AF003086CF /* AssetsLibrary.framework */,
+				9F99DC7818D104A5003086CF /* AVFoundation.framework */,
+				9F99DC7618D10491003086CF /* CoreVideo.framework */,
+				9F99DC7418D10485003086CF /* CoreMedia.framework */,
+				9F99DC7218D1047C003086CF /* CoreImage.framework */,
+				9F99DC7018D10460003086CF /* QuartzCore.framework */,
+				9F99DC6918D0F723003086CF /* opencv2.framework */,
 				5C3751FC18BE5662000CBE77 /* Foundation.framework */,
 				5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */,
 				5C37520018BE5662000CBE77 /* UIKit.framework */,
@@ -149,6 +187,8 @@
 				5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */,
 				5C5A0B5D18C1A92C0092293D /* TMStatViewController.h */,
 				5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */,
+				9F99DC6C18D0F7C2003086CF /* TMHeartbeatViewController.h */,
+				9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */,
 				5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */,
 				5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */,
 				5C37521418BE5662000CBE77 /* Images.xcassets */,
@@ -257,7 +297,7 @@
 				ORGANIZATIONNAME = smu;
 				TargetAttributes = {
 					5C3751F818BE5662000CBE77 = {
-						DevelopmentTeam = ELJL6XCWJA;
+						DevelopmentTeam = APD62CDC25;
 					};
 					5C37521918BE5662000CBE77 = {
 						TestTargetID = 5C3751F818BE5662000CBE77;
@@ -317,6 +357,7 @@
 				5C5A0B5818C127F20092293D /* TMUIStairImageView.m in Sources */,
 				5C5A0B5B18C143FA0092293D /* TMStairViewController.m in Sources */,
 				5C5A0B5F18C1A92C0092293D /* TMStatViewController.m in Sources */,
+				9F99DC6E18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */,
 				5C37520D18BE5662000CBE77 /* TMAppDelegate.m in Sources */,
 				5C37523318BE6DDA000CBE77 /* TMStepCountViewController.m in Sources */,
 				5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */,
@@ -327,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F99DC6F18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */,
 				5C37522818BE5662000CBE77 /* TeamFitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +490,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";
@@ -464,6 +510,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";
@@ -482,6 +532,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
@@ -505,6 +556,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
