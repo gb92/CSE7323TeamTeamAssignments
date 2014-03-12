@@ -23,6 +23,8 @@
 		992A95C218C7E3310055C8E8 /* Assignment4Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95C118C7E3310055C8E8 /* Assignment4Tests.m */; };
 		9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6218CFC9E40064DED3 /* TTViewController.m */; };
 		9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */; };
+		EF9A53F918D0FCCF0042D210 /* A4GraphicsOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A53F818D0FCCF0042D210 /* A4GraphicsOverlay.m */; };
+		EF9A53FC18D116580042D210 /* A4Face.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A53FB18D116580042D210 /* A4Face.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		9F9E0E6218CFC9E40064DED3 /* TTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
 		9F9E0E6418CFC9F40064DED3 /* VideoAnalgesic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnalgesic.h; sourceTree = "<group>"; };
 		9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnalgesic.m; sourceTree = "<group>"; };
+		EF9A53F718D0FCCF0042D210 /* A4GraphicsOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4GraphicsOverlay.h; sourceTree = "<group>"; };
+		EF9A53F818D0FCCF0042D210 /* A4GraphicsOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4GraphicsOverlay.m; sourceTree = "<group>"; };
+		EF9A53FA18D116580042D210 /* A4Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4Face.h; sourceTree = "<group>"; };
+		EF9A53FB18D116580042D210 /* A4Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4Face.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,10 @@
 				9F9E0E6218CFC9E40064DED3 /* TTViewController.m */,
 				992A95AE18C7E3310055C8E8 /* Images.xcassets */,
 				992A959D18C7E3310055C8E8 /* Supporting Files */,
+				EF9A53F718D0FCCF0042D210 /* A4GraphicsOverlay.h */,
+				EF9A53F818D0FCCF0042D210 /* A4GraphicsOverlay.m */,
+				EF9A53FA18D116580042D210 /* A4Face.h */,
+				EF9A53FB18D116580042D210 /* A4Face.m */,
 			);
 			path = Assignment4;
 			sourceTree = "<group>";
@@ -260,10 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9A53F918D0FCCF0042D210 /* A4GraphicsOverlay.m in Sources */,
 				9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */,
 				992A95A318C7E3310055C8E8 /* main.m in Sources */,
 				9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */,
 				992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */,
+				EF9A53FC18D116580042D210 /* A4Face.m in Sources */,
 				992A95AD18C7E3310055C8E8 /* A4ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
