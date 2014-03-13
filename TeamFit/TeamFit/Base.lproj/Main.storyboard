@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Stat View Controller-->
+        <!--Stat View Controller - Stats View-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="TMStatViewController" sceneMemberID="viewController">
@@ -17,18 +17,18 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWR-Hf-gEP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="219"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHr-1y-oob">
-                                        <rect key="frame" x="55" y="111" width="210" height="60"/>
+                                        <rect key="frame" x="55" y="136" width="210" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="50"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="YESTERDAY STEPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKF-fU-xD0">
-                                        <rect key="frame" x="75" y="94" width="170" height="21"/>
+                                        <rect key="frame" x="75" y="119" width="170" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,7 +37,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.49384124087591241" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="219" id="KbN-8M-4fZ"/>
+                                    <constraint firstAttribute="height" constant="239" id="KbN-8M-4fZ"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXf-JO-Es4">
@@ -51,26 +51,14 @@
                                 <rect key="frame" x="75" y="292" width="170" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNQ-34-GoW">
-                                <rect key="frame" x="20" y="455" width="46" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onBackButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pyr-GE-V6B"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.38179658259999999" green="0.85890541939999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WXf-JO-Es4" secondAttribute="trailing" constant="55" id="2TI-lN-OG9"/>
-                            <constraint firstItem="xmM-dP-ZU8" firstAttribute="top" secondItem="RWR-Hf-gEP" secondAttribute="bottom" constant="73" id="GBG-fr-CR3"/>
+                            <constraint firstItem="xmM-dP-ZU8" firstAttribute="top" secondItem="RWR-Hf-gEP" secondAttribute="bottom" constant="53" id="GBG-fr-CR3"/>
                             <constraint firstItem="RWR-Hf-gEP" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="V3Z-N5-dBi"/>
                             <constraint firstAttribute="trailing" secondItem="RWR-Hf-gEP" secondAttribute="trailing" id="byC-jA-qKn"/>
                             <constraint firstAttribute="trailing" secondItem="xmM-dP-ZU8" secondAttribute="trailing" constant="75" id="elw-vu-2hD"/>
@@ -80,6 +68,9 @@
                             <constraint firstItem="RWR-Hf-gEP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yIq-Zl-Djz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Stats View" id="xB9-VQ-5m0">
+                        <barButtonItem key="backBarButtonItem" title="Step Counting" id="hBD-Pw-IPo"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="currentStepsLabel" destination="WXf-JO-Es4" id="M6E-1w-B7f"/>
                         <outlet property="yesterdayStepsLabel" destination="lHr-1y-oob" id="1QF-Pz-WdQ"/>
@@ -89,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="2059" y="-847"/>
         </scene>
-        <!--Step Count View Controller-->
+        <!--Step Count View Controller - Step Counting-->
         <scene sceneID="gHH-8Z-7gS">
             <objects>
                 <viewController id="aVv-4K-efQ" customClass="TMStepCountViewController" sceneMemberID="viewController">
@@ -153,21 +144,21 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUz-B4-ln5">
-                                        <rect key="frame" x="20" y="463" width="64" height="24"/>
+                                        <rect key="frame" x="54" y="463" width="64" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title=" Stats" image="barico"/>
                                         <state key="highlighted" image="baricoHightligh"/>
                                         <connections>
-                                            <segue destination="vXZ-lx-hvc" kind="push" identifier="toStatView" id="378-6t-Rou"/>
+                                            <segue destination="vXZ-lx-hvc" kind="push" identifier="toStatView" id="V4d-Xn-RiD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5q-Lx-QZJ">
-                                        <rect key="frame" x="212" y="450" width="88" height="50"/>
+                                        <rect key="frame" x="187" y="463" width="88" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title=" Set Goal" image="editico"/>
                                         <state key="highlighted" image="editicoHightligh"/>
                                         <connections>
-                                            <segue destination="Cwt-pB-f5o" kind="push" identifier="toSetGoalView" id="XSn-Hc-YL6"/>
+                                            <segue destination="Cwt-pB-f5o" kind="push" identifier="toSetGoalView" id="d0e-ON-3ZD"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-gI-Q0k">
@@ -182,12 +173,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="f81-Ke-IFR" secondAttribute="width" id="0Es-Rj-EPr"/>
                                     <constraint firstAttribute="centerX" secondItem="f81-Ke-IFR" secondAttribute="centerX" id="1Ip-PU-Oz1"/>
-                                    <constraint firstItem="LUz-B4-ln5" firstAttribute="leading" secondItem="vFL-za-6Lu" secondAttribute="leading" constant="20" id="C19-pX-37b"/>
-                                    <constraint firstAttribute="bottom" secondItem="B5q-Lx-QZJ" secondAttribute="bottom" priority="991" constant="68" id="Dhb-t1-6NG"/>
+                                    <constraint firstItem="LUz-B4-ln5" firstAttribute="leading" secondItem="vFL-za-6Lu" secondAttribute="leading" constant="54" id="C19-pX-37b"/>
+                                    <constraint firstAttribute="trailing" secondItem="B5q-Lx-QZJ" secondAttribute="trailing" constant="45" id="HVs-2s-VmE"/>
+                                    <constraint firstItem="B5q-Lx-QZJ" firstAttribute="centerY" secondItem="LUz-B4-ln5" secondAttribute="centerY" id="Jqc-t8-1VN"/>
                                     <constraint firstAttribute="centerY" secondItem="f81-Ke-IFR" secondAttribute="centerY" constant="15" id="OXn-wK-xcX"/>
-                                    <constraint firstItem="B5q-Lx-QZJ" firstAttribute="top" secondItem="f81-Ke-IFR" secondAttribute="bottom" constant="41" id="enh-vR-8rf"/>
                                     <constraint firstAttribute="centerX" secondItem="3jh-gI-Q0k" secondAttribute="centerX" id="jFp-BW-E3e"/>
-                                    <constraint firstAttribute="trailing" secondItem="B5q-Lx-QZJ" secondAttribute="trailing" constant="20" id="k1C-RF-qka"/>
                                     <constraint firstAttribute="bottom" secondItem="LUz-B4-ln5" secondAttribute="bottom" priority="991" constant="81" id="o0L-tO-kyI"/>
                                     <constraint firstItem="f81-Ke-IFR" firstAttribute="top" secondItem="3jh-gI-Q0k" secondAttribute="bottom" constant="8" id="w1h-dK-ggW"/>
                                 </constraints>
@@ -200,7 +190,7 @@
                             <constraint firstItem="vFL-za-6Lu" firstAttribute="top" secondItem="rnl-bi-yL0" secondAttribute="top" id="tSG-W1-t17"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ae0-Nj-SaX"/>
+                    <navigationItem key="navigationItem" title="Step Counting" id="ae0-Nj-SaX"/>
                     <connections>
                         <outlet property="activityLabel" destination="3jh-gI-Q0k" id="A4A-M2-dwK"/>
                         <outlet property="currentStepLabel" destination="lCd-U6-ic7" id="aCI-fO-HOl"/>
@@ -224,63 +214,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tLS-Kk-Pa7">
-                                <rect key="frame" x="0.0" y="274" width="320" height="162"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLS-Kk-Pa7">
+                                <rect key="frame" x="0.0" y="214" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.974609375" green="0.974609375" blue="0.974609375" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6s-kL-N5H">
-                                <rect key="frame" x="15" y="71" width="62" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelPress:" destination="Cwt-pB-f5o" eventType="touchUpInside" id="e15-Uk-79y"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qk-VS-TPu">
-                                <rect key="frame" x="270" y="71" width="30" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Set"/>
-                                <connections>
-                                    <action selector="setPressed:" destination="Cwt-pB-f5o" eventType="touchUpInside" id="q0X-eK-hbv"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STF-Mw-Wux">
-                                <rect key="frame" x="15" y="155" width="291" height="91"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STF-Mw-Wux">
+                                <rect key="frame" x="15" y="97" width="291" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="77"/>
                                 <color key="textColor" red="0.56180245539999996" green="0.2247223347" blue="0.37554104379999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOAL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwf-SB-Ofh">
-                                <rect key="frame" x="122" y="115" width="76" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="tLS-Kk-Pa7" secondAttribute="trailing" id="3lX-90-jWq"/>
-                            <constraint firstItem="nwf-SB-Ofh" firstAttribute="top" secondItem="iqA-qR-cdO" secondAttribute="bottom" constant="95" id="4Ck-1b-HTi"/>
-                            <constraint firstItem="1Qk-VS-TPu" firstAttribute="baseline" secondItem="T6s-kL-N5H" secondAttribute="baseline" id="6Gx-Yl-zNh"/>
-                            <constraint firstItem="STF-Mw-Wux" firstAttribute="top" secondItem="nwf-SB-Ofh" secondAttribute="bottom" constant="16" id="7P3-7f-8B7"/>
                             <constraint firstAttribute="trailing" secondItem="STF-Mw-Wux" secondAttribute="trailing" constant="14" id="AQe-ec-SR6"/>
-                            <constraint firstItem="tLS-Kk-Pa7" firstAttribute="top" secondItem="STF-Mw-Wux" secondAttribute="bottom" constant="28" id="KTA-HT-chu"/>
-                            <constraint firstItem="nwf-SB-Ofh" firstAttribute="leading" secondItem="tuQ-bx-pF6" secondAttribute="leading" constant="122" id="PbE-yo-D6U"/>
-                            <constraint firstAttribute="trailing" secondItem="nwf-SB-Ofh" secondAttribute="trailing" constant="122" id="Zhk-GY-WQe"/>
+                            <constraint firstItem="STF-Mw-Wux" firstAttribute="top" secondItem="iqA-qR-cdO" secondAttribute="bottom" constant="33" id="Igb-qc-kc6"/>
+                            <constraint firstItem="tLS-Kk-Pa7" firstAttribute="top" secondItem="STF-Mw-Wux" secondAttribute="bottom" constant="26" id="KTA-HT-chu"/>
                             <constraint firstItem="STF-Mw-Wux" firstAttribute="leading" secondItem="tuQ-bx-pF6" secondAttribute="leading" constant="15" id="fYY-DF-Ivq"/>
-                            <constraint firstAttribute="trailing" secondItem="1Qk-VS-TPu" secondAttribute="trailing" constant="20" id="hld-iH-ijg"/>
                             <constraint firstItem="tLS-Kk-Pa7" firstAttribute="leading" secondItem="tuQ-bx-pF6" secondAttribute="leading" id="idG-cL-4U3"/>
-                            <constraint firstItem="T6s-kL-N5H" firstAttribute="leading" secondItem="tuQ-bx-pF6" secondAttribute="leading" constant="15" id="pUL-EO-Fg6"/>
-                            <constraint firstItem="T6s-kL-N5H" firstAttribute="top" secondItem="iqA-qR-cdO" secondAttribute="bottom" constant="7" id="vjx-0A-IHZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Set Goal" id="pIo-bV-dcE">
+                        <barButtonItem key="backBarButtonItem" title="Step Counting" id="ySY-9r-PXC"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="MMB-eI-ygR">
+                            <connections>
+                                <action selector="cancelPress:" destination="Cwt-pB-f5o" id="1Y6-B5-PLw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Set" id="XHf-VB-oj5">
+                            <connections>
+                                <action selector="setPressed:" destination="Cwt-pB-f5o" id="46G-vA-VQQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="goalLabel" destination="STF-Mw-Wux" id="ABm-hA-2Rx"/>
                         <outlet property="goalPicker" destination="tLS-Kk-Pa7" id="ceT-dF-cX7"/>
