@@ -543,17 +543,23 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-Mq-IZe">
-                                <rect key="frame" x="260" y="407" width="51" height="31"/>
+                                <rect key="frame" x="261" y="463" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="ToggleTorch:" destination="ZDq-I6-hzI" eventType="valueChanged" id="Q4V-HU-FIV"/>
                                 </connections>
                             </switch>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GrZ-WW-4HB" customClass="APLGraphView">
+                                <rect key="frame" x="0.0" y="271" width="320" height="178"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Heart Beats" image="eye" id="AXT-fx-ODd"/>
                     <connections>
+                        <outlet property="heartBeatGraphView" destination="GrZ-WW-4HB" id="xO8-TV-rsx"/>
                         <outlet property="imageView" destination="Nmx-UD-px3" id="RJH-A3-8kl"/>
                     </connections>
                 </viewController>
