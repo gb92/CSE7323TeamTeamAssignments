@@ -18,9 +18,10 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentStepLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goalStepLabel;
+@property (weak, nonatomic) IBOutlet UILabel *activityLabel;
 
 @property (weak, nonatomic) IBOutlet TMStepIndicaterView *stepIndicaterView;
-@property (weak, nonatomic) IBOutlet UIImageView *activityStateImageView;
+
 
 @property (nonatomic) SIActivityType activityType;
 - (IBAction)onButtonTestActivityPressed:(id)sender;
@@ -30,9 +31,9 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
 @property (strong,nonatomic) CMMotionActivityManager *cmActivityManager;
 @property (strong,nonatomic) CMStepCounter *cmStepCounter;
 
-@property (nonatomic) unsigned int numberOfSteps;
-@property (nonatomic) unsigned int numberOfStepsSinceMorningUntilOpenApp;
-@property (nonatomic) unsigned int numberOfYesterdaySteps;
+@property (nonatomic) NSInteger numberOfSteps;
+@property (nonatomic) NSInteger numberOfStepsSinceMorningUntilOpenApp;
+@property (nonatomic) NSInteger numberOfYesterdaySteps;
 
 
 @property ( strong, nonatomic ) NSUserDefaults* userDefault;
@@ -200,8 +201,8 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
     if([segue.identifier isEqualToString:@"toStatView"])
     {
         TMStatViewController *statView = segue.destinationViewController;
-        [statView setCurrentStep:self.numberOfSteps];
-        [statView setYesterdayStep:self.numberOfYesterdaySteps];
+        [statView setCurrentStep:(int)self.numberOfSteps];
+        [statView setYesterdayStep:(int)self.numberOfYesterdaySteps];
     }
     else if( [segue.identifier isEqualToString:@"toSetGoalView"])
     {
@@ -257,7 +258,7 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
         self.stepIndicaterView.barColor = [UIColor grayColor];
     }
     
-    [self.currentStepLabel setText:[NSString stringWithFormat:@"%d",self.numberOfSteps]];
+    [self.currentStepLabel setText:[NSString stringWithFormat:@"%d",(int)self.numberOfSteps]];
     [self.goalStepLabel setText:[NSString stringWithFormat:@"%d",numberOfGoalSteps]];
     
     // Make sure you set max before set current value!
@@ -282,24 +283,23 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
     switch (activityType)
     {
         case SI_ACTIVITY_STILL:
-            imageName = @"stand";
+            imageName = @"Still";
             break;
         case SI_ACTIVITY_RUNNING:
-            imageName = @"running";
+            imageName = @"Running";
             break;
         case SI_ACTIVITY_WALKING:
-            imageName = @"walking";
+            imageName = @"Walking";
             break;
         case SI_ACTIVITY_DRIVING:
-            imageName = @"driving";
+            imageName = @"Driving";
             break;
         default:
-            imageName = @"stand";
+            imageName = @"Still";
             break;
     }
   
-    UIImage *activityImage = [UIImage imageNamed:imageName];
-    [self.activityStateImageView setImage:activityImage];
+    [self.activityLabel setText:imageName];
     
     _activityType = activityType;
 }
