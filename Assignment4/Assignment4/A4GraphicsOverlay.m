@@ -16,6 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor=nil;
+        //self.transform=CGAffineTransformMakeRotation(M_PI);
     }
     return self;
 }
@@ -25,6 +26,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.backgroundColor=nil;
+        //self.transform=CGAffineTransformMakeRotation(M_PI);
     }
     return self;
 }
@@ -32,37 +34,18 @@
 -(void) drawRect:(CGRect)rect
 {
     CGContextRef context= UIGraphicsGetCurrentContext();
+    
+    CGContextTranslateCTM(context, 0, self.frame.size.width);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
     if(context != nil)
     {
-        /*if(self.rectAroundFace.size.height>0 && self.rectAroundFace.size.width>0)
-        {
-            //CGContextSetBlendMode(context, )
-            CGContextSetLineWidth(context, 2.0);
-            CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-            CGContextAddRect(context, self.rectAroundFace);
-            CGContextStrokePath(context);
-            NSLog(@"Drawing Robot Face");
-        }
-        else
-        {
-            NSLog(@"rect around face is 0");
-        }*/
-        
-        /*for(int i=0; i<self.faceRects.count; i++)
-        {
-            CGRect face=[self.faceRects[i] CGRectValue];
-         
-            CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-            CGContextAddRect(context, face);
-            CGContextStrokePath(context);
-        }*/
         
         CGContextSetLineWidth(context, 2.0);
         for(int i=0; i<self.faceRects.count;i++)
         {
             A4Face *face=self.faceRects[i];
             //[CGColorRef colorWithRed:<#(CGFloat)#> green:<#(CGFloat)#> blue:<#(CGFloat)#>]
-            
+            //CGRect modFace=CGRectMake(self.frame.size.height-face.face.origin.x, self.frame.size.width-face.face.origin.y, face.face.size.width, face.face.size.height);
             CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
             CGContextAddRect(context, face.face);
             CGContextStrokePath(context);
@@ -70,6 +53,7 @@
             if(face.hasLeftEye)
             {
                 CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+                
                 CGContextAddRect(context, face.leftEye);
                 CGContextStrokePath(context);
                 NSLog(@"isLeftEyeClosed:%@",face.isLeftEyeClosed?@"YES": @"NO");
@@ -81,6 +65,7 @@
             if(face.hasRightEye)
             {
                 CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
+                
                 CGContextAddRect(context, face.rightEye);
                 CGContextStrokePath(context);
                 NSLog(@"isRightEyeClosed:%@",face.isRightEyeClosed?@"YES": @"NO");
@@ -92,6 +77,8 @@
             if(face.hasMouth)
             {
                 CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+                
+                //CGRect modMouth=CGRectMake(self.frame.size.height-face.mouth.origin.x,self.frame.size.width-face.mouth.origin.y,face.mouth.size.width,face.mouth.size.height);
                 CGContextAddRect(context, face.mouth);
                 CGContextStrokePath(context);
                 
@@ -107,23 +94,7 @@
         NSLog(@"context is nil");
     }
 }
-- (void)drawRectOverFace:(CGRect)rect
-{
-/*    CGContextRef context= UIGraphicsGetCurrentContext();
-    if(context != nil)
-    {
-        CGContextSetLineWidth(context, 2.0);
-        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-        CGContextAddRect(context, rect);
-        CGContextStrokePath(context);
-    }
-    else{
-        NSLog(@"context is nil");
-    }
-*/
-    
-    [self setNeedsDisplay];
-}
+
 
 
 @end

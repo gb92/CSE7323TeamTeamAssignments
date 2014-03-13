@@ -14,7 +14,6 @@
 		992A95A318C7E3310055C8E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95A218C7E3310055C8E8 /* main.m */; };
 		992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95A618C7E3310055C8E8 /* A4AppDelegate.m */; };
 		992A95AA18C7E3310055C8E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992A95A818C7E3310055C8E8 /* Main.storyboard */; };
-		992A95AD18C7E3310055C8E8 /* A4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95AC18C7E3310055C8E8 /* A4ViewController.m */; };
 		992A95AF18C7E3310055C8E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 992A95AE18C7E3310055C8E8 /* Images.xcassets */; };
 		992A95B618C7E3310055C8E8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A95B518C7E3310055C8E8 /* XCTest.framework */; };
 		992A95B718C7E3310055C8E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A959618C7E3310055C8E8 /* Foundation.framework */; };
@@ -49,8 +48,6 @@
 		992A95A518C7E3310055C8E8 /* A4AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = A4AppDelegate.h; sourceTree = "<group>"; };
 		992A95A618C7E3310055C8E8 /* A4AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A4AppDelegate.m; sourceTree = "<group>"; };
 		992A95A918C7E3310055C8E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		992A95AB18C7E3310055C8E8 /* A4ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = A4ViewController.h; sourceTree = "<group>"; };
-		992A95AC18C7E3310055C8E8 /* A4ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A4ViewController.m; sourceTree = "<group>"; };
 		992A95AE18C7E3310055C8E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		992A95B418C7E3310055C8E8 /* Assignment4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		992A95B518C7E3310055C8E8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -127,10 +124,8 @@
 				992A95A518C7E3310055C8E8 /* A4AppDelegate.h */,
 				992A95A618C7E3310055C8E8 /* A4AppDelegate.m */,
 				992A95A818C7E3310055C8E8 /* Main.storyboard */,
-				992A95AB18C7E3310055C8E8 /* A4ViewController.h */,
 				9F9E0E6418CFC9F40064DED3 /* VideoAnalgesic.h */,
 				9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */,
-				992A95AC18C7E3310055C8E8 /* A4ViewController.m */,
 				9F9E0E6118CFC9E40064DED3 /* TTViewController.h */,
 				9F9E0E6218CFC9E40064DED3 /* TTViewController.m */,
 				992A95AE18C7E3310055C8E8 /* Images.xcassets */,
@@ -276,7 +271,6 @@
 				9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */,
 				992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */,
 				EF9A53FC18D116580042D210 /* A4Face.m in Sources */,
-				992A95AD18C7E3310055C8E8 /* A4ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

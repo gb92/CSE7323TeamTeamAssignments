@@ -12,9 +12,6 @@
 
 @property(nonatomic) CGRect rectAroundFace;
 @property(strong, nonatomic) NSArray *faceRects;
-
-
--(void) drawRectOverFace:(CGRect) rect;
-
+@property (strong, nonatomic) NSNumber *imageHeight;
 
 @end
