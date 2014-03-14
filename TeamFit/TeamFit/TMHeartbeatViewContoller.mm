@@ -12,6 +12,9 @@
 
 using namespace cv;
 
+static const int kFramesPerSec = 24;
+static const int kSampleSecond = 5;
+
 @interface TMHeartbeatViewController () <CvVideoCameraDelegate>
 @property (weak, nonatomic) IBOutlet APLGraphView *heartBeatGraphView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -23,7 +26,7 @@ using namespace cv;
 @implementation TMHeartbeatViewController
 #ifdef __cplusplus
     std::vector<float> meanOfRedValues;
-static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = 240;
+static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 #endif
 
 -(NSMutableArray *)redAverageValues{
@@ -95,31 +98,33 @@ std::vector<float>maximumValueList;
         meanOfRedValues.clear();
     }
     
-    
-//    dispatch_async(dispatch_get_main_queue(),^{
-//        
-//            float plotedRed = (avgPixelIntensity.val[2] - (int)(avgPixelIntensity.val[2] - 0.5)) * 100;
-//            [self.heartBeatGraphView addX:plotedRed y:0 z:0];
-//        
-//    });
-    
     char text[50];
     
-    
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartBeat * 6 );
+    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartBeat * 60 / kSampleSecond );
     
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }
 
-
+void normalizeData( std::vector<float>& array, float scaleFactor )
+{
+    int minOfThisList = (int)minValueOfArray(array, array.begin(), array.end());
+    int maxOfThisList = (int)maxValueOfArray(array, array.begin(), array.end())+1;
+    
+    for( int i=0; i<array.size(); i++ )
+    {
+        array[i] = (array[i] - minOfThisList) / (maxOfThisList-minOfThisList);
+        array[i] *= scaleFactor;
+    }
+    
+}
 
 int countLocalMaximaFromArray( std::vector<float>& array )
 {
     int result = 0;
     
     static const float ErrorRate = 0.000001f;
-    static const int windowSize = 17;
+    static const int windowSize = 9;
     std::vector<float> window;
     window.resize( windowSize );
     
@@ -139,23 +144,30 @@ int countLocalMaximaFromArray( std::vector<float>& array )
     std::vector<float>::iterator pEndWindow = array.end();
     std::vector<float>::iterator pCurrentPointer = pBeginWindow;
     
+    normalizeData( array, 1000 );
+    
     while( pCurrentPointer < pEndWindow)
     {
         currentMaxValue = maxValueOfArray( array, pCurrentPointer, pCurrentPointer + windowSize );
 
-        if ( abs(previousMaxValue - currentMaxValue) < ErrorRate )
+        float thisError = (previousMaxValue - currentMaxValue);
+        
+        if( thisError < 0 ) thisError *= -1.0;
+        
+        if ( thisError < ErrorRate )
         {
+
             result++;
             
             *maxValueListIterator = *pCurrentPointer;
             
             // Hack lol
-            pCurrentPointer = pCurrentPointer + windowSize - 5;
-            previousMaxValue = currentMaxValue;
+            pCurrentPointer = pCurrentPointer + windowSize;
+            previousMaxValue = 0;
             
             // Debug mask
             //
-            maxValueListIterator = maxValueListIterator + windowSize -5;
+            maxValueListIterator = maxValueListIterator + windowSize;
             
             //
             // End debug mask
@@ -163,15 +175,19 @@ int countLocalMaximaFromArray( std::vector<float>& array )
             continue;
             
         }
+        else
+        {
+            
+            // move window
+            pCurrentPointer = pCurrentPointer + 2;
+            
+            // Debug mask---
+            maxValueListIterator = maxValueListIterator + 2;
+            // end Debug mask---
+            
+            previousMaxValue = currentMaxValue;
+        }
 
-        // move window
-        pCurrentPointer = pCurrentPointer + 10;
-        
-        // Debug mask---
-        maxValueListIterator = maxValueListIterator + 10;
-        // end Debug mask---
-        
-        previousMaxValue = currentMaxValue;
     }
     
     return result;
@@ -190,6 +206,21 @@ float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator b
     }
     
     return max;
+}
+
+float minValueOfArray( std::vector<float>& array, std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
+{
+    float min = 99999;
+    
+    std::vector<float>::iterator currentPoint = beginOfWindow;
+    
+    while( currentPoint < endOfWindow )
+    {
+        min = std::min( *currentPoint, min );
+        currentPoint++;
+    }
+    
+    return min;
 }
 
 #endif
@@ -213,7 +244,7 @@ float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator b
         _videoCamera.defaultAVCaptureDevicePosition=AVCaptureDevicePositionBack;
         _videoCamera.defaultAVCaptureSessionPreset=AVCaptureSessionPreset352x288;
         _videoCamera.defaultAVCaptureVideoOrientation=AVCaptureVideoOrientationLandscapeLeft;
-        _videoCamera.defaultFPS = 24;
+        _videoCamera.defaultFPS = kFramesPerSec;
         _videoCamera.grayscaleMode = NO;
         
         
@@ -324,7 +355,7 @@ float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator b
 
 -(void) drawGraph:( std::vector<float> ) data withMaximarList:(std::vector<float>) maxList
 {
-    static const float kTimePerSec = (1.0 / 24.0);
+    static const float kTimePerSec = (1.0 / (float)kFramesPerSec);
     
     for( int i = 0; i<data.size(); i++ )
     {
@@ -344,15 +375,6 @@ float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator b
     float number = thisNumber.X;
     float maximar = thisNumber.Y;
     
-    NSLog (@"Got the float: %f  : %f", number, maximar);
-    
-    number = (number - (235));
-    number = (number < 0)? 0: number;
-    number *= 100;
-    
-    maximar = (maximar - (235));
-    maximar = (maximar < 0)? 0: maximar;
-    maximar *= 100;
     
    [self.heartBeatGraphView addX:number y:maximar z:0];
 }
