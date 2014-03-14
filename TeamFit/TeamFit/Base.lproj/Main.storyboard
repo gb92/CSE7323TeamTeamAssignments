@@ -144,8 +144,9 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUz-B4-ln5">
-                                        <rect key="frame" x="54" y="463" width="64" height="24"/>
+                                        <rect key="frame" x="54" y="463" width="67" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title=" Stats" image="barico"/>
                                         <state key="highlighted" image="baricoHightligh"/>
                                         <connections>
@@ -153,8 +154,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5q-Lx-QZJ">
-                                        <rect key="frame" x="187" y="463" width="88" height="24"/>
+                                        <rect key="frame" x="183" y="463" width="92" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title=" Set Goal" image="editico"/>
                                         <state key="highlighted" image="editicoHightligh"/>
                                         <connections>
@@ -200,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDs-tu-N9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1574" y="-185"/>
+            <point key="canvasLocation" x="1560" y="-200"/>
         </scene>
         <!--Set Goal Step View Controller - Set Goal-->
         <scene sceneID="22A-gZ-54b">
@@ -295,14 +297,14 @@
                                 <rect key="frame" x="55" y="75" width="210" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="63"/>
-                                <color key="textColor" red="0.48038903059999999" green="0.20028424246071694" blue="0.29533077812439551" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.60768096299999996" green="0.29464374300000001" blue="0.45260780020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STAIR STEPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-wM-xEi">
-                                <rect key="frame" x="90" y="52" width="140" height="26"/>
+                                <rect key="frame" x="110" y="66" width="100" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleBack" translatesAutoresizingMaskIntoConstraints="NO" id="Vqk-xg-F4f" customClass="TMUIStairImageView">
@@ -328,54 +330,42 @@
                                     <action selector="onPlayButtonPressed:" destination="9Hw-lx-FwF" eventType="touchUpInside" id="3jz-Qi-fKR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbW-vX-3iF">
-                                <rect key="frame" x="107" y="431" width="106" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEK-fF-JSL">
+                                <rect key="frame" x="55" y="433" width="66" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                <state key="normal" title=" Reset" image="editico">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Reset" image="editico"/>
                                 <state key="highlighted" image="editicoHightligh">
-                                    <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.2456220154" green="0.4802694515" blue="0.35917319209999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onResetButtonPressed:" destination="9Hw-lx-FwF" eventType="touchUpInside" id="v1B-u8-58B"/>
+                                    <action selector="onResetButtonPressed:" destination="9Hw-lx-FwF" eventType="touchUpInside" id="tEF-kI-4Er"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wg0-Mk-Un2">
-                                <rect key="frame" x="121" y="481" width="79" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jII-m1-OnA">
+                                <rect key="frame" x="197" y="435" width="77" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="FAG-0v-bfA"/>
-                                    <constraint firstAttribute="width" constant="79" id="VoQ-Bv-tDi"/>
-                                </constraints>
-                                <state key="normal" title="Setting" image="setting">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title=" Setting" image="setting"/>
                                 <state key="highlighted" image="settingHightlight"/>
                                 <connections>
-                                    <action selector="onButtonTestActivityPressed:" destination="aVv-4K-efQ" eventType="touchUpInside" id="mRz-gK-GUZ"/>
-                                    <segue destination="tEy-c5-FMB" kind="modal" identifier="toSettingView" id="9fr-OF-jBg"/>
+                                    <segue destination="tEy-c5-FMB" kind="modal" identifier="toSettingView" modalTransitionStyle="coverVertical" id="snp-XX-eLK"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.52045377771188872" blue="0.42063914228281551" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="jII-m1-OnA" firstAttribute="top" secondItem="Vqk-xg-F4f" secondAttribute="bottom" constant="26" id="AdU-Qw-SdU"/>
                             <constraint firstAttribute="centerX" secondItem="rTT-TK-o22" secondAttribute="centerX" id="Aoy-8S-qMc"/>
-                            <constraint firstItem="Wg0-Mk-Un2" firstAttribute="top" secondItem="EbW-vX-3iF" secondAttribute="bottom" constant="18" id="Ef8-ag-uFH"/>
-                            <constraint firstItem="EbW-vX-3iF" firstAttribute="leading" secondItem="ch1-hA-5Xb" secondAttribute="leading" constant="107" id="GWa-a1-23p"/>
-                            <constraint firstAttribute="trailing" secondItem="Go9-wM-xEi" secondAttribute="trailing" constant="90" id="LFd-ck-Sk3"/>
-                            <constraint firstItem="EbW-vX-3iF" firstAttribute="top" secondItem="Vqk-xg-F4f" secondAttribute="bottom" constant="22" id="Nda-D6-qxD"/>
-                            <constraint firstItem="Go9-wM-xEi" firstAttribute="top" secondItem="9cY-7H-ofX" secondAttribute="bottom" constant="32" id="NqT-cu-ccH"/>
-                            <constraint firstItem="Wg0-Mk-Un2" firstAttribute="centerX" secondItem="EbW-vX-3iF" secondAttribute="centerX" id="PZQ-kE-aC2"/>
-                            <constraint firstItem="RJ9-Em-OSV" firstAttribute="top" secondItem="Go9-wM-xEi" secondAttribute="bottom" constant="-3" id="Q0j-a7-fcA"/>
+                            <constraint firstAttribute="trailing" secondItem="jII-m1-OnA" secondAttribute="trailing" constant="46" id="Env-fF-0uB"/>
+                            <constraint firstAttribute="centerX" secondItem="Go9-wM-xEi" secondAttribute="centerX" id="H9A-L0-sbF"/>
                             <constraint firstAttribute="trailing" secondItem="RJ9-Em-OSV" secondAttribute="trailing" constant="55" id="UBZ-6H-8ti"/>
                             <constraint firstAttribute="centerY" secondItem="Vqk-xg-F4f" secondAttribute="centerY" constant="0.5" id="bvv-HQ-pg2"/>
-                            <constraint firstItem="RJ9-Em-OSV" firstAttribute="top" secondItem="Go9-wM-xEi" secondAttribute="bottom" constant="-3" id="cxG-aM-xv4"/>
-                            <constraint firstAttribute="trailing" secondItem="EbW-vX-3iF" secondAttribute="trailing" constant="107" id="gMa-yn-31A"/>
+                            <constraint firstItem="Vqk-xg-F4f" firstAttribute="top" secondItem="RJ9-Em-OSV" secondAttribute="bottom" constant="8" id="cH8-vn-9gu"/>
                             <constraint firstItem="RJ9-Em-OSV" firstAttribute="leading" secondItem="ch1-hA-5Xb" secondAttribute="leading" constant="55" id="i1T-vs-by4"/>
-                            <constraint firstItem="Go9-wM-xEi" firstAttribute="leading" secondItem="ch1-hA-5Xb" secondAttribute="leading" constant="90" id="kK8-vx-UJj"/>
+                            <constraint firstItem="jII-m1-OnA" firstAttribute="centerY" secondItem="NEK-fF-JSL" secondAttribute="centerY" id="k3x-gY-Vew"/>
+                            <constraint firstItem="RJ9-Em-OSV" firstAttribute="top" secondItem="Go9-wM-xEi" secondAttribute="bottom" constant="-11" id="kpS-ps-89j"/>
+                            <constraint firstItem="NEK-fF-JSL" firstAttribute="leading" secondItem="ch1-hA-5Xb" secondAttribute="leading" constant="55" id="qOu-dh-sgA"/>
                             <constraint firstAttribute="centerY" secondItem="rTT-TK-o22" secondAttribute="centerY" id="x8d-FC-07f"/>
                             <constraint firstAttribute="centerX" secondItem="Vqk-xg-F4f" secondAttribute="centerX" id="yTH-MQ-Ycv"/>
                         </constraints>
@@ -389,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UvE-8K-YMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="480"/>
+            <point key="canvasLocation" x="1034" y="496"/>
         </scene>
         <!--Stair Setting View Controller-->
         <scene sceneID="dww-6m-k3P">
@@ -451,8 +441,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10f-Jh-ngc">
-                                <rect key="frame" x="41" y="270" width="239" height="105"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10f-Jh-ngc">
+                                <rect key="frame" x="41" y="267" width="239" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="90"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -486,7 +476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSb-2q-MsC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1533" y="480"/>
+            <point key="canvasLocation" x="1573" y="472"/>
         </scene>
         <!--Vibration View Controller - Vibration-->
         <scene sceneID="itE-zX-6VD">
@@ -639,7 +629,7 @@
         <image name="settingHightlight" width="20" height="20"/>
         <image name="stairico" width="24" height="24"/>
     </resources>
-    <color key="tintColor" red="0.2456220154" green="0.4802694515" blue="0.35917319209999998" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.60768096299999996" green="0.29464374300000001" blue="0.45260780020000002" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
