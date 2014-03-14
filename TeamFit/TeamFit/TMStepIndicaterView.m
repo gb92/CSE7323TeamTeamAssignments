@@ -13,7 +13,7 @@
 #define ToDeg(rad)		( (180.0 * (rad)) / M_PI )
 #define SQR(x)			( (x) * (x) )
 
-static const int SI_LINE_WIDTH = 40;
+static const int SI_LINE_WIDTH = 20;
 static const int SI_START_OFFSET = 20;
 static const int SI_ARC_PADDING = 40;
 
@@ -67,7 +67,7 @@ static const int SI_ARC_PADDING = 40;
 {
     [super drawRect:rect];
     
-    radius = self.frame.size.height / 2 - SI_ARC_PADDING;
+    radius = self.frame.size.width / 2 - SI_ARC_PADDING;
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     

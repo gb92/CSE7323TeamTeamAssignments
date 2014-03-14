@@ -99,5 +99,201 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamFit/TMHeartbeatViewContoller.mm"
+            timestampString = "416442266.411221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "countLocalMaximaFromArray( std::vector&lt;float&gt;&amp; array )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamFit/TMHeartbeatViewContoller.mm"
+            timestampString = "416442266.411221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "-drawGraph:withMaximarList:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440104.551071"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440104.551424"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440104.551626"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "296">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamFit/TMHeartbeatViewContoller.mm"
+            timestampString = "416442266.411221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "-sendPlotValueToGraphToDraw:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController sendPlotValueToGraphToDraw:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416439826.373604"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "309"
+                  endingLineNumber = "309"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController sendPlotValueToGraphToDraw:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416439826.37384"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "309"
+                  endingLineNumber = "309"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamFit/TMHeartbeatViewContoller.mm"
+            timestampString = "416442266.411221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
+            landmarkName = "-drawGraph:withMaximarList:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440112.408616"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440112.408991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440112.409342"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "316">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TMHeartbeatViewController drawGraph:]"
+                  moduleName = "TeamFit"
+                  urlString = "file:///Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit/TeamFit/TMHeartbeatViewContoller.mm"
+                  timestampString = "416440112.409692"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "302"
+                  endingLineNumber = "302"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
