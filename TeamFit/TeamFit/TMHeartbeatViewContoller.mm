@@ -78,7 +78,11 @@ std::vector<float>maximumValueList;
     
     if( meanOfRedValues.size() < MEAN_OF_RED_VALUES_ARRAY_SIZE )
     {
-        meanOfRedValues.push_back( avgPixelIntensity.val[2] );
+        // Make sure that the color is red.
+        // and push data to the buffer.
+        //
+        if( (avgPixelIntensity[0] < 50) && (avgPixelIntensity[1] < 30) && (avgPixelIntensity[2] < 252) )
+            meanOfRedValues.push_back( avgPixelIntensity.val[2] );
     }
     else
     {
@@ -98,18 +102,18 @@ std::vector<float>maximumValueList;
         meanOfRedValues.clear();
     }
     
+    
+    // Display color values and heartrate onto the image.
     char text[50];
-    
     sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartBeat * 60 / kSampleSecond );
-    
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }
 
 void normalizeData( std::vector<float>& array, float scaleFactor )
 {
-    int minOfThisList = (int)minValueOfArray(array, array.begin(), array.end());
-    int maxOfThisList = (int)maxValueOfArray(array, array.begin(), array.end())+1;
+    int minOfThisList = (int)minValueOfArray( array.begin(), array.end());
+    int maxOfThisList = (int)maxValueOfArray( array.begin(), array.end())+1;
     
     for( int i=0; i<array.size(); i++ )
     {
@@ -148,7 +152,7 @@ int countLocalMaximaFromArray( std::vector<float>& array )
     
     while( pCurrentPointer < pEndWindow)
     {
-        currentMaxValue = maxValueOfArray( array, pCurrentPointer, pCurrentPointer + windowSize );
+        currentMaxValue = maxValueOfArray( pCurrentPointer, pCurrentPointer + windowSize );
 
         float thisError = (previousMaxValue - currentMaxValue);
         
@@ -193,7 +197,7 @@ int countLocalMaximaFromArray( std::vector<float>& array )
     return result;
 }
 
-float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
+float maxValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
 {
     float max = -99999;
     
@@ -208,7 +212,7 @@ float maxValueOfArray( std::vector<float>& array, std::vector<float>::iterator b
     return max;
 }
 
-float minValueOfArray( std::vector<float>& array, std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
+float minValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
 {
     float min = 99999;
     
