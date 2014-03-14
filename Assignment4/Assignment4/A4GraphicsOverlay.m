@@ -34,18 +34,21 @@
 -(void) drawRect:(CGRect)rect
 {
     CGContextRef context= UIGraphicsGetCurrentContext();
-    
-    CGContextTranslateCTM(context, 0, self.frame.size.width);
-    CGContextScaleCTM(context, 1.0f, -1.0f);
     if(context != nil)
     {
         
-        CGContextSetLineWidth(context, 2.0);
+        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+        CGContextAddRect(context, self.frame);
+        CGContextStrokePath(context);
+        
+        CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+        CGContextAddRect(context,([UIApplication sharedApplication].delegate).window.bounds);
+        CGContextStrokePath(context);
+
         for(int i=0; i<self.faceRects.count;i++)
         {
             A4Face *face=self.faceRects[i];
-            //[CGColorRef colorWithRed:<#(CGFloat)#> green:<#(CGFloat)#> blue:<#(CGFloat)#>]
-            //CGRect modFace=CGRectMake(self.frame.size.height-face.face.origin.x, self.frame.size.width-face.face.origin.y, face.face.size.width, face.face.size.height);
+            
             CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
             CGContextAddRect(context, face.face);
             CGContextStrokePath(context);
@@ -89,6 +92,9 @@
                 }
             }
         }
+        CGAffineTransform transform=CGAffineTransformMakeRotation(M_PI_2);
+        //transform=CGAffineTransformConcat(transform, CGAffineTransformMakeScale(1.0, 1.0));
+        [self setTransform:transform];
     }
     else{
         NSLog(@"context is nil");

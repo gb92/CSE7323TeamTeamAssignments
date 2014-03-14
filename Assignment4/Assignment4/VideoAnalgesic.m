@@ -86,10 +86,10 @@ static CGColorSpaceRef sDeviceRgbColorSpace = NULL;
         ciOrientation = @7;
     }
     else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft){
-        ciOrientation = @3;
+        ciOrientation = @1;
     }
     else if(interfaceOrientation == UIInterfaceOrientationLandscapeRight){
-        ciOrientation = @1;
+        ciOrientation = @3;
     }
     else{
         //unknown orientation!
@@ -193,7 +193,7 @@ static CGColorSpaceRef sDeviceRgbColorSpace = NULL;
         }
         
         // CoreImage wants BGRA pixel format
-        NSDictionary *outputSettings = @{ (id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInteger:kCVPixelFormatType_32BGRA]};
+        NSDictionary *outputSettings = @{ (id)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA)};
         
         // create the capture session
         _captureSession = [[AVCaptureSession alloc] init];
@@ -342,7 +342,7 @@ static CGColorSpaceRef sDeviceRgbColorSpace = NULL;
 
 -(NSNumber*)framesPerSecond{
     if(!_framesPerSecond)
-        _framesPerSecond = [NSNumber numberWithFloat:30.0];
+        _framesPerSecond = @30.0f;
     
     return _framesPerSecond;
 }

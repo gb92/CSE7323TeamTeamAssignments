@@ -25,12 +25,12 @@
 		5C5A0B5818C127F20092293D /* TMUIStairImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A0B5718C127F20092293D /* TMUIStairImageView.m */; };
 		5C5A0B5B18C143FA0092293D /* TMStairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A0B5A18C143FA0092293D /* TMStairViewController.m */; };
 		5C5A0B5F18C1A92C0092293D /* TMStatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */; };
+		5C9CFF0E18D2809400EFF22E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9CFF0D18D2809400EFF22E /* opencv2.framework */; };
+		5C9CFF0F18D2809400EFF22E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9CFF0D18D2809400EFF22E /* opencv2.framework */; };
 		5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */; };
 		5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */; };
 		5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */; };
 		5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */; };
-		9F99DC6A18D0F723003086CF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC6918D0F723003086CF /* opencv2.framework */; };
-		9F99DC6B18D0F723003086CF /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC6918D0F723003086CF /* opencv2.framework */; };
 		9F99DC6E18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */; };
 		9F99DC6F18D0F7C2003086CF /* TMHeartbeatViewContoller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */; };
 		9F99DC7118D10460003086CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F99DC7018D10460003086CF /* QuartzCore.framework */; };
@@ -80,6 +80,7 @@
 		5C5A0B5A18C143FA0092293D /* TMStairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMStairViewController.m; sourceTree = "<group>"; };
 		5C5A0B5D18C1A92C0092293D /* TMStatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMStatViewController.h; path = ../TMStatViewController.h; sourceTree = "<group>"; };
 		5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMStatViewController.m; path = ../TMStatViewController.m; sourceTree = "<group>"; };
+		5C9CFF0D18D2809400EFF22E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5CEBFA7318C2E31A00311B33 /* TMStairSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMStairSettingViewController.h; sourceTree = "<group>"; };
 		5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMStairSettingViewController.m; sourceTree = "<group>"; };
 		5CEF5CD918C059C000F87969 /* TMSetGoalStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSetGoalStepViewController.h; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLGraphView.m; sourceTree = "<group>"; };
 		5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMVibrationViewController.h; sourceTree = "<group>"; };
 		5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMVibrationViewController.m; sourceTree = "<group>"; };
-		9F99DC6918D0F723003086CF /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		9F99DC6C18D0F7C2003086CF /* TMHeartbeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHeartbeatViewController.h; sourceTree = "<group>"; };
 		9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TMHeartbeatViewContoller.mm; sourceTree = "<group>"; };
 		9F99DC7018D10460003086CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -114,8 +114,8 @@
 				9F99DC7118D10460003086CF /* QuartzCore.framework in Frameworks */,
 				5C3751FF18BE5662000CBE77 /* CoreGraphics.framework in Frameworks */,
 				5C37520118BE5662000CBE77 /* UIKit.framework in Frameworks */,
-				9F99DC6A18D0F723003086CF /* opencv2.framework in Frameworks */,
 				5C3751FD18BE5662000CBE77 /* Foundation.framework in Frameworks */,
+				5C9CFF0E18D2809400EFF22E /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +125,7 @@
 			files = (
 				5C37521C18BE5662000CBE77 /* XCTest.framework in Frameworks */,
 				5C37521E18BE5662000CBE77 /* UIKit.framework in Frameworks */,
-				9F99DC6B18D0F723003086CF /* opencv2.framework in Frameworks */,
+				5C9CFF0F18D2809400EFF22E /* opencv2.framework in Frameworks */,
 				5C37521D18BE5662000CBE77 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +155,7 @@
 		5C3751FB18BE5662000CBE77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C9CFF0D18D2809400EFF22E /* opencv2.framework */,
 				9F99DC7C18D104C8003086CF /* Accelerate.framework */,
 				9F99DC7A18D104AF003086CF /* AssetsLibrary.framework */,
 				9F99DC7818D104A5003086CF /* AVFoundation.framework */,
@@ -162,7 +163,6 @@
 				9F99DC7418D10485003086CF /* CoreMedia.framework */,
 				9F99DC7218D1047C003086CF /* CoreImage.framework */,
 				9F99DC7018D10460003086CF /* QuartzCore.framework */,
-				9F99DC6918D0F723003086CF /* opencv2.framework */,
 				5C3751FC18BE5662000CBE77 /* Foundation.framework */,
 				5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */,
 				5C37520018BE5662000CBE77 /* UIKit.framework */,
@@ -301,11 +301,11 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TM;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = smu;
 				TargetAttributes = {
 					5C3751F818BE5662000CBE77 = {
-						DevelopmentTeam = APD62CDC25;
+						DevelopmentTeam = 8N25HJ2H24;
 					};
 					5C37521918BE5662000CBE77 = {
 						TestTargetID = 5C3751F818BE5662000CBE77;
@@ -423,7 +423,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -462,7 +461,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -501,6 +499,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
@@ -521,6 +520,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
@@ -534,13 +534,13 @@
 		5C37522F18BE5662000CBE77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeamFit.app/TeamFit";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
@@ -558,13 +558,13 @@
 		5C37523018BE5662000CBE77 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeamFit.app/TeamFit";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";

@@ -9,7 +9,7 @@
 #import "TMStatViewController.h"
 
 @interface TMStatViewController ()
-- (IBAction)onBackButtonPressed:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayStepsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentStepsLabel;
 
@@ -52,8 +52,4 @@
     [self.yesterdayStepsLabel setText:[NSString stringWithFormat:@"%d", yesterdayStep]];
 }
 
-- (IBAction)onBackButtonPressed:(id)sender {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 @end
