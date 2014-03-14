@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Stat View Controller - Stats View-->
@@ -147,8 +147,8 @@
                                         <rect key="frame" x="54" y="463" width="67" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title=" Stats" image="barico"/>
-                                        <state key="highlighted" image="baricoHightligh"/>
+                                        <state key="normal" title=" Stats" image="chart"/>
+                                        <state key="highlighted" image="chart"/>
                                         <connections>
                                             <segue destination="vXZ-lx-hvc" kind="push" identifier="toStatView" id="V4d-Xn-RiD"/>
                                         </connections>
@@ -157,8 +157,8 @@
                                         <rect key="frame" x="183" y="463" width="92" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title=" Set Goal" image="editico"/>
-                                        <state key="highlighted" image="editicoHightligh"/>
+                                        <state key="normal" title=" Set Goal" image="setting-1"/>
+                                        <state key="highlighted" image="setting-1"/>
                                         <connections>
                                             <segue destination="Cwt-pB-f5o" kind="push" identifier="toSetGoalView" id="d0e-ON-3ZD"/>
                                         </connections>
@@ -312,7 +312,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Heart Rate" image="eye" id="7es-4k-nWJ"/>
+                    <tabBarItem key="tabBarItem" title="Heart Rate" image="heart" id="7es-4k-nWJ"/>
                     <connections>
                         <outlet property="heartBeatGraphView" destination="cNp-IT-7Nj" id="ubs-fP-96Q"/>
                         <outlet property="imageView" destination="kwQ-Iy-2s7" id="8oR-H5-C7T"/>
@@ -375,8 +375,8 @@
                                 <rect key="frame" x="55" y="433" width="66" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Reset" image="editico"/>
-                                <state key="highlighted" image="editicoHightligh">
+                                <state key="normal" title="Reset" image="reload"/>
+                                <state key="highlighted" image="reload">
                                     <color key="titleColor" red="0.2456220154" green="0.4802694515" blue="0.35917319209999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -384,11 +384,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jII-m1-OnA">
-                                <rect key="frame" x="197" y="435" width="77" height="20"/>
+                                <rect key="frame" x="193" y="433" width="81" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title=" Setting" image="setting"/>
-                                <state key="highlighted" image="settingHightlight"/>
+                                <state key="normal" title=" Setting" image="setting-1"/>
+                                <state key="highlighted" image="setting-1"/>
                                 <connections>
                                     <segue destination="tEy-c5-FMB" kind="modal" identifier="toSettingView" modalTransitionStyle="coverVertical" id="snp-XX-eLK"/>
                                 </connections>
@@ -396,7 +396,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="jII-m1-OnA" firstAttribute="top" secondItem="Vqk-xg-F4f" secondAttribute="bottom" constant="26" id="AdU-Qw-SdU"/>
+                            <constraint firstItem="jII-m1-OnA" firstAttribute="top" secondItem="Vqk-xg-F4f" secondAttribute="bottom" constant="24" id="AdU-Qw-SdU"/>
                             <constraint firstAttribute="centerX" secondItem="rTT-TK-o22" secondAttribute="centerX" id="Aoy-8S-qMc"/>
                             <constraint firstAttribute="trailing" secondItem="jII-m1-OnA" secondAttribute="trailing" constant="46" id="Env-fF-0uB"/>
                             <constraint firstAttribute="centerX" secondItem="Go9-wM-xEi" secondAttribute="centerX" id="H9A-L0-sbF"/>
@@ -411,7 +411,7 @@
                             <constraint firstAttribute="centerX" secondItem="Vqk-xg-F4f" secondAttribute="centerX" id="yTH-MQ-Ycv"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stair Count" image="stairico" id="ClI-Ow-FSj"/>
+                    <tabBarItem key="tabBarItem" title="Stair Count" image="stair" id="ClI-Ow-FSj"/>
                     <connections>
                         <outlet property="playButton" destination="rTT-TK-o22" id="8Nb-wF-PK2"/>
                         <outlet property="stairIndicator" destination="Vqk-xg-F4f" id="Fd1-BM-8rV"/>
@@ -469,7 +469,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-0.5" minValue="-1" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="FdA-yR-gNB">
-                                <rect key="frame" x="18" y="151" width="284" height="31"/>
+                                <rect key="frame" x="18" y="151" width="284" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="onThresholdChanged:" destination="tEy-c5-FMB" eventType="valueChanged" id="tae-mS-fiw"/>
@@ -483,7 +483,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10f-Jh-ngc">
-                                <rect key="frame" x="41" y="267" width="239" height="105"/>
+                                <rect key="frame" x="41" y="270" width="239" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="90"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -523,7 +523,7 @@
         <scene sceneID="B4G-48-30y">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ad8-jl-rUq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Step Count" image="home" id="bC0-N7-phU"/>
+                    <tabBarItem key="tabBarItem" title="Step Count" image="run" id="bC0-N7-phU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I9l-rC-bVf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -540,18 +540,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="barico" width="24" height="24"/>
-        <image name="baricoHightligh" width="24" height="24"/>
+        <image name="chart" width="24" height="24"/>
         <image name="circleBack" width="251" height="251"/>
-        <image name="editico" width="24" height="24"/>
-        <image name="editicoHightligh" width="24" height="24"/>
-        <image name="eye" width="20" height="20"/>
-        <image name="home" width="24" height="24"/>
+        <image name="heart" width="24" height="24"/>
         <image name="play" width="164" height="161"/>
         <image name="playHightlight" width="165" height="161"/>
-        <image name="setting" width="20" height="20"/>
-        <image name="settingHightlight" width="20" height="20"/>
-        <image name="stairico" width="24" height="24"/>
+        <image name="reload" width="24" height="24"/>
+        <image name="run" width="24" height="24"/>
+        <image name="setting-1" width="24" height="24"/>
+        <image name="stair" width="24" height="24"/>
     </resources>
     <color key="tintColor" red="0.15560434363488465" green="0.45509211250058906" blue="0.4912109375" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
