@@ -86,10 +86,10 @@ static CGColorSpaceRef sDeviceRgbColorSpace = NULL;
         ciOrientation = @7;
     }
     else if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft){
-        ciOrientation = @3;
+        ciOrientation = @1;
     }
     else if(interfaceOrientation == UIInterfaceOrientationLandscapeRight){
-        ciOrientation = @1;
+        ciOrientation = @3;
     }
     else{
         //unknown orientation!
