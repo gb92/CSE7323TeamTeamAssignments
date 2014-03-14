@@ -36,9 +36,25 @@
     CGContextRef context= UIGraphicsGetCurrentContext();
     if(context != nil)
     {
+        //CGContextTranslateCTM(context, 0, self.bounds.size.height);
+        //CGContextScaleCTM(context, 1.0f, -1.0f);
+        
+        CGFloat scaleX=self.imageSize.size.width/self.bounds.size.width;
+        CGFloat scaleY=self.imageSize.size.height/self.bounds.size.height;
+        
+        UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
+        
+        if(orientation == UIInterfaceOrientationLandscapeLeft)
+        {
+            CGContextRotateCTM(context, M_PI);
+            CGContextTranslateCTM(context, 0, -1*self.bounds.size.width);
+        }
+        
+        CGContextSetLineWidth(context, 2.0);
+
         
         CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-        CGContextAddRect(context, self.frame);
+        CGContextAddRect(context, self.bounds);
         CGContextStrokePath(context);
         
         CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
@@ -56,8 +72,21 @@
             if(face.hasLeftEye)
             {
                 CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+                CGRect scaledLeftEye;
+                if(orientation==UIInterfaceOrientationPortrait)
+                {
+                 scaledLeftEye=CGRectMake(face.leftEye.origin.y*scaleX, face.leftEye.origin.x*scaleY, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+                }
+                else if(orientation == UIInterfaceOrientationLandscapeLeft)
+                {
+                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+                }
+                else
+                {
+                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+                }
                 
-                CGContextAddRect(context, face.leftEye);
+                CGContextAddRect(context, scaledLeftEye);
                 CGContextStrokePath(context);
                 NSLog(@"isLeftEyeClosed:%@",face.isLeftEyeClosed?@"YES": @"NO");
                 if(face.isLeftEyeClosed)
@@ -92,9 +121,10 @@
                 }
             }
         }
-        CGAffineTransform transform=CGAffineTransformMakeRotation(M_PI_2);
+        
+        //CGAffineTransform transform=CGAffineTransformMakeRotation(M_PI_2);
         //transform=CGAffineTransformConcat(transform, CGAffineTransformMakeScale(1.0, 1.0));
-        [self setTransform:transform];
+        //[self setTransform:transform];
     }
     else{
         NSLog(@"context is nil");

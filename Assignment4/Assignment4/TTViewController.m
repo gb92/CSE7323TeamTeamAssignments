@@ -49,10 +49,11 @@ return _videoManager;
     __weak typeof(self) weakSelf=self;
     
     [self.videoManager setProcessBlock:^(CIImage *cameraImage){
+        
         if(weakSelf != nil)
         {
             A4GraphicsOverlay *overlay=(A4GraphicsOverlay *)weakSelf.view;
-            //overlay.imageHeight=cameraImage.properties
+            overlay.imageSize=cameraImage.extent;;
             opts = @{CIDetectorImageOrientation: [VideoAnalgesic ciOrientationFromDeviceOrientation:[UIApplication sharedApplication].statusBarOrientation], CIDetectorEyeBlink:@YES, CIDetectorSmile:@YES};
             NSArray *faceFeatures = [detector featuresInImage: cameraImage options:opts];
         
@@ -110,46 +111,11 @@ return _videoManager;
                 overlay.faceRects=nil;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-//                CGAffineTransform transform=CGAffineTransformMakeRotation(M_PI_2);
-//                CGAffineTransformConcat(transform, CGAffineTransformMakeScale(1.0, -1.0));
-//                
-//                overlay.transform=transform;
                 [overlay setNeedsDisplay];
             });
         }
         return cameraImage;
     }];
-//    [self.videoManager setProcessBlock:^(CIImage *cameraImage){
-//        CGSize imageSize=([UIApplication sharedApplication].delegate).window.frame.size;
-//        
-//        //NSLog(@"Height: %f Width: %f", imageSize.height, imageSize.width);
-//        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        
-//        opts = @{CIDetectorImageOrientation: [VideoAnalgesic ciOrientationFromDeviceOrientation:[UIApplication sharedApplication].statusBarOrientation]};
-//        NSArray *faceFeatures = [detector featuresInImage: cameraImage];
-//        NSLog(@"Num Faces %ld", [faceFeatures count]);
-//        
-//        CGContextTranslateCTM(context, 0, imageSize.height);
-//        CGContextScaleCTM(context, -1.0f, 1.0f);
-//        
-//        for(CIFaceFeature *face in faceFeatures){
-//            
-//            CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-//            CGContextAddRect(context, face.bounds);
-//            CGContextStrokePath(context);
-//        }
-//        UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
-//        UIImageView *imageView=(UIImageView *)weakSelf.view;
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            imageView.image=image;
-//        });
-//        
-//        UIGraphicsEndImageContext();
-//        return cameraImage;
-//    }];
-    
     [self changeColorMatching];
 }
 

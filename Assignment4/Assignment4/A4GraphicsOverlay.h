@@ -10,7 +10,7 @@
 
 @interface A4GraphicsOverlay : UIView
 
-@property(nonatomic) CGRect rectAroundFace;
+@property(nonatomic) CGRect imageSize;
 @property(strong, nonatomic) NSArray *faceRects;
 @property (strong, nonatomic) NSNumber *imageHeight;
 
