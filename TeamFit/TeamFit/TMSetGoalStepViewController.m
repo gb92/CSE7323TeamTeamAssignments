@@ -15,8 +15,6 @@ static const int PICKER_COMPONENT = 6;
 @property (weak, nonatomic) IBOutlet UIPickerView *goalPicker;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
 
-- (IBAction)cancelPress:(id)sender;
-- (IBAction)setPressed:(id)sender;
 
 @property (nonatomic, readwrite) unsigned int newStepGoal;
 
@@ -88,7 +86,7 @@ static const int PICKER_COMPONENT = 6;
 {
     [self.delegate SetGoalSetpViewControllerDidCancel:self];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)setPressed:(id)sender
@@ -96,7 +94,8 @@ static const int PICKER_COMPONENT = 6;
     
     [self.delegate SetGoalSetpViewControllerDidSet:self newGoal:self.newStepGoal];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*-----------------------------------*/

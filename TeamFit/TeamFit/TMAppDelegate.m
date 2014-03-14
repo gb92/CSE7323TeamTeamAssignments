@@ -12,6 +12,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Use this to channge the tint colo of the entere TabBar
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(40.0/256.0) green:(116.0/256.0) blue:(125.0/256.0) alpha:(1.0)]];
+
     // Override point for customization after application launch.
     return YES;
 }
