@@ -81,11 +81,13 @@ std::vector<float>maximumValueList;
         // Make sure that the color is red.
         // and push data to the buffer.
         //
-        if( (avgPixelIntensity[0] < 50) && (avgPixelIntensity[1] < 30) && (avgPixelIntensity[2] < 252) )
+        if( (avgPixelIntensity[0] < 50) && (avgPixelIntensity[1] < 50) && (avgPixelIntensity[2] > 240) && (avgPixelIntensity[2] < 253) )
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
     }
     else
     {
+        normalizeData( meanOfRedValues, 1000 );
+        
         heartBeat = countLocalMaximaFromArray( meanOfRedValues );
         
         std::vector<float>drawingBuffer;
@@ -114,16 +116,19 @@ void normalizeData( std::vector<float>& array, float scaleFactor )
 {
     int minOfThisList = (int)minValueOfArray( array.begin(), array.end());
     int maxOfThisList = (int)maxValueOfArray( array.begin(), array.end())+1;
+    const float range = (float)(maxOfThisList-minOfThisList);
+    const float rangeInverse = 1.0/range;
     
     for( int i=0; i<array.size(); i++ )
     {
-        array[i] = (array[i] - minOfThisList) / (maxOfThisList-minOfThisList);
+        float substractedValue = (array[i] - minOfThisList);
+        array[i] = substractedValue * rangeInverse;
         array[i] *= scaleFactor;
     }
     
 }
 
-int countLocalMaximaFromArray( std::vector<float>& array )
+int countLocalMaximaFromArray( const std::vector<float> array )
 {
     int result = 0;
     
@@ -144,13 +149,12 @@ int countLocalMaximaFromArray( std::vector<float>& array )
     float previousMaxValue = 0.0f;
     float currentMaxValue = 0.0f;
     
-    std::vector<float>::iterator pBeginWindow = array.begin();
-    std::vector<float>::iterator pEndWindow = array.end();
-    std::vector<float>::iterator pCurrentPointer = pBeginWindow;
+    std::vector<float>::const_iterator pBeginOfBuffer = array.begin();
+    std::vector<float>::const_iterator pEndOfBuffer = array.end();
+    std::vector<float>::const_iterator pCurrentPointer = pBeginOfBuffer;
     
-    normalizeData( array, 1000 );
     
-    while( pCurrentPointer < pEndWindow)
+    while( pCurrentPointer < pEndOfBuffer)
     {
         currentMaxValue = maxValueOfArray( pCurrentPointer, pCurrentPointer + windowSize );
 
@@ -158,38 +162,42 @@ int countLocalMaximaFromArray( std::vector<float>& array )
         
         if( thisError < 0 ) thisError *= -1.0;
         
-        if ( thisError < ErrorRate )
+        if ( thisError < ErrorRate ) // Found local maximar
         {
-
-            result++;
             
-            *maxValueListIterator = *pCurrentPointer;
+            // Debug mask
+            //
+            {
+                *maxValueListIterator = currentMaxValue;
+                maxValueListIterator = maxValueListIterator + windowSize;
+            }
+            //
+            // End debug mask
+            
+            
+            result++;
             
             // Hack lol
             pCurrentPointer = pCurrentPointer + windowSize;
             previousMaxValue = 0;
             
-            // Debug mask
-            //
-            maxValueListIterator = maxValueListIterator + windowSize;
-            
-            //
-            // End debug mask
-            
-            continue;
-            
+
         }
-        else
+        else // Not Found local maximra
         {
             
             // move window
             pCurrentPointer = pCurrentPointer + 2;
             
             // Debug mask---
+            *maxValueListIterator = currentMaxValue;
             maxValueListIterator = maxValueListIterator + 2;
+            
             // end Debug mask---
             
             previousMaxValue = currentMaxValue;
+            
+            
         }
 
     }
@@ -197,11 +205,11 @@ int countLocalMaximaFromArray( std::vector<float>& array )
     return result;
 }
 
-float maxValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
+float maxValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
 {
     float max = -99999;
     
-    std::vector<float>::iterator currentPoint = beginOfWindow;
+    std::vector<float>::const_iterator currentPoint = beginOfWindow;
     
     while( currentPoint < endOfWindow )
     {
@@ -212,11 +220,11 @@ float maxValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<f
     return max;
 }
 
-float minValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<float>::iterator endOfWindow )
+float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
 {
     float min = 99999;
     
-    std::vector<float>::iterator currentPoint = beginOfWindow;
+    std::vector<float>::const_iterator currentPoint = beginOfWindow;
     
     while( currentPoint < endOfWindow )
     {
@@ -268,93 +276,6 @@ float minValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<f
 #endif
 
     
-//    std::vector<float>arrayTest;
-//    arrayTest.push_back(10.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(18.0f);
-//    arrayTest.push_back(17.0f);
-//    arrayTest.push_back(10.0f);
-//    float a = maxValueOfArray(arrayTest, arrayTest.begin(), arrayTest.begin() + 3 );
-//
-//    NSLog(@"Max of this array %f", a );
-    
-    
-//  std::vector<float>arrayTest;
-//  arrayTest.push_back(10.0f);
-//  arrayTest.push_back(12.0f);
-//  arrayTest.push_back(13.0f);
-//  arrayTest.push_back(14.0f);
-//  arrayTest.push_back(15.0f);
-//  arrayTest.push_back(16.0f);  //--1
-//    arrayTest.push_back(15.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(13.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(11.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(13.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(15.0f);
-//    arrayTest.push_back(16.0f); //--2
-//    arrayTest.push_back(15.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(13.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(10.0f);
-//    arrayTest.push_back(11.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(13.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(15.0f);
-//    arrayTest.push_back(16.0f); //--3
-//    arrayTest.push_back(15.0f);
-//    arrayTest.push_back(14.0f);
-//    arrayTest.push_back(13.0f);
-//    arrayTest.push_back(12.0f);
-//    arrayTest.push_back(10.0f);
-//    
-//    int numberOfLocalMaxima = countLocalMaximaFromArray(arrayTest);
-//  
-//    NSLog(@"Max of this array %d", numberOfLocalMaxima );
-    
-    
-//      std::vector<float>arrayTest;
-//      arrayTest.push_back(10.0f);
-//      arrayTest.push_back(12.0f);
-//      arrayTest.push_back(13.0f);
-//      arrayTest.push_back(14.0f);
-//      arrayTest.push_back(15.0f);
-//      arrayTest.push_back(16.0f);  //--1
-//        arrayTest.push_back(15.0f);
-//        arrayTest.push_back(14.0f);
-//        arrayTest.push_back(13.0f);
-//        arrayTest.push_back(12.0f);
-//        arrayTest.push_back(11.0f);
-//        arrayTest.push_back(12.0f);
-//        arrayTest.push_back(13.0f);
-//        arrayTest.push_back(14.0f);
-//        arrayTest.push_back(15.0f);
-//        arrayTest.push_back(16.0f); //--2
-//        arrayTest.push_back(15.0f);
-//        arrayTest.push_back(14.0f);
-//        arrayTest.push_back(13.0f);
-//        arrayTest.push_back(12.0f);
-//        arrayTest.push_back(10.0f);
-//        arrayTest.push_back(11.0f);
-//        arrayTest.push_back(12.0f);
-//        arrayTest.push_back(13.0f);
-//        arrayTest.push_back(14.0f);
-//        arrayTest.push_back(15.0f);
-//        arrayTest.push_back(16.0f); //--3
-//        arrayTest.push_back(15.0f);
-//        arrayTest.push_back(14.0f);
-//        arrayTest.push_back(13.0f);
-//        arrayTest.push_back(12.0f);
-//        arrayTest.push_back(10.0f);
-//    
-//    [self drawGraph:arrayTest];
-    
 }
 
 -(void) drawGraph:( std::vector<float> ) data withMaximarList:(std::vector<float>) maxList
@@ -366,6 +287,7 @@ float minValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<f
         CIVector *vec = [CIVector vectorWithX:data[i] Y:maxList[i] Z:0];
         
         [NSTimer scheduledTimerWithTimeInterval:i * kTimePerSec target:self selector:@selector(sendPlotValueToGraphToDraw:) userInfo:vec repeats:NO];
+        
     }
     
 }
@@ -378,6 +300,17 @@ float minValueOfArray( std::vector<float>::iterator beginOfWindow, std::vector<f
     CIVector *thisNumber = ((CIVector*)[theTimer userInfo]);
     float number = thisNumber.X;
     float maximar = thisNumber.Y;
+  
+    static float oldMax = 0;
+    
+    if(maximar <= 0)
+    {
+        maximar = oldMax;
+    }
+    else
+    {
+        oldMax = maximar;
+    }
     
     
    [self.heartBeatGraphView addX:number y:maximar z:0];
