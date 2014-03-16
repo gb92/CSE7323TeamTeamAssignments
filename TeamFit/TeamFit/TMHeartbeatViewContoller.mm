@@ -13,13 +13,13 @@
 using namespace cv;
 
 static const int kFramesPerSec = 24;
-static const int kSampleSecond = 5;
+static const int kSampleSecond = 2;
 
 @interface TMHeartbeatViewController () <CvVideoCameraDelegate>
 @property (weak, nonatomic) IBOutlet APLGraphView *heartBeatGraphView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) CvVideoCamera* videoCamera;
-@property (strong, nonatomic) NSMutableArray *redAverageValues;
+@property (nonatomic) int heartRate;
 
 @end
 
@@ -29,12 +29,6 @@ static const int kSampleSecond = 5;
 static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 #endif
 
--(NSMutableArray *)redAverageValues{
-    if(!_redAverageValues)
-    {_redAverageValues= [[NSMutableArray alloc] init];
-        
-    } return _redAverageValues;
-}
 
 
 - (IBAction)ToggleTorch:(UISwitch *)sender {
@@ -73,22 +67,26 @@ std::vector<float>maximumValueList;
     cvtColor(image, image_copy, CV_BGRA2BGR); // get rid of alpha for processing
     Scalar avgPixelIntensity = cv::mean( image_copy );
 
-    
-    static int heartBeat = 0;
+    static int countTime = 0;
     
     if( meanOfRedValues.size() < MEAN_OF_RED_VALUES_ARRAY_SIZE )
     {
         // Make sure that the color is red.
         // and push data to the buffer.
         //
-        if( (avgPixelIntensity[0] < 50) && (avgPixelIntensity[1] < 50) && (avgPixelIntensity[2] > 240) && (avgPixelIntensity[2] < 253) )
+        if( (avgPixelIntensity[0] < 80) && (avgPixelIntensity[1] < 80) && (avgPixelIntensity[2] > 100) && (avgPixelIntensity[2] < 255) )
+        {
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
+            countTime++;
+        }
+        
+        
     }
     else
     {
-        normalizeData( meanOfRedValues, 1000 );
+        normalizeData( meanOfRedValues, 5 );
         
-        heartBeat = countLocalMaximaFromArray( meanOfRedValues );
+        self.heartRate += countLocalMaximaFromArray( meanOfRedValues );
         
         std::vector<float>drawingBuffer;
         drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());
@@ -107,7 +105,7 @@ std::vector<float>maximumValueList;
     
     // Display color values and heartrate onto the image.
     char text[50];
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartBeat * 60 / kSampleSecond );
+    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], (int)(self.heartRate / (countTime / kFramesPerSec) *60 ) );
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }
@@ -190,7 +188,7 @@ int countLocalMaximaFromArray( const std::vector<float> array )
             pCurrentPointer = pCurrentPointer + 2;
             
             // Debug mask---
-            *maxValueListIterator = currentMaxValue;
+            //*maxValueListIterator = currentMaxValue;
             maxValueListIterator = maxValueListIterator + 2;
             
             // end Debug mask---
@@ -278,6 +276,7 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
     
 }
 
+
 -(void) drawGraph:( std::vector<float> ) data withMaximarList:(std::vector<float>) maxList
 {
     static const float kTimePerSec = (1.0 / (float)kFramesPerSec);
@@ -287,7 +286,7 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
         CIVector *vec = [CIVector vectorWithX:data[i] Y:maxList[i] Z:0];
         
         [NSTimer scheduledTimerWithTimeInterval:i * kTimePerSec target:self selector:@selector(sendPlotValueToGraphToDraw:) userInfo:vec repeats:NO];
-        
+
     }
     
 }
@@ -301,17 +300,19 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
     float number = thisNumber.X;
     float maximar = thisNumber.Y;
   
-    static float oldMax = 0;
+//    static float oldMax = 0;
+//    
+//    if(maximar <= 0)
+//    {
+//        maximar = oldMax;
+//    }
+//    else
+//    {
+//        oldMax = maximar;
+//    }
     
-    if(maximar <= 0)
-    {
-        maximar = oldMax;
-    }
-    else
-    {
-        oldMax = maximar;
-    }
     
+    if( maximar > 6 ) maximar = 6;
     
    [self.heartBeatGraphView addX:number y:maximar z:0];
 }
@@ -323,6 +324,7 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 [self.videoCamera start];
     
     [self setTorchOn:YES];
+    
 
 }
 
