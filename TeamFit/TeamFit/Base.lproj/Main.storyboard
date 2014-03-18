@@ -157,8 +157,8 @@
                                         <rect key="frame" x="183" y="463" width="92" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title=" Set Goal" image="setting-1"/>
-                                        <state key="highlighted" image="setting-1"/>
+                                        <state key="normal" title=" Set Goal" image="setting"/>
+                                        <state key="highlighted" image="setting"/>
                                         <connections>
                                             <segue destination="Cwt-pB-f5o" kind="push" identifier="toSetGoalView" id="d0e-ON-3ZD"/>
                                         </connections>
@@ -386,8 +386,8 @@
                                 <rect key="frame" x="193" y="433" width="81" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title=" Setting" image="setting-1"/>
-                                <state key="highlighted" image="setting-1"/>
+                                <state key="normal" title=" Setting" image="setting"/>
+                                <state key="highlighted" image="setting"/>
                                 <connections>
                                     <segue destination="tEy-c5-FMB" kind="modal" identifier="toSettingView" modalTransitionStyle="coverVertical" id="snp-XX-eLK"/>
                                 </connections>
@@ -546,7 +546,7 @@
         <image name="playHightlight" width="165" height="161"/>
         <image name="reload" width="24" height="24"/>
         <image name="run" width="24" height="24"/>
-        <image name="setting-1" width="24" height="24"/>
+        <image name="setting" width="24" height="24"/>
         <image name="stair" width="24" height="24"/>
         <image name="walkingICO" width="24" height="24"/>
     </resources>
