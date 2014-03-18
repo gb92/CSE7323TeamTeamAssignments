@@ -9,29 +9,33 @@
 #import "TMHeartbeatViewController.h"
 #import <opencv2/highgui/cap_ios.h>
 #import "APLGraphView.h"
+#import <numeric>
+
+#define LogCall() NSLog(@"%d %s", __LINE__, __func__) // Changed:
 
 using namespace cv;
 
 static const int kFramesPerSec = 24;
-static const int kSampleSecond = 2;
+static const int kSampleSecond = 5;
 
 @interface TMHeartbeatViewController () <CvVideoCameraDelegate>
 @property (weak, nonatomic) IBOutlet APLGraphView *heartBeatGraphView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) CvVideoCamera* videoCamera;
-@property (nonatomic) int heartRate;
 
+@property (nonatomic) float heartRate;
 @end
 
 @implementation TMHeartbeatViewController
 #ifdef __cplusplus
-    std::vector<float> meanOfRedValues;
+std::vector<float> meanOfRedValues;
 static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 #endif
 
 
-
-- (IBAction)ToggleTorch:(UISwitch *)sender {
+- (IBAction)ToggleTorch:(UISwitch *)sender
+{
+	
     if(self.videoCamera.defaultAVCaptureDevicePosition==AVCaptureDevicePositionBack){
         
         if([sender isOn])
@@ -42,12 +46,14 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
         {
             [self setTorchOn:NO];
         }
-
+        
     }
 }
 
 -(void)setTorchOn: (BOOL) onoff
 {
+	LogCall(); // Changed:
+	
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     {
         [device lockForConfiguration:nil];
@@ -61,40 +67,42 @@ std::vector<float>maximumValueList;
 #ifdef __cplusplus
 -(void)processImage:(Mat&)image;
 {
-     Mat image_copy;
+    Mat image_copy;
     //============================================
     // get average pixel intensity
     cvtColor(image, image_copy, CV_BGRA2BGR); // get rid of alpha for processing
     Scalar avgPixelIntensity = cv::mean( image_copy );
-
-    static int countTime = 0;
     
     if( meanOfRedValues.size() < MEAN_OF_RED_VALUES_ARRAY_SIZE )
     {
         // Make sure that the color is red.
         // and push data to the buffer.
         //
-        if( (avgPixelIntensity[0] < 80) && (avgPixelIntensity[1] < 80) && (avgPixelIntensity[2] > 100) && (avgPixelIntensity[2] < 255) )
-        {
+
+        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 253) ||
+			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
+		{
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
-            countTime++;
-        }
-        
-        
+		}
     }
     else
     {
-        normalizeData( meanOfRedValues, 5 );
+        normalizeData( meanOfRedValues, 6 );
         
-        self.heartRate += countLocalMaximaFromArray( meanOfRedValues );
+        NSLog(@"Hear Rate : %f\n", self.heartRate);
+        
+        float newHeartRate = countLocalMaximaFromArray(meanOfRedValues) - 1 /* (-1) Error at the edge of data */;
+        self.heartRate = ( newHeartRate + self.heartRate ) / 2.0;
+        
+        NSLog(@"Hear Rate new : %f\n", newHeartRate);
         
         std::vector<float>drawingBuffer;
         drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());
         
         std::vector<float>drawingMaximarBuffer;
         drawingMaximarBuffer.assign(maximumValueList.begin(), maximumValueList.end());
-        
-        
+		
+		
         dispatch_async(dispatch_get_main_queue(),^{
             [self drawGraph:drawingBuffer withMaximarList:drawingMaximarBuffer];
         });
@@ -105,13 +113,14 @@ std::vector<float>maximumValueList;
     
     // Display color values and heartrate onto the image.
     char text[50];
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %d", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], (int)(self.heartRate / (countTime / kFramesPerSec) *60 ) );
+    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], self.heartRate * 60 / kSampleSecond );
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }
 
 void normalizeData( std::vector<float>& array, float scaleFactor )
 {
+	
     int minOfThisList = (int)minValueOfArray( array.begin(), array.end());
     int maxOfThisList = (int)maxValueOfArray( array.begin(), array.end())+1;
     const float range = (float)(maxOfThisList-minOfThisList);
@@ -126,11 +135,11 @@ void normalizeData( std::vector<float>& array, float scaleFactor )
     
 }
 
-int countLocalMaximaFromArray( const std::vector<float> array )
+int countLocalMaximaFromArray(const std::vector<float> array)
 {
     int result = 0;
     
-    static const float ErrorRate = 0.000001f;
+    static const double ErrorRate = 0.000001;
     static const int windowSize = 9;
     std::vector<float> window;
     window.resize( windowSize );
@@ -143,8 +152,7 @@ int countLocalMaximaFromArray( const std::vector<float> array )
     
     //End Debug
     
-    
-    float previousMaxValue = 0.0f;
+	float previousMaxValue = 0.0f;
     float currentMaxValue = 0.0f;
     
     std::vector<float>::const_iterator pBeginOfBuffer = array.begin();
@@ -155,15 +163,15 @@ int countLocalMaximaFromArray( const std::vector<float> array )
     while( pCurrentPointer < pEndOfBuffer)
     {
         currentMaxValue = maxValueOfArray( pCurrentPointer, pCurrentPointer + windowSize );
-
-        float thisError = (previousMaxValue - currentMaxValue);
+		
+        double thisError = (previousMaxValue - currentMaxValue); // Changed:
         
         if( thisError < 0 ) thisError *= -1.0;
         
         if ( thisError < ErrorRate ) // Found local maximar
         {
             
-            // Debug mask
+            //! Debug mask
             //
             {
                 *maxValueListIterator = currentMaxValue;
@@ -179,7 +187,7 @@ int countLocalMaximaFromArray( const std::vector<float> array )
             pCurrentPointer = pCurrentPointer + windowSize;
             previousMaxValue = 0;
             
-
+			
         }
         else // Not Found local maximra
         {
@@ -197,7 +205,7 @@ int countLocalMaximaFromArray( const std::vector<float> array )
             
             
         }
-
+		
     }
     
     return result;
@@ -205,7 +213,8 @@ int countLocalMaximaFromArray( const std::vector<float> array )
 
 float maxValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
 {
-    float max = -99999;
+	
+    float max = -MAXFLOAT;
     
     std::vector<float>::const_iterator currentPoint = beginOfWindow;
     
@@ -220,7 +229,8 @@ float maxValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 
 float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
 {
-    float min = 99999;
+	
+    float min = MAXFLOAT;
     
     std::vector<float>::const_iterator currentPoint = beginOfWindow;
     
@@ -246,7 +256,8 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 
 
 
--(CvVideoCamera *)videoCamera{
+-(CvVideoCamera *)videoCamera
+{
     if(!_videoCamera)
     {
         _videoCamera= [[CvVideoCamera alloc ] initWithParentView:self.imageView];
@@ -256,7 +267,6 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
         _videoCamera.defaultAVCaptureVideoOrientation=AVCaptureVideoOrientationLandscapeLeft;
         _videoCamera.defaultFPS = kFramesPerSec;
         _videoCamera.grayscaleMode = NO;
-        
         
     }
     return  _videoCamera;
@@ -268,25 +278,22 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 {
     [super viewDidLoad];
     
-
+    
 #ifdef __cplusplus
     meanOfRedValues.reserve( MEAN_OF_RED_VALUES_ARRAY_SIZE );
 #endif
-
+    
     
 }
 
-
 -(void) drawGraph:( std::vector<float> ) data withMaximarList:(std::vector<float>) maxList
 {
-    static const float kTimePerSec = (1.0 / (float)kFramesPerSec);
-    
+    static const double kTimePerSec = (1.0 / kFramesPerSec);
+
     for( int i = 0; i<data.size(); i++ )
     {
         CIVector *vec = [CIVector vectorWithX:data[i] Y:maxList[i] Z:0];
-        
-        [NSTimer scheduledTimerWithTimeInterval:i * kTimePerSec target:self selector:@selector(sendPlotValueToGraphToDraw:) userInfo:vec repeats:NO];
-
+		[NSTimer scheduledTimerWithTimeInterval:i * kTimePerSec target:self selector:@selector(sendPlotValueToGraphToDraw:) userInfo:vec repeats:NO];
     }
     
 }
@@ -296,10 +303,11 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 
 - (void)sendPlotValueToGraphToDraw:(NSTimer*)theTimer
 {
+    
     CIVector *thisNumber = ((CIVector*)[theTimer userInfo]);
     float number = thisNumber.X;
     float maximar = thisNumber.Y;
-  
+    
 //    static float oldMax = 0;
 //    
 //    if(maximar <= 0)
@@ -311,25 +319,27 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 //        oldMax = maximar;
 //    }
     
+    if( maximar > 200 )
+    {
+        maximar = 0;
+    }
     
-    if( maximar > 6 ) maximar = 6;
-    
-   [self.heartBeatGraphView addX:number y:maximar z:0];
+    [self.heartBeatGraphView addX:number y:maximar z:0];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated
+{
     
-    
-[super viewDidAppear:animated];
-[self.videoCamera start];
+	[super viewDidAppear:animated];
+	[self.videoCamera start];
     
     [self setTorchOn:YES];
     
-
 }
 
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated
+{
     
     [self.videoCamera stop];
     [super viewWillDisappear:animated];
@@ -338,3 +348,4 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 
 
 @end
+
