@@ -305,7 +305,7 @@
 				ORGANIZATIONNAME = smu;
 				TargetAttributes = {
 					5C3751F818BE5662000CBE77 = {
-						DevelopmentTeam = APD62CDC25;
+						DevelopmentTeam = 8N25HJ2H24;
 					};
 					5C37521918BE5662000CBE77 = {
 						TestTargetID = 5C3751F818BE5662000CBE77;

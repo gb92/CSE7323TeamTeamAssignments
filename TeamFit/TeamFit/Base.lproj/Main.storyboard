@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Stat View Controller - Stats View-->
@@ -96,25 +96,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f81-Ke-IFR" customClass="TMStepIndicaterView">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f81-Ke-IFR" customClass="TMStepIndicaterView">
                                         <rect key="frame" x="0.0" y="129" width="320" height="280"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxQ-53-XBH">
-                                                <rect key="frame" x="136" y="88" width="49" height="24"/>
+                                                <rect key="frame" x="142" y="94" width="37" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOd-SS-Lmm">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOd-SS-Lmm">
                                                 <rect key="frame" x="0.0" y="183" width="320" height="39"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="33"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCd-U6-ic7">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCd-U6-ic7">
                                                 <rect key="frame" x="0.0" y="106" width="320" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="54"/>
@@ -122,9 +122,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="of" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTV-5Q-dgM">
-                                                <rect key="frame" x="152" y="162" width="16" height="24"/>
+                                                <rect key="frame" x="154" y="162" width="13" height="19"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -163,13 +163,14 @@
                                             <segue destination="Cwt-pB-f5o" kind="push" identifier="toSetGoalView" id="d0e-ON-3ZD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-gI-Q0k">
-                                        <rect key="frame" x="83" y="67" width="154" height="54"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="walkingICO" translatesAutoresizingMaskIntoConstraints="NO" id="AWj-Af-ak3">
+                                        <rect key="frame" x="148" y="191" width="24" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="45"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="M0l-ra-a8g"/>
+                                            <constraint firstAttribute="width" constant="24" id="PP7-xM-oI4"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89293686224489799" green="0.89293686224489799" blue="0.89293686224489799" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -179,9 +180,7 @@
                                     <constraint firstAttribute="trailing" secondItem="B5q-Lx-QZJ" secondAttribute="trailing" constant="45" id="HVs-2s-VmE"/>
                                     <constraint firstItem="B5q-Lx-QZJ" firstAttribute="centerY" secondItem="LUz-B4-ln5" secondAttribute="centerY" id="Jqc-t8-1VN"/>
                                     <constraint firstAttribute="centerY" secondItem="f81-Ke-IFR" secondAttribute="centerY" constant="15" id="OXn-wK-xcX"/>
-                                    <constraint firstAttribute="centerX" secondItem="3jh-gI-Q0k" secondAttribute="centerX" id="jFp-BW-E3e"/>
                                     <constraint firstAttribute="bottom" secondItem="LUz-B4-ln5" secondAttribute="bottom" priority="991" constant="81" id="o0L-tO-kyI"/>
-                                    <constraint firstItem="f81-Ke-IFR" firstAttribute="top" secondItem="3jh-gI-Q0k" secondAttribute="bottom" constant="8" id="w1h-dK-ggW"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -194,7 +193,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Step Counting" id="ae0-Nj-SaX"/>
                     <connections>
-                        <outlet property="activityLabel" destination="3jh-gI-Q0k" id="A4A-M2-dwK"/>
+                        <outlet property="activityImageView" destination="AWj-Af-ak3" id="fDO-VC-Ihp"/>
                         <outlet property="currentStepLabel" destination="lCd-U6-ic7" id="aCI-fO-HOl"/>
                         <outlet property="goalStepLabel" destination="hOd-SS-Lmm" id="SaT-bx-GMV"/>
                         <outlet property="stepIndicaterView" destination="f81-Ke-IFR" id="yu5-OD-Jsq"/>
@@ -469,7 +468,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-0.5" minValue="-1" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="FdA-yR-gNB">
-                                <rect key="frame" x="18" y="151" width="284" height="34"/>
+                                <rect key="frame" x="18" y="151" width="284" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="onThresholdChanged:" destination="tEy-c5-FMB" eventType="valueChanged" id="tae-mS-fiw"/>
@@ -483,7 +482,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10f-Jh-ngc">
-                                <rect key="frame" x="41" y="270" width="239" height="105"/>
+                                <rect key="frame" x="41" y="267" width="239" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="90"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -549,6 +548,7 @@
         <image name="run" width="24" height="24"/>
         <image name="setting-1" width="24" height="24"/>
         <image name="stair" width="24" height="24"/>
+        <image name="walkingICO" width="24" height="24"/>
     </resources>
     <color key="tintColor" red="0.15560434363488465" green="0.45509211250058906" blue="0.4912109375" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

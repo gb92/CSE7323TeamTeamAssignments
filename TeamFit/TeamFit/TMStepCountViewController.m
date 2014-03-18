@@ -18,7 +18,7 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentStepLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goalStepLabel;
-@property (weak, nonatomic) IBOutlet UILabel *activityLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *activityImageView;
 
 @property (weak, nonatomic) IBOutlet TMStepIndicaterView *stepIndicaterView;
 
@@ -283,23 +283,24 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
     switch (activityType)
     {
         case SI_ACTIVITY_STILL:
-            imageName = @"Still";
+            imageName = @"stand";
             break;
         case SI_ACTIVITY_RUNNING:
-            imageName = @"Running";
+            imageName = @"run";
             break;
         case SI_ACTIVITY_WALKING:
-            imageName = @"Walking";
+            imageName = @"walkingICO";
             break;
         case SI_ACTIVITY_DRIVING:
-            imageName = @"Driving";
+            imageName = @"driving";
             break;
         default:
-            imageName = @"Still";
+            imageName = @"stand";
             break;
     }
   
-    [self.activityLabel setText:imageName];
+    UIImage *activityImage = [UIImage imageNamed:imageName];
+    [self.activityImageView setImage:activityImage];
     
     _activityType = activityType;
 }
