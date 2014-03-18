@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C26260018D7F966005F65FC /* TMUIHeartrateIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */; };
 		5C3751FD18BE5662000CBE77 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3751FC18BE5662000CBE77 /* Foundation.framework */; };
 		5C3751FF18BE5662000CBE77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */; };
 		5C37520118BE5662000CBE77 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C37520018BE5662000CBE77 /* UIKit.framework */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C2625FE18D7F966005F65FC /* TMUIHeartrateIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMUIHeartrateIndicator.h; sourceTree = "<group>"; };
+		5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMUIHeartrateIndicator.m; sourceTree = "<group>"; };
 		5C3751F918BE5662000CBE77 /* TeamFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C3751FC18BE5662000CBE77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -252,6 +255,8 @@
 				5C37520E18BE5662000CBE77 /* Main.storyboard */,
 				5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */,
 				5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */,
+				5C2625FE18D7F966005F65FC /* TMUIHeartrateIndicator.h */,
+				5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */,
 			);
 			name = HeartBeat;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 				5C37520D18BE5662000CBE77 /* TMAppDelegate.m in Sources */,
 				5C37523318BE6DDA000CBE77 /* TMStepCountViewController.m in Sources */,
 				5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */,
+				5C26260018D7F966005F65FC /* TMUIHeartrateIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

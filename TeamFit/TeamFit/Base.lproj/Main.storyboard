@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7nz-11-nVk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gfr-Gv-7m3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -322,6 +322,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-KJ-P5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1034" y="1167"/>
+        </scene>
+        <!--View Controller - Item-->
+        <scene sceneID="JFV-dR-Vmm">
+            <objects>
+                <viewController id="Gfr-Gv-7m3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sAp-Si-Vo6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vy8-Ul-gjz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bH5-7N-GHf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SlM-y0-C0t" customClass="TMUIHeartrateIndicator">
+                                <rect key="frame" x="0.0" y="144" width="320" height="280"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="cZ9-rC-CbF"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="130" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8n-F0-qqA">
+                                <rect key="frame" x="118" y="251" width="84" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="42"/>
+                                <color key="textColor" red="0.64002623175182483" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.60401459854014594" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Please put your finger at the camera." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSI-yP-Ia7">
+                                <rect key="frame" x="0.0" y="432" width="320" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89293686220000001" green="0.89293686220000001" blue="0.89293686220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lSI-yP-Ia7" firstAttribute="top" secondItem="SlM-y0-C0t" secondAttribute="bottom" constant="8" id="8MO-pM-x9g"/>
+                            <constraint firstItem="Vy8-Ul-gjz" firstAttribute="top" secondItem="lSI-yP-Ia7" secondAttribute="bottom" constant="17" id="8i2-ze-4mL"/>
+                            <constraint firstAttribute="trailing" secondItem="SlM-y0-C0t" secondAttribute="trailing" id="JNi-OI-eNi"/>
+                            <constraint firstItem="lSI-yP-Ia7" firstAttribute="leading" secondItem="bH5-7N-GHf" secondAttribute="leading" id="cpp-9B-0dS"/>
+                            <constraint firstAttribute="trailing" secondItem="lSI-yP-Ia7" secondAttribute="trailing" id="fAv-c5-ccM"/>
+                            <constraint firstAttribute="centerX" secondItem="SlM-y0-C0t" secondAttribute="centerX" id="fR7-4T-8f7"/>
+                            <constraint firstItem="SlM-y0-C0t" firstAttribute="leading" secondItem="bH5-7N-GHf" secondAttribute="leading" id="gy4-Ps-T6r"/>
+                            <constraint firstAttribute="centerY" secondItem="SlM-y0-C0t" secondAttribute="centerY" id="t2Q-XQ-I8T"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Vo3-vY-jgi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZoI-RT-zzS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1009" y="2039"/>
         </scene>
         <!--Stair View Controller - Stair Count-->
         <scene sceneID="ZRE-lX-p4Q">
