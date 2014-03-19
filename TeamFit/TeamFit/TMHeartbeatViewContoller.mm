@@ -91,7 +91,7 @@ std::vector<float>maximumValueList;
         
         NSLog(@"Hear Rate : %f\n", self.heartRate);
         
-        float newHeartRate = countLocalMaximaFromArray(meanOfRedValues) - 1 /* (-1) Error at the edge of data */;
+        float newHeartRate = countLocalMaximaFromArray(meanOfRedValues);
         self.heartRate = ( newHeartRate + self.heartRate ) / 2.0;
         
         NSLog(@"Hear Rate new : %f\n", newHeartRate);
@@ -140,7 +140,7 @@ int countLocalMaximaFromArray(const std::vector<float> array)
     int result = 0;
     
     static const double ErrorRate = 0.000001;
-    static const int windowSize = 9;
+    static const int windowSize = 11;
     std::vector<float> window;
     window.resize( windowSize );
     
@@ -193,11 +193,11 @@ int countLocalMaximaFromArray(const std::vector<float> array)
         {
             
             // move window
-            pCurrentPointer = pCurrentPointer + 2;
+            pCurrentPointer = pCurrentPointer + 5;
             
             // Debug mask---
             //*maxValueListIterator = currentMaxValue;
-            maxValueListIterator = maxValueListIterator + 2;
+            maxValueListIterator = maxValueListIterator + 5;
             
             // end Debug mask---
             
