@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C26260018D7F966005F65FC /* TMUIHeartrateIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */; };
 		5C3751FD18BE5662000CBE77 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3751FC18BE5662000CBE77 /* Foundation.framework */; };
 		5C3751FF18BE5662000CBE77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */; };
 		5C37520118BE5662000CBE77 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C37520018BE5662000CBE77 /* UIKit.framework */; };
@@ -27,6 +28,8 @@
 		5C5A0B5F18C1A92C0092293D /* TMStatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */; };
 		5C9CFF0E18D2809400EFF22E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9CFF0D18D2809400EFF22E /* opencv2.framework */; };
 		5C9CFF0F18D2809400EFF22E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9CFF0D18D2809400EFF22E /* opencv2.framework */; };
+		5CE67A6E18D8EAC3001EE125 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67A6D18D8EAC3001EE125 /* opencv2.framework */; };
+		5CE67A6F18D8EAC3001EE125 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67A6D18D8EAC3001EE125 /* opencv2.framework */; };
 		5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */; };
 		5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */; };
 		5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */; };
@@ -53,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C2625FE18D7F966005F65FC /* TMUIHeartrateIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMUIHeartrateIndicator.h; sourceTree = "<group>"; };
+		5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMUIHeartrateIndicator.m; sourceTree = "<group>"; };
 		5C3751F918BE5662000CBE77 /* TeamFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C3751FC18BE5662000CBE77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5C3751FE18BE5662000CBE77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +86,7 @@
 		5C5A0B5D18C1A92C0092293D /* TMStatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMStatViewController.h; path = ../TMStatViewController.h; sourceTree = "<group>"; };
 		5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMStatViewController.m; path = ../TMStatViewController.m; sourceTree = "<group>"; };
 		5C9CFF0D18D2809400EFF22E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		5CE67A6D18D8EAC3001EE125 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5CEBFA7318C2E31A00311B33 /* TMStairSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMStairSettingViewController.h; sourceTree = "<group>"; };
 		5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMStairSettingViewController.m; sourceTree = "<group>"; };
 		5CEF5CD918C059C000F87969 /* TMSetGoalStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSetGoalStepViewController.h; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 				9F99DC7718D10491003086CF /* CoreVideo.framework in Frameworks */,
 				9F99DC7518D10485003086CF /* CoreMedia.framework in Frameworks */,
 				9F99DC7318D1047C003086CF /* CoreImage.framework in Frameworks */,
+				5CE67A6E18D8EAC3001EE125 /* opencv2.framework in Frameworks */,
 				9F99DC7118D10460003086CF /* QuartzCore.framework in Frameworks */,
 				5C3751FF18BE5662000CBE77 /* CoreGraphics.framework in Frameworks */,
 				5C37520118BE5662000CBE77 /* UIKit.framework in Frameworks */,
@@ -126,6 +133,7 @@
 				5C37521C18BE5662000CBE77 /* XCTest.framework in Frameworks */,
 				5C37521E18BE5662000CBE77 /* UIKit.framework in Frameworks */,
 				5C9CFF0F18D2809400EFF22E /* opencv2.framework in Frameworks */,
+				5CE67A6F18D8EAC3001EE125 /* opencv2.framework in Frameworks */,
 				5C37521D18BE5662000CBE77 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +163,7 @@
 		5C3751FB18BE5662000CBE77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CE67A6D18D8EAC3001EE125 /* opencv2.framework */,
 				5C9CFF0D18D2809400EFF22E /* opencv2.framework */,
 				9F99DC7C18D104C8003086CF /* Accelerate.framework */,
 				9F99DC7A18D104AF003086CF /* AssetsLibrary.framework */,
@@ -252,6 +261,8 @@
 				5C37520E18BE5662000CBE77 /* Main.storyboard */,
 				5CFC7D0C18C3CC47008AE082 /* TMVibrationViewController.h */,
 				5CFC7D0D18C3CC47008AE082 /* TMVibrationViewController.m */,
+				5C2625FE18D7F966005F65FC /* TMUIHeartrateIndicator.h */,
+				5C2625FF18D7F966005F65FC /* TMUIHeartrateIndicator.m */,
 			);
 			name = HeartBeat;
 			sourceTree = "<group>";
@@ -369,6 +380,7 @@
 				5C37520D18BE5662000CBE77 /* TMAppDelegate.m in Sources */,
 				5C37523318BE6DDA000CBE77 /* TMStepCountViewController.m in Sources */,
 				5CFC7D0E18C3CC47008AE082 /* TMVibrationViewController.m in Sources */,
+				5C26260018D7F966005F65FC /* TMUIHeartrateIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,11 +508,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";
@@ -517,11 +525,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/chc484-mac2/Desktop/CSE7323TeamTeamAssignments/TeamFit",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";
