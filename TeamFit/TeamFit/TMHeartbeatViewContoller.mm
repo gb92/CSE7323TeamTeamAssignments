@@ -11,7 +11,9 @@
 #import "APLGraphView.h"
 #import <numeric>
 
-#define LogCall() NSLog(@"%d %s", __LINE__, __func__) // Changed:
+#import "TMHeartBeatCounter.h"
+
+#define LogCall() NSLog(@"%d %s", __LINE__, __func__)
 
 using namespace cv;
 
@@ -23,15 +25,25 @@ static const int kSampleSecond = 5;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) CvVideoCamera* videoCamera;
 
-@property (nonatomic) float heartRate;
+@property (strong, nonatomic) TMHeartBeatCounter *heartBeatCounter;
+
+
 @end
 
 @implementation TMHeartbeatViewController
 #ifdef __cplusplus
-std::vector<float> meanOfRedValues;
-static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
+
 #endif
 
+-( TMHeartBeatCounter* ) heartBeatCounter
+{
+    if ( !_heartBeatCounter )
+    {
+        _heartBeatCounter = [[TMHeartBeatCounter alloc]  init];
+    }
+    
+    return _heartBeatCounter;
+}
 
 - (IBAction)ToggleTorch:(UISwitch *)sender
 {
@@ -62,185 +74,49 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
     }
 }
 
-std::vector<float>maximumValueList;
+std::vector<float> maximumValueList;
+std::vector<float> meanOfRedValues;
 
 #ifdef __cplusplus
 -(void)processImage:(Mat&)image;
 {
+    
     Mat image_copy;
     //============================================
     // get average pixel intensity
     cvtColor(image, image_copy, CV_BGRA2BGR); // get rid of alpha for processing
     Scalar avgPixelIntensity = cv::mean( image_copy );
     
-    if( meanOfRedValues.size() < MEAN_OF_RED_VALUES_ARRAY_SIZE )
+    [self.heartBeatCounter setMeanOfRedValue:avgPixelIntensity[2] green:avgPixelIntensity[2]  blue:avgPixelIntensity[2] ];
+    
+    //------------------------
+    
+    float heartRate = [self.heartBeatCounter heartRate];
+    
+    maximumValueList = [self.heartBeatCounter getMaximumValueList];
+    meanOfRedValues = [self.heartBeatCounter getMeanOfRedValue];
+    
+    if( meanOfRedValues.size() <= 0 )
     {
-        // Make sure that the color is red.
-        // and push data to the buffer.
-        //
-
-        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 253) ||
-			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
-		{
-            meanOfRedValues.push_back( avgPixelIntensity.val[2] );
-		}
-    }
-    else
-    {
-        normalizeData( meanOfRedValues, 6 );
-        
-        NSLog(@"Hear Rate : %f\n", self.heartRate);
-        
-        float newHeartRate = countLocalMaximaFromArray(meanOfRedValues);
-        self.heartRate = ( newHeartRate + self.heartRate ) / 2.0;
-        
-        NSLog(@"Hear Rate new : %f\n", newHeartRate);
-        
+        //-----------------------
         std::vector<float>drawingBuffer;
         drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());
         
         std::vector<float>drawingMaximarBuffer;
         drawingMaximarBuffer.assign(maximumValueList.begin(), maximumValueList.end());
-		
-		
+        
+        
         dispatch_async(dispatch_get_main_queue(),^{
             [self drawGraph:drawingBuffer withMaximarList:drawingMaximarBuffer];
         });
-        
-        meanOfRedValues.clear();
-    }
     
+    }
     
     // Display color values and heartrate onto the image.
     char text[50];
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], self.heartRate * 60 / kSampleSecond );
+    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartRate * 60 / kSampleSecond );
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
-}
-
-void normalizeData( std::vector<float>& array, float scaleFactor )
-{
-	
-    int minOfThisList = (int)minValueOfArray( array.begin(), array.end());
-    int maxOfThisList = (int)maxValueOfArray( array.begin(), array.end())+1;
-    const float range = (float)(maxOfThisList-minOfThisList);
-    const float rangeInverse = 1.0/range;
-    
-    for( int i=0; i<array.size(); i++ )
-    {
-        float substractedValue = (array[i] - minOfThisList);
-        array[i] = substractedValue * rangeInverse;
-        array[i] *= scaleFactor;
-    }
-    
-}
-
-int countLocalMaximaFromArray(const std::vector<float> array)
-{
-    int result = 0;
-    
-    static const double ErrorRate = 0.000001;
-    static const int windowSize = 11;
-    std::vector<float> window;
-    window.resize( windowSize );
-    
-    //Debug
-    maximumValueList.clear();
-    maximumValueList.resize( array.size() );
-    
-    std::vector<float>::iterator maxValueListIterator = maximumValueList.begin();
-    
-    //End Debug
-    
-	float previousMaxValue = 0.0f;
-    float currentMaxValue = 0.0f;
-    
-    std::vector<float>::const_iterator pBeginOfBuffer = array.begin();
-    std::vector<float>::const_iterator pEndOfBuffer = array.end();
-    std::vector<float>::const_iterator pCurrentPointer = pBeginOfBuffer;
-    
-    
-    while( pCurrentPointer < pEndOfBuffer)
-    {
-        currentMaxValue = maxValueOfArray( pCurrentPointer, pCurrentPointer + windowSize );
-		
-        double thisError = (previousMaxValue - currentMaxValue); // Changed:
-        
-        if( thisError < 0 ) thisError *= -1.0;
-        
-        if ( thisError < ErrorRate ) // Found local maximar
-        {
-            
-            //! Debug mask
-            //
-            {
-                *maxValueListIterator = currentMaxValue;
-                maxValueListIterator = maxValueListIterator + windowSize;
-            }
-            //
-            // End debug mask
-            
-            
-            result++;
-            
-            // Hack lol
-            pCurrentPointer = pCurrentPointer + windowSize;
-            previousMaxValue = 0;
-            
-			
-        }
-        else // Not Found local maximra
-        {
-            
-            // move window
-            pCurrentPointer = pCurrentPointer + 5;
-            
-            // Debug mask---
-            //*maxValueListIterator = currentMaxValue;
-            maxValueListIterator = maxValueListIterator + 5;
-            
-            // end Debug mask---
-            
-            previousMaxValue = currentMaxValue;
-            
-            
-        }
-		
-    }
-    
-    return result;
-}
-
-float maxValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
-{
-	
-    float max = -MAXFLOAT;
-    
-    std::vector<float>::const_iterator currentPoint = beginOfWindow;
-    
-    while( currentPoint < endOfWindow )
-    {
-        max = std::max( *currentPoint, max );
-        currentPoint++;
-    }
-    
-    return max;
-}
-
-float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
-{
-	
-    float min = MAXFLOAT;
-    
-    std::vector<float>::const_iterator currentPoint = beginOfWindow;
-    
-    while( currentPoint < endOfWindow )
-    {
-        min = std::min( *currentPoint, min );
-        currentPoint++;
-    }
-    
-    return min;
 }
 
 #endif
@@ -277,12 +153,6 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-#ifdef __cplusplus
-    meanOfRedValues.reserve( MEAN_OF_RED_VALUES_ARRAY_SIZE );
-#endif
-    
     
 }
 
