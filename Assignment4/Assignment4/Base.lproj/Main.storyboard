@@ -12,7 +12,7 @@
                         <viewControllerLayoutGuide type="top" id="2IL-ei-ZZv"/>
                         <viewControllerLayoutGuide type="bottom" id="0ce-5C-Tkc"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="A4GraphicsOverlay">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

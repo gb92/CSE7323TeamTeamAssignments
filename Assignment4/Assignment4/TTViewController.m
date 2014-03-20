@@ -43,8 +43,17 @@ return _videoManager;
 	// Do any additional setup after loading the view, typically from a nib.
     
     
-    __block NSDictionary *opts = @{CIDetectorAccuracy: CIDetectorAccuracyLow, CIDetectorTracking:@YES};
+    __block NSDictionary *opts = @{CIDetectorAccuracy:CIDetectorAccuracyHigh, CIDetectorTracking:@YES};
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeFace context:self.videoManager.ciContext options:opts];
+    
+    __block CIFilter *gradientFilter=[CIFilter filterWithName:@"CIGaussianGradient"];
+    __block CIFilter *overlayFilter=[CIFilter filterWithName:@"CISourceOverCompositing"];
+    __block CIColor *faceColor=[CIColor colorWithRed:255 green:0 blue:0 alpha:1];
+    __block CIColor *endColor=[CIColor colorWithRed:255 green:0 blue:0 alpha:0];
+    __block CIColor *eyeOpenColor=[CIColor colorWithRed:255 green:215 blue:0 alpha:1];
+    __block CIColor *eyeClosedColor=[CIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    __block CIColor *mouthColor=[CIColor colorWithRed:0 green:255 blue:0 alpha:1];
+    __block CIColor *mouthSmileColor=[CIColor colorWithRed:0 green:0 blue:255 alpha:1];
     
     __weak typeof(self) weakSelf=self;
     
@@ -52,67 +61,138 @@ return _videoManager;
         
         if(weakSelf != nil)
         {
-            A4GraphicsOverlay *overlay=(A4GraphicsOverlay *)weakSelf.view;
-            overlay.imageSize=cameraImage.extent;;
             opts = @{CIDetectorImageOrientation: [VideoAnalgesic ciOrientationFromDeviceOrientation:[UIApplication sharedApplication].statusBarOrientation], CIDetectorEyeBlink:@YES, CIDetectorSmile:@YES};
             NSArray *faceFeatures = [detector featuresInImage: cameraImage options:opts];
-        
-            //NSLog(@"Num Faces %ld", [faceFeatures count]);
-            if(faceFeatures.count >0)
+            NSLog(@"Num Faces %ld", faceFeatures.count);
+            //CIImage *overlayImage;
+            for(CIFaceFeature *face in faceFeatures)
             {
-                NSMutableArray *faces=[[NSMutableArray alloc] initWithCapacity:faceFeatures.count];
-                for(CIFaceFeature *face in faceFeatures){
-                   //NSLog(@"ITS A FACE");
-                    A4Face *newFace=[[A4Face alloc]init];
-                    newFace.face=face.bounds;
-                    //overlay.rectAroundFace = CGRectMake(face.bounds.origin.x, face.bounds.origin.y, face.bounds.size.width, face.bounds.size.height);
+                
+                //draw over face
+                [gradientFilter setDefaults];
+                [overlayFilter setDefaults];
+                
+               
+                CIVector *centerVector=[CIVector vectorWithX:face.bounds.origin.x+face.bounds.size.width/2
+                                                          Y:face.bounds.origin.y+face.bounds.size.height/2];
+                float radius=face.bounds.size.height;
+                NSNumber *rad=[NSNumber numberWithFloat:radius];
+                
+                
+                [gradientFilter setValue:centerVector forKey:@"inputCenter"];
+                [gradientFilter setValue:rad forKey:@"inputRadius"];
+                [gradientFilter setValue:faceColor forKey:@"inputColor0"];
+                [gradientFilter setValue:endColor forKey:@"inputColor1"];
+            
+                CIImage *outputImage=[gradientFilter outputImage];
+                
+                
+                [overlayFilter setValue:outputImage forKey:kCIInputImageKey];
+                [overlayFilter setValue:cameraImage forKey:kCIInputBackgroundImageKey];
+                
+                cameraImage=overlayFilter.outputImage;
+                
+                //draw over left eye
+                if(face.hasLeftEyePosition)
+                {
+                
+                    CIVector *centerVector=[CIVector
+                                            vectorWithX:face.leftEyePosition.x
+                                                      Y:face.leftEyePosition.y];
+                    
+                    float radius=face.bounds.size.width/4;
+                    NSNumber *rad=[NSNumber numberWithFloat:radius];
                     
                     
-                    if(face.hasMouthPosition)
+                    [gradientFilter setValue:centerVector forKey:@"inputCenter"];
+                    [gradientFilter setValue:rad forKey:@"inputRadius"];
+                    if(face.leftEyeClosed)
                     {
-                        CGRect mouthRect= CGRectMake(face.mouthPosition.x-10, face.mouthPosition.y-10, 20, 20);
-                        
-                        newFace.mouth=mouthRect;
-                        newFace.hasMouth=YES;
-                        newFace.isSmiling=face.hasSmile;
-                        NSLog(@"smiling:%@",face.hasSmile?@"YES": @"NO");
-                        
-                        //[faces insertObject:[NSValue valueWithCGRect:mouthRect] atIndex:faces.count];
+                        [gradientFilter setValue:eyeClosedColor forKey:@"inputColor0"];
                     }
-                    if(face.hasLeftEyePosition)
+                    else
                     {
-                        CGRect leftEyeRect= CGRectMake(face.leftEyePosition.x-5, face.leftEyePosition.y-5, 10, 10);
-                        newFace.leftEye=leftEyeRect;
-                        newFace.hasLeftEye=YES;
-                        newFace.isLeftEyeClosed=face.leftEyeClosed;
-                        
-                        NSLog(@"leftEyeClosed:%@",face.leftEyeClosed?@"YES": @"NO");
-                        
-                        //[faces insertObject:[NSValue valueWithCGRect:leftEyeRect] atIndex:faces.count];
+                        [gradientFilter setValue:eyeOpenColor forKey:@"inputColor0"];
                     }
-                    if(face.hasRightEyePosition)
-                    {
-                        CGRect rightEyeRect= CGRectMake(face.rightEyePosition.x-5, face.rightEyePosition.y-5, 10, 10);
-                        newFace.rightEye=rightEyeRect;
-                        newFace.hasRightEye=YES;
-                        newFace.isRightEyeClosed=face.rightEyeClosed;
-                        NSLog(@"rightEyeClosed:%@",face.rightEyeClosed?@"YES": @"NO");
-                        //[faces insertObject:[NSValue valueWithCGRect:rightEyeRect] atIndex:faces.count];
-                    }
+                    [gradientFilter setValue:endColor forKey:@"inputColor1"];
+                    CIImage *outputImage=[gradientFilter outputImage];
                     
-                    [faces insertObject:newFace atIndex:faces.count];
                     
+                    [overlayFilter setValue:outputImage forKey:kCIInputImageKey];
+                    [overlayFilter setValue:cameraImage forKey:kCIInputBackgroundImageKey];
+                    
+                    cameraImage=overlayFilter.outputImage;
                 }
-                overlay.faceRects=faces;
+
+                //draw over right eye
+                if(face.hasRightEyePosition)
+                {
+                    
+                    CIVector *centerVector=[CIVector
+                                            vectorWithX:face.rightEyePosition.x
+                                            Y:face.rightEyePosition.y];
+                    
+                    float radius=face.bounds.size.width/4;
+                    NSNumber *rad=[NSNumber numberWithFloat:radius];
+                    
+                    
+                    [gradientFilter setValue:centerVector forKey:@"inputCenter"];
+                    [gradientFilter setValue:rad forKey:@"inputRadius"];
+                    if(face.rightEyeClosed)
+                    {
+                        [gradientFilter setValue:eyeClosedColor forKey:@"inputColor0"];
+                    }
+                    else
+                    {
+                        [gradientFilter setValue:eyeOpenColor forKey:@"inputColor0"];
+                    }
+                    [gradientFilter setValue:endColor forKey:@"inputColor1"];
+                    CIImage *outputImage=[gradientFilter outputImage];
+                    
+                    
+                    [overlayFilter setValue:outputImage forKey:kCIInputImageKey];
+                    [overlayFilter setValue:cameraImage forKey:kCIInputBackgroundImageKey];
+                    
+                    cameraImage=overlayFilter.outputImage;
+                }
+                
+                //draw over left eye
+                if(face.hasMouthPosition)
+                {
+                    
+                    CIVector *centerVector=[CIVector
+                                            vectorWithX:face.mouthPosition.x
+                                            Y:face.mouthPosition.y];
+                    
+                    float radius=face.bounds.size.width/2;
+                    NSNumber *rad=[NSNumber numberWithFloat:radius];
+                    
+                    
+                    [gradientFilter setValue:centerVector forKey:@"inputCenter"];
+                    [gradientFilter setValue:rad forKey:@"inputRadius"];
+                    if(face.hasSmile)
+                    {
+                        [gradientFilter setValue:mouthSmileColor forKey:@"inputColor0"];
+                    }
+                    else
+                    {
+                        [gradientFilter setValue:mouthColor forKey:@"inputColor0"];
+                    }
+                    [gradientFilter setValue:endColor forKey:@"inputColor1"];
+                    CIImage *outputImage=[gradientFilter outputImage];
+                    
+                    
+                    [overlayFilter setValue:outputImage forKey:kCIInputImageKey];
+                    [overlayFilter setValue:cameraImage forKey:kCIInputBackgroundImageKey];
+                    
+                    cameraImage=overlayFilter.outputImage;
+                }
+
                 
             }
-            else
-            {
-                overlay.faceRects=nil;
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [overlay setNeedsDisplay];
-            });
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [overlay setNeedsDisplay];
+//            });
         }
         return cameraImage;
     }];

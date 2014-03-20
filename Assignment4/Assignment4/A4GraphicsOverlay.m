@@ -44,49 +44,55 @@
         
         UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
         
-        if(orientation == UIInterfaceOrientationLandscapeLeft)
-        {
-            CGContextRotateCTM(context, M_PI);
-            CGContextTranslateCTM(context, 0, -1*self.bounds.size.width);
-        }
+//        if(orientation == UIInterfaceOrientationLandscapeLeft)
+//        {
+//            CGContextRotateCTM(context, M_PI);
+//            CGContextTranslateCTM(context, 0, -1*self.bounds.size.width);
+//        }
         
         CGContextSetLineWidth(context, 2.0);
 
         
-        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-        CGContextAddRect(context, self.bounds);
-        CGContextStrokePath(context);
-        
-        CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
-        CGContextAddRect(context,([UIApplication sharedApplication].delegate).window.bounds);
-        CGContextStrokePath(context);
+//        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+//        CGContextAddRect(context, self.bounds);
+//        CGContextStrokePath(context);
+//        
+//        CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
+//        CGContextAddRect(context,([UIApplication sharedApplication].delegate).window.bounds);
+//        CGContextStrokePath(context);
 
         for(int i=0; i<self.faceRects.count;i++)
         {
             A4Face *face=self.faceRects[i];
-            
-            CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-            CGContextAddRect(context, face.face);
-            CGContextStrokePath(context);
-            
+            if(orientation==UIInterfaceOrientationPortrait)
+            {
+                CGRect 
+            }
+            else
+            {
+                CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+                CGContextAddRect(context, face.face);
+                CGContextStrokePath(context);
+            }
+
             if(face.hasLeftEye)
             {
                 CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-                CGRect scaledLeftEye;
-                if(orientation==UIInterfaceOrientationPortrait)
-                {
-                 scaledLeftEye=CGRectMake(face.leftEye.origin.y*scaleX, face.leftEye.origin.x*scaleY, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
-                }
-                else if(orientation == UIInterfaceOrientationLandscapeLeft)
-                {
-                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
-                }
-                else
-                {
-                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
-                }
+//                CGRect scaledLeftEye;
+//                if(orientation==UIInterfaceOrientationPortrait)
+//                {
+//                 scaledLeftEye=CGRectMake(face.leftEye.origin.y*scaleX, face.leftEye.origin.x*scaleY, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+//                }
+//                else if(orientation == UIInterfaceOrientationLandscapeLeft)
+//                {
+//                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+//                }
+//                else
+//                {
+//                    scaledLeftEye=CGRectMake(face.leftEye.origin.x*scaleY, face.leftEye.origin.y*scaleX, face.leftEye.size.width*scaleX, face.leftEye.size.height*scaleY);
+//                }
                 
-                CGContextAddRect(context, scaledLeftEye);
+                CGContextAddRect(context, face.leftEye);
                 CGContextStrokePath(context);
                 NSLog(@"isLeftEyeClosed:%@",face.isLeftEyeClosed?@"YES": @"NO");
                 if(face.isLeftEyeClosed)
