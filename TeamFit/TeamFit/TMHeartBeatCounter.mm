@@ -12,20 +12,20 @@ namespace TeamTeam
 {
     
     static const int kFramesPerSec = 24;
-    static const int kSampleSecond = 5;
-    static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
+    static const int kSampleSecond = 10;
+    static const int HEART_RATE_BUFFER_SIZE = kSampleSecond * kFramesPerSec;
 
 
     //-------------------------------------------
     /* Convinion Functions */
     //-------------------------------------------
 
-    float maxValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
+    float maxValueOfArray( std::deque<float>::const_iterator beginOfWindow, std::deque<float>::const_iterator endOfWindow )
     {
         
         float max = -MAXFLOAT;
         
-        std::vector<float>::const_iterator currentPoint = beginOfWindow;
+        std::deque<float>::const_iterator currentPoint = beginOfWindow;
         
         while( currentPoint < endOfWindow )
         {
@@ -36,12 +36,12 @@ namespace TeamTeam
         return max;
     }
 
-    float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::vector<float>::const_iterator endOfWindow )
+    float minValueOfArray( std::deque<float>::const_iterator beginOfWindow, std::deque<float>::const_iterator endOfWindow )
     {
         
         float min = MAXFLOAT;
         
-        std::vector<float>::const_iterator currentPoint = beginOfWindow;
+        std::deque<float>::const_iterator currentPoint = beginOfWindow;
         
         while( currentPoint < endOfWindow )
         {
@@ -53,7 +53,7 @@ namespace TeamTeam
     }
 
 
-    void normalizeData( std::vector<float>& array, float scaleFactor )
+    void normalizeData( std::deque<float>& array, float scaleFactor )
     {
         
         int minOfThisList = (int)minValueOfArray( array.begin(), array.end());
@@ -76,7 +76,7 @@ namespace TeamTeam
 
     TMHeartRateCounter::TMHeartRateCounter()
     {
-        meanOfRedValues.reserve( MEAN_OF_RED_VALUES_ARRAY_SIZE );
+        
     }
 
     TMHeartRateCounter::~TMHeartRateCounter()
@@ -86,57 +86,49 @@ namespace TeamTeam
 
     void TMHeartRateCounter::setMeanOfPixelValue( float redValue, float greenValue, float blueValue )
     {
-        if( meanOfRedValues.size() < MEAN_OF_RED_VALUES_ARRAY_SIZE )
+        if ((blueValue < 50 && greenValue< 50 && redValue > 200 && redValue < 253) ||
+            (blueValue < 10 && greenValue < 10 && redValue > 45 && redValue < 113)) // Changed: Consider dark red as a sample
         {
-            // Make sure that the color is red.
-            // and push data to the buffer.
-            //
-        
-            if ((blueValue < 50 && greenValue< 50 && redValue > 200 && redValue < 253) ||
-                (blueValue < 10 && greenValue < 10 && redValue > 45 && redValue < 113)) // Changed: Consider dark red as a sample
+            if( meanOfRedValues.size() >= HEART_RATE_BUFFER_SIZE )
             {
-                meanOfRedValues.push_back( redValue );
+                meanOfRedValues.pop_back();
             }
+            
+            meanOfRedValues.push_front(redValue);
+
+            //NSLog(@"%f\n", meanOfRedValues[0]);
 
         }
-        else
-        {
-            normalizeData( meanOfRedValues, 6 );
+    }
 
-            
-            float newHeartRate = countLocalMaximaFromArray(meanOfRedValues);
-            heartRate = ( newHeartRate + heartRate ) / 2.0;
-            
-            
-            meanOfRedValues.clear();
-        }
+    void TMHeartRateCounter::calculateHeartRate()
+    {
+        //normalizeData( meanOfRedValues, 6 );
+        heartRate = countLocalMaximaFromArray(meanOfRedValues);
 
     }
 
-
-    int TMHeartRateCounter::countLocalMaximaFromArray(const std::vector<float> array)
+    int TMHeartRateCounter::countLocalMaximaFromArray(const std::deque<float> array)
     {
         int result = 0;
         
         static const double ErrorRate = 0.000001;
         static const int windowSize = 11;
-        std::vector<float> window;
-        window.resize( windowSize );
-        
+
         //Debug
         maximumValueList.clear();
         maximumValueList.resize( array.size() );
         
-        std::vector<float>::iterator maxValueListIterator = maximumValueList.begin();
+        std::deque<float>::iterator maxValueListIterator = maximumValueList.begin();
         
         //End Debug
         
         float previousMaxValue = 0.0f;
         float currentMaxValue = 0.0f;
         
-        std::vector<float>::const_iterator pBeginOfBuffer = array.begin();
-        std::vector<float>::const_iterator pEndOfBuffer = array.end();
-        std::vector<float>::const_iterator pCurrentPointer = pBeginOfBuffer;
+        std::deque<float>::const_iterator pBeginOfBuffer = array.begin();
+        std::deque<float>::const_iterator pEndOfBuffer = array.end();
+        std::deque<float>::const_iterator pCurrentPointer = pBeginOfBuffer;
         
         
         while( pCurrentPointer < pEndOfBuffer)
@@ -192,17 +184,17 @@ namespace TeamTeam
 
     std::vector<float> TMHeartRateCounter::getMaximumValueList()
     {
-        return maximumValueList;
+        return std::vector<float>( maximumValueList.begin(), maximumValueList.end() );
     }
 
     std::vector<float> TMHeartRateCounter::getMeanOfRedValue()
     {
-        return meanOfRedValues;
+        return std::vector<float>( meanOfRedValues.begin(), meanOfRedValues.end() );;
     }
     
     float TMHeartRateCounter::getHeartRate()
     {
-        return heartRate;
+        return (float)heartRate * 6 * ( (float)HEART_RATE_BUFFER_SIZE / (float)meanOfRedValues.size() );
     }
 
 }

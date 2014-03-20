@@ -81,32 +81,37 @@ std::vector<float> meanOfRedValues;
     
     heartBeatCounter->setMeanOfPixelValue( avgPixelIntensity[2], avgPixelIntensity[1], avgPixelIntensity[0] );
     
+    dispatch_async(dispatch_get_main_queue(),^{
+        [self.heartBeatGraphView addX:avgPixelIntensity[2] y:0 z:0];
+    });
+
     //------------------------
     
+    heartBeatCounter->calculateHeartRate();
     float heartRate = heartBeatCounter->getHeartRate();
     
     maximumValueList = heartBeatCounter->getMaximumValueList();
     meanOfRedValues = heartBeatCounter->getMeanOfRedValue();
     
-    if( meanOfRedValues.size() > 0 && maximumValueList.size() > 0)
-    {
-        //-----------------------
-        std::vector<float>drawingBuffer;
-        drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());
-        
-        std::vector<float>drawingMaximarBuffer;
-        drawingMaximarBuffer.assign(maximumValueList.begin(), maximumValueList.end());
-        
-        
-        dispatch_async(dispatch_get_main_queue(),^{
-            [self drawGraph:drawingBuffer withMaximarList:drawingMaximarBuffer];
-        });
-    
-    }
+//    if( meanOfRedValues.size() > 0 && maximumValueList.size() > 0)
+//    {
+//        //-----------------------
+//        std::vector<float>drawingBuffer;
+//        drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());
+//        
+//        std::vector<float>drawingMaximarBuffer;
+//        drawingMaximarBuffer.assign(maximumValueList.begin(), maximumValueList.end());
+//        
+//        
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            [self drawGraph:drawingBuffer withMaximarList:drawingMaximarBuffer];
+//        });
+//    
+//    }
     
     // Display color values and heartrate onto the image.
     char text[50];
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartRate * 60 / kSampleSecond );
+    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], heartRate );
     cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }

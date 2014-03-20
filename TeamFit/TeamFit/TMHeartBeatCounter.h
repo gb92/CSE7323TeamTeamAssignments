@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 smu. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <vector>
+#import <deque>
 
 namespace TeamTeam
 {
@@ -14,12 +16,13 @@ namespace TeamTeam
     class TMHeartRateCounter
     {
     private:
-        std::vector<float> meanOfRedValues;
-        std::vector<float>maximumValueList;
+        std::deque<float> meanOfRedValues;
+        std::deque<float> maximumValueList;
         float heartRate;
         
         
-        int countLocalMaximaFromArray(const std::vector<float> array);
+        int countLocalMaximaFromArray(const std::deque<float> array);
+        
         
     public:
         TMHeartRateCounter();
@@ -28,7 +31,9 @@ namespace TeamTeam
         void setMeanOfPixelValue( float redValue, float greenValue, float blueValue );
         std::vector<float> getMaximumValueList();
         std::vector<float> getMeanOfRedValue();
+        void calculateHeartRate();
         float getHeartRate();
+        
     };
 
 }
