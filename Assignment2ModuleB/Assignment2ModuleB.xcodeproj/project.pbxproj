@@ -502,6 +502,7 @@
 				99A2CC2B18B55ABA00992716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99A2CC2C18B55ABA00992716 /* Build configuration list for PBXNativeTarget "Assignment2ModuleBTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +511,7 @@
 				99A2CC2E18B55ABA00992716 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>96E89D6A-9EAC-450D-8124-1D63926EB962</string>
+	<string>555B8B30-03E5-4819-9B9D-B9875EA61BE0</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Assignment2ModuleB</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4574BCFD-A0F6-421F-8558-1FA82D07D09D</key>
+		<key>268B650E-AE06-4A0F-9DED-83BDD5D49D62</key>
 		<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Assignment2ModuleB/Assignment2ModuleB.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4574BCFD-A0F6-421F-8558-1FA82D07D09D</key>
+		<key>268B650E-AE06-4A0F-9DED-83BDD5D49D62</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4574BCFD-A0F6-421F-8558-1FA82D07D09D</string>
+	<string>268B650E-AE06-4A0F-9DED-83BDD5D49D62</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4574BCFD-A0F6-421F-8558-1FA82D07D09D</string>
+			<string>268B650E-AE06-4A0F-9DED-83BDD5D49D62</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CSE7323TeamTeamAssignments</string>
 		</dict>

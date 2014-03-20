@@ -30,6 +30,7 @@
 		5C9CFF0F18D2809400EFF22E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9CFF0D18D2809400EFF22E /* opencv2.framework */; };
 		5CE67A6E18D8EAC3001EE125 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67A6D18D8EAC3001EE125 /* opencv2.framework */; };
 		5CE67A6F18D8EAC3001EE125 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67A6D18D8EAC3001EE125 /* opencv2.framework */; };
+		5CE67A8C18DA8182001EE125 /* TMHeartBeatCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CE67A8B18DA8182001EE125 /* TMHeartBeatCounter.mm */; };
 		5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */; };
 		5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF5CDA18C059C000F87969 /* TMSetGoalStepViewController.m */; };
 		5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC7D0918C3CBD8008AE082 /* APLGraphView.m */; };
@@ -87,6 +88,8 @@
 		5C5A0B5E18C1A92C0092293D /* TMStatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMStatViewController.m; path = ../TMStatViewController.m; sourceTree = "<group>"; };
 		5C9CFF0D18D2809400EFF22E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5CE67A6D18D8EAC3001EE125 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		5CE67A8A18DA8182001EE125 /* TMHeartBeatCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHeartBeatCounter.h; sourceTree = "<group>"; };
+		5CE67A8B18DA8182001EE125 /* TMHeartBeatCounter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TMHeartBeatCounter.mm; sourceTree = "<group>"; };
 		5CEBFA7318C2E31A00311B33 /* TMStairSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMStairSettingViewController.h; sourceTree = "<group>"; };
 		5CEBFA7418C2E31A00311B33 /* TMStairSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMStairSettingViewController.m; sourceTree = "<group>"; };
 		5CEF5CD918C059C000F87969 /* TMSetGoalStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMSetGoalStepViewController.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 		9FE9368218D2462200BF33E0 /* HeartBeat */ = {
 			isa = PBXGroup;
 			children = (
+				5CE67A8A18DA8182001EE125 /* TMHeartBeatCounter.h */,
+				5CE67A8B18DA8182001EE125 /* TMHeartBeatCounter.mm */,
 				9F99DC6C18D0F7C2003086CF /* TMHeartbeatViewController.h */,
 				9F99DC6D18D0F7C2003086CF /* TMHeartbeatViewContoller.mm */,
 				5C37520E18BE5662000CBE77 /* Main.storyboard */,
@@ -370,6 +375,7 @@
 			files = (
 				5C37523718BE7394000CBE77 /* TMStepIndicaterView.m in Sources */,
 				5CEBFA7518C2E31A00311B33 /* TMStairSettingViewController.m in Sources */,
+				5CE67A8C18DA8182001EE125 /* TMHeartBeatCounter.mm in Sources */,
 				5C37520918BE5662000CBE77 /* main.m in Sources */,
 				5CFC7D0A18C3CBD8008AE082 /* APLGraphView.m in Sources */,
 				5CEF5CDB18C059C000F87969 /* TMSetGoalStepViewController.m in Sources */,
@@ -509,6 +515,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";
@@ -526,6 +533,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamFit/TeamFit-Prefix.pch";
 				INFOPLIST_FILE = "TeamFit/TeamFit-Info.plist";

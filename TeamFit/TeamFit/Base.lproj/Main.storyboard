@@ -343,7 +343,7 @@
                                     <constraint firstAttribute="height" constant="280" id="cZ9-rC-CbF"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Please put your finger at the camera." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSI-yP-Ia7">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="Please put your finger at the camera." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSI-yP-Ia7">
                                 <rect key="frame" x="0.0" y="432" width="320" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
