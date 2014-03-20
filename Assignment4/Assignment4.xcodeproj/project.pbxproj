@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CE67A8F18DAC426001EE125 /* TMHeartbeatViewContoller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CE67A8E18DAC426001EE125 /* TMHeartbeatViewContoller.mm */; };
+		5CE67AA018DAC45E001EE125 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67A9918DAC45E001EE125 /* QuartzCore.framework */; };
+		5CE67AA218DAC490001EE125 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AA118DAC490001EE125 /* opencv2.framework */; };
+		5CE67AA418DAC4A9001EE125 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AA318DAC4A9001EE125 /* Accelerate.framework */; };
+		5CE67AA618DAC4AF001EE125 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AA518DAC4AF001EE125 /* AssetsLibrary.framework */; };
+		5CE67AA818DAC4BE001EE125 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AA718DAC4BE001EE125 /* AVFoundation.framework */; };
+		5CE67AAA18DAC4CE001EE125 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AA918DAC4CE001EE125 /* CoreMedia.framework */; };
+		5CE67AAC18DAC4D7001EE125 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AAB18DAC4D7001EE125 /* CoreVideo.framework */; };
+		5CE67AAE18DAC4DF001EE125 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE67AAD18DAC4DE001EE125 /* CoreImage.framework */; };
+		5CE67AB118DAC50F001EE125 /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE67AB018DAC50F001EE125 /* APLGraphView.m */; };
 		992A959718C7E3310055C8E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A959618C7E3310055C8E8 /* Foundation.framework */; };
 		992A959918C7E3310055C8E8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A959818C7E3310055C8E8 /* CoreGraphics.framework */; };
 		992A959B18C7E3310055C8E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992A959A18C7E3310055C8E8 /* UIKit.framework */; };
@@ -35,6 +45,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5CE67A8D18DAC426001EE125 /* TMHeartbeatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHeartbeatViewController.h; sourceTree = "<group>"; };
+		5CE67A8E18DAC426001EE125 /* TMHeartbeatViewContoller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TMHeartbeatViewContoller.mm; sourceTree = "<group>"; };
+		5CE67A9918DAC45E001EE125 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuartzCore.framework; sourceTree = "<group>"; };
+		5CE67AA118DAC490001EE125 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		5CE67AA318DAC4A9001EE125 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		5CE67AA518DAC4AF001EE125 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		5CE67AA718DAC4BE001EE125 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5CE67AA918DAC4CE001EE125 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		5CE67AAB18DAC4D7001EE125 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		5CE67AAD18DAC4DE001EE125 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		5CE67AAF18DAC50F001EE125 /* APLGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLGraphView.h; sourceTree = "<group>"; };
+		5CE67AB018DAC50F001EE125 /* APLGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLGraphView.m; sourceTree = "<group>"; };
 		992A959318C7E3310055C8E8 /* Assignment4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		992A959618C7E3310055C8E8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		992A959818C7E3310055C8E8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,8 +85,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE67AAE18DAC4DF001EE125 /* CoreImage.framework in Frameworks */,
+				5CE67AAC18DAC4D7001EE125 /* CoreVideo.framework in Frameworks */,
+				5CE67AAA18DAC4CE001EE125 /* CoreMedia.framework in Frameworks */,
+				5CE67AA818DAC4BE001EE125 /* AVFoundation.framework in Frameworks */,
+				5CE67AA618DAC4AF001EE125 /* AssetsLibrary.framework in Frameworks */,
+				5CE67AA418DAC4A9001EE125 /* Accelerate.framework in Frameworks */,
 				992A959918C7E3310055C8E8 /* CoreGraphics.framework in Frameworks */,
 				992A959B18C7E3310055C8E8 /* UIKit.framework in Frameworks */,
+				5CE67AA018DAC45E001EE125 /* QuartzCore.framework in Frameworks */,
+				5CE67AA218DAC490001EE125 /* opencv2.framework in Frameworks */,
 				992A959718C7E3310055C8E8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +134,14 @@
 		992A959518C7E3310055C8E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CE67AAD18DAC4DE001EE125 /* CoreImage.framework */,
+				5CE67AAB18DAC4D7001EE125 /* CoreVideo.framework */,
+				5CE67AA918DAC4CE001EE125 /* CoreMedia.framework */,
+				5CE67AA718DAC4BE001EE125 /* AVFoundation.framework */,
+				5CE67AA518DAC4AF001EE125 /* AssetsLibrary.framework */,
+				5CE67AA318DAC4A9001EE125 /* Accelerate.framework */,
+				5CE67AA118DAC490001EE125 /* opencv2.framework */,
+				5CE67A9918DAC45E001EE125 /* QuartzCore.framework */,
 				992A959618C7E3310055C8E8 /* Foundation.framework */,
 				992A959818C7E3310055C8E8 /* CoreGraphics.framework */,
 				992A959A18C7E3310055C8E8 /* UIKit.framework */,
@@ -115,6 +153,10 @@
 		992A959C18C7E3310055C8E8 /* Assignment4 */ = {
 			isa = PBXGroup;
 			children = (
+				5CE67AAF18DAC50F001EE125 /* APLGraphView.h */,
+				5CE67AB018DAC50F001EE125 /* APLGraphView.m */,
+				5CE67A8D18DAC426001EE125 /* TMHeartbeatViewController.h */,
+				5CE67A8E18DAC426001EE125 /* TMHeartbeatViewContoller.mm */,
 				992A95A518C7E3310055C8E8 /* A4AppDelegate.h */,
 				992A95A618C7E3310055C8E8 /* A4AppDelegate.m */,
 				992A95A818C7E3310055C8E8 /* Main.storyboard */,
@@ -257,8 +299,10 @@
 			files = (
 				9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */,
 				992A95A318C7E3310055C8E8 /* main.m in Sources */,
+				5CE67A8F18DAC426001EE125 /* TMHeartbeatViewContoller.mm in Sources */,
 				9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */,
 				992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */,
+				5CE67AB118DAC50F001EE125 /* APLGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +427,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment4/Assignment4-Prefix.pch";
 				INFOPLIST_FILE = "Assignment4/Assignment4-Info.plist";
@@ -396,6 +444,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment4/Assignment4-Prefix.pch";
 				INFOPLIST_FILE = "Assignment4/Assignment4-Info.plist";
@@ -412,6 +464,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment4/Assignment4-Prefix.pch";
@@ -434,6 +487,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment4/Assignment4-Prefix.pch";
