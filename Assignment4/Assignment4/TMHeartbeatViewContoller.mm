@@ -23,6 +23,9 @@ static const int kSampleSecond = 5;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) CvVideoCamera* videoCamera;
 
+@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
+
 @property (nonatomic) float heartRate;
 @end
 
@@ -79,11 +82,22 @@ std::vector<float>maximumValueList;
         // and push data to the buffer.
         //
 
-        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 253) ||
+        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 255) ||
 			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
 		{
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+                
+                [self.instructionLabel setText:@"Counting Heart Signal..."];
+            });
 		}
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.instructionLabel setText:@"Please place your finger at the back camera of the phone."];
+            });
+        }
     }
     else
     {
@@ -104,6 +118,8 @@ std::vector<float>maximumValueList;
 		
 		
         dispatch_async(dispatch_get_main_queue(),^{
+            [self.heartRateLabel setText:[NSString stringWithFormat:@"%.0f",self.heartRate * 60 / kSampleSecond]];
+            
             [self drawGraph:drawingBuffer withMaximarList:drawingMaximarBuffer];
         });
         
@@ -112,9 +128,9 @@ std::vector<float>maximumValueList;
     
     
     // Display color values and heartrate onto the image.
-    char text[50];
-    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], self.heartRate * 60 / kSampleSecond );
-    cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
+//    char text[50];
+//    sprintf(text,"Avg. B: %.1f, G: %.1f,R: %.1f, H: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2], self.heartRate * 60 / kSampleSecond );
+//    cv::putText(image, text, cv::Point(10, 20), FONT_HERSHEY_PLAIN, 1, Scalar::all(255), 1,2);
     
 }
 
@@ -140,7 +156,7 @@ int countLocalMaximaFromArray(const std::vector<float> array)
     int result = 0;
     
     static const double ErrorRate = 0.000001;
-    static const int windowSize = 9;
+    static const int windowSize = 11;
     std::vector<float> window;
     window.resize( windowSize );
     
@@ -349,7 +365,7 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self.videoCamera layoutPreviewLayer];    
+    [self.videoCamera layoutPreviewLayer];
 }
 
 
