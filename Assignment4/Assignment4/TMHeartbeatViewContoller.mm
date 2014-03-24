@@ -327,7 +327,7 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
     [self.heartBeatGraphView addX:number y:maximar z:0];
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
     
 	[super viewDidAppear:animated];
@@ -338,12 +338,18 @@ float minValueOfArray( std::vector<float>::const_iterator beginOfWindow, std::ve
 }
 
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
     
     [self.videoCamera stop];
     [super viewWillDisappear:animated];
     
+}
+
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.videoCamera layoutPreviewLayer];    
 }
 
 
