@@ -17,20 +17,26 @@
 
 @implementation TTConnectingTableView
 
-
--(BLE*)ble
+-(void)scanForDevices
 {
-    
-    if( !_ble )
+    if( bleShield.activePeripheral )
     {
-        _ble = [[BLE alloc] init ];
+        if( bleShield.activePeripheral.isConnected )
+        {
+            [[bleShield CM] cancelPeripheralConnection:[bleShield activePeripheral]];
+            return;
+        }
     }
     
-    return _ble;
+    if( bleShield.peripherals )
+    {
+        bleShield.peripherals = nil;
+    }
     
+    [bleShield findBLEPeripherals:3];
+    
+    [NSTimer scheduledTimerWithTimeInterval:(float)3.0 target:self selector:@selector(scanDevicesTimer:) userInfo:nil repeats:NO];
 }
-
-
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -51,38 +57,71 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.ble controlSetup];
-    self.ble.delegate=self;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(scanForDevices) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    
+    bleShield = [[BLE alloc] init];
+    [bleShield controlSetup];
+    bleShield.delegate = self;
     
     self.devicesList = [[NSMutableArray alloc] init];
 
     
 }
--(void) connectionTimer:(NSTimer *)timer
+-(void) scanDevicesTimer:(NSTimer *)timer
 {
 
-    for( CBPeripheral* device in self.ble.peripherals )
+    if( [bleShield.peripherals count ] > 0 )
     {
-        NSString* deviceName = @"Ion'tcare" ;
-        [self.devicesList addObject:deviceName];
+        [self.devicesList removeAllObjects];
+        
+        for( CBPeripheral* device in bleShield.peripherals )
+        {
+            NSString* deviceName = device.name ;
+            [self.devicesList addObject:deviceName];
+        }
+        
+        [self.tableView reloadData];
     }
     
-    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
-
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [self.ble findBLEPeripherals:10];
-    
-    [NSTimer scheduledTimerWithTimeInterval:(float)10.0 target:self selector:@selector(connectionTimer:) userInfo:nil repeats:NO];
-}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - BLE Delegate
+
+-(void) bleDidReceiveData:(unsigned char *)data length:(int)length
+{
+    // Recieve Data
+}
+
+NSTimer *rssiTimer;
+
+-(void) readRSSITimer:(NSTimer *)timer
+{
+    [bleShield readRSSI];
+}
+
+- (void) bleDidDisconnect
+{
+    [rssiTimer invalidate];
+}
+
+-(void) bleDidConnect
+{
+    // Schedule to read RSSI every 1 sec.
+    rssiTimer = [NSTimer scheduledTimerWithTimeInterval:(float)1.0 target:self selector:@selector(readRSSITimer:) userInfo:nil repeats:YES];
+}
+
+-(void) bleDidUpdateRSSI:(NSNumber *)rssi
+{
+    //self.labelRSSI.text = rssi.stringValue;
 }
 
 #pragma mark - Table view data source
@@ -104,12 +143,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
-    
     [cell.textLabel setText: [self.devicesList objectAtIndex:indexPath.row] ];
-
+    
     // Configure the cell...
     
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Connect
+    //
+    //[bleShield connectPeripheral:[bleShield.peripherals objectAtIndex:0]];
+    
 }
 
 /*
