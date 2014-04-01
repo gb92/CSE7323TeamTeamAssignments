@@ -11,27 +11,39 @@
 
 @interface TTConnectingTableView ()
 
+@property (nonatomic, strong) NSString* activeDeviceName;
 
 @end
 
 @implementation TTConnectingTableView
 
+-(BLE*)bleShield
+{
+    if(!_bleShield)
+    {
+        _bleShield = [[BLE alloc]init];
+        [_bleShield controlSetup];
+    }
+    
+    return _bleShield;
+}
+
 -(void)scanForDevices
 {
-    if( bleShield.activePeripheral )
+    if( self.bleShield.activePeripheral )
     {
-        if( bleShield.activePeripheral.isConnected )
+        if( self.bleShield.activePeripheral.isConnected )
         {
-            [[bleShield CM] cancelPeripheralConnection:[bleShield activePeripheral]];
+            [[self.bleShield CM] cancelPeripheralConnection:[self.bleShield activePeripheral]];
         }
     }
     
-    if( bleShield.peripherals )
+    if( self.bleShield.peripherals )
     {
-        bleShield.peripherals = nil;
+        self.bleShield.peripherals = nil;
     }
     
-    [bleShield findBLEPeripherals:2];
+    [self.bleShield findBLEPeripherals:2];
     
     [NSTimer scheduledTimerWithTimeInterval:(float)2.0 target:self selector:@selector(OnFinishedScaningDevices:) userInfo:nil repeats:NO];
 }
@@ -58,17 +70,13 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(scanForDevices) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
-    
-    bleShield = [[BLE alloc] init];
-    [bleShield controlSetup];
-    bleShield.delegate = self;
+
+    self.bleShield.delegate = self;
     
 
 //    [self.refreshControl beginRefreshing];
 //    [self scanForDevices];
 }
-
-
 
 -(void) OnFinishedScaningDevices:(NSTimer *)timer
 {
@@ -89,30 +97,17 @@
 
 -(void) bleDidReceiveData:(unsigned char *)data length:(int)length
 {
-    // Recieve Data
-}
-
-NSTimer *rssiTimer;
-
--(void) readRSSITimer:(NSTimer *)timer
-{
-    [bleShield readRSSI];
+    NSLog(@"recived data in ConnectionTable");
 }
 
 - (void) bleDidDisconnect
 {
-    [rssiTimer invalidate];
+    NSLog(@"Disconected in ConnectionTable");
 }
 
 -(void) bleDidConnect
 {
-    // Schedule to read RSSI every 1 sec.
-    rssiTimer = [NSTimer scheduledTimerWithTimeInterval:(float)1.0 target:self selector:@selector(readRSSITimer:) userInfo:nil repeats:YES];
-}
-
--(void) bleDidUpdateRSSI:(NSNumber *)rssi
-{
-    //self.labelRSSI.text = rssi.stringValue;
+    NSLog(@"connected in ConnectionTable");
 }
 
 #pragma mark - Table view data source
@@ -125,7 +120,7 @@ NSTimer *rssiTimer;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [bleShield.peripherals count];
+    return [self.bleShield.peripherals count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,12 +128,12 @@ NSTimer *rssiTimer;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    CBPeripheral* aPeripheral = [bleShield.peripherals objectAtIndex:indexPath.row];
+    CBPeripheral* aPeripheral = [self.bleShield.peripherals objectAtIndex:indexPath.row];
     
-    NSString* pName = aPeripheral.name ;
+    self.activeDeviceName = aPeripheral.name ;
     NSString* pUUID = aPeripheral.identifier.UUIDString;
     
-    [cell.textLabel setText: pName ];
+    [cell.textLabel setText: self.activeDeviceName ];
     [cell.detailTextLabel setText:pUUID];
     
     
@@ -152,10 +147,12 @@ NSTimer *rssiTimer;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [((TTControllerViewController*)segue.destinationViewController).macAddressLabel setText:@"Hey"];
-    
-    TTControllerViewController* CVC = segue.destinationViewController;
-    CVC.CVCData = @"Data from Table View";
+    if( [segue.identifier isEqualToString:@"deviceRow"] )
+    {
+        TTControllerViewController* dstVC = segue.destinationViewController;
+        dstVC.deviceName = self.activeDeviceName;
+        dstVC.bleShield = self.bleShield;
+    }
     
 }
 
@@ -165,9 +162,9 @@ NSTimer *rssiTimer;
     
     NSLog(@"Attemp to connect to peripherals %ld", (long)indexPath.row);
     
-    CBPeripheral *aPeripheral = [bleShield.peripherals objectAtIndex:indexPath.row];
+    CBPeripheral *aPeripheral = [self.bleShield.peripherals objectAtIndex:indexPath.row];
     
-    [bleShield connectPeripheral:aPeripheral ];
+    [self.bleShield connectPeripheral:aPeripheral ];
     
     // If successfully -> move to the next view controller.
     // if not -> alert Error message!

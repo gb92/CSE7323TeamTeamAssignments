@@ -16,26 +16,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-aG-9vA">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-aG-9vA">
                                 <rect key="frame" x="139" y="86" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT7-nM-CMV">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT7-nM-CMV">
                                 <rect key="frame" x="139" y="123" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VhH-pl-b3n">
+                                <rect key="frame" x="112" y="165" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDb-Tx-NbC">
+                                <rect key="frame" x="137" y="208" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BLEShieldSend:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wpj-cX-qw1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LSc-aG-9vA" firstAttribute="top" secondItem="2cP-tU-F9B" secondAttribute="bottom" constant="22" id="Nhz-fc-Tke"/>
+                            <constraint firstItem="rT7-nM-CMV" firstAttribute="top" secondItem="LSc-aG-9vA" secondAttribute="bottom" constant="16" id="VcE-YJ-1br"/>
+                            <constraint firstItem="VhH-pl-b3n" firstAttribute="top" secondItem="rT7-nM-CMV" secondAttribute="bottom" constant="21" id="Ys9-mV-gC0"/>
+                            <constraint firstAttribute="trailing" secondItem="VhH-pl-b3n" secondAttribute="trailing" constant="111" id="aRR-IG-JrO"/>
+                            <constraint firstItem="VhH-pl-b3n" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="112" id="aqV-bE-dkE"/>
+                            <constraint firstAttribute="trailing" secondItem="LSc-aG-9vA" secondAttribute="trailing" constant="139" id="n61-U2-VWP"/>
+                            <constraint firstAttribute="trailing" secondItem="rT7-nM-CMV" secondAttribute="trailing" constant="139" id="nm0-dS-dh9"/>
+                            <constraint firstItem="rT7-nM-CMV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="139" id="p4G-Ri-lT8"/>
+                            <constraint firstItem="LSc-aG-9vA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="139" id="tUo-zj-vC0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mRs-wS-ph6"/>
                     <connections>
-                        <outlet property="deviceNameLabel" destination="LSc-aG-9vA" id="CXn-34-qO2"/>
-                        <outlet property="macAddressLabel" destination="rT7-nM-CMV" id="2Em-6o-M90"/>
+                        <outlet property="deviceNameLabel" destination="LSc-aG-9vA" id="uyC-rf-pB5"/>
+                        <outlet property="recivedDataLabel" destination="rT7-nM-CMV" id="3Fs-ph-6M7"/>
+                        <outlet property="sendDataText" destination="VhH-pl-b3n" id="TEf-Eo-458"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

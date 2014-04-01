@@ -11,7 +11,7 @@
 
 
 @interface TTConnectingTableView : UITableViewController <BLEDelegate>
-{
-    BLE *bleShield;
-}
+
+@property (strong, nonatomic) BLE* bleShield;
+
 @end

@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLE.h"
 
-@interface TTControllerViewController : UIViewController
-
-@property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
+@interface TTControllerViewController : UIViewController <BLEDelegate>
 
 @property (strong, nonatomic) NSString *deviceName;
-@property (weak, nonatomic) IBOutlet UILabel *macAddressLabel;
 
-@property( strong, nonatomic )NSString *CVCData;
+@property (strong, nonatomic) BLE *bleShield;
 
 @end
