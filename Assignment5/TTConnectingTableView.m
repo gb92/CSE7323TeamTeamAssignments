@@ -7,11 +7,10 @@
 //
 
 #import "TTConnectingTableView.h"
-
+#import "TTControllerViewController.h"
 
 @interface TTConnectingTableView ()
 
-@property( strong, nonatomic ) NSMutableArray* devicesList;
 
 @end
 
@@ -24,7 +23,6 @@
         if( bleShield.activePeripheral.isConnected )
         {
             [[bleShield CM] cancelPeripheralConnection:[bleShield activePeripheral]];
-            return;
         }
     }
     
@@ -33,9 +31,9 @@
         bleShield.peripherals = nil;
     }
     
-    [bleShield findBLEPeripherals:3];
+    [bleShield findBLEPeripherals:2];
     
-    [NSTimer scheduledTimerWithTimeInterval:(float)3.0 target:self selector:@selector(scanDevicesTimer:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(float)2.0 target:self selector:@selector(OnFinishedScaningDevices:) userInfo:nil repeats:NO];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -65,27 +63,20 @@
     [bleShield controlSetup];
     bleShield.delegate = self;
     
-    self.devicesList = [[NSMutableArray alloc] init];
 
-    
+//    [self.refreshControl beginRefreshing];
+//    [self scanForDevices];
 }
--(void) scanDevicesTimer:(NSTimer *)timer
+
+
+
+-(void) OnFinishedScaningDevices:(NSTimer *)timer
 {
 
-    if( [bleShield.peripherals count ] > 0 )
-    {
-        [self.devicesList removeAllObjects];
-        
-        for( CBPeripheral* device in bleShield.peripherals )
-        {
-            NSString* deviceName = device.name ;
-            [self.devicesList addObject:deviceName];
-        }
-        
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
     
     [self.refreshControl endRefreshing];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,7 +125,7 @@ NSTimer *rssiTimer;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.devicesList count];
+    return [bleShield.peripherals count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,20 +133,44 @@ NSTimer *rssiTimer;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    CBPeripheral* aPeripheral = [bleShield.peripherals objectAtIndex:indexPath.row];
     
-    [cell.textLabel setText: [self.devicesList objectAtIndex:indexPath.row] ];
+    NSString* pName = aPeripheral.name ;
+    NSString* pUUID = aPeripheral.identifier.UUIDString;
     
-    // Configure the cell...
+    [cell.textLabel setText: pName ];
+    [cell.detailTextLabel setText:pUUID];
+    
     
     return cell;
 }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return YES;
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Connect
-    //
-    //[bleShield connectPeripheral:[bleShield.peripherals objectAtIndex:0]];
+    [((TTControllerViewController*)segue.destinationViewController).macAddressLabel setText:@"Hey"];
     
+    TTControllerViewController* CVC = segue.destinationViewController;
+    CVC.CVCData = @"Data from Table View";
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    
+    NSLog(@"Attemp to connect to peripherals %ld", (long)indexPath.row);
+    
+    CBPeripheral *aPeripheral = [bleShield.peripherals objectAtIndex:indexPath.row];
+    
+    [bleShield connectPeripheral:aPeripheral ];
+    
+    // If successfully -> move to the next view controller.
+    // if not -> alert Error message!
 }
 
 /*
