@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLE.h"
 
-@interface TTAppDelegate : UIResponder <UIApplicationDelegate>
+
+@interface TTAppDelegate : UIResponder <UIApplicationDelegate,BLEDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) BLE* bleShield;
 
 @end

@@ -10,8 +10,8 @@
 #import "BLE.h"
 
 
-@interface TTConnectingTableView : UITableViewController <BLEDelegate>
+@interface TTConnectingTableView : UITableViewController
 
-@property (strong, nonatomic) BLE* bleShield;
+@property (strong, nonatomic, readonly) BLE* bleShield;
 
 @end

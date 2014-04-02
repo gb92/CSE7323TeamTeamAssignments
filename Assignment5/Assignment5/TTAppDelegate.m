@@ -10,9 +10,36 @@
 
 @implementation TTAppDelegate
 
+#pragma mark - BLE Delegate
+-(void) bleDidConnect
+{
+    NSLog(@"BLE Connected");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidConnected" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Hey", @"String", nil]];
+}
+-(void) bleDidDisconnect
+{
+    NSLog(@"BLE DisConnected");
+}
+-(void) bleDidUpdateRSSI:(NSNumber *) rssi
+{
+    NSLog(@"BLE Update RSSI");
+}
+-(void) bleDidReceiveData:(unsigned char *) data length:(int) length
+{
+    NSLog(@"BLE ReceiveData");
+}
+
+#pragma mark - Application Deletate
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    self.bleShield = [[BLE alloc] init];
+    [self.bleShield controlSetup];
+    self.bleShield.delegate = self;
+    
     return YES;
 }
 							

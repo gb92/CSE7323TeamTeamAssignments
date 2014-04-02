@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BLE.h"
 
-@interface TTControllerViewController : UIViewController <BLEDelegate>
+@interface TTControllerViewController : UIViewController
 
 @property (strong, nonatomic) NSString *deviceName;
 
-@property (strong, nonatomic) BLE *bleShield;
+@property (strong, nonatomic, readonly) BLE *bleShield;
 
 @end
