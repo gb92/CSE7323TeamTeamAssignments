@@ -14,19 +14,26 @@
 -(void) bleDidConnect
 {
     NSLog(@"BLE Connected");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidConnected" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Hey", @"String", nil]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidConnected" object:self];
 }
 -(void) bleDidDisconnect
 {
     NSLog(@"BLE DisConnected");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidDisconnected" object:self] ;
 }
 -(void) bleDidUpdateRSSI:(NSNumber *) rssi
 {
     NSLog(@"BLE Update RSSI");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEUpdateRSSI" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:rssi,@"RSSI"        , nil]];
 }
 -(void) bleDidReceiveData:(unsigned char *) data length:(int) length
 {
     NSLog(@"BLE ReceiveData");
+    
+    NSData* myData = [NSData dataWithBytes:data length:length];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEReceievedData" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys: myData, @"data",nil]] ;
+    
 }
 
 #pragma mark - Application Deletate

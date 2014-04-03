@@ -12,8 +12,14 @@
 @interface TTControllerViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *recivedDataLabel;
+@property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lightLabel;
+
+
+
 @property (weak, nonatomic) IBOutlet UITextField *sendDataText;
+@property (weak, nonatomic) IBOutlet UISwitch *onOffSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *servoSlider;
 
 @end
 
@@ -35,6 +41,13 @@
     
     [self.deviceNameLabel setText:self.deviceName];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnDidBLEConnected:) name:@"BLEDidConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnBLEDidDisconnect:) name:@"BLEDidDisconnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnBLEDidUpdateRSSI:) name:@"BLEUpdateRSSI" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector (OnBLEDidReceiveData:) name:@"BLEReceievedData" object:nil];
+     
+    
+    
+    
 }
 
 -(BLE*)bleShield
@@ -48,24 +61,110 @@
 
 -(void)OnDidBLEConnected:(NSNotification *)notification
 {
-    //TTAppDelegate *postingObject = [notification object];
-    NSString *string = [[notification userInfo]
-                        objectForKey:@"String"];
+    NSLog(@"This view is recieved connected package");
     
-    NSLog(@"View connectedkdkdkdkdkdksdfsdfsdfsdfsdfsdfsdfdsf %@", string);
+    [self.onOffSwitch setEnabled:YES];
+    [self.servoSlider setEnabled:YES];
+    
 }
 
--(void) bleDidReceiveData:(unsigned char *)data length:(int)length
+-(void)OnBLEDidDisconnect:(NSNotification *)notification
 {
-    NSData *d = [NSData dataWithBytes:data length:length];
-    NSString *s = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
-    self.recivedDataLabel.text = s;
+    NSLog(@"Disconnected");
     
-    NSLog(@"recived data in TTControllerViewController.h");
+    [self.onOffSwitch setEnabled:NO];
+    [self.servoSlider setEnabled:NO];
+}
+
+-(void)OnBLEDidUpdateRSSI:(NSNotification *)notification
+{
+    NSNumber* rssi = [[notification userInfo]
+                        objectForKey:@"RSSI"];
+    NSLog(@"Updated RSSI%@", rssi);
+
+}
+
+
+-(void)OnBLEDidReceiveData:(NSNotification *)notification
+{
+    NSData* mydata = [[notification userInfo]
+                        objectForKey:@"data"];
+    
+    unsigned char *dataPtr = (unsigned char*)mydata.bytes;
+    
+    if( dataPtr[0] == 0 )
+    {
+        [self.onOffSwitch setOn:NO];
+    }
+    else if( dataPtr[0] == 1)
+    {
+        [self.onOffSwitch setOn:YES];
+    
+        if( dataPtr[1] == 0 )
+        {
+            self.temperatureLabel.text = [NSString stringWithFormat:@"%d C", dataPtr[2]];
+        }
+        else if( dataPtr[1] == 1 )
+        {
+            self.lightLabel.text = [NSString stringWithFormat:@"%d light", dataPtr[2]];
+        }
+    }
+    
+}
+
+- (IBAction)OnChangeSlider:(UISlider *)sender
+{
+    
+    UInt8 buf[2] = {0, 0};
+    
+    if( [self.bleShield.activePeripheral isConnected])
+    {
+        /*
+         0 = Servo
+         1 = Motor
+         2 = LED
+         */
+        buf[0] = 0;
+        
+        
+        buf[1] = (UInt8)self.servoSlider.value;
+        
+        
+        NSData *data = [[NSData alloc] initWithBytes:buf length:2];
+        
+        [self.bleShield write:data];
+    }
+}
+
+- (IBAction)OnSwitchChange:(UISwitch *)sender
+{
+    
+    UInt8 buf[2] = {0, 0};
+    
+    if( [self.bleShield.activePeripheral isConnected])
+    {
+        /*
+            0 = Servo
+            1 = Motor
+            2 = LED
+         */
+        buf[0] = 2;
+    
+    
+        if( [self.onOffSwitch isOn])
+        {
+            buf[1] = 1;
+        }
+        
+        NSData *data = [[NSData alloc] initWithBytes:buf length:2];
+        
+        [self.bleShield write:data];
+    }
 }
 
 - (IBAction)BLEShieldSend:(id)sender
 {
+    /*
     NSString *s;
     NSData *d;
     
@@ -77,7 +176,11 @@
     s = [NSString stringWithFormat:@"%@\r\n", s];
     d = [s dataUsingEncoding:NSUTF8StringEncoding];
     
+    
     [self.bleShield write:d];
+  
+  */
+
 }
 
 
