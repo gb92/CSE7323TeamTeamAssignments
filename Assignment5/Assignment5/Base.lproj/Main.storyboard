@@ -68,14 +68,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296" y="125"/>
+            <point key="canvasLocation" x="1738" y="211"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eZU-vw-BcA">
+            <objects>
+                <viewController id="Ojk-NX-6wp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Aj3-yQ-Fbv"/>
+                        <viewControllerLayoutGuide type="bottom" id="rKO-JW-BQR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nN4-TH-pKC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="OqA-Ua-lnX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4OX-0s-cAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="839" y="125"/>
         </scene>
         <!--Connecting Table View-->
         <scene sceneID="vA4-q7-Ppj">
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="3De-0E-d0G" customClass="TTConnectingTableView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vKG-kz-vrE">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -120,7 +139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y0X-jQ-AsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="837" y="125"/>
+            <point key="canvasLocation" x="839" y="801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cZj-uB-XlN">
@@ -133,12 +152,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="3De-0E-d0G" kind="relationship" relationship="rootViewController" id="gkn-Hb-xX5"/>
+                        <segue destination="Ojk-NX-6wp" kind="relationship" relationship="rootViewController" id="Xfk-7y-LFm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cAO-Jy-Anw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="311" y="125"/>
+            <point key="canvasLocation" x="398" y="125"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
