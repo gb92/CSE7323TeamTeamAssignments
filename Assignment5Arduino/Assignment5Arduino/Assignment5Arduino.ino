@@ -1,51 +1,88 @@
 #include <Servo.h>
 
+#include <SPI.h>
+#include <boards.h>
+#include <ble_shield.h>
+#include <services.h> 
 
-const int RED_PIN = 9;
-const int GREEN_PIN = 10;
-const int BLUE_PIN = 11;
+const int RED_PIN = 7;
+const int GREEN_PIN = 5;
+const int BLUE_PIN = 3;
 const int SERVO_PIN=6;
 
+
 int temperaturePin=0;
-int lightSensorPin=1;
+int lightSensorPin=3;
 
-int r, g, b;
+volatile int state=0;
 
-//Servo servo1;
+Servo servo1;
 
 
 void setup()
 {
-  Serial.begin(9600);
+
   
   pinMode(RED_PIN, OUTPUT);
   pinMode(BLUE_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
   
+  pinMode(lightSensorPin, INPUT);
+  attachInterrupt(0, lightChangedToDark, CHANGE); 
+  
   pinMode(SERVO_PIN, OUTPUT);
   
+  servo1.attach(SERVO_PIN);
+  ble_set_name("TeamTeam");
+  ble_begin();
   
-  r=0;
-  b=1;
-  g=0;
-  
-  //servo1.attach(6);
+  Serial.begin(57600);
 }
 
 void loop()
 {
   
-  float voltage, degreesC, degreesF;
-  int lightLevel, position;
+  printCurrentTemperatures();
+  delay(1000);
   
-  voltage=getVoltage(temperaturePin);
+  printCurrentLightLevel();
+  delay(1000);
   
-  degreesC = (voltage - 0.5) * 100.0;
+  setLEDColor(state, 0, 0);
+  Serial.print("state: ");
+  Serial.println(state);
+  
+  handleBluetooth();
+}
+
+float getCurrentDegreesC()
+{
+  int voltage=getVoltage(temperaturePin);
+  
+  int degreesC = (voltage - 0.5) * 100.0;
+  
+  return degreesC;
+}
+
+float getCurrentDegreesF()
+{
+  int degreesC = getCurrentDegreesC();
+  int degreesF = degreesC * (9.0/5.0) + 32.0;
+  
+  return degreesF;
+}
+
+void printCurrentTemperatures()
+{
+  
+  int voltage=getVoltage(temperaturePin);
+  
+  int degreesC = getCurrentDegreesC();
   
   // While we're at it, let's convert degrees Celsius to Fahrenheit.
   // This is the classic C to F conversion formula:
   
-  degreesF = degreesC * (9.0/5.0) + 32.0;
+  int degreesF = getCurrentDegreesF();
   
   Serial.print("voltage: ");
   Serial.print(voltage);
@@ -54,98 +91,9 @@ void loop()
   Serial.print("  deg F: ");
   Serial.println(degreesF);
   
-  delay(1000);
   
-  lightLevel=analogRead(lightSensorPin);
-  Serial.print("light sensor val: ");
-  Serial.println(lightLevel);
-  
-  delay(1000);
-  
-  analogWrite(SERVO_PIN, 50);
-  delay(20);
-  analogWrite(SERVO_PIN, 0);
-  delay(20);
-  analogWrite(SERVO_PIN,-50);
-  delay(20);
-  analogWrite(SERVO_PIN,0);
-  
-  /*
-  //Servo stuff
-  
-   // Change position at full speed:
-
-  servo1.write(90);    // Tell servo to go to 90 degrees
-
-  delay(1000);         // Pause to get it time to move
-
-  servo1.write(180);   // Tell servo to go to 180 degrees
-
-  delay(1000);         // Pause to get it time to move
-
-  servo1.write(0);     // Tell servo to go to 0 degrees
-
-  delay(1000);         // Pause to get it time to move
-  
-  // Change position at a slower speed:
-
-  // To slow down the servo's motion, we'll use a for() loop
-  // to give it a bunch of intermediate positions, with 20ms
-  // delays between them. You can change the step size to make 
-  // the servo slow down or speed up. Note that the servo can't
-  // move faster than its full speed, and you won't be able
-  // to update it any faster than every 20ms.
-
-  // Tell servo to go to 180 degrees, stepping by two degrees
- 
-  for(position = 0; position < 180; position += 2)
-  {
-    servo1.write(position);  // Move to next position
-    delay(20);               // Short pause to allow it to move
-  }
-
-  // Tell servo to go to 0 degrees, stepping by one degree
-
-  for(position = 180; position >= 0; position -= 1)
-  {                                
-    servo1.write(position);  // Move to next position
-    delay(20);               // Short pause to allow it to move
-  }
-  */
-  
-  if(r == 1)
-  {
-    digitalWrite(RED_PIN, LOW);
-    digitalWrite(BLUE_PIN, HIGH);
-    digitalWrite(GREEN_PIN, LOW);
-    
-    r=0;
-    b=1;
-    g=0;
-  }
-  else if(b == 1)
-  {
-    digitalWrite(RED_PIN, LOW);
-    digitalWrite(BLUE_PIN, LOW);
-    digitalWrite(GREEN_PIN, HIGH);
-    
-    r=0;
-    b=0;
-    g=1;
-  }
-  else
-  {
-    digitalWrite(RED_PIN, HIGH);
-    digitalWrite(BLUE_PIN, LOW);
-    digitalWrite(GREEN_PIN, LOW);
-    
-    r=1;
-    b=0;
-    g=0;
-  }
-  
+  handleBluetooth();
 }
-
 
 float getVoltage(int pin)
 {
@@ -156,4 +104,69 @@ float getVoltage(int pin)
   // This equation converts the 0 to 1023 value that analogRead()
   // returns, into a 0.0 to 5.0 value that is the true voltage
   // being read at that pin.
+}
+
+float getCurrentLightLevel()
+{
+  float lightLevel=analogRead(lightSensorPin);
+  return lightLevel;
+  
+}
+
+void printCurrentLightLevel()
+{
+  float lightLevel=analogRead(lightSensorPin);
+  Serial.print("light sensor val: ");
+  Serial.println(lightLevel);
+}
+
+
+void moveServoToPosition(int pos)
+{
+  servo1.write(pos);
+  
+  delay(1000);
+}
+
+void setLEDColor(int r, int g, int b)
+{
+ analogWrite(RED_PIN, r);
+ analogWrite(GREEN_PIN, g);
+ analogWrite(BLUE_PIN, b); 
+}
+
+void lightChangedToDark()
+{
+  int lightVal=getCurrentLightLevel();
+  if(lightVal>500)
+  {
+    state=255;
+  }
+  else if(lightVal>200&&lightVal<500)
+  {
+    state=150;
+  }
+  else
+  {
+    state=0;
+  }
+}
+
+void handleBluetooth()
+{
+  if(ble_available())
+  {
+    int instruction=ble_read();
+    
+    int firstByte=instruction>>8;
+    int secondByte=instruction&255;
+    Serial.print("firstByte: ");
+    Serial.println(firstByte);
+    Serial.print("secondByte: ");
+    Serial.println(secondByte);
+    
+    //Serial.write(ble_read());
+  }
+    
+  ble_do_events();
 }
