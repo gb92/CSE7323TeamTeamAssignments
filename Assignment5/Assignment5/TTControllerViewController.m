@@ -61,7 +61,11 @@
 
 -(void)OnDidBLEConnected:(NSNotification *)notification
 {
+    NSString *deviceName =[notification.userInfo objectForKey:@"deviceName"];
+    
     NSLog(@"This view is recieved connected package");
+    
+    self.deviceNameLabel.text = deviceName;
     
     [self.onOffSwitch setEnabled:YES];
     [self.servoSlider setEnabled:YES];

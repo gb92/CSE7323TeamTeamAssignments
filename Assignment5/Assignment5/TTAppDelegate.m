@@ -14,7 +14,7 @@
 -(void) bleDidConnect
 {
     NSLog(@"BLE Connected");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidConnected" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEDidConnected" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.bleShield.activePeripheral.name,@"deviceName", nil]];
 }
 -(void) bleDidDisconnect
 {

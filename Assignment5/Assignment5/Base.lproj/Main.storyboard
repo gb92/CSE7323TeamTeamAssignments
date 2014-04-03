@@ -94,11 +94,9 @@
                         <outlet property="deviceNameLabel" destination="LSc-aG-9vA" id="uyC-rf-pB5"/>
                         <outlet property="lightLabel" destination="PG9-iQ-ktB" id="Rgu-Sz-YJ6"/>
                         <outlet property="onOffSwitch" destination="S8u-vE-FjR" id="ps1-r9-S5o"/>
-                        <outlet property="recivedDataLabel" destination="rT7-nM-CMV" id="3Fs-ph-6M7"/>
                         <outlet property="sendDataText" destination="VhH-pl-b3n" id="TEf-Eo-458"/>
                         <outlet property="servoSlider" destination="niz-Uy-kJ7" id="m2h-bt-Art"/>
-                        <outlet property="temperatureLabel" destination="rT7-nM-CMV" id="XgN-Wj-i8d"/>
-                        <outlet property="temperatureLable" destination="rT7-nM-CMV" id="I6f-Mi-o2j"/>
+                        <outlet property="temperatureLabel" destination="rT7-nM-CMV" id="b1I-Ha-tRO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
