@@ -104,14 +104,9 @@
     {
         [self.onOffSwitch setOn:YES];
     
-        if( dataPtr[1] == 0 )
-        {
-            self.temperatureLabel.text = [NSString stringWithFormat:@"%d C", dataPtr[2]];
-        }
-        else if( dataPtr[1] == 1 )
-        {
-            self.lightLabel.text = [NSString stringWithFormat:@"%d light", dataPtr[2]];
-        }
+         self.temperatureLabel.text = [NSString stringWithFormat:@"%d C", dataPtr[1]];
+         self.lightLabel.text = [NSString stringWithFormat:@"%d light", dataPtr[2]];
+        
     }
     
 }
