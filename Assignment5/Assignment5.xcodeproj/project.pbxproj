@@ -42,7 +42,7 @@
 		5C5B408518EE6D0500FE82BE /* TTControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTControllerTableViewController.m; sourceTree = "<group>"; };
 		5C5B408A18EE7CD600FE82BE /* TTStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTStartViewController.h; sourceTree = "<group>"; };
 		5C5B408B18EE7CD600FE82BE /* TTStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTStartViewController.m; sourceTree = "<group>"; };
-		EF0EBE4418E39FC900FD8D12 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0EBE4418E39FC900FD8D12 /* TeamGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0EBE4718E39FC900FD8D12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF0EBE4918E39FC900FD8D12 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EF0EBE4B18E39FC900FD8D12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -105,7 +105,7 @@
 		EF0EBE4518E39FC900FD8D12 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF0EBE4418E39FC900FD8D12 /* Assignment5.app */,
+				EF0EBE4418E39FC900FD8D12 /* TeamGreen.app */,
 				EF0EBE6518E39FC900FD8D12 /* Assignment5Tests.xctest */,
 			);
 			name = Products;
@@ -199,7 +199,7 @@
 			);
 			name = Assignment5;
 			productName = Assignment5;
-			productReference = EF0EBE4418E39FC900FD8D12 /* Assignment5.app */;
+			productReference = EF0EBE4418E39FC900FD8D12 /* TeamGreen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EF0EBE6418E39FC900FD8D12 /* Assignment5Tests */ = {
@@ -416,7 +416,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment5/Assignment5-Prefix.pch";
 				INFOPLIST_FILE = "Assignment5/Assignment5-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TeamGreen;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -429,7 +429,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment5/Assignment5-Prefix.pch";
 				INFOPLIST_FILE = "Assignment5/Assignment5-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TeamGreen;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -159,7 +159,7 @@
     
     UInt8 buf[2] = {0, 0};
     
-    if( [self.bleShield.activePeripheral isConnected])
+    if( self.bleShield.activePeripheral)
     {
         /*
          0 = Servo
@@ -185,7 +185,7 @@
     
     UInt8 buf[2] = {0, 0};
     
-    if( [self.bleShield.activePeripheral isConnected])
+    if( self.bleShield.activePeripheral)
     {
         /*
          0 = Servo

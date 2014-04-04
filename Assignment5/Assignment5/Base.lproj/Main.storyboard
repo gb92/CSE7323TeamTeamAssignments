@@ -16,21 +16,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startbg" translatesAutoresizingMaskIntoConstraints="NO" id="Cqr-Vh-MDs">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startbg" translatesAutoresizingMaskIntoConstraints="NO" id="Cqr-Vh-MDs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8Vh-Em-HTb">
-                                <rect key="frame" x="150" y="316" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8Vh-Em-HTb">
+                                <rect key="frame" x="150" y="322" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by TeamTeam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GM0-b9-0sc">
+                                <rect key="frame" x="161" y="293" width="117" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="Q7U-wu-cOB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="8Vh-Em-HTb" firstAttribute="centerX" secondItem="Cqr-Vh-MDs" secondAttribute="centerX" id="5g2-yQ-n1A"/>
+                            <constraint firstAttribute="trailing" secondItem="GM0-b9-0sc" secondAttribute="trailing" constant="42" id="CY0-E8-CTo"/>
+                            <constraint firstItem="8Vh-Em-HTb" firstAttribute="top" secondItem="GM0-b9-0sc" secondAttribute="bottom" constant="8" symbolic="YES" id="Tcm-Mn-1ez"/>
                             <constraint firstAttribute="trailing" secondItem="Cqr-Vh-MDs" secondAttribute="trailing" id="dBd-h5-IzB"/>
                             <constraint firstItem="Cqr-Vh-MDs" firstAttribute="leading" secondItem="1iI-t5-gAS" secondAttribute="leading" id="eY3-tP-EK5"/>
                             <constraint firstItem="Cqr-Vh-MDs" firstAttribute="top" secondItem="1iI-t5-gAS" secondAttribute="top" id="gc2-BO-PcR"/>
+                            <constraint firstItem="ucl-wz-5nL" firstAttribute="top" secondItem="8Vh-Em-HTb" secondAttribute="bottom" constant="226" id="k9l-Mo-ozz"/>
                             <constraint firstAttribute="bottom" secondItem="Cqr-Vh-MDs" secondAttribute="bottom" id="qcM-zZ-gaT"/>
                         </constraints>
                     </view>

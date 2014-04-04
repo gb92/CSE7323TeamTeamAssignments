@@ -28,7 +28,7 @@
 {
     if( self.bleShield.activePeripheral )
     {
-        if( self.bleShield.activePeripheral.isConnected )
+        if( self.bleShield.activePeripheral )
         {
             [[self.bleShield CM] cancelPeripheralConnection:[self.bleShield activePeripheral]];
         }
