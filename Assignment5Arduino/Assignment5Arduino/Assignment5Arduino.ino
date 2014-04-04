@@ -3,104 +3,107 @@
 #include <SPI.h>
 #include <boards.h>
 #include <ble_shield.h>
-#include <services.h> 
+#include <services.h>
 
 const int RED_PIN = 7;
 const int GREEN_PIN = 5;
 const int BLUE_PIN = 3;
-const int SERVO_PIN=6;
+const int SERVO_PIN= 10;
 
+const int temperaturePin=0;
+const int lightSensorPin=3;
 
-int temperaturePin=0;
-int lightSensorPin=3;
-
+// Device State
+// 0 = off ( red )
+// 1 = on but connecting to phone ( green  )
 volatile int state=0;
+
+float lastUpdateTime = 0.0f;
+float lastPressSwitchTime = 0.0f;
 
 Servo servo1;
 
-
 void setup()
 {
-
-  
   pinMode(RED_PIN, OUTPUT);
   pinMode(BLUE_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
-  
+
   pinMode(lightSensorPin, INPUT);
-  attachInterrupt(0, lightChangedToDark, CHANGE); 
-  
+
+  attachInterrupt(0, buttonClick, FALLING);
+
   pinMode(SERVO_PIN, OUTPUT);
-  
+
   servo1.attach(SERVO_PIN);
-  ble_set_name("TeamTeam");
+  ble_set_name("TeamGreen");
   ble_begin();
-  
+
   Serial.begin(57600);
 }
 
 void loop()
 {
+  switch( state )
+  {
+    case 0: setLEDColor( 255, 0, 0 ); break;
+    case 1: setLEDColor( 0, 255, 0 ); break;
+    default: setLEDColor( 0,0,0 ); break;
+  }
+
+    handleBluetooth();
   
-  printCurrentTemperatures();
-  delay(1000);
-  
-  printCurrentLightLevel();
-  delay(1000);
-  
-  setLEDColor(state, 0, 0);
-  Serial.print("state: ");
-  Serial.println(state);
-  
-  handleBluetooth();
 }
 
-float getCurrentDegreesC()
+void buttonClick()
 {
-  int voltage=getVoltage(temperaturePin);
-  
-  int degreesC = (voltage - 0.5) * 100.0;
-  
-  return degreesC;
+  const int updateDelay = 500;
+  if( (millis() - lastPressSwitchTime) > updateDelay ) 
+  {
+    if( state > 0 )
+    {
+      state = 0 ;
+    }
+    else
+    {
+      state = 1;
+    }
+    
+    lastPressSwitchTime = millis();
+  }
 }
 
-float getCurrentDegreesF()
+float converseToDegreesC( float voltage )
 {
-  int degreesC = getCurrentDegreesC();
-  int degreesF = degreesC * (9.0/5.0) + 32.0;
-  
-  return degreesF;
+  return (voltage - 0.5) * 100.0;
 }
+float converseToDegreesF( float voltage )
+{
+  return ( converseToDegreesC( voltage ) * (9.0/5.0) + 32.0 );
+}
+
 
 void printCurrentTemperatures()
 {
-  
-  int voltage=getVoltage(temperaturePin);
-  
-  int degreesC = getCurrentDegreesC();
-  
-  // While we're at it, let's convert degrees Celsius to Fahrenheit.
-  // This is the classic C to F conversion formula:
-  
-  int degreesF = getCurrentDegreesF();
-  
+
+  float voltage=getVoltage(temperaturePin);
+
+  float degreesC = converseToDegreesC( voltage );
+  float degreesF = converseToDegreesF( voltage );
+
   Serial.print("voltage: ");
   Serial.print(voltage);
   Serial.print("  deg C: ");
   Serial.print(degreesC);
   Serial.print("  deg F: ");
   Serial.println(degreesF);
-  
-  
-  handleBluetooth();
 }
 
 float getVoltage(int pin)
 {
 
-  
   return (analogRead(pin) * 0.004882814);
-  
+
   // This equation converts the 0 to 1023 value that analogRead()
   // returns, into a 0.0 to 5.0 value that is the true voltage
   // being read at that pin.
@@ -110,7 +113,7 @@ float getCurrentLightLevel()
 {
   float lightLevel=analogRead(lightSensorPin);
   return lightLevel;
-  
+
 }
 
 void printCurrentLightLevel()
@@ -124,49 +127,77 @@ void printCurrentLightLevel()
 void moveServoToPosition(int pos)
 {
   servo1.write(pos);
-  
-  delay(1000);
 }
 
 void setLEDColor(int r, int g, int b)
 {
- analogWrite(RED_PIN, r);
- analogWrite(GREEN_PIN, g);
- analogWrite(BLUE_PIN, b); 
+  analogWrite(RED_PIN, r);
+  analogWrite(GREEN_PIN, g);
+  analogWrite(BLUE_PIN, b);
 }
 
-void lightChangedToDark()
+void sendSensorsUpdate()
 {
-  int lightVal=getCurrentLightLevel();
-  if(lightVal>500)
-  {
-    state=255;
-  }
-  else if(lightVal>200&&lightVal<500)
-  {
-    state=150;
-  }
-  else
-  {
-    state=0;
+  
+          const int updateDelay = 1000;
+          if( (millis() - lastUpdateTime) > updateDelay )
+          {
+              float voltage=getVoltage(temperaturePin);
+          
+              float degreesC = converseToDegreesC( voltage );
+              float degreesF = converseToDegreesF( voltage );
+              
+              float lightLevel=analogRead(lightSensorPin);
+              
+              if ( ble_connected() )
+              {
+                ble_write( state);
+                ble_write( degreesC );
+                ble_write( lightLevel );
+              }
+            lastUpdateTime = millis();
+          }
+          
+}
+
+void controlSensors()
+{
+  
+    if(ble_available())
+    {
+          byte deviceNumber = ble_read();
+          byte data = ble_read();
+          
+          if( deviceNumber == 0x00 ) // control servo
+          {
+            if( state )
+            {
+              moveServoToPosition( data );
+            }
+          }
+          else if( deviceNumber == 0x02 )
+          {
+            if( data == 0x00 )
+            {
+                state = 0;
+            }
+            else
+            {
+                state = 1;
+            }
+          }
+     
   }
 }
 
 void handleBluetooth()
 {
-  if(ble_available())
-  {
-    int instruction=ble_read();
-    
-    int firstByte=instruction>>8;
-    int secondByte=instruction&255;
-    Serial.print("firstByte: ");
-    Serial.println(firstByte);
-    Serial.print("secondByte: ");
-    Serial.println(secondByte);
-    
-    //Serial.write(ble_read());
-  }
-    
-  ble_do_events();
+      if ( ble_connected() )
+      {
+        sendSensorsUpdate();
+        controlSensors();
+      }
+      
+      ble_do_events();
 }
+
