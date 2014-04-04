@@ -53,6 +53,10 @@
 {
     [super viewDidLoad];
     
+    if (self.bleShield.activePeripheral)
+    {
+        [self.deviceNameLabel setText:self.bleShield.activePeripheral.name];
+    }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnDidBLEConnected:) name:@"BLEDidConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnBLEDidDisconnect:) name:@"BLEDidDisconnected" object:nil];
