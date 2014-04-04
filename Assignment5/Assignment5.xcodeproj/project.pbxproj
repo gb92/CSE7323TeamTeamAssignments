@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C5B408618EE6D0500FE82BE /* TTControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5B408518EE6D0500FE82BE /* TTControllerTableViewController.m */; };
+		5C5B408C18EE7CD600FE82BE /* TTStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5B408B18EE7CD600FE82BE /* TTStartViewController.m */; };
 		EF0EBE4818E39FC900FD8D12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0EBE4718E39FC900FD8D12 /* Foundation.framework */; };
 		EF0EBE4A18E39FC900FD8D12 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0EBE4918E39FC900FD8D12 /* CoreGraphics.framework */; };
 		EF0EBE4C18E39FC900FD8D12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0EBE4B18E39FC900FD8D12 /* UIKit.framework */; };
@@ -23,7 +25,6 @@
 		EF0EBE7318E39FC900FD8D12 /* Assignment5Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0EBE7218E39FC900FD8D12 /* Assignment5Tests.m */; };
 		EF0EBE7F18E3A04F00FD8D12 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0EBE7D18E3A04F00FD8D12 /* BLE.m */; };
 		EF0EBE8318E3A3D400FD8D12 /* TTConnectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0EBE8218E3A3D400FD8D12 /* TTConnectingTableView.m */; };
-		EF9B5FF718EA3C8100CBB86F /* TTControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9B5FF618EA3C8100CBB86F /* TTControllerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C5B408418EE6D0500FE82BE /* TTControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTControllerTableViewController.h; sourceTree = "<group>"; };
+		5C5B408518EE6D0500FE82BE /* TTControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTControllerTableViewController.m; sourceTree = "<group>"; };
+		5C5B408A18EE7CD600FE82BE /* TTStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTStartViewController.h; sourceTree = "<group>"; };
+		5C5B408B18EE7CD600FE82BE /* TTStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTStartViewController.m; sourceTree = "<group>"; };
 		EF0EBE4418E39FC900FD8D12 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0EBE4718E39FC900FD8D12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF0EBE4918E39FC900FD8D12 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,8 +66,6 @@
 		EF0EBE7E18E3A04F00FD8D12 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
 		EF0EBE8118E3A3D400FD8D12 /* TTConnectingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTConnectingTableView.h; path = ../TTConnectingTableView.h; sourceTree = "<group>"; };
 		EF0EBE8218E3A3D400FD8D12 /* TTConnectingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTConnectingTableView.m; path = ../TTConnectingTableView.m; sourceTree = "<group>"; };
-		EF9B5FF518EA3C8100CBB86F /* TTControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTControllerViewController.h; sourceTree = "<group>"; };
-		EF9B5FF618EA3C8100CBB86F /* TTControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTControllerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +126,10 @@
 		EF0EBE4D18E39FC900FD8D12 /* Assignment5 */ = {
 			isa = PBXGroup;
 			children = (
-				EF9B5FF518EA3C8100CBB86F /* TTControllerViewController.h */,
-				EF9B5FF618EA3C8100CBB86F /* TTControllerViewController.m */,
+				5C5B408A18EE7CD600FE82BE /* TTStartViewController.h */,
+				5C5B408B18EE7CD600FE82BE /* TTStartViewController.m */,
+				5C5B408418EE6D0500FE82BE /* TTControllerTableViewController.h */,
+				5C5B408518EE6D0500FE82BE /* TTControllerTableViewController.m */,
 				EF0EBE8118E3A3D400FD8D12 /* TTConnectingTableView.h */,
 				EF0EBE8218E3A3D400FD8D12 /* TTConnectingTableView.m */,
 				EF0EBE5618E39FC900FD8D12 /* TTAppDelegate.h */,
@@ -279,8 +284,9 @@
 				EF0EBE5418E39FC900FD8D12 /* main.m in Sources */,
 				EF0EBE5E18E39FC900FD8D12 /* TTViewController.m in Sources */,
 				EF0EBE7F18E3A04F00FD8D12 /* BLE.m in Sources */,
-				EF9B5FF718EA3C8100CBB86F /* TTControllerViewController.m in Sources */,
+				5C5B408618EE6D0500FE82BE /* TTControllerTableViewController.m in Sources */,
 				EF0EBE8318E3A3D400FD8D12 /* TTConnectingTableView.m in Sources */,
+				5C5B408C18EE7CD600FE82BE /* TTStartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
