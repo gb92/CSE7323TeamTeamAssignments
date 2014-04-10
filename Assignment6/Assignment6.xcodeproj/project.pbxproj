@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BCF20DDC18F73519005227F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDB18F73519005227F5 /* Foundation.framework */; };
+		BCF20DDE18F73519005227F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDD18F73519005227F5 /* CoreGraphics.framework */; };
+		BCF20DE018F73519005227F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDF18F73519005227F5 /* UIKit.framework */; };
+		BCF20DE618F73519005227F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCF20DE418F73519005227F5 /* InfoPlist.strings */; };
+		BCF20DE818F73519005227F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20DE718F73519005227F5 /* main.m */; };
+		BCF20DEC18F73519005227F5 /* TTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20DEB18F73519005227F5 /* TTAppDelegate.m */; };
+		BCF20DEF18F73519005227F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF20DED18F73519005227F5 /* Main.storyboard */; };
+		BCF20DF218F73519005227F5 /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20DF118F73519005227F5 /* TTViewController.m */; };
+		BCF20DF418F73519005227F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF20DF318F73519005227F5 /* Images.xcassets */; };
+		BCF20DFB18F73519005227F5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DFA18F73519005227F5 /* XCTest.framework */; };
+		BCF20DFC18F73519005227F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDB18F73519005227F5 /* Foundation.framework */; };
+		BCF20DFD18F73519005227F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDF18F73519005227F5 /* UIKit.framework */; };
+		BCF20E0518F73519005227F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCF20E0318F73519005227F5 /* InfoPlist.strings */; };
+		BCF20E0718F73519005227F5 /* Assignment6Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E0618F73519005227F5 /* Assignment6Tests.m */; };
+		BCF20E1218F73737005227F5 /* TTGestureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E1118F73736005227F5 /* TTGestureTableViewController.m */; };
+		BCF20E1518F74EF0005227F5 /* TTMotionCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E1418F74EF0005227F5 /* TTMotionCaptureViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BCF20DFE18F73519005227F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCF20DD018F73519005227F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF20DD718F73519005227F5;
+			remoteInfo = Assignment6;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BCF20DD818F73519005227F5 /* Assignment6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment6.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCF20DDB18F73519005227F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BCF20DDD18F73519005227F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BCF20DDF18F73519005227F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BCF20DE318F73519005227F5 /* Assignment6-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment6-Info.plist"; sourceTree = "<group>"; };
+		BCF20DE518F73519005227F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BCF20DE718F73519005227F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BCF20DE918F73519005227F5 /* Assignment6-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Assignment6-Prefix.pch"; sourceTree = "<group>"; };
+		BCF20DEA18F73519005227F5 /* TTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTAppDelegate.h; sourceTree = "<group>"; };
+		BCF20DEB18F73519005227F5 /* TTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTAppDelegate.m; sourceTree = "<group>"; };
+		BCF20DEE18F73519005227F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BCF20DF018F73519005227F5 /* TTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTViewController.h; sourceTree = "<group>"; };
+		BCF20DF118F73519005227F5 /* TTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
+		BCF20DF318F73519005227F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BCF20DF918F73519005227F5 /* Assignment6Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment6Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCF20DFA18F73519005227F5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BCF20E0218F73519005227F5 /* Assignment6Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Assignment6Tests-Info.plist"; sourceTree = "<group>"; };
+		BCF20E0418F73519005227F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BCF20E0618F73519005227F5 /* Assignment6Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment6Tests.m; sourceTree = "<group>"; };
+		BCF20E1018F73736005227F5 /* TTGestureTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGestureTableViewController.h; sourceTree = "<group>"; };
+		BCF20E1118F73736005227F5 /* TTGestureTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGestureTableViewController.m; sourceTree = "<group>"; };
+		BCF20E1318F74EF0005227F5 /* TTMotionCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMotionCaptureViewController.h; sourceTree = "<group>"; };
+		BCF20E1418F74EF0005227F5 /* TTMotionCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionCaptureViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BCF20DD518F73519005227F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20DDE18F73519005227F5 /* CoreGraphics.framework in Frameworks */,
+				BCF20DE018F73519005227F5 /* UIKit.framework in Frameworks */,
+				BCF20DDC18F73519005227F5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCF20DF618F73519005227F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20DFB18F73519005227F5 /* XCTest.framework in Frameworks */,
+				BCF20DFD18F73519005227F5 /* UIKit.framework in Frameworks */,
+				BCF20DFC18F73519005227F5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BCF20DCF18F73519005227F5 = {
+			isa = PBXGroup;
+			children = (
+				BCF20DE118F73519005227F5 /* Assignment6 */,
+				BCF20E0018F73519005227F5 /* Assignment6Tests */,
+				BCF20DDA18F73519005227F5 /* Frameworks */,
+				BCF20DD918F73519005227F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCF20DD918F73519005227F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20DD818F73519005227F5 /* Assignment6.app */,
+				BCF20DF918F73519005227F5 /* Assignment6Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BCF20DDA18F73519005227F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20DDB18F73519005227F5 /* Foundation.framework */,
+				BCF20DDD18F73519005227F5 /* CoreGraphics.framework */,
+				BCF20DDF18F73519005227F5 /* UIKit.framework */,
+				BCF20DFA18F73519005227F5 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BCF20DE118F73519005227F5 /* Assignment6 */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20DEA18F73519005227F5 /* TTAppDelegate.h */,
+				BCF20DEB18F73519005227F5 /* TTAppDelegate.m */,
+				BCF20DED18F73519005227F5 /* Main.storyboard */,
+				BCF20E1018F73736005227F5 /* TTGestureTableViewController.h */,
+				BCF20E1118F73736005227F5 /* TTGestureTableViewController.m */,
+				BCF20DF018F73519005227F5 /* TTViewController.h */,
+				BCF20DF118F73519005227F5 /* TTViewController.m */,
+				BCF20E1318F74EF0005227F5 /* TTMotionCaptureViewController.h */,
+				BCF20E1418F74EF0005227F5 /* TTMotionCaptureViewController.m */,
+				BCF20DF318F73519005227F5 /* Images.xcassets */,
+				BCF20DE218F73519005227F5 /* Supporting Files */,
+			);
+			path = Assignment6;
+			sourceTree = "<group>";
+		};
+		BCF20DE218F73519005227F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20DE318F73519005227F5 /* Assignment6-Info.plist */,
+				BCF20DE418F73519005227F5 /* InfoPlist.strings */,
+				BCF20DE718F73519005227F5 /* main.m */,
+				BCF20DE918F73519005227F5 /* Assignment6-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BCF20E0018F73519005227F5 /* Assignment6Tests */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20E0618F73519005227F5 /* Assignment6Tests.m */,
+				BCF20E0118F73519005227F5 /* Supporting Files */,
+			);
+			path = Assignment6Tests;
+			sourceTree = "<group>";
+		};
+		BCF20E0118F73519005227F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BCF20E0218F73519005227F5 /* Assignment6Tests-Info.plist */,
+				BCF20E0318F73519005227F5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BCF20DD718F73519005227F5 /* Assignment6 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCF20E0A18F73519005227F5 /* Build configuration list for PBXNativeTarget "Assignment6" */;
+			buildPhases = (
+				BCF20DD418F73519005227F5 /* Sources */,
+				BCF20DD518F73519005227F5 /* Frameworks */,
+				BCF20DD618F73519005227F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Assignment6;
+			productName = Assignment6;
+			productReference = BCF20DD818F73519005227F5 /* Assignment6.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BCF20DF818F73519005227F5 /* Assignment6Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCF20E0D18F73519005227F5 /* Build configuration list for PBXNativeTarget "Assignment6Tests" */;
+			buildPhases = (
+				BCF20DF518F73519005227F5 /* Sources */,
+				BCF20DF618F73519005227F5 /* Frameworks */,
+				BCF20DF718F73519005227F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCF20DFF18F73519005227F5 /* PBXTargetDependency */,
+			);
+			name = Assignment6Tests;
+			productName = Assignment6Tests;
+			productReference = BCF20DF918F73519005227F5 /* Assignment6Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BCF20DD018F73519005227F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = smu;
+				TargetAttributes = {
+					BCF20DF818F73519005227F5 = {
+						TestTargetID = BCF20DD718F73519005227F5;
+					};
+				};
+			};
+			buildConfigurationList = BCF20DD318F73519005227F5 /* Build configuration list for PBXProject "Assignment6" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BCF20DCF18F73519005227F5;
+			productRefGroup = BCF20DD918F73519005227F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BCF20DD718F73519005227F5 /* Assignment6 */,
+				BCF20DF818F73519005227F5 /* Assignment6Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BCF20DD618F73519005227F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20DF418F73519005227F5 /* Images.xcassets in Resources */,
+				BCF20DE618F73519005227F5 /* InfoPlist.strings in Resources */,
+				BCF20DEF18F73519005227F5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCF20DF718F73519005227F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20E0518F73519005227F5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BCF20DD418F73519005227F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20DEC18F73519005227F5 /* TTAppDelegate.m in Sources */,
+				BCF20E1518F74EF0005227F5 /* TTMotionCaptureViewController.m in Sources */,
+				BCF20DE818F73519005227F5 /* main.m in Sources */,
+				BCF20DF218F73519005227F5 /* TTViewController.m in Sources */,
+				BCF20E1218F73737005227F5 /* TTGestureTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCF20DF518F73519005227F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF20E0718F73519005227F5 /* Assignment6Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BCF20DFF18F73519005227F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCF20DD718F73519005227F5 /* Assignment6 */;
+			targetProxy = BCF20DFE18F73519005227F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BCF20DE418F73519005227F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF20DE518F73519005227F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BCF20DED18F73519005227F5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF20DEE18F73519005227F5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BCF20E0318F73519005227F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF20E0418F73519005227F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BCF20E0818F73519005227F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BCF20E0918F73519005227F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BCF20E0B18F73519005227F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
+				INFOPLIST_FILE = "Assignment6/Assignment6-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BCF20E0C18F73519005227F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
+				INFOPLIST_FILE = "Assignment6/Assignment6-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BCF20E0E18F73519005227F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Assignment6.app/Assignment6";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Assignment6Tests/Assignment6Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BCF20E0F18F73519005227F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Assignment6.app/Assignment6";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
+				INFOPLIST_FILE = "Assignment6Tests/Assignment6Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BCF20DD318F73519005227F5 /* Build configuration list for PBXProject "Assignment6" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF20E0818F73519005227F5 /* Debug */,
+				BCF20E0918F73519005227F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCF20E0A18F73519005227F5 /* Build configuration list for PBXNativeTarget "Assignment6" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF20E0B18F73519005227F5 /* Debug */,
+				BCF20E0C18F73519005227F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCF20E0D18F73519005227F5 /* Build configuration list for PBXNativeTarget "Assignment6Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF20E0E18F73519005227F5 /* Debug */,
+				BCF20E0F18F73519005227F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BCF20DD018F73519005227F5 /* Project object */;
+}
