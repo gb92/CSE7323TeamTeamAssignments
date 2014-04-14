@@ -7,8 +7,8 @@
 //
 
 #import "TTConnectingTableView.h"
-#import "TTControllerViewController.h"
 #import "TTAppDelegate.h"
+
 
 @interface TTConnectingTableView ()
 
@@ -28,7 +28,7 @@
 {
     if( self.bleShield.activePeripheral )
     {
-        if( self.bleShield.activePeripheral.isConnected )
+        if( self.bleShield.activePeripheral )
         {
             [[self.bleShield CM] cancelPeripheralConnection:[self.bleShield activePeripheral]];
         }
@@ -62,8 +62,11 @@
     [refreshControl addTarget:self action:@selector(scanForDevices) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
 
-//    [self.refreshControl beginRefreshing];
-//    [self scanForDevices];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
 }
 
 -(void) OnFinishedScaningDevices:(NSTimer *)timer
@@ -97,9 +100,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    NSLog(@"%ld", indexPath.row);
+    static NSString *CellIdentifier = @"Cell2";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+
+
     CBPeripheral* aPeripheral = [self.bleShield.peripherals objectAtIndex:indexPath.row];
     
     self.activeDeviceName = aPeripheral.name ;
@@ -107,25 +112,12 @@
     
     [cell.textLabel setText: self.activeDeviceName ];
     [cell.detailTextLabel setText:pUUID];
-    
+
     
     return cell;
 }
 
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    return YES;
-}
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if( [segue.identifier isEqualToString:@"deviceRow"] )
-    {
-        TTControllerViewController* dstVC = segue.destinationViewController;
-        dstVC.deviceName = self.activeDeviceName;
-    }
-    
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
