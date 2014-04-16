@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Tto-XW-Ulb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Tto-XW-Ulb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -100,13 +100,23 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxA-zd-D0p">
                                 <rect key="frame" x="60" y="184" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="`" backgroundImage="Play_next_music_movie_film">
+                                <state key="normal" title="`" backgroundImage="geek_turn_off_button_exit_buttons_twitter_art_design_wallpaper_backgorund_background_tweet-1331px">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onCapturedButtonDown:" destination="P9E-07-IKX" eventType="touchDown" id="zKT-PS-JMl"/>
                                     <action selector="onCapturingButtonHold:" destination="P9E-07-IKX" eventType="touchDownRepeat" id="EAD-nz-oHG"/>
                                     <action selector="onCapturingButtonUp:" destination="P9E-07-IKX" eventType="touchUpInside" id="GAl-sR-4G1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hou-8x-J2Y">
+                                <rect key="frame" x="124" y="518" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Predict">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onPredictButtonPressed:" destination="P9E-07-IKX" eventType="touchUpInside" id="drg-3U-gGI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -137,7 +147,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Play_next_music_movie_film" width="256" height="256"/>
+        <image name="geek_turn_off_button_exit_buttons_twitter_art_design_wallpaper_backgorund_background_tweet-1331px" width="1331" height="1257"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

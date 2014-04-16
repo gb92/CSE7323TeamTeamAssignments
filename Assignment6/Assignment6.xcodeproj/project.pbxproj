@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		23F22DCC18FBFA80001E9841 /* TTGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F22DCB18FBFA80001E9841 /* TTGesture.m */; };
-		5C2130AE18FE150000A03C9A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2130AD18FE150000A03C9A /* opencv2.framework */; };
 		5C2130B118FE158A00A03C9A /* GestureTrainner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C2130AF18FE158A00A03C9A /* GestureTrainner.cpp */; };
 		5C2130B418FE5F8B00A03C9A /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2130B318FE5F8B00A03C9A /* RingBuffer.m */; };
 		BCF20DDC18F73519005227F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDB18F73519005227F5 /* Foundation.framework */; };
@@ -27,6 +26,8 @@
 		BCF20E0718F73519005227F5 /* Assignment6Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E0618F73519005227F5 /* Assignment6Tests.m */; };
 		BCF20E1218F73737005227F5 /* TTGestureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E1118F73736005227F5 /* TTGestureTableViewController.m */; };
 		BCF20E1518F74EF0005227F5 /* TTMotionCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF20E1418F74EF0005227F5 /* TTMotionCaptureViewController.m */; };
+		EF651B9C18FF231A0067E2B2 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF651B9B18FF231A0067E2B2 /* opencv2.framework */; };
+		EF651B9D18FF231A0067E2B2 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF651B9B18FF231A0067E2B2 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +44,6 @@
 		23416E3818FC070200371F97 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		23F22DCA18FBFA80001E9841 /* TTGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGesture.h; sourceTree = "<group>"; };
 		23F22DCB18FBFA80001E9841 /* TTGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGesture.m; sourceTree = "<group>"; };
-		5C2130AD18FE150000A03C9A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		5C2130AF18FE158A00A03C9A /* GestureTrainner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GestureTrainner.cpp; sourceTree = "<group>"; };
 		5C2130B018FE158A00A03C9A /* GestureTrainner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureTrainner.h; sourceTree = "<group>"; };
 		5C2130B218FE5F8B00A03C9A /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 		BCF20E1118F73736005227F5 /* TTGestureTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGestureTableViewController.m; sourceTree = "<group>"; };
 		BCF20E1318F74EF0005227F5 /* TTMotionCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMotionCaptureViewController.h; sourceTree = "<group>"; };
 		BCF20E1418F74EF0005227F5 /* TTMotionCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionCaptureViewController.m; sourceTree = "<group>"; };
+		EF651B9B18FF231A0067E2B2 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +81,7 @@
 			files = (
 				BCF20DDE18F73519005227F5 /* CoreGraphics.framework in Frameworks */,
 				BCF20DE018F73519005227F5 /* UIKit.framework in Frameworks */,
-				5C2130AE18FE150000A03C9A /* opencv2.framework in Frameworks */,
+				EF651B9C18FF231A0067E2B2 /* opencv2.framework in Frameworks */,
 				BCF20DDC18F73519005227F5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +92,7 @@
 			files = (
 				BCF20DFB18F73519005227F5 /* XCTest.framework in Frameworks */,
 				BCF20DFD18F73519005227F5 /* UIKit.framework in Frameworks */,
+				EF651B9D18FF231A0067E2B2 /* opencv2.framework in Frameworks */,
 				BCF20DFC18F73519005227F5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,7 +134,7 @@
 		BCF20DDA18F73519005227F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C2130AD18FE150000A03C9A /* opencv2.framework */,
+				EF651B9B18FF231A0067E2B2 /* opencv2.framework */,
 				BCF20DDB18F73519005227F5 /* Foundation.framework */,
 				BCF20DDD18F73519005227F5 /* CoreGraphics.framework */,
 				BCF20DDF18F73519005227F5 /* UIKit.framework */,
@@ -239,6 +241,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = smu;
 				TargetAttributes = {
+					BCF20DD718F73519005227F5 = {
+						DevelopmentTeam = APD62CDC25;
+					};
 					BCF20DF818F73519005227F5 = {
 						TestTargetID = BCF20DD718F73519005227F5;
 					};
@@ -421,13 +426,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/chc484-mac/CSE7323TeamTeamAssignments/Assignment6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
 				INFOPLIST_FILE = "Assignment6/Assignment6-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -438,13 +446,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/chc484-mac/CSE7323TeamTeamAssignments/Assignment6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
 				INFOPLIST_FILE = "Assignment6/Assignment6-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -458,6 +469,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/chc484-mac/CSE7323TeamTeamAssignments/Assignment6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
@@ -466,6 +478,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Assignment6Tests/Assignment6Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -480,10 +493,12 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/chc484-mac/CSE7323TeamTeamAssignments/Assignment6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Assignment6/Assignment6-Prefix.pch";
 				INFOPLIST_FILE = "Assignment6Tests/Assignment6Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
