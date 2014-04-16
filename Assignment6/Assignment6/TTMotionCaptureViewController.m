@@ -12,7 +12,7 @@
 #import "TTGesture.h"
 #import "RingBuffer.h"
 
-#define SERVER_URL "http://129.119.8.102:8000"
+#define SERVER_URL "http://teamhyperfit.cloudapp.net:8000"
 #define UPDATE_INTERVAL 1/10.0
 
 @interface TTMotionCaptureViewController ()<UIAlertViewDelegate , NSURLSessionTaskDelegate>
