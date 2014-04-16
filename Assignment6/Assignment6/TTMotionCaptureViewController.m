@@ -7,88 +7,80 @@
 //
 
 #import "TTMotionCaptureViewController.h"
+#import "TTGesture.h"
 
-@interface TTMotionCaptureViewController ()
-
+@interface TTMotionCaptureViewController ()<UIAlertViewDelegate>
 
 @end
 
 @implementation TTMotionCaptureViewController
 {
-dispatch_queue_t motionCaptureQueue;
+    dispatch_queue_t motionCaptureQueue;
     bool bCollecting;
+    int count;
 }
 
 
 
 
-- (IBAction)onCapturingButtonUp:(UIButton *)sender {
+- (IBAction)onCapturingButtonUp:(UIButton *)sender
+{
     bCollecting=false;
-    }
+	
+	UIAlertView *alert = [UIAlertView new];
+	alert.title = @"Motion Name";
+	alert.message = @"Please enter the Gesture's Name:";
+	alert.delegate = self;
+	[alert addButtonWithTitle:@"OK"];
+	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+	[alert show];
+}
 
 
 - (IBAction)onCapturedButtonDown:(id)sender {
     
     bCollecting= true;
+    count = 0;
     
     dispatch_async(motionCaptureQueue, ^{
         
         
         while(bCollecting)
-            
-        {printf("do some work here.\n");}
-        
+        {
+             NSLog(@"Second One %d", count);
+            count++;
+		}
         
         
     });
-    
-
-    NSLog(@"Second One");
-}
-- (IBAction)onCapturingButtonHold:(UIButton *)sender {
-    NSLog(@"I work");
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (IBAction)onCapturingButtonHold:(UIButton *)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    NSLog(@"I work");
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    
-    
-   motionCaptureQueue = dispatch_queue_create("edu.smu.TeamTeam.MotionCapture", NULL);
-      
-    
 
-    
-    
+   motionCaptureQueue = dispatch_queue_create("edu.smu.TeamTeam.MotionCapture", NULL);
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - AlertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	UITextField *gestureTextField = [alertView textFieldAtIndex:0];
+	TTGesture *capturedGesture = [TTGesture new];
+	capturedGesture.name = gestureTextField.text;
+	
+	if (self.delegate)
+	{
+		[self.delegate didCaptureNewMotion:capturedGesture];
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
 }
-*/
 
 @end

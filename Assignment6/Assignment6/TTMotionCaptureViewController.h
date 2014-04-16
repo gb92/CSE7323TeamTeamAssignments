@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TTMotionCaptureViewController : UIViewController
+@class TTGesture;
 
+@protocol TTMotionCaptureDelegate <NSObject>
+- (void)didCaptureNewMotion:(TTGesture *)capturedGesture;
+@end
+
+@interface TTMotionCaptureViewController : UIViewController
+@property (nonatomic, weak) id<TTMotionCaptureDelegate> delegate; 
 @end

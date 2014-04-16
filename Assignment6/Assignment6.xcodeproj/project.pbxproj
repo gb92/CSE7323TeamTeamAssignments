@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23F22DCC18FBFA80001E9841 /* TTGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F22DCB18FBFA80001E9841 /* TTGesture.m */; };
 		BCF20DDC18F73519005227F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDB18F73519005227F5 /* Foundation.framework */; };
 		BCF20DDE18F73519005227F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDD18F73519005227F5 /* CoreGraphics.framework */; };
 		BCF20DE018F73519005227F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF20DDF18F73519005227F5 /* UIKit.framework */; };
@@ -36,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23416E3818FC070200371F97 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		23F22DCA18FBFA80001E9841 /* TTGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGesture.h; sourceTree = "<group>"; };
+		23F22DCB18FBFA80001E9841 /* TTGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGesture.m; sourceTree = "<group>"; };
 		BCF20DD818F73519005227F5 /* Assignment6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF20DDB18F73519005227F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BCF20DDD18F73519005227F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -85,6 +89,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C2130AC18FE130100A03C9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				23F22DCA18FBFA80001E9841 /* TTGesture.h */,
+				23F22DCB18FBFA80001E9841 /* TTGesture.m */,
+				23416E3818FC070200371F97 /* Constants.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		BCF20DCF18F73519005227F5 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +132,7 @@
 		BCF20DE118F73519005227F5 /* Assignment6 */ = {
 			isa = PBXGroup;
 			children = (
+				5C2130AC18FE130100A03C9A /* Models */,
 				BCF20DEA18F73519005227F5 /* TTAppDelegate.h */,
 				BCF20DEB18F73519005227F5 /* TTAppDelegate.m */,
 				BCF20DED18F73519005227F5 /* Main.storyboard */,
@@ -261,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF20DEC18F73519005227F5 /* TTAppDelegate.m in Sources */,
+				23F22DCC18FBFA80001E9841 /* TTGesture.m in Sources */,
 				BCF20E1518F74EF0005227F5 /* TTMotionCaptureViewController.m in Sources */,
 				BCF20DE818F73519005227F5 /* main.m in Sources */,
 				BCF20DF218F73519005227F5 /* TTViewController.m in Sources */,
