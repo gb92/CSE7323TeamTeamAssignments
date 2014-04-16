@@ -7,9 +7,15 @@
 //
 
 #import "TTMotionCaptureViewController.h"
+#import <CoreMotion/CoreMotion.h>
+
 #import "TTGesture.h"
+#import "RingBuffer.h"
 
 @interface TTMotionCaptureViewController ()<UIAlertViewDelegate>
+
+@property (strong,nonatomic) CMMotionManager *cmMotionManager;
+@property (strong, nonatomic ) RingBuffer *ringBuffer;
 
 @end
 
@@ -21,38 +27,104 @@
 }
 
 
+-(RingBuffer*)ringBuffer
+{
+    if(!_ringBuffer)
+    {
+        _ringBuffer = [[RingBuffer alloc] init];
+    }
+    
+    return _ringBuffer;
+}
 
+-(CMMotionManager*)cmMotionManager
+{
+    if(!_cmMotionManager){
+        _cmMotionManager = [[CMMotionManager alloc] init];
+        
+        if(![_cmMotionManager isDeviceMotionAvailable]){
+            _cmMotionManager = nil;
+        }
+    }
+    return _cmMotionManager;
+    
+}
+
+-(void) startMotionUpdates{
+    
+    if(self.cmMotionManager)
+    {
+        if (![self.cmMotionManager isDeviceMotionActive]) {
+            [self.cmMotionManager startDeviceMotionUpdates];
+        }
+        
+        NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+        myQueue.maxConcurrentOperationCount = 1;
+        
+        [self.cmMotionManager setDeviceMotionUpdateInterval:1.0/100.0];
+        [self.cmMotionManager
+         startDeviceMotionUpdatesToQueue:myQueue
+         withHandler:^(CMDeviceMotion *motion, NSError *error) {
+             
+             float dotProduct =
+             motion.gravity.x*motion.userAcceleration.x +
+             motion.gravity.y*motion.userAcceleration.y +
+             motion.gravity.z*motion.userAcceleration.z;
+            
+             [self.ringBuffer addNewData:motion.userAcceleration.x withY:motion.userAcceleration.y withZ:motion.userAcceleration.z ];
+             
+             NSLog(@"x : %f", motion.userAcceleration.x );
+             
+         }];
+    }
+}
+
+-(void)activate
+{
+    [self startMotionUpdates];
+}
+
+-(void)deactivate
+{
+    if ([self.cmMotionManager isDeviceMotionActive]) {
+        [self.cmMotionManager stopDeviceMotionUpdates];
+    }
+}
 
 - (IBAction)onCapturingButtonUp:(UIButton *)sender
 {
-    bCollecting=false;
+    
+    [self deactivate];
+    
+//    bCollecting=false;
 	
-	UIAlertView *alert = [UIAlertView new];
-	alert.title = @"Motion Name";
-	alert.message = @"Please enter the Gesture's Name:";
-	alert.delegate = self;
-	[alert addButtonWithTitle:@"OK"];
-	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-	[alert show];
+//	UIAlertView *alert = [UIAlertView new];
+//	alert.title = @"Motion Name";
+//	alert.message = @"Please enter the Gesture's Name:";
+//	alert.delegate = self;
+//	[alert addButtonWithTitle:@"OK"];
+//	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//	[alert show];
 }
 
 
 - (IBAction)onCapturedButtonDown:(id)sender {
+  
     
-    bCollecting= true;
-    count = 0;
+    [self activate];
     
-    dispatch_async(motionCaptureQueue, ^{
-        
-        
-        while(bCollecting)
-        {
-             NSLog(@"Second One %d", count);
-            count++;
-		}
-        
-        
-    });
+//    bCollecting= true;
+    
+//    dispatch_async(motionCaptureQueue, ^{
+//        
+//        
+//        while(bCollecting)
+//        {
+//             NSLog(@"Second One %d", count);
+//		}
+//        
+//    });
+    
 }
 
 - (IBAction)onCapturingButtonHold:(UIButton *)sender
@@ -68,6 +140,15 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self deactivate];
+}
 
 #pragma mark - AlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
