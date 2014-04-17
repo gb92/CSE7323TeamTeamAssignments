@@ -67,7 +67,7 @@ class UpdateModelForDatasetId(BaseHandler):
 		acc_knn = -1
 		acc_svm = -1
 
-		if l:
+		if len(l)>=2:
 			c_knn.fit(f,l); # training
 			lstar_knn = c_knn.predict(f);
 			acc_knn = sum(lstar_knn==l)/float(len(l));

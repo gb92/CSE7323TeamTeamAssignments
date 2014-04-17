@@ -342,7 +342,7 @@
                                                          NSLog(@"%@",response);
                                                          NSLog(@"%@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
                                                          NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy"], responseData[@"resubAccuracy"]);
+                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy_svm"], responseData[@"resubAccuracy_knn"]);
                                                      }
                                                  }];
     [dataTask resume]; // start the task
