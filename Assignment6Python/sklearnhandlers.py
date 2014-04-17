@@ -68,7 +68,7 @@ class UpdateModelForDatasetId(BaseHandler):
 		acc_svm = -1
 
 		if l:
-			'''c_knn.fit(f,l); # training
+			c_knn.fit(f,l); # training
 			lstar_knn = c_knn.predict(f);
 			acc_knn = sum(lstar_knn==l)/float(len(l));
 			bytes_knn = pickle.dumps(c_knn);
@@ -79,9 +79,9 @@ class UpdateModelForDatasetId(BaseHandler):
 			bytes_svm = pickle.dumps(c_svm);
 
 			self.db.models.update({"dsid":dsid},
-				{  "$set": {"model_knn":Binary(bytes_svm), "model_svm":Binary(bytes_svm)}  },
+				{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_svm)}  },
 				upsert=True)
-
+'''
 		# send back the resubstitution accuracy
 		# if training takes a while, we are blocking tornado!! No!!
 		self.write_json({"resubAccuracy_knn":acc_knn, "resubAccuracy_svm":acc_svm})
