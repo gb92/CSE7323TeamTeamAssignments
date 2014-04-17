@@ -340,6 +340,7 @@
                                                      if(!error){
                                                          // we should get back the accuracy of the model
                                                          NSLog(@"%@",response);
+                                                         NSLog(@"%@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
                                                          NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                                                          NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy"], responseData[@"resubAccuracy"]);
                                                      }
