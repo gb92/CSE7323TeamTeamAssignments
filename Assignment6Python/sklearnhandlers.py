@@ -99,3 +99,12 @@ class PredictOneFromDatasetId(BaseHandler):
 		predLabel = c2.predict(fvals);
 		self.write_json({"prediction":str(predLabel)})
 		self.client.close()
+
+
+class GetLabelList(BaseHandler):
+	def get(self):
+		l=[];
+		for a in self.db.labeledinstances.find({"dsid":dsid}):
+			l.append(a['label'])
+
+		self.write_json({labels:str(l)})

@@ -31,7 +31,7 @@ class Application(tornado.web.Application):
 	   connect to database
 	'''
 
-        handlers = [(r"/[/]?", 
+        handlers = [(r"/[/]?",
                         BaseHandler),
                     (r"/GetExample[/]?",
                         examplehandlers.TestHandler),
@@ -46,9 +46,11 @@ class Application(tornado.web.Application):
                     (r"/GetNewDatasetId[/]?",
                         sklearnhandlers.RequestNewDatasetId),
                     (r"/UpdateModel[/]?",
-                        sklearnhandlers.UpdateModelForDatasetId),     
+                        sklearnhandlers.UpdateModelForDatasetId),
                     (r"/PredictOne[/]?",
-                        sklearnhandlers.PredictOneFromDatasetId),               
+                        sklearnhandlers.PredictOneFromDatasetId),
+                    (r"/GetLabelList[/]?",
+                        sklearnhandlers.GetLabelList),              
                     ]
 
         settings = {'debug':True}
@@ -64,7 +66,7 @@ class Application(tornado.web.Application):
 
 
 def main():
-    '''Create server, begin IOLoop 
+    '''Create server, begin IOLoop
     '''
     tornado.options.parse_command_line()
     http_server = HTTPServer(Application(), xheaders=True)
