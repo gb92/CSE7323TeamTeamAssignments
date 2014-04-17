@@ -72,13 +72,15 @@ class UpdateModelForDatasetId(BaseHandler):
 			lstar_knn = c_knn.predict(f);
 			acc_knn = sum(lstar_knn==l)/float(len(l));
 			bytes_knn = pickle.dumps(c_knn);
-'''
+
 			c_svm.fit(f,l); # training
 			lstar_svm = c_svm.predict(f);
 			acc_svm = sum(lstar_svm==l)/float(len(l));
 			bytes_svm = pickle.dumps(c_svm);
-'''
-			self.db.models.update({"dsid":dsid},{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_knn)}  },upsert=True)
+
+			self.db.models.update({"dsid":dsid},
+				{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_svm)}  },
+				upsert=True)
 
 		# send back the resubstitution accuracy
 		# if training takes a while, we are blocking tornado!! No!!
