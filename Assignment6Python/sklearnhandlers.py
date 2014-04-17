@@ -109,4 +109,4 @@ class GetLabelList(BaseHandler):
 		for a in self.db.labeledinstances.find({"dsid":dsid}):
 			l.append(a['label'])
 
-		self.write_json({"labels":str(list(set(l)))})
+		self.write_json({"listLength":len(l), "labels":list(set(l))})
