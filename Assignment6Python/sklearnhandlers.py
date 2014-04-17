@@ -66,7 +66,7 @@ class UpdateModelForDatasetId(BaseHandler):
 
 		acc_knn = -1
 		acc_svm = -1
-		
+
 		if l:
 			c_knn.fit(f,l); # training
 			lstar_knn = c_knn.predict(f);
@@ -79,7 +79,7 @@ class UpdateModelForDatasetId(BaseHandler):
 			bytes_svm = pickle.dumps(c_svm);
 
 			self.db.models.update({"dsid":dsid},
-				{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_svm}  },
+				{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_svm)}  },
 				upsert=True)
 
 		# send back the resubstitution accuracy
@@ -105,7 +105,7 @@ class PredictOneFromDatasetId(BaseHandler):
 		
 		if model == 'svm':
 			c2 = pickle.loads(tmp['model_svm'])
-		else
+		else:
 			c2 = pickle.loads(tep['model_knn'])
 
 		predLabel = c2.predict(fvals);
