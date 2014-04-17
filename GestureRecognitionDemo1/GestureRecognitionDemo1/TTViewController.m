@@ -1,9 +1,9 @@
 //
 //  TTViewController.m
-//  Assignment6
+//  GestureRecognitionDemo1
 //
-//  Created by install on 4/10/14.
-//  Copyright (c) 2014 smu. All rights reserved.
+//  Created by ch484-mac5 on 4/9/14.
+//  Copyright (c) 2014 ch484-mac5. All rights reserved.
 //
 
 #import "TTViewController.h"

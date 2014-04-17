@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTMotionCaptureViewController.h"
 
-@interface TTGestureTableViewController : UITableViewController
+@interface TTGestureTableViewController : UITableViewController<TTMotionCaptureDelegate>
 
 @end

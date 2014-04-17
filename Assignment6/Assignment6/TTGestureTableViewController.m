@@ -10,17 +10,18 @@
 
 
 @interface TTGestureTableViewController ()
-@property (nonatomic, strong) NSArray* gestures;
+
+@property (nonatomic, strong) NSMutableArray* gestures;
 
 @end
 
 @implementation TTGestureTableViewController
 
 
-- (NSArray *) gestures
+- (NSMutableArray *) gestures
 {
     if (!_gestures){
-        _gestures = [[NSArray alloc] init];
+        _gestures = [[NSMutableArray alloc] init];
     }
     return _gestures;
 }
@@ -40,11 +41,7 @@
 {
     [super viewDidLoad];
     
-    
-    
-    
-    
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -52,25 +49,17 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
-   
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    
-    return 10;
+    return self.gestures.count;
 }
 
 
@@ -78,11 +67,30 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SimpleCell" forIndexPath:indexPath];
     
-    cell.textLabel.text=@"Test";
+    cell.textLabel.text = [self.gestures[indexPath.row] name];
     
     return cell;
 }
 
+
+#pragma mark - TTMotionCaptureDelegate
+- (void)didCaptureNewMotion:(TTGesture *)capturedGesture
+{
+	if (![self.gestures containsObject:capturedGesture])
+	{
+		[self.gestures addObject:capturedGesture];
+		[self.tableView reloadData];
+	}
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"MotionCaptureSegue"])
+	{
+		TTMotionCaptureViewController *motionCaptureViewController = segue.destinationViewController;
+		motionCaptureViewController.delegate = self;
+	}
+}
 
 /*
 // Override to support conditional editing of the table view.
