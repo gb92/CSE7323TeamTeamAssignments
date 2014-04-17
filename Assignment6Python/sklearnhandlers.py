@@ -64,7 +64,9 @@ class UpdateModelForDatasetId(BaseHandler):
 		C=1.0
 		c_svm=svm.SVC(kernel='linear', C=C)
 
-		acc = -1;
+		acc_knn = -1
+		acc_svm = -1
+		
 		if l:
 			c_knn.fit(f,l); # training
 			lstar_knn = c_knn.predict(f);
