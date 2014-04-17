@@ -13,7 +13,7 @@
 #import "RingBuffer.h"
 
 #define SERVER_URL "http://teamhyperfit.cloudapp.net:8000"
-#define UPDATE_INTERVAL 1/10.0
+
 
 @interface TTMotionCaptureViewController ()<UIAlertViewDelegate , NSURLSessionTaskDelegate>
 
@@ -22,42 +22,37 @@
 
 // for the machine learning session
 @property (strong,nonatomic) NSURLSession *session;
-@property (strong,nonatomic) NSNumber *dsid;
 @property (atomic) BOOL isWaitingForInputData;
 
-- (IBAction)onPredictButtonPressed:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gestureNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trainingModelLabel;
+
+@property (strong, nonatomic) TTGesture *gesture;
+@property (nonatomic) BOOL haveTrained;
+@property (nonatomic) BOOL isSVM;
 @end
 
 @implementation TTMotionCaptureViewController
 {
     dispatch_queue_t motionCaptureQueue;
     bool bCollecting;
-    int count;
     BOOL isTrained;
 }
 
-- (IBAction)onTrainSwitched:(UISwitch *)sender
-{
-    isTrained = [sender isOn];
-}
+#pragma makr - Instantiation
 
-- (IBAction)onBackButtonPressed:(UIBarButtonItem *)sender
+-(TTGesture*) gesture
 {
-	TTGesture *capturedGesture = [TTGesture new];
-	capturedGesture.name = [NSString stringWithFormat:@"Gesture%d",self.GID];
-	
-	if (self.delegate)
-	{
-		[self.delegate didCaptureNewMotion:capturedGesture];
-        [self.navigationController popViewControllerAnimated:YES];
-	}
+    if(!_gesture)
+    {
+        _gesture = [[TTGesture alloc] init];
+        _gesture.name = [NSString stringWithFormat:@"Gesture%d", self.GID];
+    }
     
-
-}
-
-- (IBAction)onPredictButtonPressed:(UIButton *)sender
-{
-    [self predictFeature:self.ringBuffer.getDataAsVector ];
+    return _gesture;
 }
 
 -(RingBuffer*)ringBuffer
@@ -82,6 +77,127 @@
     return _cmMotionManager;
     
 }
+
+#pragma mark - control callback
+
+- (IBAction)EditGestureName:(id)sender
+{
+    UIAlertView *alert = [UIAlertView new];
+    alert.title = @"Motion Name";
+    alert.message = @"Please enter the Gesture's Name:";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"OK"];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+- (IBAction)onTrainModelChanged:(UISwitch *)sender
+{
+    self.isSVM = [sender isOn];
+    if( self.isSVM )
+    {
+        self.trainingModelLabel.text = @"SVM";
+    }
+    else
+    {
+        self.trainingModelLabel.text = @"KNN";
+    }
+}
+
+- (IBAction)onTrainSwitched:(UISwitch *)sender
+{
+    isTrained = [sender isOn];
+    if( isTrained )
+    {
+        self.modeLabel.text = @"Training Mode";
+    }
+    else
+    {
+        self.modeLabel.text = @"Testing Mode";
+    }
+}
+
+- (IBAction)onBackButtonPressed:(UIBarButtonItem *)sender
+{
+
+	if (self.delegate)
+	{
+        if( self.haveTrained )
+            [self.delegate didCaptureNewMotion:self.gesture];
+        else
+            [self.delegate didCaptureNewMotion:nil];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+	}
+
+}
+
+- (IBAction)onCapturingButtonUp:(UIButton *)sender
+{
+    
+    [self deactivate];
+    
+    if (isTrained)
+    {
+        [self sendFeatureArray:[self.ringBuffer getDataAsVector] withLabel:@(self.GID) ];
+        [self updateModel];
+    }
+    else
+    {
+        [self predictFeature:self.ringBuffer.getDataAsVector];
+    }
+}
+
+
+- (IBAction)onCapturedButtonDown:(id)sender {
+    
+    
+    [self activate];
+    
+}
+
+- (IBAction)onCapturingButtonHold:(UIButton *)sender
+{
+    //NSLog(@"I work");
+}
+
+#pragma mark - View Delegation
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    motionCaptureQueue = dispatch_queue_create("edu.smu.TeamTeam.MotionCapture", NULL);
+    
+    // Do any additional setup after loading the view.
+    //setup NSURLSession (ephemeral)
+    NSURLSessionConfiguration *sessionConfig =
+    [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    sessionConfig.timeoutIntervalForRequest = 5.0;
+    sessionConfig.timeoutIntervalForResource = 8.0;
+    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+    
+    self.session =
+    [NSURLSession sessionWithConfiguration:sessionConfig
+                                  delegate:self
+                             delegateQueue:nil];
+    isTrained = YES;
+    self.haveTrained = NO;
+    self.isSVM = YES;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.gestureNameLabel.text = self.gesture.name;
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+
+}
+
+#pragma mark - Motion Control
 
 -(void) startMotionUpdates{
     
@@ -119,92 +235,12 @@
     }
 }
 
-- (IBAction)onCapturingButtonUp:(UIButton *)sender
-{
-    
-    [self deactivate];
-    
-    if (isTrained)
-    {
-        [self sendFeatureArray:[self.ringBuffer getDataAsVector] withLabel:@(self.GID) ];
-        [self updateModel];
-    }
-    else
-    {
-        [self predictFeature:self.ringBuffer.getDataAsVector];
-    }
-
-	
-//	UIAlertView *alert = [UIAlertView new];
-//	alert.title = @"Motion Name";
-//	alert.message = @"Please enter the Gesture's Name:";
-//	alert.delegate = self;
-//	[alert addButtonWithTitle:@"OK"];
-//	alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-//	[alert show];
-}
-
-
-- (IBAction)onCapturedButtonDown:(id)sender {
-  
-    
-    [self activate];
-    
-}
-
-- (IBAction)onCapturingButtonHold:(UIButton *)sender
-{
-    //NSLog(@"I work");
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-   motionCaptureQueue = dispatch_queue_create("edu.smu.TeamTeam.MotionCapture", NULL);
-    // Do any additional setup after loading the view.
-    //setup NSURLSession (ephemeral)
-    NSURLSessionConfiguration *sessionConfig =
-    [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    sessionConfig.timeoutIntervalForRequest = 5.0;
-    sessionConfig.timeoutIntervalForResource = 8.0;
-    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
-    
-    self.session =
-    [NSURLSession sessionWithConfiguration:sessionConfig
-                                  delegate:self
-                             delegateQueue:nil];
-    isTrained = YES;
-    
-    //[self getDataSetId];
-    self.dsid = @( 10 );
-    
-    
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-
-}
-
--(void)viewDidDisappear:(BOOL)animated
-{
-    [self deactivate];
-}
 
 #pragma mark - AlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UITextField *gestureTextField = [alertView textFieldAtIndex:0];
-	TTGesture *capturedGesture = [TTGesture new];
-	capturedGesture.name = gestureTextField.text;
-	
-	if (self.delegate)
-	{
-		[self.delegate didCaptureNewMotion:capturedGesture];
-		[self dismissViewControllerAnimated:YES completion:nil];
-	}
+	self.gestureNameLabel.text = gestureTextField.text;
 }
 
 #pragma mark - HTTP Post and Get Request Methods
@@ -244,13 +280,57 @@
     
 }
 
+
+- (void)sendFeatureArray:(NSArray*)data
+               withLabel:(NSNumber*)label
+{
+    // Add a data point and a label to the database for the current dataset ID
+    
+    // setup the url
+    NSString *baseURL = [NSString stringWithFormat:@"%s/AddDataPoint",SERVER_URL];
+    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    
+    
+    // make an array of feature data
+    // and place inside a dictionary with the label and dsid
+    NSError *error = nil;
+    NSDictionary *jsonUpload = @{@"feature":data,
+                                 @"label":label,
+                                 @"dsid":self.dsid};
+    
+    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+    
+    // create a custom HTTP POST request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestBody];
+    
+    // start the request, print the responses etc.
+    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                         if(!error){
+                                                             NSLog(@"%@",response);
+                                                             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                             
+                                                             self.haveTrained = YES;
+                                                             // we should get back the feature data from the server and the label it parsed
+                                                             NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
+                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
+                                                             NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+                                                         }
+                                                     }];
+    [postTask resume];
+    
+}
+
 - (void)updateModel
 {
     // tell the server to train a new model for the given dataset id (dsid)
     
     // create a GET request and get the reponse back as NSData
     NSString *baseURL = [NSString stringWithFormat:@"%s/UpdateModel",SERVER_URL];
-    NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
+    NSString *query = [NSString stringWithFormat:@"?dsid=%d&usesvm=%d",[self.dsid intValue], self.isSVM];
     
     NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:getUrl
@@ -301,6 +381,7 @@
                                                              
                                                              dispatch_async(dispatch_get_main_queue(), ^{
                                                           
+                                                                 self.resultLabel.text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                                                  
                                                                  self.isWaitingForInputData = YES;
                                                              });
@@ -309,47 +390,6 @@
     [postTask resume];
 }
 
-- (void)sendFeatureArray:(NSArray*)data
-               withLabel:(NSNumber*)label
-{
-    // Add a data point and a label to the database for the current dataset ID
-    
-    // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%s/AddDataPoint",SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
-    
-    // make an array of feature data
-    // and place inside a dictionary with the label and dsid
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"feature":data,
-                                 @"label":label,
-                                 @"dsid":self.dsid};
-    
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-    
-    // create a custom HTTP POST request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:requestBody];
-    
-    // start the request, print the responses etc.
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         if(!error){
-                                                             NSLog(@"%@",response);
-                                                             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                             
-                                                             // we should get back the feature data from the server and the label it parsed
-                                                             NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-                                                             NSLog(@"received %@ and %@",featuresResponse,labelResponse);
-                                                         }
-                                                     }];
-    [postTask resume];
-    
-}
 
 
 @end

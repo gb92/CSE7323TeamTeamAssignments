@@ -7,9 +7,14 @@
 //
 
 #import "TTGestureTableViewController.h"
+#import "TTGesture.h"
 
+#define SERVER_URL "http://teamhyperfit.cloudapp.net:8000"
 
-@interface TTGestureTableViewController ()
+@interface TTGestureTableViewController () <NSURLSessionTaskDelegate,UIAlertViewDelegate>
+
+@property (strong,nonatomic) NSURLSession *session;
+@property (strong,nonatomic) NSNumber *dsid;
 
 @property (nonatomic, strong) NSMutableArray* gestures;
 
@@ -40,13 +45,72 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // Do any additional setup after loading the view.
+    //setup NSURLSession (ephemeral)
+    NSURLSessionConfiguration *sessionConfig =
+    [NSURLSessionConfiguration ephemeralSessionConfiguration];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    sessionConfig.timeoutIntervalForRequest = 5.0;
+    sessionConfig.timeoutIntervalForResource = 8.0;
+    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+    
+    self.session =
+    [NSURLSession sessionWithConfiguration:sessionConfig
+                                  delegate:self
+                             delegateQueue:nil];
+}
+
+- (IBAction)OnUIDButtonPressed:(UIBarButtonItem *)sender
+{
+    UIAlertView *alert = [UIAlertView new];
+    alert.title = @"User ID";
+    alert.message = @"Please enter User ID";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"OK"];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+-(void)getGestureListFromServer
+{
+    NSString *baseURL = [NSString stringWithFormat:@"%s/GetLabelList?dsid=%@",SERVER_URL,self.dsid];
+    
+    NSURL *getUrl = [NSURL URLWithString:baseURL];
+    NSURLSessionTask *theTask = [self.session dataTaskWithURL:getUrl
+                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                     if (!error) {
+                                         NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                                         
+                                         [self.gestures removeAllObjects];
+                                         
+                                         for( id item in responseData[@"labels"])
+                                         {
+                                             TTGesture *gesture = [[TTGesture alloc] init];
+                                             gesture.name = [NSString stringWithFormat:@"Gesture%@", item];
+                                             [self.gestures addObject:gesture];
+                                         }
+                                         
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             [self.tableView reloadData];
+                                         });
+                                     }
+                                     else
+                                     {
+                                         NSLog(@"%@", error);
+                                     }
+                                 }];
+    
+    [theTask resume];
+}
+
+#pragma mark - AlertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	UITextField *gestureTextField = [alertView textFieldAtIndex:0];
+	self.dsid = @(gestureTextField.text.intValue);
+    
+    [self getGestureListFromServer];
 }
 
 #pragma mark - Table view data source
@@ -58,7 +122,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
     return self.gestures.count;
 }
 
@@ -76,7 +139,7 @@
 #pragma mark - TTMotionCaptureDelegate
 - (void)didCaptureNewMotion:(TTGesture *)capturedGesture
 {
-	if (![self.gestures containsObject:capturedGesture])
+	if ( capturedGesture )
 	{
 		[self.gestures addObject:capturedGesture];
 		[self.tableView reloadData];
@@ -89,57 +152,9 @@
 	{
 		TTMotionCaptureViewController *motionCaptureViewController = segue.destinationViewController;
 		motionCaptureViewController.delegate = self;
-        motionCaptureViewController.GID = self.gestures.count;
+        motionCaptureViewController.GID = (int)self.gestures.count;
+        motionCaptureViewController.dsid = self.dsid;
 	}
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TTGesture : NSObject
+
 @property (nonatomic, copy) NSString *name;
 
-- (void)uploadToServer;
 @end
