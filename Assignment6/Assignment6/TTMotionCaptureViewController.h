@@ -15,5 +15,6 @@
 @end
 
 @interface TTMotionCaptureViewController : UIViewController
-@property (nonatomic, weak) id<TTMotionCaptureDelegate> delegate; 
+@property (nonatomic, weak) id<TTMotionCaptureDelegate> delegate;
+@property int GID;
 @end

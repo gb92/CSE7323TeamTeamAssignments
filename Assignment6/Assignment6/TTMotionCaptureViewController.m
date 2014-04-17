@@ -33,6 +33,26 @@
     dispatch_queue_t motionCaptureQueue;
     bool bCollecting;
     int count;
+    BOOL isTrained;
+}
+
+- (IBAction)onTrainSwitched:(UISwitch *)sender
+{
+    isTrained = [sender isOn];
+}
+
+- (IBAction)onBackButtonPressed:(UIBarButtonItem *)sender
+{
+	TTGesture *capturedGesture = [TTGesture new];
+	capturedGesture.name = [NSString stringWithFormat:@"Gesture%d",self.GID];
+	
+	if (self.delegate)
+	{
+		[self.delegate didCaptureNewMotion:capturedGesture];
+        [self.navigationController popViewControllerAnimated:YES];
+	}
+    
+
 }
 
 - (IBAction)onPredictButtonPressed:(UIButton *)sender
@@ -78,15 +98,10 @@
         [self.cmMotionManager
          startDeviceMotionUpdatesToQueue:myQueue
          withHandler:^(CMDeviceMotion *motion, NSError *error) {
-             
-//             float dotProduct =
-//             motion.gravity.x*motion.userAcceleration.x +
-//             motion.gravity.y*motion.userAcceleration.y +
-//             motion.gravity.z*motion.userAcceleration.z;
             
-             [self.ringBuffer addNewData:motion.userAcceleration.x withY:motion.userAcceleration.y withZ:motion.userAcceleration.z ];
-             
-             NSLog(@"x : %f", motion.userAcceleration.x );
+             [self.ringBuffer addNewData:motion.userAcceleration.x
+                                   withY:motion.userAcceleration.y
+                                   withZ:motion.userAcceleration.z ];
              
          }];
     }
@@ -108,10 +123,17 @@
 {
     
     [self deactivate];
-    [self sendFeatureArray:[self.ringBuffer getDataAsVector] withLabel:@(1) ];
-    [self updateModel];
     
-//    bCollecting=false;
+    if (isTrained)
+    {
+        [self sendFeatureArray:[self.ringBuffer getDataAsVector] withLabel:@(self.GID) ];
+        [self updateModel];
+    }
+    else
+    {
+        [self predictFeature:self.ringBuffer.getDataAsVector];
+    }
+
 	
 //	UIAlertView *alert = [UIAlertView new];
 //	alert.title = @"Motion Name";
@@ -128,23 +150,11 @@
     
     [self activate];
     
-//    bCollecting= true;
-    
-//    dispatch_async(motionCaptureQueue, ^{
-//        
-//        
-//        while(bCollecting)
-//        {
-//             NSLog(@"Second One %d", count);
-//		}
-//        
-//    });
-    
 }
 
 - (IBAction)onCapturingButtonHold:(UIButton *)sender
 {
-    NSLog(@"I work");
+    //NSLog(@"I work");
 }
 
 - (void)viewDidLoad
@@ -165,8 +175,11 @@
     [NSURLSession sessionWithConfiguration:sessionConfig
                                   delegate:self
                              delegateQueue:nil];
+    isTrained = YES;
     
-    [self getDataSetId];
+    //[self getDataSetId];
+    self.dsid = @( 10 );
+    
     
 }
 
@@ -287,15 +300,7 @@
                                                              NSLog(@"result : %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                              
                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                 // flash the view that was touched
-                                                                 if([labelResponse  isEqual: @"[0]"])
-                                                                     NSLog(@"%@", labelResponse);
-                                                                 else if([labelResponse  isEqual: @"[1]"])
-                                                                     NSLog(@"%@", labelResponse);
-                                                                 else if([labelResponse  isEqual: @"[2]"])
-                                                                     NSLog(@"%@", labelResponse);
-                                                                 else if([labelResponse  isEqual: @"[3]"])
-                                                                     NSLog(@"%@", labelResponse);
+                                                          
                                                                  
                                                                  self.isWaitingForInputData = YES;
                                                              });

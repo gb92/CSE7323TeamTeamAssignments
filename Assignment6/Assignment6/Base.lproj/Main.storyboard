@@ -57,7 +57,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="BQQ-v1-iI3">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aLe-sp-fez">
                             <connections>
-                                <segue destination="P9E-07-IKX" kind="modal" identifier="MotionCaptureSegue" id="oOq-79-sGa"/>
+                                <segue destination="P9E-07-IKX" kind="push" identifier="MotionCaptureSegue" id="oOq-79-sGa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -119,11 +119,24 @@
                                     <action selector="onPredictButtonPressed:" destination="P9E-07-IKX" eventType="touchUpInside" id="drg-3U-gGI"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Zr-Rg-MBU">
+                                <rect key="frame" x="136" y="79" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onTrainSwitched:" destination="P9E-07-IKX" eventType="valueChanged" id="EI6-Jz-IUg"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Test" id="Sla-hw-p3o"/>
-                    <navigationItem key="navigationItem" id="S2p-Ln-erV"/>
+                    <navigationItem key="navigationItem" id="S2p-Ln-erV">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Pmp-4W-Ux2">
+                            <connections>
+                                <action selector="onBackButtonPressed:" destination="P9E-07-IKX" id="YkK-on-Yfx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39x-xJ-rff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

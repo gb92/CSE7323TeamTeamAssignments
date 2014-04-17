@@ -89,6 +89,7 @@
 	{
 		TTMotionCaptureViewController *motionCaptureViewController = segue.destinationViewController;
 		motionCaptureViewController.delegate = self;
+        motionCaptureViewController.GID = self.gestures.count;
 	}
 }
 
