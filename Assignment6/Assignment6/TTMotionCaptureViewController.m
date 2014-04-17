@@ -340,9 +340,26 @@
                                                      if(!error){
                                                          // we should get back the accuracy of the model
                                                          NSLog(@"%@",response);
-                                                         NSLog(@"%@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+
                                                          NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy_svm"], responseData[@"resubAccuracy_knn"]);
+                                                         
+                                                         if (responseData) {
+                                                             NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy_svm"], responseData[@"resubAccuracy_knn"]);
+                                                             
+                                                             float accSVM = [responseData[@"resubAccuracy_svm"] floatValue];
+                                                             float accKNN = [responseData[@"resubAccuracy_knn"] floatValue];
+                                                             
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 
+                                                                 if ( accSVM > accKNN )
+                                                                     self.resultLabel.text = [NSString stringWithFormat:@"SVM>knn Acc : %f", (accSVM-accKNN)];
+                                                                 else
+                                                                     self.resultLabel.text = [NSString stringWithFormat:@"KNN>svm : %f", (accKNN-accSVM)];
+                                                                 
+                                                                 self.isWaitingForInputData = YES;
+                                                             });
+                                                         }
+
                                                      }
                                                  }];
     [dataTask resume]; // start the task
@@ -360,7 +377,8 @@
     // data to send in body of post request (send arguments as json)
     NSError *error = nil;
     NSDictionary *jsonUpload = @{@"feature":featureData,
-                                 @"dsid":self.dsid};
+                                 @"dsid":self.dsid,
+                                 @"model": (self.isSVM)?@"svm":@"knn" };
     
     NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
     
@@ -376,16 +394,20 @@
                                                          if(!error){
                                                              NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                                                              
-                                                             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
-                                                             NSLog(@"%@",labelResponse);
-                                                             NSLog(@"result : %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                                                             
-                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                          
-                                                                 self.resultLabel.text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                                             if (responseData) {
                                                                  
-                                                                 self.isWaitingForInputData = YES;
-                                                             });
+                                                                 NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+                                                                 NSLog(@"%@",labelResponse);
+                                                                 NSLog(@"result : %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                                 
+                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                     
+                                                                     self.resultLabel.text = [NSString stringWithFormat:@"Result = Gesture%@", labelResponse];
+                                                                     
+                                                                     self.isWaitingForInputData = YES;
+                                                                 });
+                                                             }
+
                                                          }
                                                      }];
     [postTask resume];

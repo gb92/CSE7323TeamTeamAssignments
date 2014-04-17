@@ -172,11 +172,6 @@
                                 <action selector="onBackButtonPressed:" destination="P9E-07-IKX" id="YkK-on-Yfx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="xg4-Ec-TAQ">
-                            <connections>
-                                <action selector="EditGestureName:" destination="P9E-07-IKX" id="6yM-Wt-9OJ"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="gestureNameLabel" destination="3eO-OR-L0Y" id="l8O-6h-sk6"/>
