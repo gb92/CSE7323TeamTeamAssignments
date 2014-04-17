@@ -78,9 +78,7 @@ class UpdateModelForDatasetId(BaseHandler):
 			acc_svm = sum(lstar_svm==l)/float(len(l));
 			bytes_svm = pickle.dumps(c_svm);
 '''
-			self.db.models.update({"dsid":dsid},
-				{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_svm)}  },
-				upsert=True)
+			self.db.models.update({"dsid":dsid},{  "$set": {"model_knn":Binary(bytes_knn), "model_svm":Binary(bytes_knn)}  },upsert=True)
 
 		# send back the resubstitution accuracy
 		# if training takes a while, we are blocking tornado!! No!!
