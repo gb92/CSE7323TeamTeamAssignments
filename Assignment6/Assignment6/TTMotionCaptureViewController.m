@@ -330,7 +330,7 @@
     
     // create a GET request and get the reponse back as NSData
     NSString *baseURL = [NSString stringWithFormat:@"%s/UpdateModel",SERVER_URL];
-    NSString *query = [NSString stringWithFormat:@"?dsid=%d&usesvm=%d",[self.dsid intValue], self.isSVM];
+    NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
     
     NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];
     NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:getUrl
@@ -341,7 +341,7 @@
                                                          // we should get back the accuracy of the model
                                                          NSLog(@"%@",response);
                                                          NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution: %@",responseData[@"resubAccuracy"]);
+                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy_svm"], responseData[@"resubAccuracy_knn"]);
                                                      }
                                                  }];
     [dataTask resume]; // start the task
