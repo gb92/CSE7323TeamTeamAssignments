@@ -103,8 +103,10 @@ class PredictOneFromDatasetId(BaseHandler):
 
 class GetLabelList(BaseHandler):
 	def get(self):
+		dsid = self.get_int_arg("dsid",default=0);
+
 		l=[];
 		for a in self.db.labeledinstances.find({"dsid":dsid}):
 			l.append(a['label'])
 
-		self.write_json({labels:str(l)})
+		self.write_json({"labels":str(list(set(l)))})
