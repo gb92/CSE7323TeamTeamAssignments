@@ -341,7 +341,7 @@
                                                          // we should get back the accuracy of the model
                                                          NSLog(@"%@",response);
                                                          NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy_svm"], responseData[@"resubAccuracy_knn"]);
+                                                         NSLog(@"Accuracy using resubstitution [SVM: %@] [KNN: %@]",responseData[@"resubAccuracy"], responseData[@"resubAccuracy"]);
                                                      }
                                                  }];
     [dataTask resume]; // start the task

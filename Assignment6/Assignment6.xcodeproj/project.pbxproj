@@ -229,7 +229,7 @@
 				ORGANIZATIONNAME = smu;
 				TargetAttributes = {
 					BCF20DD718F73519005227F5 = {
-						DevelopmentTeam = 8N25HJ2H24;
+						DevelopmentTeam = APD62CDC25;
 					};
 					BCF20DF818F73519005227F5 = {
 						TestTargetID = BCF20DD718F73519005227F5;
