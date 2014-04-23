@@ -47,12 +47,12 @@
     return self;
 }
 
--(void)senPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
+-(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
 {
     assert( [data count] > 0 );
     assert( [self.serverURL length] > 0 );
     
-    if (self.serverURL.length)
+    if (self.serverURL.length <= 0)
     {
         NSLog(@"Server URL is empty. Please set server URL before use this function.");
         return;
@@ -78,7 +78,7 @@
                                                          {
                                                              //!@TODO : Handle response;
                                                              
-                                                             [callbackBlock data];
+                                                             callbackBlock(data);
                                                          }
                                                          else
                                                          {
@@ -89,12 +89,12 @@
     [postTask resume];
 }
 
--(void)senGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
+-(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
 {
     
     assert( [self.serverURL length] > 0 );
     
-    if (self.serverURL.length)
+    if (self.serverURL.length <= 0)
     {
         NSLog(@"Server URL is empty. Please set server URL before use this function.");
         return;
@@ -120,7 +120,7 @@
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                 if (!error)
                                                 {
-                                                    [callbackBlock data];
+                                                    callbackBlock(data);
                                                 }
                                                 else
                                                 {

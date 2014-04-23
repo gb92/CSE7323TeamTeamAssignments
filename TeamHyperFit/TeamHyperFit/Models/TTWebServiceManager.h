@@ -15,8 +15,8 @@ typedef void (^webCallBackBlock)(NSData*);
 @property (nonatomic, strong) NSString* serverURL;
 @property (nonatomic, strong) NSNumber* serverPort;
 
--(void)senPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+-(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
 
--(void)senGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+-(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
 
 @end
