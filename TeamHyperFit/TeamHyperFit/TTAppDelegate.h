@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTWebServiceManager.h"
 
 @interface TTAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) TTWebServiceManager* webServiceManager;
 
 @end

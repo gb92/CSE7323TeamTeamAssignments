@@ -154,8 +154,11 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LUz-B4-ln5">
-                                        <rect key="frame" x="54" y="463" width="67" height="24"/>
+                                        <rect key="frame" x="50" y="463" width="67" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="cLv-XU-umC"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title=" Stats" image="chart"/>
                                         <state key="highlighted" image="chart"/>
@@ -164,8 +167,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5q-Lx-QZJ">
-                                        <rect key="frame" x="183" y="463" width="92" height="24"/>
+                                        <rect key="frame" x="179" y="463" width="92" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="d9V-NA-Zw1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title=" Set Goal" image="setting"/>
                                         <state key="highlighted" image="setting"/>
@@ -178,11 +184,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="f81-Ke-IFR" secondAttribute="width" constant="-1" id="0Es-Rj-EPr"/>
                                     <constraint firstAttribute="centerX" secondItem="f81-Ke-IFR" secondAttribute="centerX" id="1Ip-PU-Oz1"/>
-                                    <constraint firstItem="LUz-B4-ln5" firstAttribute="leading" secondItem="vFL-za-6Lu" secondAttribute="leading" constant="54" id="C19-pX-37b"/>
-                                    <constraint firstAttribute="trailing" secondItem="B5q-Lx-QZJ" secondAttribute="trailing" constant="45" id="HVs-2s-VmE"/>
+                                    <constraint firstItem="LUz-B4-ln5" firstAttribute="leading" secondItem="vFL-za-6Lu" secondAttribute="leading" constant="50" id="C19-pX-37b"/>
+                                    <constraint firstAttribute="trailing" secondItem="B5q-Lx-QZJ" secondAttribute="trailing" constant="49" id="HVs-2s-VmE"/>
                                     <constraint firstItem="B5q-Lx-QZJ" firstAttribute="centerY" secondItem="LUz-B4-ln5" secondAttribute="centerY" id="Jqc-t8-1VN"/>
                                     <constraint firstAttribute="centerY" secondItem="f81-Ke-IFR" secondAttribute="centerY" constant="15" id="OXn-wK-xcX"/>
-                                    <constraint firstAttribute="bottom" secondItem="LUz-B4-ln5" secondAttribute="bottom" priority="991" constant="81" id="o0L-tO-kyI"/>
+                                    <constraint firstAttribute="bottom" secondItem="LUz-B4-ln5" secondAttribute="bottom" priority="991" constant="61" id="o0L-tO-kyI"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -292,6 +298,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="epD-ZY-I0U">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.15560434363488465" green="0.45509211250058906" blue="0.4912109375" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="aVv-4K-efQ" kind="relationship" relationship="rootViewController" id="mNz-J3-xCc"/>
                     </connections>
