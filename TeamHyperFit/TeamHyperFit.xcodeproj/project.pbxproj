@@ -40,6 +40,12 @@
 		5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
 		5CBA7A46190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A44190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
+		99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C851909A1FA00E3E073 /* TFUserModel.m */; };
+		99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */; };
+		99D88C901909B65B00E3E073 /* TFGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C8F1909B65B00E3E073 /* TFGesture.m */; };
+		99D88C931909BB2600E3E073 /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C921909BB2600E3E073 /* RingBuffer.m */; };
+		99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C951909BEB000E3E073 /* TTMotionDataBuffer.m */; };
+		99D88C9B1909C66C00E3E073 /* TTMotionDataBufferTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +106,19 @@
 		5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamHyperFitTests-Info.plist"; sourceTree = "<group>"; };
 		5CBA7A45190767620099C0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
+		99D88C841909A1FA00E3E073 /* TFUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFUserModel.h; sourceTree = "<group>"; };
+		99D88C851909A1FA00E3E073 /* TFUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFUserModel.m; sourceTree = "<group>"; };
+		99D88C871909B45A00E3E073 /* TFGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGestureRecognizer.h; sourceTree = "<group>"; };
+		99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGestureRecognizer.m; sourceTree = "<group>"; };
+		99D88C8B1909B61E00E3E073 /* TFGestureRecognizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGestureRecognizerDelegate.h; sourceTree = "<group>"; };
+		99D88C8E1909B65B00E3E073 /* TFGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGesture.h; sourceTree = "<group>"; };
+		99D88C8F1909B65B00E3E073 /* TFGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFGesture.m; sourceTree = "<group>"; };
+		99D88C911909BB2600E3E073 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		99D88C921909BB2600E3E073 /* RingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingBuffer.m; sourceTree = "<group>"; };
+		99D88C941909BEB000E3E073 /* TTMotionDataBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMotionDataBuffer.h; sourceTree = "<group>"; };
+		99D88C951909BEB000E3E073 /* TTMotionDataBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionDataBuffer.m; sourceTree = "<group>"; };
+		99D88C971909BFAE00E3E073 /* TTMotionDataBufferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMotionDataBufferDelegate.h; sourceTree = "<group>"; };
+		99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionDataBufferTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +183,14 @@
 		5C2626C71907782B001AA0E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				99D88C841909A1FA00E3E073 /* TFUserModel.h */,
+				99D88C851909A1FA00E3E073 /* TFUserModel.m */,
 				5C2626E619077D86001AA0E7 /* TTWebServiceManager.h */,
 				5C2626E719077D86001AA0E7 /* TTWebServiceManager.m */,
+				99D88C871909B45A00E3E073 /* TFGestureRecognizer.h */,
+				99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */,
+				99D88C8E1909B65B00E3E073 /* TFGesture.h */,
+				99D88C8F1909B65B00E3E073 /* TFGesture.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,6 +249,7 @@
 		5CBA7A22190767620099C0B9 /* TeamHyperFit */ = {
 			isa = PBXGroup;
 			children = (
+				99D88C8A1909B5F900E3E073 /* Protocols */,
 				5C2626C819077834001AA0E7 /* Views */,
 				5C2626C71907782B001AA0E7 /* Models */,
 				5C2626B419077822001AA0E7 /* ViewControllers */,
@@ -240,10 +266,14 @@
 		5CBA7A23190767620099C0B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				99D88C911909BB2600E3E073 /* RingBuffer.h */,
+				99D88C921909BB2600E3E073 /* RingBuffer.m */,
 				5CBA7A24190767620099C0B9 /* TeamHyperFit-Info.plist */,
 				5CBA7A25190767620099C0B9 /* InfoPlist.strings */,
 				5CBA7A28190767620099C0B9 /* main.m */,
 				5CBA7A2A190767620099C0B9 /* TeamHyperFit-Prefix.pch */,
+				99D88C941909BEB000E3E073 /* TTMotionDataBuffer.h */,
+				99D88C951909BEB000E3E073 /* TTMotionDataBuffer.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -262,10 +292,20 @@
 		5CBA7A42190767620099C0B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */,
 				5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */,
 				5CBA7A44190767620099C0B9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		99D88C8A1909B5F900E3E073 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				99D88C8B1909B61E00E3E073 /* TFGestureRecognizerDelegate.h */,
+				99D88C971909BFAE00E3E073 /* TTMotionDataBufferDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,15 +412,20 @@
 				5CBA7A2D190767620099C0B9 /* TTAppDelegate.m in Sources */,
 				5C2626C419077822001AA0E7 /* TMStatViewController.m in Sources */,
 				5C2626E819077D86001AA0E7 /* TTWebServiceManager.m in Sources */,
+				99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */,
 				5C2626C519077822001AA0E7 /* TMStepCountViewController.m in Sources */,
 				5C2626B319077802001AA0E7 /* APLGraphView.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,
+				99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */,
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,
+				99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */,
 				5C2626D41907796F001AA0E7 /* TMHeartbeatViewContoller.mm in Sources */,
 				5C2626C619077822001AA0E7 /* TTViewController.m in Sources */,
+				99D88C931909BB2600E3E073 /* RingBuffer.m in Sources */,
+				99D88C901909B65B00E3E073 /* TFGesture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2626EA19078B6F001AA0E7 /* TTWebServiceManagerTests.m in Sources */,
+				99D88C9B1909C66C00E3E073 /* TTMotionDataBufferTests.m in Sources */,
 				5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
