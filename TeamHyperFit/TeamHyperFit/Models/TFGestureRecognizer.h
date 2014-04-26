@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TTMotionDataBufferDelegate.h"
 
-@interface TFGestureRecognizer : NSObject
+@interface TFGestureRecognizer : NSObject <TTMotionDataBufferDelegate>
 
 @property (nonatomic, assign)id delegate;
 

@@ -8,11 +8,12 @@
 
 #import "TFGestureRecognizer.h"
 #import <CoreMotion/CoreMotion.h>
+#import "TTMotionDataBuffer.h"
 
 @interface TFGestureRecognizer()
 
-@property CMMotionManager *cmMotionManager;
-
+@property (strong, nonatomic) CMMotionManager *cmMotionManager;
+@property (strong, nonatomic) TTMotionDataBuffer *ttMotionDataBuffer;
 
 @end
 
@@ -21,6 +22,14 @@
     dispatch_queue_t motionCaptureQueue;
 }
 
+-(TTMotionDataBuffer *) ttMotionDataBuffer
+{
+    if(_ttMotionDataBuffer == nil)
+    {
+        _ttMotionDataBuffer= [[TTMotionDataBuffer alloc] initWithBufferLength:50];
+    }
+    return _ttMotionDataBuffer;
+}
 
 -(CMMotionManager *) cmMotionManager
 {
@@ -56,9 +65,9 @@
          startDeviceMotionUpdatesToQueue:myQueue
          withHandler:^(CMDeviceMotion *motion, NSError *error) {
              
-             [self addNewData:motion.userAcceleration.x
+             [self.ttMotionDataBuffer addNewAccelerationData:motion.userAcceleration.x
                                    withY:motion.userAcceleration.y
-                                   withZ:motion.userAcceleration.z ];
+                                   withZ:motion.userAcceleration.z];
              
          }];
     }
@@ -67,6 +76,12 @@
 -(void) stopGestureCapture
 {
     [self.cmMotionManager stopDeviceMotionUpdates];
+}
+
+
+-(void) accelerationDataBufferFilled:(NSArray *)accelerationVector
+{
+    NSLog(@"Acceleration Data Buffer Filled!");
 }
 
 @end
