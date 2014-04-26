@@ -13,6 +13,11 @@
 
 @property (nonatomic, assign)id delegate;
 
+@property (strong, nonatomic) NSNumber *modelDataSetID;
+
+
+-(id) initWithModelDSID:(NSNumber *)modelDSID;
+
 -(void) startGestureCapture;
 -(void) stopGestureCapture;
 
