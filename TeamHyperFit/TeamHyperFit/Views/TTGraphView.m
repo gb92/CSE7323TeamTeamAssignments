@@ -15,7 +15,7 @@
 
 const int kPaddingLeft      = 10;
 const int kPaddingRight     = 10;
-const int kPaddingBottom    = 10;
+const int kPaddingBottom    = 20;
 const int kPaddingTop       = 10;
 
 const int kGraphPadding     = 10;
@@ -116,10 +116,23 @@ const int kLineWidth        = 2;
     }
     
 }
+-(void)drawFontWithString:(NSString*)text size:(int) size position:(CGPoint) point
+{
+    UIFont* font = [UIFont fontWithName:@"Arial" size:size];
+    UIColor* textColor = [UIColor whiteColor];
+    
+    NSDictionary* stringAttrs = @{ NSFontAttributeName : font, NSForegroundColorAttributeName : textColor };
+    
+    NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:text attributes:stringAttrs];
+    
+    [attrStr drawAtPoint:point];
+}
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    [self drawFontWithString:@"FIT POINTS" size:10 position:CGPointMake(kPaddingLeft+10, kPaddingTop)];
     
     [self drawGraphFrame:ctx];
     
@@ -183,6 +196,7 @@ const int kLineWidth        = 2;
     for ( int i=0; i < (int)numberOfPoints; i++ )
     {
         [self drawDot:context point:points[i]];
+        //[self drawFontWithString:[NSString stringWithFormat:@"10,000"] size:10 position:CGPointMake(points[i].x-15, points[i].y - 15)];
     }
 }
 
