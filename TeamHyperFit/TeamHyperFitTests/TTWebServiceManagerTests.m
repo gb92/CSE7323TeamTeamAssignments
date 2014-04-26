@@ -46,7 +46,7 @@
     
     __block BOOL jobDone = NO;
     
-    [self.webServiceManager sentPost:@{@"a":@5} to:@"test" callback:^( NSData* data){
+    [self.webServiceManager sendPost:@{@"a":@5} to:@"test" callback:^( NSData* data){
         NSString* stringOfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"Result Data : %@",stringOfData);
         
@@ -62,7 +62,7 @@
     
     __block BOOL jobDone = NO;
     
-    [self.webServiceManager sentPost:@{@"a":@5} to:@"test" callback:^( NSData* data){
+    [self.webServiceManager sendPost:@{@"a":@5} to:@"test" callback:^( NSData* data){
         NSString* stringOfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"Result Data : %@",stringOfData);
         

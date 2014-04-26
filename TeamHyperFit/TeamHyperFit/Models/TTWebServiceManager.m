@@ -59,7 +59,7 @@
 }
 
 
--(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
+-(void)sendPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
 {
     assert( [data count] > 0 );
     assert( [self.serverURL length] > 0 );
@@ -101,7 +101,7 @@
     [postTask resume];
 }
 
--(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
+-(void)sendGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
 {
     
     assert( [self.serverURL length] > 0 );

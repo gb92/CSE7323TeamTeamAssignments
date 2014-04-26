@@ -17,7 +17,7 @@ typedef void (^webCallBackBlock)(NSData*);
 
     -(id)initWithURL:(NSString*) url port:(NSNumber*) port;
 
-    -(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
-    -(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+    -(void)sendPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+    -(void)sendGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
 
 @end
