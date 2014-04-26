@@ -446,14 +446,14 @@
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-fg-QRw">
-                                <rect key="frame" x="278" y="40" width="22" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-fg-QRw">
+                                <rect key="frame" x="278" y="41" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysu-Ec-iQc">
-                                <rect key="frame" x="20" y="39" width="49" height="30"/>
+                                <rect key="frame" x="20" y="37" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&lt; Back"/>
+                                <state key="normal" backgroundImage="close"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETu-E7-uZx">
                                 <rect key="frame" x="0.0" y="80" width="320" height="488"/>
@@ -557,12 +557,12 @@
                         <constraints>
                             <constraint firstItem="ipt-fg-QRw" firstAttribute="top" secondItem="mlB-zR-c39" secondAttribute="top" constant="-1" id="6Ya-xP-xGj"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="KBn-0O-XpW" secondAttribute="leading" id="9Ay-cZ-Mqm"/>
-                            <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="-69" id="OFv-Mi-jnj"/>
-                            <constraint firstItem="mlB-zR-c39" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="51" id="OXr-ur-Rqx"/>
+                            <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="-50" id="OFv-Mi-jnj"/>
+                            <constraint firstItem="mlB-zR-c39" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="70" id="OXr-ur-Rqx"/>
                             <constraint firstAttribute="trailing" secondItem="U4e-G3-zSb" secondAttribute="trailing" id="QKs-EK-5c8"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="top" secondItem="KBn-0O-XpW" secondAttribute="top" id="SqS-Es-3wW"/>
-                            <constraint firstItem="mlB-zR-c39" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="top" constant="2" id="Sxz-My-4gc"/>
-                            <constraint firstItem="ETu-E7-uZx" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="bottom" constant="11" id="TxF-Xg-oLG"/>
+                            <constraint firstItem="mlB-zR-c39" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="top" constant="4" id="Sxz-My-4gc"/>
+                            <constraint firstItem="ETu-E7-uZx" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="bottom" constant="13" id="TxF-Xg-oLG"/>
                             <constraint firstItem="Wx4-GL-oe8" firstAttribute="top" secondItem="U4e-G3-zSb" secondAttribute="bottom" id="UFM-Xq-rli"/>
                             <constraint firstItem="ipt-fg-QRw" firstAttribute="leading" secondItem="mlB-zR-c39" secondAttribute="trailing" constant="78" id="VS9-b1-f5O"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="top" secondItem="mlB-zR-c39" secondAttribute="bottom" constant="-63" id="WKo-dZ-KqK"/>
@@ -609,6 +609,7 @@
     <resources>
         <image name="bg2" width="320" height="568"/>
         <image name="chart" width="24" height="24"/>
+        <image name="close" width="30" height="30"/>
         <image name="heart" width="24" height="24"/>
         <image name="pushup" width="30" height="30"/>
         <image name="run" width="24" height="24"/>
