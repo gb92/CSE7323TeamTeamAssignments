@@ -29,6 +29,9 @@
 		5C2626E519077A07001AA0E7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A3B190767620099C0B9 /* XCTest.framework */; };
 		5C2626E819077D86001AA0E7 /* TTWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E719077D86001AA0E7 /* TTWebServiceManager.m */; };
 		5C2626EA19078B6F001AA0E7 /* TTWebServiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E919078B6F001AA0E7 /* TTWebServiceManagerTests.m */; };
+		5C9ADF3C190B666300EB3729 /* TTStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */; };
+		5C9ADF3F190B673E00EB3729 /* TTGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF3E190B673E00EB3729 /* TTGraphView.m */; };
+		5C9ADF42190B68E400EB3729 /* TTActionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF41190B68E400EB3729 /* TTActionTableViewCell.m */; };
 		5CBA7A1D190767620099C0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A1C190767620099C0B9 /* Foundation.framework */; };
 		5CBA7A1F190767620099C0B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A1E190767620099C0B9 /* CoreGraphics.framework */; };
 		5CBA7A21190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
@@ -92,6 +95,12 @@
 		5C2626E719077D86001AA0E7 /* TTWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWebServiceManager.m; sourceTree = "<group>"; };
 		5C2626E919078B6F001AA0E7 /* TTWebServiceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWebServiceManagerTests.m; sourceTree = "<group>"; };
 		5C2626EB19078F71001AA0E7 /* AGAsyncTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAsyncTestHelper.h; sourceTree = "<group>"; };
+		5C9ADF3A190B666300EB3729 /* TTStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTStatusViewController.h; sourceTree = "<group>"; };
+		5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTStatusViewController.m; sourceTree = "<group>"; };
+		5C9ADF3D190B673E00EB3729 /* TTGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGraphView.h; sourceTree = "<group>"; };
+		5C9ADF3E190B673E00EB3729 /* TTGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGraphView.m; sourceTree = "<group>"; };
+		5C9ADF40190B68E400EB3729 /* TTActionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTActionTableViewCell.h; sourceTree = "<group>"; };
+		5C9ADF41190B68E400EB3729 /* TTActionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTActionTableViewCell.m; sourceTree = "<group>"; };
 		5CBA7A19190767620099C0B9 /* TeamHyperFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamHyperFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBA7A1C190767620099C0B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5CBA7A1E190767620099C0B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -179,6 +188,8 @@
 				5C2626BE19077822001AA0E7 /* TMStepCountViewController.m */,
 				5C2626BF19077822001AA0E7 /* TTViewController.h */,
 				5C2626C019077822001AA0E7 /* TTViewController.m */,
+				5C9ADF3A190B666300EB3729 /* TTStatusViewController.h */,
+				5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -207,6 +218,10 @@
 				5C2626CC19077834001AA0E7 /* TMUIHeartrateIndicator.m */,
 				5C2626CD19077834001AA0E7 /* TMUIStairImageView.h */,
 				5C2626CE19077834001AA0E7 /* TMUIStairImageView.m */,
+				5C9ADF3D190B673E00EB3729 /* TTGraphView.h */,
+				5C9ADF3E190B673E00EB3729 /* TTGraphView.m */,
+				5C9ADF40190B68E400EB3729 /* TTActionTableViewCell.h */,
+				5C9ADF41190B68E400EB3729 /* TTActionTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,13 +430,16 @@
 			files = (
 				5CBA7A2D190767620099C0B9 /* TTAppDelegate.m in Sources */,
 				5C2626C419077822001AA0E7 /* TMStatViewController.m in Sources */,
+				5C9ADF3C190B666300EB3729 /* TTStatusViewController.m in Sources */,
 				5C2626E819077D86001AA0E7 /* TTWebServiceManager.m in Sources */,
 				99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */,
 				5C2626C519077822001AA0E7 /* TMStepCountViewController.m in Sources */,
+				5C9ADF3F190B673E00EB3729 /* TTGraphView.m in Sources */,
 				5C2626B319077802001AA0E7 /* APLGraphView.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,
+				5C9ADF42190B68E400EB3729 /* TTActionTableViewCell.m in Sources */,
 				99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */,
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,

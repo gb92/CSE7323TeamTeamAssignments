@@ -12,10 +12,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.webServiceManager = [[TTWebServiceManager alloc] init];
-    self.webServiceManager.serverURL = @"http://teamhyperfit.cloudapp.net";
-    self.webServiceManager.serverPort = @(8000);
-    
+    self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:@"http://teamhyperfit.cloudapp.net"
+                                                                 port:@(8000)];
+
     return YES;
 }
 

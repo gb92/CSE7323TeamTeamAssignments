@@ -12,11 +12,12 @@ typedef void (^webCallBackBlock)(NSData*);
 
 @interface TTWebServiceManager : NSObject
 
-@property (nonatomic, strong) NSString* serverURL;
-@property (nonatomic, strong) NSNumber* serverPort;
+    @property (nonatomic, strong) NSString* serverURL;
+    @property (nonatomic, strong) NSNumber* serverPort;
 
--(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+    -(id)initWithURL:(NSString*) url port:(NSNumber*) port;
 
--(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+    -(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
+    -(void)sentGet:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock;
 
 @end

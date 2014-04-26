@@ -25,9 +25,8 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
-    self.webServiceManager = [[TTWebServiceManager alloc] init];
-    self.webServiceManager.serverURL = @"http://teamhyperfit.cloudapp.net";
-    self.webServiceManager.serverPort = @(8000);
+    self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:@"http://teamhyperfit.cloudapp.net"
+                                                                 port:@(8000)];
     
 }
 
