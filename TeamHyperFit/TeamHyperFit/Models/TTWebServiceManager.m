@@ -47,6 +47,18 @@
     return self;
 }
 
+-(id)initWithURL:(NSString*) url port:(NSNumber*) port
+{
+    if ([super init])
+    {
+        self.serverURL = url;
+        self.serverPort = port;
+    }
+    
+    return self;
+}
+
+
 -(void)sentPost:(NSDictionary*) data to:(NSString*) webModule callback:(webCallBackBlock) callbackBlock
 {
     assert( [data count] > 0 );

@@ -11,7 +11,7 @@
 
 @interface TFGestureRecognizer()
 
-@property CMMotionManager *cmMotionManager;
+@property (strong, nonatomic)  CMMotionManager *cmMotionManager;
 
 
 @end
@@ -56,9 +56,9 @@
          startDeviceMotionUpdatesToQueue:myQueue
          withHandler:^(CMDeviceMotion *motion, NSError *error) {
              
-             [self addNewData:motion.userAcceleration.x
-                                   withY:motion.userAcceleration.y
-                                   withZ:motion.userAcceleration.z ];
+//             [self addNewData:motion.userAcceleration.x
+//                                   withY:motion.userAcceleration.y
+//                                   withZ:motion.userAcceleration.z ];
              
          }];
     }
