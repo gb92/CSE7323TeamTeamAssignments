@@ -589,10 +589,10 @@
             </objects>
             <point key="canvasLocation" x="1576" y="1416"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="3Jn-vL-GNo">
             <objects>
-                <viewController id="u7r-TB-KOQ" sceneMemberID="viewController">
+                <viewController id="u7r-TB-KOQ" customClass="TTMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZHN-bR-wgK"/>
                         <viewControllerLayoutGuide type="bottom" id="l3s-7f-0R2"/>
@@ -735,6 +735,18 @@
                             <constraint firstItem="MES-Vg-hyd" firstAttribute="top" secondItem="tCo-Gh-BKf" secondAttribute="top" id="tfP-nG-qDM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="calorieLabel" destination="Pe5-XA-UWI" id="THG-cJ-7UJ"/>
+                        <outlet property="fitpointView" destination="pzh-dL-uLp" id="Svw-C0-VQC"/>
+                        <outlet property="friView" destination="Jh2-fg-e5q" id="9BF-au-lDl"/>
+                        <outlet property="monView" destination="00Q-U1-ex0" id="tEX-6Y-eTn"/>
+                        <outlet property="satView" destination="6bn-Xw-pwO" id="SdR-TT-tal"/>
+                        <outlet property="stepsLabel" destination="hZd-87-Qly" id="Wto-iG-nWV"/>
+                        <outlet property="sunView" destination="pHd-xx-0cR" id="TxR-44-EyK"/>
+                        <outlet property="thuView" destination="LBu-N5-HGG" id="Cj2-ni-SOx"/>
+                        <outlet property="tueView" destination="SxW-9b-eE3" id="KS9-1O-f8M"/>
+                        <outlet property="wesView" destination="qIM-dt-cm0" id="vEK-Ej-Q4Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U80-0L-8Pv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

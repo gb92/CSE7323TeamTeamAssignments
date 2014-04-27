@@ -31,6 +31,7 @@
 		5C2626EA19078B6F001AA0E7 /* TTWebServiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E919078B6F001AA0E7 /* TTWebServiceManagerTests.m */; };
 		5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C513797190C5FE90054E253 /* TTSessionViewController.m */; };
 		5C51379B190C7B910054E253 /* TTSevenDaysView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C51379A190C7B910054E253 /* TTSevenDaysView.m */; };
+		5C51379E190C83310054E253 /* TTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C51379D190C83310054E253 /* TTMainViewController.m */; };
 		5C9ADF3C190B666300EB3729 /* TTStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */; };
 		5C9ADF3F190B673E00EB3729 /* TTGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF3E190B673E00EB3729 /* TTGraphView.m */; };
 		5C9ADF42190B68E400EB3729 /* TTActionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ADF41190B68E400EB3729 /* TTActionTableViewCell.m */; };
@@ -101,6 +102,8 @@
 		5C513797190C5FE90054E253 /* TTSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSessionViewController.m; sourceTree = "<group>"; };
 		5C513799190C7B910054E253 /* TTSevenDaysView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSevenDaysView.h; sourceTree = "<group>"; };
 		5C51379A190C7B910054E253 /* TTSevenDaysView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSevenDaysView.m; sourceTree = "<group>"; };
+		5C51379C190C83310054E253 /* TTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMainViewController.h; sourceTree = "<group>"; };
+		5C51379D190C83310054E253 /* TTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMainViewController.m; sourceTree = "<group>"; };
 		5C9ADF3A190B666300EB3729 /* TTStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTStatusViewController.h; sourceTree = "<group>"; };
 		5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTStatusViewController.m; sourceTree = "<group>"; };
 		5C9ADF3D190B673E00EB3729 /* TTGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGraphView.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				5C9ADF3B190B666300EB3729 /* TTStatusViewController.m */,
 				5C513796190C5FE90054E253 /* TTSessionViewController.h */,
 				5C513797190C5FE90054E253 /* TTSessionViewController.m */,
+				5C51379C190C83310054E253 /* TTMainViewController.h */,
+				5C51379D190C83310054E253 /* TTMainViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */,
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,
+				5C51379E190C83310054E253 /* TTMainViewController.m in Sources */,
 				99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */,
 				5C2626D41907796F001AA0E7 /* TMHeartbeatViewContoller.mm in Sources */,
 				5C2626C619077822001AA0E7 /* TTViewController.m in Sources */,

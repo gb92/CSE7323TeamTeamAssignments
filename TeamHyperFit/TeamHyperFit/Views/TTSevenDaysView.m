@@ -123,7 +123,7 @@ static const int SI_GATE_PADDING = 3;
     
     [self.barColor setStroke];
     
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
+    //CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
     
     CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
     CGContextSetLineCap(ctx, kCGLineCapButt);
@@ -132,7 +132,7 @@ static const int SI_GATE_PADDING = 3;
     
     CGContextRestoreGState(ctx);
 
-    [self drawFontWithString:@"M" size:radius position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
+    [self drawFontWithString:self.text size:radius/1.5f position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
     
 }
 

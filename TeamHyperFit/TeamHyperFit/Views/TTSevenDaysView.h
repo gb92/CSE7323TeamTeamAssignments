@@ -12,6 +12,8 @@
 @interface TTSevenDaysView : UIView
 
 @property (strong, nonatomic) UIColor* barColor;
+@property (strong, nonatomic) NSString* text;
+
 -(void)setStepValue:(float)value;
 -(void)setMaxValue:(float)value;
 
