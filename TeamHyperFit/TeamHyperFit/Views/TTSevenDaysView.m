@@ -1,31 +1,31 @@
 //
-//  TMStepIndicaterView.m
-//  TeamFit
+//  TTSevenDaysView.m
+//  TeamHyperFit
 //
-//  Created by Mark Wang on 2/26/14.
-//  Copyright (c) 2014 smu. All rights reserved.
+//  Created by Mark Wang on 4/26/14.
+//  Copyright (c) 2014 SMU. All rights reserved.
 //
 
-#import "TMStepIndicaterView.h"
+#import "TTSevenDaysView.h"
 
 /** Helper Functions **/
 #define ToRad(deg) 		( (M_PI * (deg)) / 180.0 )
 #define ToDeg(rad)		( (180.0 * (rad)) / M_PI )
 #define SQR(x)			( (x) * (x) )
 
-static const int SI_LINE_WIDTH = 30;
+static const int SI_LINE_WIDTH = 5;
 static const int SI_START_OFFSET = 20;
 static const int SI_ARC_PADDING = 0;
-static const int SI_GATE_PADDING = 20;
+static const int SI_GATE_PADDING = 3;
 
-@interface TMStepIndicaterView()
+@interface TTSevenDaysView()
 
 @property(nonatomic) float value;
 @property(nonatomic) float maxValue;
 
 @end
 
-@implementation TMStepIndicaterView
+@implementation TTSevenDaysView
 {
     int radius;
 }
@@ -91,7 +91,7 @@ static const int SI_GATE_PADDING = 20;
     
     [displayText drawAtPoint:CGPointMake(point.x - boundOfText.size.width/2, point.y - boundOfText.size.height / 2)];
     
-
+    
 }
 
 
@@ -107,12 +107,12 @@ static const int SI_GATE_PADDING = 20;
     
     CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius, ToRad(0), ToRad(360), 0);
     [[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f] setFill];
-
+    
     
     CGContextDrawPath(ctx, kCGPathFill);
     
     CGContextRestoreGState(ctx);
-
+    
     /* Draw Gate */
     
     CGContextSaveGState(ctx);
@@ -131,18 +131,14 @@ static const int SI_GATE_PADDING = 20;
     CGContextDrawPath(ctx, kCGPathStroke);
     
     CGContextRestoreGState(ctx);
-    
-    [self drawFontWithString:@"TODAY FIT POINTS" size:12 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 30 )];
-    [self drawFontWithString:@"54,321" size:40 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
 
+    [self drawFontWithString:@"M" size:radius position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
+    
 }
+
 
 -(void)updateUI
 {
-    if( self.maxValue <= self.value )
-    {
-        [self.delegate TMSetIndicaterViewReachGoal:self];
-    }
     
     [self setNeedsDisplay];
     

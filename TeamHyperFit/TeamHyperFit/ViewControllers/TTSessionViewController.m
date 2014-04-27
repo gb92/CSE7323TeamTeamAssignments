@@ -59,6 +59,6 @@
 
 - (IBAction)closeButton:(UIButton *)sender
 {
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

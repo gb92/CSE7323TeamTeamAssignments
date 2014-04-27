@@ -51,6 +51,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)closeButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark --Table View Datasource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
