@@ -50,7 +50,14 @@ class Application(tornado.web.Application):
                     (r"/PredictOne[/]?",
                         sklearnhandlers.PredictOneFromDatasetId),
                     (r"/GetLabelList[/]?",
-                        sklearnhandlers.GetLabelList),              
+                        sklearnhandlers.GetLabelList),   
+                    
+                    (r"/GetIDFromPCA[/]?",
+                        sklearnhandlers.RequestNewDatasetIdFromPCA),
+                    (r"/AddDataPointToPCA[/]?",
+                        sklearnhandlers.UploadDataToUserHandler),   
+                    (r"/UpdatePCAModel[/]?",
+                        sklearnhandlers.UpdatePCACVForDatasetId)             
                     ]
 
         settings = {'debug':True}

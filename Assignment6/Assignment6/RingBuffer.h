@@ -11,4 +11,5 @@
 
 -(NSArray*)getDataAsVector;
 -(void) addNewData:(float)xData withY:(float)yData withZ:(float)zData;
+-(void) emptyBuffer;
 @end

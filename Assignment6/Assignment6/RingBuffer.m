@@ -29,6 +29,14 @@
     return self;
 }
 
+-(void)emptyBuffer
+{
+    memset(&x, 0, BUFFER_SIZE);
+    memset(&y, 0, BUFFER_SIZE);
+    memset(&z, 0, BUFFER_SIZE);
+    self.head = 0;
+}
+
 -(void) addNewData:(float)xData
              withY:(float)yData
              withZ:(float)zData

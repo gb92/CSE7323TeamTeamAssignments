@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *gestureNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trainingModelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @property (strong, nonatomic) TTGesture *gesture;
 @property (nonatomic) BOOL haveTrained;
@@ -40,6 +41,9 @@
     dispatch_queue_t motionCaptureQueue;
     bool bCollecting;
     BOOL isTrained;
+    BOOL isCapturing;
+    
+    int predictionCount[2];
 }
 
 #pragma makr - Instantiation
@@ -185,16 +189,20 @@
     self.haveTrained = NO;
     self.isSVM = YES;
     
+    isCapturing = NO;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.gestureNameLabel.text = self.gesture.name;
+    
+    [self startMotionUpdates];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-
+    [self deactivate];
 }
 
 #pragma mark - Motion Control
@@ -210,16 +218,76 @@
         NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
         myQueue.maxConcurrentOperationCount = 1;
         
+        __weak typeof(self) weakSelf = self;
+        
         [self.cmMotionManager setDeviceMotionUpdateInterval:1.0/100.0];
         [self.cmMotionManager
          startDeviceMotionUpdatesToQueue:myQueue
          withHandler:^(CMDeviceMotion *motion, NSError *error) {
             
-             [self.ringBuffer addNewData:motion.userAcceleration.x
-                                   withY:motion.userAcceleration.y
-                                   withZ:motion.userAcceleration.z ];
+//             
+//             float dotProduct =
+//             motion.gravity.x*motion.userAcceleration.x +
+//             motion.gravity.y*motion.userAcceleration.y +
+//             motion.gravity.z*motion.userAcceleration.z;
+//             
+//             dotProduct /= motion.gravity.x*motion.gravity.x +
+//             motion.gravity.y*motion.gravity.y +
+//             motion.gravity.z*motion.gravity.z;
              
+             float length = (motion.userAcceleration.x * motion.userAcceleration.x) +
+             (motion.userAcceleration.y * motion.userAcceleration.y) +
+             (motion.userAcceleration.z * motion.userAcceleration.z);
+             
+//             float lengthOfRotation = (motion.rotationRate.x * motion.rotationRate.x) +
+//             (motion.rotationRate.y * motion.rotationRate.y) +
+//             (motion.rotationRate.z * motion.rotationRate.z);
+             
+             length = sqrtf(length);
+             
+             if(length > 0.4)
+             {
+                 if( !isCapturing )
+                 {
+                      dispatch_async(dispatch_get_main_queue(),^{
+                         [weakSelf beginCapture];
+                     });
+                     
+                 }
+             }
+
+            if( isCapturing )
+            {
+                [self.ringBuffer addNewData:motion.userAcceleration.x
+                                           withY:motion.userAcceleration.y
+                                           withZ:motion.userAcceleration.z ];
+            }
+             
+
          }];
+    }
+}
+
+-(void)beginCapture
+{
+    isCapturing = YES;
+    [self performSelector:@selector(doneCapture) withObject:nil afterDelay:1];
+    
+    NSLog(@"Begin Capuring");
+}
+-(void)doneCapture
+{
+    isCapturing = NO;
+    //! Send data to server and predict it.
+    NSLog(@"Done Capuring");
+    if (isTrained)
+    {
+        [self sendFeatureArray:[self.ringBuffer getDataAsVector] withLabel:@(self.GID) ];
+        [self updateModel];
+    }
+    else
+    {
+        [self predictFeature:self.ringBuffer.getDataAsVector];
     }
 }
 
@@ -400,11 +468,21 @@
                                                                  NSLog(@"%@",labelResponse);
                                                                  NSLog(@"result : %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                                                                  
+                                                                 if ([labelResponse isEqualToString:@"[0]"]) {
+                                                                     predictionCount[0]++;
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     predictionCount[1]++;
+                                                                 }
+                                                                 
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                      
                                                                      self.resultLabel.text = [NSString stringWithFormat:@"Result = Gesture%@", labelResponse];
                                                                      
                                                                      self.isWaitingForInputData = YES;
+                                                                     
+                                                                     self.countLabel.text = [NSString stringWithFormat:@"%d",predictionCount[0]];
                                                                  });
                                                              }
 

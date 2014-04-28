@@ -12,6 +12,11 @@ from basehandler import BaseHandler
 
 from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
+
+import sklearn.decomposition as deco
+import cv2 as cv
+import os
+
 import pickle
 from bson.binary import Binary
 import json
@@ -41,6 +46,100 @@ class RequestNewDatasetId(BaseHandler):
 		newSessionId = float(a['dsid'])+1;
 		self.write_json({"dsid":newSessionId})
 		self.client.close()
+
+#------------------------------------------------------------------------------
+
+class RequestNewDatasetIdFromPCA(BaseHandler):
+	def get(self):
+		'''Get a new dataset ID for building a new dataset
+		'''
+		a = self.db.gestures.find_one(sort=[("dsid", -1)])
+		newSessionId = float(a['dsid'])+1;
+		self.write_json({"dsid":newSessionId})
+		self.client.close()
+
+class UploadDataToUserHandler(BaseHandler):
+	def post(self):
+		'''Save data point and class label to database
+		'''
+		data = json.loads(self.request.body)
+
+		vals = data['feature'];
+		fvals = [float(val) for val in vals]
+		user_id = data['user_id']
+		sess  = data['dsid']
+
+		dbid = self.db.gestures.insert(
+			{"feature":fvals,"user_id":user_id,"dsid":sess}
+			);
+		self.write_json({"id":str(dbid),"feature":fvals,"user_id":user_id})
+		self.client.close()
+
+class UpdatePCACVForDatasetId(BaseHandler):
+	def get(self):
+
+		dsid = self.get_int_arg("dsid",default=0)
+		user_id = self.get_int_arg("user_id",default=0)
+
+		# create feature vectors from database
+		f=[];
+		for a in self.db.gestures.find({"dsid":dsid, "user_id":user_id}):
+			f.append([float(val) for val in a['feature']])
+
+		if f:
+			mean, eigen_vectors = cv.PCACompute(f, np.mean(f,axis=0).reshape(1,-1))
+
+			print (mean);
+			print (eigen_vectors);
+
+		self.client.close()
+
+#------------------------------------------------------------------------------
+
+'''
+class UpdatePCAForDatasetId(BaseHandler):
+	def get(self):
+
+		dsid = self.get_int_arg("dsid",default=0)
+		user_id = self.get_int_arg("user_id"), default=0)
+
+		# create feature vectors from database
+		f=[];
+		for a in self.db.gestures.find({"dsid":dsid, "user_id":user_id}):
+			f.append([float(val) for val in a['feature']])
+
+		if f:
+			x = f;
+			x = (x - np.mean(x, 0)) / np.std(x, 0) # You need to normalize your data first
+			pca = deco.PCA(n_components) # n_components is the components number after reduction
+			x_r = pca.fit(x).transform(x)
+			print ('explained variance (first %d components): %.2f'%(n_components, sum(pca.explained_variance_ratio_)))
+
+		self.client.close()
+
+class PredictOneFromPCAModelId(BaseHandler):
+	def post(self):
+
+		data = json.loads(self.request.body)
+
+		vals = data['feature'];
+		fvals = [float(val) for val in vals];
+		dsid  = data['dsid']
+		model = data['model']
+
+		# load the model from the database (using pickle)
+		# we are blocking tornado!! no!!
+		tmp = self.db.models.find_one({"dsid":dsid})
+		
+		if model == 'svm':
+			c2 = pickle.loads(tmp['model_svm'])
+		else:
+			c2 = pickle.loads(tmp['model_knn'])
+
+		predLabel = c2.predict(fvals);
+		self.write_json({"prediction":str(predLabel)})
+		self.client.close()
+'''
 
 class UpdateModelForDatasetId(BaseHandler):
 	def get(self):
