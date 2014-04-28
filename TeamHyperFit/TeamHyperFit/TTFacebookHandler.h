@@ -8,12 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^userFitPointsBlock)(NSNumber* fitPoints, NSError* error);
+typedef void (^userFriendsBlock) (NSArray * friends, NSError* error);
+
 @interface TTFacebookHandler : NSObject
 
--(NSNumber *) getCurrentUserFitPoints;
+-(void) getCurrentUserFitPoints:(userFitPointsBlock) callback;
+
+-(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback;
 
 -(NSArray *) getFriendsFitPoints;
 
--(void) updateCurrentUserFitPoints;
+-(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints;
+
+-(void) addToCurrentUserFitPoints:(NSNumber *) fitPointsToAdd;
 
 @end

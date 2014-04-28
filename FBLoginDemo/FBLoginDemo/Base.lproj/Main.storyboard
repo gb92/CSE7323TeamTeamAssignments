@@ -30,8 +30,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="FBProfilePicView" destination="Suf-W2-cuK" id="QFo-DB-3No"/>
                         <outlet property="FacebookLoginView" destination="Re2-L7-hP0" id="I77-h6-57E"/>
+                        <outlet property="profilePic" destination="Suf-W2-cuK" id="CvR-81-ZcB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

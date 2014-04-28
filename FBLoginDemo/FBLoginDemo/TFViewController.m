@@ -13,8 +13,8 @@
 
 @interface TFViewController ()
 @property (weak, nonatomic) IBOutlet FBLoginView *FacebookLoginView;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *profilePic;
 
-@property (weak, nonatomic) IBOutlet FBProfilePictureView *FBProfilePicView;
 @property (weak, nonatomic) MSClient *client;
 @property (strong, nonatomic) NSString *fbId;
 
@@ -88,9 +88,11 @@
 {
     NSLog(@"loginViewFetchedUserInfo called");
     
-    [self.FBProfilePicView setProfileID:user.id];
+    //[self.profilePic setProfileID:user.id];
+    //self.profilePic.profileID=user.id;
+    //[self getUserId];
     
-    [self getUserId];
+    [self getFriendsList];
 }
 
 -(void)getUserId
@@ -102,14 +104,39 @@
         NSDictionary *meDictionary=(NSDictionary *) result;
         
         self.fbId=[meDictionary valueForKey:@"id"];
-        
+        [self.profilePic setProfileID:self.fbId];
         NSLog(@"FB ID: %@", self.fbId);
         
-        [self postDataToMobileService];
+        //[self postDataToMobileService];
+        
     }];
     
 }
 
+-(void) getFriendsList
+{
+    NSString *query=@"Select name, uid, pic_small from user where is_app_user = 1 and uid in (select uid2 from friend where uid1 = me()) order by concat(first_name,last_name) asc";
+    NSDictionary *params=@{@"q":query};
+    [FBRequestConnection startWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", [error localizedDescription]);
+        } else {
+            NSLog(@"Result: %@", result);
+            
+            NSDictionary *res=(NSDictionary *) result;
+            
+            NSArray *friends=[res valueForKey:@"data"];
+            
+            NSLog(@"Array Size: %ld", friends.count);
+            
+            for(int i=0; i<friends.count; i++)
+            {
+                NSLog(@"Friend Name: %@",[friends[i] valueForKey:@"name"]);
+                self.profilePic.profileID=[friends[i] valueForKey:@"uid"];
+            }
+        }
+    }];
+}
 -(void) postDataToMobileService
 {
     

@@ -9,6 +9,7 @@
 #import "TTFacebookHandler.h"
 #import "TTAppDelegate.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import <FacebookSDK/FacebookSDK.h>
 @interface TTFacebookHandler()
 
 @property (weak, nonatomic) MSClient *client;
@@ -28,9 +29,79 @@
     return _client;
 }
 
--(NSNumber *) getCurrentUserFitPoints
+-(void)getCurrentUserFitPoints:(userFitPointsBlock)callback
 {
-    return nil;
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"fb result: %@", result);
+        
+        NSDictionary *meDictionary=(NSDictionary *) result;
+        
+        NSString *fbID=[meDictionary valueForKey:@"id"];
+        
+        NSLog(@"FB ID: %@", fbID);
+        
+        MSTable *table = [self.client tableWithName:@"FitPoints"];
+        
+        MSQuery *query=[table query];
+        query.includeTotalCount=YES;
+        query.parameters=@{@"userID":fbID};
+        
+        [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+            
+            if (error) {
+                NSLog(@"Error reading item: %@", error);
+                return;
+                
+                callback(nil, error);
+            }
+            NSLog(@"Total Count:%ld", totalCount);
+            
+            if(totalCount<=0)
+            {
+                NSDictionary *item = @{@"userID":fbID,@"numFitPoints":@0};
+                [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error inserting item: %@", error);
+                        callback(nil, error);
+                        return;
+                    }
+                    NSLog(@"Inserted: %@", item);
+                    callback(@0, nil);
+                }];
+                
+                
+            }
+            else if(totalCount>0)
+            {
+                NSDictionary *item = (NSDictionary *)items[0];
+                NSNumber *fitPoints=[item valueForKey:@"numFitPoints"];
+                
+                callback(fitPoints, nil);
+            }
+        }];
+
+        
+    }];
+}
+
+-(void) getCurrentUserFriendsWithApp:(userFriendsBlock)callback
+{
+    NSString *query=@"Select name, uid, pic_small from user where is_app_user = 1 and uid in (select uid2 from friend where uid1 = me()) order by concat(first_name,last_name) asc";
+    NSDictionary *params=@{@"q":query};
+    [FBRequestConnection startWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", [error localizedDescription]);
+            callback(result, error);
+        }
+        else
+        {
+            NSLog(@"Result: %@", result);
+            NSDictionary *res=(NSDictionary *) result;
+            NSArray *friends=[res valueForKey:@"data"];
+            callback(friends, error);
+        }
+    }];
+
 }
 
 -(NSArray *) getFriendsFitPoints
@@ -38,8 +109,111 @@
     return nil;
 }
 
--(void) updateCurrentUserFitPoints
+-(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints
 {
-    
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"fb result: %@", result);
+        
+        NSDictionary *meDictionary=(NSDictionary *) result;
+        
+        NSString *fbID=[meDictionary valueForKey:@"id"];
+        
+        
+        NSLog(@"FB ID: %@", fbID);
+        MSTable *table = [self.client tableWithName:@"FitPoints"];
+        
+        MSQuery *query=[table query];
+        query.includeTotalCount=YES;
+        query.parameters=@{@"userID":fbID};
+        
+        [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+            
+            if (error) {
+                NSLog(@"Error reading item: %@", error);
+                return;
+            }
+            NSLog(@"Total Count:%ld", totalCount);
+            
+            if(totalCount<=0)
+            {
+                NSDictionary *item = @{@"userID":fbID,@"numFitPoints": fitPoints};
+                [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error inserting item: %@", error);
+                        return;
+                    }
+                    NSLog(@"Inserted: %@", item);
+                }];
+            }
+            else if(totalCount>0)
+            {
+                NSDictionary *item = (NSDictionary *)items[0];
+                [item setValue:fitPoints forKey:@"numFitPoints"];
+                
+                [table update:item completion:^(NSDictionary *item, NSError *error) {
+                    if(error){
+                        NSLog(@"Error updating item %@", error);
+                        return;
+                    }
+                    NSLog(@"Updated: %@", item);
+                }];
+            }
+        }];
+    }];
+
+}
+
+-(void) addToCurrentUserFitPoints:(NSNumber *)fitPointsToAdd
+{
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"fb result: %@", result);
+        
+        NSDictionary *meDictionary=(NSDictionary *) result;
+        
+        NSString *fbID=[meDictionary valueForKey:@"id"];
+        
+        
+        NSLog(@"FB ID: %@", fbID);
+        MSTable *table = [self.client tableWithName:@"FitPoints"];
+        
+        MSQuery *query=[table query];
+        query.includeTotalCount=YES;
+        query.parameters=@{@"userID":fbID};
+        
+        [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+            
+            if (error) {
+                NSLog(@"Error reading item: %@", error);
+                return;
+            }
+            NSLog(@"Total Count:%ld", totalCount);
+            
+            if(totalCount<=0)
+            {
+                NSDictionary *item = @{@"userID":fbID,@"numFitPoints": fitPointsToAdd};
+                [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                    if (error) {
+                        NSLog(@"Error inserting item: %@", error);
+                        return;
+                    }
+                    NSLog(@"Inserted: %@", item);
+                }];
+            }
+            else if(totalCount>0)
+            {
+                NSDictionary *item = (NSDictionary *)items[0];
+                [item setValue:fitPointsToAdd forKey:@"numFitPoints"];
+                
+                [table update:item completion:^(NSDictionary *item, NSError *error) {
+                    if(error){
+                        NSLog(@"Error updating item %@", error);
+                        return;
+                    }
+                    NSLog(@"Updated: %@", item);
+                }];
+            }
+        }];
+    }];
+
 }
 @end
