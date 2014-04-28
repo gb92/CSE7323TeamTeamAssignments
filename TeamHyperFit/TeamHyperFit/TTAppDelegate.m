@@ -12,8 +12,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:@"http://teamhyperfit.cloudapp.net"
-                                                                 port:@(8000)];
+    NSDictionary *appDictionary=[[NSBundle mainBundle] infoDictionary];
+    NSString *serverURL=[appDictionary valueForKey:@"TeamFitServerURL"];
+    NSNumber *serverPort=[appDictionary valueForKey:@"TeamFitServerPort"];
+    
+    self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:serverURL port:serverPort];
+    
+    self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
 
     return YES;
 }

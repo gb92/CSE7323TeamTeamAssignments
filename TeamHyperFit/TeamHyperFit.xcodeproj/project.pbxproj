@@ -46,6 +46,10 @@
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
 		99C92390190EE4820040EFB8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C9238F190EE4820040EFB8 /* XCTest.framework */; };
+		99C5A44A190C8504000B0F81 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A449190C8504000B0F81 /* FacebookSDK.framework */; };
+		99C5A44D190C8510000B0F81 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */; };
+		99C5A44E190C8510000B0F81 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */; };
+		99C5A451190C8535000B0F81 /* TTFacebookHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C5A450190C8535000B0F81 /* TTFacebookHandler.m */; };
 		99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C851909A1FA00E3E073 /* TFUserModel.m */; };
 		99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */; };
 		99D88C901909B65B00E3E073 /* TFGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C8F1909B65B00E3E073 /* TFGesture.m */; };
@@ -125,6 +129,11 @@
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
 		99C5A444190C49BF000B0F81 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		99C9238F190EE4820040EFB8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		99C5A449190C8504000B0F81 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		99C5A44F190C8535000B0F81 /* TTFacebookHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFacebookHandler.h; sourceTree = "<group>"; };
+		99C5A450190C8535000B0F81 /* TTFacebookHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookHandler.m; sourceTree = "<group>"; };
 		99D88C841909A1FA00E3E073 /* TFUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFUserModel.h; sourceTree = "<group>"; };
 		99D88C851909A1FA00E3E073 /* TFUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFUserModel.m; sourceTree = "<group>"; };
 		99D88C871909B45A00E3E073 /* TFGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGestureRecognizer.h; sourceTree = "<group>"; };
@@ -153,11 +162,14 @@
 				99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */,
 				5C2626DE190779DA001AA0E7 /* CoreVideo.framework in Frameworks */,
 				5C2626DC190779D1001AA0E7 /* AVFoundation.framework in Frameworks */,
+				99C5A44D190C8510000B0F81 /* WindowsAzureMessaging.framework in Frameworks */,
 				5C2626DA190779C9001AA0E7 /* AssetsLibrary.framework in Frameworks */,
 				5C2626D8190779C2001AA0E7 /* Accelerate.framework in Frameworks */,
 				5CBA7A21190767620099C0B9 /* UIKit.framework in Frameworks */,
 				5C2626D61907798C001AA0E7 /* opencv2.framework in Frameworks */,
 				5CBA7A1D190767620099C0B9 /* Foundation.framework in Frameworks */,
+				99C5A44E190C8510000B0F81 /* WindowsAzureMobileServices.framework in Frameworks */,
+				99C5A44A190C8504000B0F81 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +274,9 @@
 			isa = PBXGroup;
 			children = (
 				99C9238F190EE4820040EFB8 /* XCTest.framework */,
+				99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */,
+				99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */,
+				99C5A449190C8504000B0F81 /* FacebookSDK.framework */,
 				99C5A444190C49BF000B0F81 /* opencv2.framework */,
 				5C2626E3190779F3001AA0E7 /* QuartzCore.framework */,
 				5C2626E1190779EB001AA0E7 /* CoreImage.framework */,
@@ -281,6 +296,7 @@
 		5CBA7A22190767620099C0B9 /* TeamHyperFit */ = {
 			isa = PBXGroup;
 			children = (
+				99C5A448190C84CA000B0F81 /* FacebookIntegration */,
 				99D88C8A1909B5F900E3E073 /* Protocols */,
 				5C2626C819077834001AA0E7 /* Views */,
 				5C2626C71907782B001AA0E7 /* Models */,
@@ -329,6 +345,15 @@
 				5CBA7A44190767620099C0B9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		99C5A448190C84CA000B0F81 /* FacebookIntegration */ = {
+			isa = PBXGroup;
+			children = (
+				99C5A44F190C8535000B0F81 /* TTFacebookHandler.h */,
+				99C5A450190C8535000B0F81 /* TTFacebookHandler.m */,
+			);
+			name = FacebookIntegration;
 			sourceTree = "<group>";
 		};
 		99D88C8A1909B5F900E3E073 /* Protocols */ = {
@@ -449,6 +474,7 @@
 				5C2626C519077822001AA0E7 /* TMStepCountViewController.m in Sources */,
 				5C9ADF3F190B673E00EB3729 /* TTGraphView.m in Sources */,
 				5C2626B319077802001AA0E7 /* APLGraphView.m in Sources */,
+				99C5A451190C8535000B0F81 /* TTFacebookHandler.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,

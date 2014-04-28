@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface TFAppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -7,6 +7,7 @@
 //
 
 #import "TFGestureRecognizer.h"
+#import "TTAppDelegate.h"
 
 
 #import <CoreMotion/CoreMotion.h>
@@ -20,7 +21,7 @@
 
 @property (strong, nonatomic) CMMotionManager *cmMotionManager;
 @property (strong, nonatomic) TTMotionDataBuffer *ttMotionDataBuffer;
-@property (strong, nonatomic) TTWebServiceManager *ttWebServiceManager;
+@property (weak, nonatomic) TTWebServiceManager *ttWebServiceManager;
 
 @end
 
@@ -76,11 +77,9 @@
 {
     if(_ttWebServiceManager == nil)
     {
-        NSDictionary *appDictionary=[[NSBundle mainBundle] infoDictionary];
-        NSString *serverURL=[appDictionary valueForKey:@"TeamFitServerURL"];
-        NSNumber *serverPort=[appDictionary valueForKey:@"TeamFitServerPort"];
+        TTAppDelegate *appDelegate=(TTAppDelegate *)[[UIApplication sharedApplication]delegate];
         
-        _ttWebServiceManager=[[TTWebServiceManager alloc]initWithURL:serverURL port:serverPort];
+        _ttWebServiceManager=appDelegate.webServiceManager;
     }
     
     return _ttWebServiceManager;

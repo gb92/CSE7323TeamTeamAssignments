@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "TTWebServiceManager.h"
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
 @interface TTAppDelegate : UIResponder <UIApplicationDelegate>
+
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) TTWebServiceManager* webServiceManager;
 
+@property (strong, nonatomic) MSClient *msClient;
 @end

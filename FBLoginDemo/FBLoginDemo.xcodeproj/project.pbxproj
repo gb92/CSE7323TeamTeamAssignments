@@ -23,6 +23,7 @@
 		9966A9011908752900D9026D /* FBLoginDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9966A9001908752900D9026D /* FBLoginDemoTests.m */; };
 		9966A90C1908758C00D9026D /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9966A90A1908758C00D9026D /* WindowsAzureMessaging.framework */; };
 		9966A90D1908758C00D9026D /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9966A90B1908758C00D9026D /* WindowsAzureMobileServices.framework */; };
+		99C5A447190C6692000B0F81 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A446190C6692000B0F81 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		9966A9001908752900D9026D /* FBLoginDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLoginDemoTests.m; sourceTree = "<group>"; };
 		9966A90A1908758C00D9026D /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
 		9966A90B1908758C00D9026D /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		99C5A446190C6692000B0F81 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				9966A8D61908752900D9026D /* Foundation.framework in Frameworks */,
 				9966A90C1908758C00D9026D /* WindowsAzureMessaging.framework in Frameworks */,
 				9966A90D1908758C00D9026D /* WindowsAzureMobileServices.framework in Frameworks */,
+				99C5A447190C6692000B0F81 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +110,7 @@
 		9966A8D41908752900D9026D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99C5A446190C6692000B0F81 /* FacebookSDK.framework */,
 				9966A90A1908758C00D9026D /* WindowsAzureMessaging.framework */,
 				9966A90B1908758C00D9026D /* WindowsAzureMobileServices.framework */,
 				9966A8D51908752900D9026D /* Foundation.framework */,
@@ -473,6 +477,7 @@
 				9966A9061908752900D9026D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9966A9071908752900D9026D /* Build configuration list for PBXNativeTarget "FBLoginDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -481,6 +486,7 @@
 				9966A9091908752900D9026D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
