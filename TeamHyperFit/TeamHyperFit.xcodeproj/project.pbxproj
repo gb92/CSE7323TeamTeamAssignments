@@ -26,7 +26,6 @@
 		5C2626E0190779E3001AA0E7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2626DF190779E3001AA0E7 /* CoreMedia.framework */; };
 		5C2626E2190779EB001AA0E7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2626E1190779EB001AA0E7 /* CoreImage.framework */; };
 		5C2626E4190779F3001AA0E7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2626E3190779F3001AA0E7 /* QuartzCore.framework */; };
-		5C2626E519077A07001AA0E7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A3B190767620099C0B9 /* XCTest.framework */; };
 		5C2626E819077D86001AA0E7 /* TTWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E719077D86001AA0E7 /* TTWebServiceManager.m */; };
 		5C2626EA19078B6F001AA0E7 /* TTWebServiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E919078B6F001AA0E7 /* TTWebServiceManagerTests.m */; };
 		5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C513797190C5FE90054E253 /* TTSessionViewController.m */; };
@@ -41,12 +40,12 @@
 		5CBA7A27190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A25190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A29190767620099C0B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A28190767620099C0B9 /* main.m */; };
 		5CBA7A2D190767620099C0B9 /* TTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A2C190767620099C0B9 /* TTAppDelegate.m */; };
-		5CBA7A3C190767620099C0B9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A3B190767620099C0B9 /* XCTest.framework */; };
 		5CBA7A3D190767620099C0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A1C190767620099C0B9 /* Foundation.framework */; };
 		5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
 		5CBA7A46190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A44190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
+		99C92390190EE4820040EFB8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C9238F190EE4820040EFB8 /* XCTest.framework */; };
 		99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C851909A1FA00E3E073 /* TFUserModel.m */; };
 		99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */; };
 		99D88C901909B65B00E3E073 /* TFGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C8F1909B65B00E3E073 /* TFGesture.m */; };
@@ -121,11 +120,11 @@
 		5CBA7A2B190767620099C0B9 /* TTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTAppDelegate.h; sourceTree = "<group>"; };
 		5CBA7A2C190767620099C0B9 /* TTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTAppDelegate.m; sourceTree = "<group>"; };
 		5CBA7A3A190767620099C0B9 /* TeamHyperFitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamHyperFitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CBA7A3B190767620099C0B9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamHyperFitTests-Info.plist"; sourceTree = "<group>"; };
 		5CBA7A45190767620099C0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
 		99C5A444190C49BF000B0F81 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		99C9238F190EE4820040EFB8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		99D88C841909A1FA00E3E073 /* TFUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFUserModel.h; sourceTree = "<group>"; };
 		99D88C851909A1FA00E3E073 /* TFUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFUserModel.m; sourceTree = "<group>"; };
 		99D88C871909B45A00E3E073 /* TFGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFGestureRecognizer.h; sourceTree = "<group>"; };
@@ -146,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C2626E519077A07001AA0E7 /* XCTest.framework in Frameworks */,
+				99C92390190EE4820040EFB8 /* XCTest.framework in Frameworks */,
 				5CBA7A1F190767620099C0B9 /* CoreGraphics.framework in Frameworks */,
 				5C2626E4190779F3001AA0E7 /* QuartzCore.framework in Frameworks */,
 				5C2626E2190779EB001AA0E7 /* CoreImage.framework in Frameworks */,
@@ -166,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CBA7A3C190767620099C0B9 /* XCTest.framework in Frameworks */,
 				5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */,
 				5CBA7A3D190767620099C0B9 /* Foundation.framework in Frameworks */,
 			);
@@ -263,6 +261,7 @@
 		5CBA7A1B190767620099C0B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99C9238F190EE4820040EFB8 /* XCTest.framework */,
 				99C5A444190C49BF000B0F81 /* opencv2.framework */,
 				5C2626E3190779F3001AA0E7 /* QuartzCore.framework */,
 				5C2626E1190779EB001AA0E7 /* CoreImage.framework */,
@@ -275,7 +274,6 @@
 				5CBA7A1C190767620099C0B9 /* Foundation.framework */,
 				5CBA7A1E190767620099C0B9 /* CoreGraphics.framework */,
 				5CBA7A20190767620099C0B9 /* UIKit.framework */,
-				5CBA7A3B190767620099C0B9 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -391,7 +389,7 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = 8N25HJ2H24;
+						DevelopmentTeam = ELJL6XCWJA;
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
