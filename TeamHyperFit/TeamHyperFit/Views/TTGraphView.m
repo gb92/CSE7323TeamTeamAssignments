@@ -86,10 +86,14 @@ const int kLineWidth        = 2;
         
         if( [data[i] isKindOfClass:[NSNumber class]] )
         {
-            if (max < data[i])
+            if ([max floatValue] < [data[i] floatValue])
             {
                 max = data[i];
             }
+        }
+        else
+        {
+            NSLog(@"%@ is not kind of class.", data[i] );
         }
     }
     
@@ -109,9 +113,9 @@ const int kLineWidth        = 2;
         if( [self.data[i] isKindOfClass:[NSNumber class]] )
         {
             pointsOut[i].x = ( pointGap * i ) + canvas.origin.x + kGraphPadding ;
-            pointsOut[i].y =  (int) ( [data[i] floatValue] / [max floatValue] * (canvas.size.height-( 2*kGraphPadding) ) );
+            pointsOut[i].y =  (int) ( [data[i] floatValue] / [max floatValue] * (canvas.size.height - (2*kGraphPadding)) );
             
-            pointsOut[i].y = canvas.size.height - pointsOut[i].y + canvas.origin.y - kGraphPadding;
+            pointsOut[i].y = canvas.size.height - pointsOut[i].y;
         }
     }
     
@@ -148,6 +152,9 @@ const int kLineWidth        = 2;
         NSInteger dataSize = ([self.data count] < [self.numberOfColumn intValue])? [self.data count]: [self.numberOfColumn intValue];
         
         [self calGraphPointsWithData:self.data canvas:canvasRect pointsOut:graphPoints numberOfColum:self.numberOfColumn ];
+        
+        NSLog(@"datasizebeforedrawline : %d",dataSize);
+        
         [self drawGraphLine:ctx points:graphPoints numberOfPoints:dataSize ];
     }
 }

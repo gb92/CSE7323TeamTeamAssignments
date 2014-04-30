@@ -42,6 +42,8 @@
     
     //! Fake Data for now.
     self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
+
+    [self.fitpointGraphView setNeedsDisplay];
     
 }
 
