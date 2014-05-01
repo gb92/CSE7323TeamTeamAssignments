@@ -8,8 +8,10 @@
 
 #import "TTInfoViewController.h"
 #import "TTCaptureScreenShot.h"
+#import "TTNOEffectTransition.h"
 
-@interface TTInfoViewController ()
+@interface TTInfoViewController ()<UIViewControllerTransitioningDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *contentContainerView;
 
 @end
@@ -19,23 +21,20 @@
 - (IBAction)dismissButtonPress:(id)sender
 {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    CGRect startFrame = self.contentContainerView.frame;
+    startFrame.origin.y = self.view.frame.size.height;
     
-    
-//    CGRect startFrame = self.contentContainerView.frame;
-//    startFrame.origin.y = self.view.frame.size.height;
-//    
-//    [UIView animateWithDuration:0.3
-//                          delay:0
-//                        options: UIViewAnimationOptionCurveEaseOut
-//                     animations:^{
-//                         self.contentContainerView.frame = startFrame;
-//                     }
-//                     completion:^(BOOL finish){
-//                         
-//                     [self dismissViewControllerAnimated:YES completion:nil];
-//                         
-//                     }];
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.contentContainerView.frame = startFrame;
+                     }
+                     completion:^(BOOL finish){
+                         
+                     [self dismissViewControllerAnimated:YES completion:nil];
+                         
+                     }];
 }
 
 
@@ -43,7 +42,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.transitioningDelegate = self;
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.transitioningDelegate = self;
     }
     return self;
 }
@@ -51,22 +59,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.image = [TTCaptureScreenShot screenshot];
     self.backgroundImage.image = self.image;
-    
-    [self performSelectorInBackground:@selector(blurBG) withObject:nil ];
 
+    [self performSelectorInBackground:@selector(blurBG) withObject:nil ];
+    
 }
+
+
 -(void)viewDidLayoutSubviews
 {
-//    CGRect startFrame = self.contentContainerView.frame;
-//    startFrame.origin.y = self.view.frame.size.height;
-//    
-//    [self.contentContainerView setFrame:startFrame];
+    CGRect startFrame = self.contentContainerView.frame;
+    startFrame.origin.y = self.view.frame.size.height;
+    
+    [self.contentContainerView setFrame:startFrame];
 }
 
 -(void)runNoteAnimation
@@ -81,7 +92,6 @@
                          self.contentContainerView.frame = endFrame;
                      }
                      completion:nil];
-
 }
 
 -(void)blurBG
@@ -99,13 +109,31 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-//    [self performSelector:@selector(runNoteAnimation) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(runNoteAnimation) withObject:nil afterDelay:0];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -- Custom Transition Delegation
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    TTNOEffectTransition *st = [[TTNOEffectTransition alloc] init];
+    st.type = AnimationTypeDismiss;
+    st.duration = @(0.5);
+    return st;
+}
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    TTNOEffectTransition *st = [[TTNOEffectTransition alloc] init];
+    st.type = AnimationTypePresent;
+    st.duration = @(0.5);
+    return st;
 }
 
 @end

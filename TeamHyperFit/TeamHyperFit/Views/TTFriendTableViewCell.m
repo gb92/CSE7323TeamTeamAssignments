@@ -14,10 +14,17 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
+
+//-(id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    [self performSelector:@selector(runNoteAnimation) withObject:nil afterDelay:0.1];
+//    
+//    return self;
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -25,5 +32,19 @@
 
     // Configure the view for the selected state
 }
+
+//-(void)runNoteAnimation
+//{
+//    CGRect endFrame = self.frame;
+//    endFrame.origin.x = 50;
+//    
+//    [UIView animateWithDuration:0.3
+//                          delay:0
+//                        options: UIViewAnimationOptionCurveEaseOut
+//                     animations:^{
+//                         self.frame = endFrame;
+//                     }
+//                     completion:nil];
+//}
 
 @end

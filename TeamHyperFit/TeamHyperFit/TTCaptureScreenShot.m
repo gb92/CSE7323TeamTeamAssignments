@@ -75,6 +75,10 @@
     [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
     CIImage *result = [filter valueForKey:kCIOutputImageKey];
     
+//    CIFilter* gammaFilter = [CIFilter filterWithName:@"CIGammaAdjust"];
+//    [gammaFilter setValue:inputImage forKey:kCIInputImageKey];
+//    [gammaFilter setValue:@(20.0f)  forKey:@"inputPower"];
+    
     // CIGaussianBlur has a tendency to shrink the image a little,
     // this ensures it matches up exactly to the bounds of our original image
     CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];

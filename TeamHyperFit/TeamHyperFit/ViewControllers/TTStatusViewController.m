@@ -12,10 +12,12 @@
 #import "TTCaptureScreenShot.h"
 #import "TTInfoViewController.h"
 
+#import "UICountingLabel.h"
+
 @interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *calorieLabel;
+@property (weak, nonatomic) IBOutlet UICountingLabel *stepsLabel;
+@property (weak, nonatomic) IBOutlet UICountingLabel *calorieLabel;
 @property (weak, nonatomic) IBOutlet UITableView *actionTableView;
 @property (weak, nonatomic) IBOutlet TTGraphView *fitpointGraphView;
 
@@ -45,6 +47,15 @@
     //! Fake Data for now.
     self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
     
+    
+    self.stepsLabel.format = @"%d";
+    self.stepsLabel.method = UILabelCountingMethodEaseIn;
+    [self.stepsLabel countFrom:0 to:9854762 withDuration:0.5f];
+    
+    self.calorieLabel.format = @"%d";
+    self.calorieLabel.method = UILabelCountingMethodEaseIn;
+    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.7f];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,14 +69,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark -- Sage
+//#pragma mark -- Sage
 //-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 //{
 //    if( [segue.identifier isEqualToString:@"info"] )
 //    {
+//        TTNOEffectTransitionDelegation* transitionDelegation =  [[TTNOEffectTransitionDelegation alloc] init];
+//        transitionDelegation.duration = @(2);
+//        
 //        TTInfoViewController* destVC = (TTInfoViewController*)segue.destinationViewController;
-//        UIImage* image = [TTCaptureScreenShot screenshot];
-//        destVC.backgroundImage.image = [image copy];
+//        destVC.transitioningDelegate =transitionDelegation;
 //    }
 //}
 
@@ -92,5 +105,20 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect frame = cell.frame;
+    frame.origin.x = 50;
+    cell.frame = frame;
+    cell.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect frame = cell.frame;
+        frame.origin.x = 0;
+        cell.frame = frame;
+        cell.alpha = 1.0f;
+    }];
+    
+}
 
 @end

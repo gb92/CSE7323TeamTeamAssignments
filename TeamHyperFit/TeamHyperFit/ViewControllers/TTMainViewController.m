@@ -25,6 +25,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *calorieLabel;
 
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIAttachmentBehavior *attachmentBehavior;
+@property (strong, nonatomic) UIPushBehavior *pushBehavior;
+@property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
+
 @end
 
 @implementation TTMainViewController
@@ -57,6 +62,15 @@
     [self.thuView setStepValue:0];
     [self.friView setStepValue:10];
     [self.satView setStepValue:35];
+    
+//    CGVector gravityDirection = {0.0, 0.01};
+//    
+//    self.gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.monView]];
+//    [self.gravityBehavior setGravityDirection:gravityDirection];
+//    
+//    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.monView];
+//    [self.animator addBehavior:self.gravityBehavior];
+    
 }
 
 - (void)didReceiveMemoryWarning

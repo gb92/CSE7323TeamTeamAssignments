@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TTInfoViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong,nonatomic) UIImage* image;
+
 @end

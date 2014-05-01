@@ -75,4 +75,20 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect frame = cell.frame;
+    frame.origin.x = 50;
+    cell.frame = frame;
+    cell.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect frame = cell.frame;
+        frame.origin.x = 0;
+        cell.frame = frame;
+        cell.alpha = 1.0f;
+    }];
+    
+}
+
 @end
