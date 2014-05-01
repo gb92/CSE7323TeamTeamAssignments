@@ -449,6 +449,9 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-fg-QRw">
                                 <rect key="frame" x="278" y="41" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="mJQ-um-Eww" kind="modal" identifier="info" modalTransitionStyle="crossDissolve" id="uXr-cA-ygi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysu-Ec-iQc">
                                 <rect key="frame" x="6" y="30" width="44" height="44"/>
@@ -625,6 +628,9 @@
                                 <state key="normal" backgroundImage="rankButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="hp6-nb-wcO" kind="modal" id="Cri-ah-ILJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmv-Om-u4p">
                                 <rect key="frame" x="127" y="457" width="68" height="68"/>
@@ -872,6 +878,7 @@
                                 <state key="normal" image="close"/>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="4LL-o8-rRe" eventType="touchUpInside" id="dGI-gh-cbI"/>
+                                    <action selector="onCloseButtonPressed:" destination="hp6-nb-wcO" eventType="touchUpInside" id="8zI-Mg-aVN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -891,6 +898,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H26-xQ-onX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2024" y="1353"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="Bim-dD-Fgr">
+            <objects>
+                <viewController id="mJQ-um-Eww" customClass="TTInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qIM-lt-LSz"/>
+                        <viewControllerLayoutGuide type="bottom" id="IAV-3S-nmH"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="0XW-c6-5Mg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KK1-Y3-hcB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aMi-Kg-tpO">
+                                <rect key="frame" x="20" y="68" width="280" height="441"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlm-sh-wgQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="EvS-2k-Xeo"/>
+                                            <constraint firstAttribute="width" constant="44" id="S2R-Eg-Ls6"/>
+                                        </constraints>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="ecG-Rg-Xha"/>
+                                            <action selector="dismissButtonPress:" destination="mJQ-um-Eww" eventType="touchUpInside" id="zC8-0h-5jV"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QX-1J-7FB">
+                                        <rect key="frame" x="0.0" y="43" width="280" height="845"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Calorie">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">From Wikipedia, the free encyclopedia
+This article is about the units of energy. For other uses, see Calorie (disambiguation).
+The name calorie is used for two units of energy.
+
+The small </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="calorie">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.49014945652173914" green="0.11872975272824722" blue="0.11988093968922985" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content"> or gram calorie (symbol: cal) is the approximate amount of energy needed to raise the temperature of one gram of water by one degree Celsius.[1]
+The large calorie, kilogram calorie, kilocalorie, dietary calorie, nutritionist's calorie, nutritional calorie, Calorie (capital C)[2] or food calorie (symbol: Cal, equiv: kcal) is approximately the amount of energy needed to raise the temperature of one kilogram of water by one degree Celsius. The large calorie is thus equal to 1000 small calories or one kilocalorie (symbol: kcal).[1]
+Although these units are part of the metric system, they have been superseded in the International System of Units by the joule. One small calorie is approximately 4.2 joules (so one large calorie is about 4.2 kilojoules). The factor used to convert calories to joules at a given temperature is numerically equivalent to the specific heat capacity of water expressed in joules per kelvin per gram or per kilogram. The precise conversion factor depends on the definition adopted.
+
+In spite of its non-official status, the large calorie is still widely used as a unit of food energy in the US, UK and some other Western countries. The small calorie is also often used for measurements in chemistry, although the amounts involved are typically recorded in kilocalories.
+
+The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] and entered French and English dictionaries between 1841 and 1867. The word comes from Latin calor meaning "heat".</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="KK1-Y3-hcB" id="uzT-vH-X2t"/>
+                        <outlet property="contentContainerView" destination="aMi-Kg-tpO" id="mTB-YL-Sne"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mUM-kh-b7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1511" y="2117"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="LYR-at-qqc">

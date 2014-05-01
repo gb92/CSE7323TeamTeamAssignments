@@ -9,6 +9,8 @@
 #import "TTStatusViewController.h"
 #import "TTGraphView.h"
 #import "TTActionTableViewCell.h"
+#import "TTCaptureScreenShot.h"
+#import "TTInfoViewController.h"
 
 @interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -42,8 +44,6 @@
     
     //! Fake Data for now.
     self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
-
-    [self.fitpointGraphView setNeedsDisplay];
     
 }
 
@@ -57,6 +57,17 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark -- Sage
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if( [segue.identifier isEqualToString:@"info"] )
+//    {
+//        TTInfoViewController* destVC = (TTInfoViewController*)segue.destinationViewController;
+//        UIImage* image = [TTCaptureScreenShot screenshot];
+//        destVC.backgroundImage.image = [image copy];
+//    }
+//}
 
 #pragma mark --Table View Datasource
 
