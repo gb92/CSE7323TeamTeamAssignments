@@ -104,9 +104,69 @@
 
 }
 
--(NSArray *) getFriendsFitPoints
+-(void) getFriendsFitPoints:(userFriendsFitPoints) callback
 {
-    return nil;
+    NSString *query=@"Select name, uid, pic_small from user where is_app_user = 1 and uid in (select uid2 from friend where uid1 = me()) order by concat(first_name,last_name) asc";
+    NSDictionary *params=@{@"q":query};
+    [FBRequestConnection startWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", [error localizedDescription]);
+            callback(result, error);
+        }
+        else
+        {
+            NSLog(@"Result: %@", result);
+            NSDictionary *res=(NSDictionary *) result;
+            NSArray *friends=[res valueForKey:@"data"];
+            
+            MSTable *table = [self.client tableWithName:@"FitPoints"];
+            
+            MSQuery *query=[table query];
+            query.includeTotalCount=YES;
+            //query.parameters=@{@"userID":fbID};
+            
+            [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"Error reading item: %@", error);
+                    return;
+                }
+                NSLog(@"Total Count:%ld", totalCount);
+                
+                if(totalCount<=0)
+                {
+                    //this really
+                    callback(nil, error);
+                }
+                else if(totalCount>0)
+                {
+                    NSMutableArray *friendsWithFitPoints=[[NSMutableArray alloc] init];
+                    for(int i=0; i< totalCount; i++)
+                    {
+                        NSString *friendID=[items[i] valueForKey:@"userID"];
+                        NSNumber *friendFitPoints=[items[i] valueForKey:@"numFitPoints"];
+                        
+                        //linear search... not good
+                        
+                        for(int j=0; j< [friends count]; j++)
+                        {
+                            if([friendID isEqualToString:[friends[j] valueForKey:@"userID"]])
+                            {
+                                NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithDictionary:friends[j]];
+                                [dict setValue:friendFitPoints forKey:@"numFitPoints"];
+                                [friendsWithFitPoints addObject:dict];
+                            }
+                        }
+                    }
+                    
+                    callback(friendsWithFitPoints, error);
+                }
+                
+            }];
+            
+            //callback(friends, error);
+        }
+    }];
 }
 
 -(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints
@@ -216,4 +276,7 @@
     }];
 
 }
+
+
+
 @end

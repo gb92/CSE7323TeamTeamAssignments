@@ -10,6 +10,7 @@
 
 typedef void (^userFitPointsBlock)(NSNumber* fitPoints, NSError* error);
 typedef void (^userFriendsBlock) (NSArray * friends, NSError* error);
+typedef void (^userFriendsFitPoints) (NSArray *friends, NSError * error);
 
 @interface TTFacebookHandler : NSObject
 
@@ -17,7 +18,7 @@ typedef void (^userFriendsBlock) (NSArray * friends, NSError* error);
 
 -(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback;
 
--(NSArray *) getFriendsFitPoints;
+-(void) getFriendsFitPoints:(userFriendsFitPoints) callback;
 
 -(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints;
 
