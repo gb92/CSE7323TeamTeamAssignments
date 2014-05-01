@@ -33,6 +33,7 @@
 		992A95C218C7E3310055C8E8 /* Assignment4Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 992A95C118C7E3310055C8E8 /* Assignment4Tests.m */; };
 		9F9E0E6318CFC9E40064DED3 /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6218CFC9E40064DED3 /* TTViewController.m */; };
 		9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */; };
+		EF965B9A1911A9340056C2A0 /* TTHeartRateCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF965B991911A9340056C2A0 /* TTHeartRateCounter.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		9F9E0E6218CFC9E40064DED3 /* TTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
 		9F9E0E6418CFC9F40064DED3 /* VideoAnalgesic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnalgesic.h; sourceTree = "<group>"; };
 		9F9E0E6518CFC9F40064DED3 /* VideoAnalgesic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnalgesic.m; sourceTree = "<group>"; };
+		EF965B981911A9340056C2A0 /* TTHeartRateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTHeartRateCounter.h; sourceTree = "<group>"; };
+		EF965B991911A9340056C2A0 /* TTHeartRateCounter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TTHeartRateCounter.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,8 @@
 		992A959C18C7E3310055C8E8 /* Assignment4 */ = {
 			isa = PBXGroup;
 			children = (
+				EF965B981911A9340056C2A0 /* TTHeartRateCounter.h */,
+				EF965B991911A9340056C2A0 /* TTHeartRateCounter.mm */,
 				5CE67AAF18DAC50F001EE125 /* APLGraphView.h */,
 				5CE67AB018DAC50F001EE125 /* APLGraphView.m */,
 				5CE67A8D18DAC426001EE125 /* TMHeartbeatViewController.h */,
@@ -304,6 +309,7 @@
 				5CE67A8F18DAC426001EE125 /* TMHeartbeatViewContoller.mm in Sources */,
 				9F9E0E6618CFC9F40064DED3 /* VideoAnalgesic.m in Sources */,
 				992A95A718C7E3310055C8E8 /* A4AppDelegate.m in Sources */,
+				EF965B9A1911A9340056C2A0 /* TTHeartRateCounter.mm in Sources */,
 				5CE67AB118DAC50F001EE125 /* APLGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
