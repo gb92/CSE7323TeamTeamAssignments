@@ -59,6 +59,7 @@
 		99D88C931909BB2600E3E073 /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C921909BB2600E3E073 /* RingBuffer.m */; };
 		99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C951909BEB000E3E073 /* TTMotionDataBuffer.m */; };
 		99D88C9B1909C66C00E3E073 /* TTMotionDataBufferTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */; };
+		EF8D751A1912D50E00857EE3 /* TTTimeCounterView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D75191912D50E00857EE3 /* TTTimeCounterView.m */; };
 		EF965B9F1911AC800056C2A0 /* TTCircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965B9E1911AC800056C2A0 /* TTCircleImageView.m */; };
 		EF965BA21911AE4E0056C2A0 /* TTFriendRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965BA11911AE4E0056C2A0 /* TTFriendRankingViewController.m */; };
 		EF965BA51911B1770056C2A0 /* TTFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965BA41911B1770056C2A0 /* TTFriendTableViewCell.m */; };
@@ -161,6 +162,8 @@
 		99D88C951909BEB000E3E073 /* TTMotionDataBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionDataBuffer.m; sourceTree = "<group>"; };
 		99D88C971909BFAE00E3E073 /* TTMotionDataBufferDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTMotionDataBufferDelegate.h; sourceTree = "<group>"; };
 		99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTMotionDataBufferTests.m; sourceTree = "<group>"; };
+		EF8D75181912D50E00857EE3 /* TTTimeCounterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTimeCounterView.h; sourceTree = "<group>"; };
+		EF8D75191912D50E00857EE3 /* TTTimeCounterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTimeCounterView.m; sourceTree = "<group>"; };
 		EF965B9D1911AC800056C2A0 /* TTCircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCircleImageView.h; sourceTree = "<group>"; };
 		EF965B9E1911AC800056C2A0 /* TTCircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCircleImageView.m; sourceTree = "<group>"; };
 		EF965BA01911AE4E0056C2A0 /* TTFriendRankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFriendRankingViewController.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 			children = (
 				5C2626C919077834001AA0E7 /* TMStepIndicaterView.h */,
 				5C2626CA19077834001AA0E7 /* TMStepIndicaterView.m */,
+				EF8D75181912D50E00857EE3 /* TTTimeCounterView.h */,
+				EF8D75191912D50E00857EE3 /* TTTimeCounterView.m */,
 				5C2626CB19077834001AA0E7 /* TMUIHeartrateIndicator.h */,
 				5C2626CC19077834001AA0E7 /* TMUIHeartrateIndicator.m */,
 				5C2626CD19077834001AA0E7 /* TMUIStairImageView.h */,
@@ -470,7 +475,7 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = 8N25HJ2H24;
+						DevelopmentTeam = APD62CDC25;
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
@@ -548,6 +553,7 @@
 				5C51379E190C83310054E253 /* TTMainViewController.m in Sources */,
 				99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */,
 				5C427A6A191231D200BABF95 /* TTSettingViewController.m in Sources */,
+				EF8D751A1912D50E00857EE3 /* TTTimeCounterView.m in Sources */,
 				5C2626D41907796F001AA0E7 /* TMHeartbeatViewContoller.mm in Sources */,
 				EF965BA21911AE4E0056C2A0 /* TTFriendRankingViewController.m in Sources */,
 				5C2626C619077822001AA0E7 /* TTViewController.m in Sources */,
