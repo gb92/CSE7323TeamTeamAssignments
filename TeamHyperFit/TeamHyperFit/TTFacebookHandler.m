@@ -104,7 +104,7 @@
 
 }
 
--(void) getFriendsFitPoints:(userFriendsFitPoints) callback
+-(void) getFriendsFitPoints:(userFriendsFitPointsBlock) callback
 {
     NSString *query=@"Select name, uid, pic_small from user where is_app_user = 1 and uid in (select uid2 from friend where uid1 = me()) order by concat(first_name,last_name) asc";
     NSDictionary *params=@{@"q":query};

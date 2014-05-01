@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Models/TTUserActivity.h"
 
-typedef void (^userFitPointsBlock)(NSNumber* fitPoints, NSError* error);
-typedef void (^userFriendsBlock) (NSArray * friends, NSError* error);
-typedef void (^userFriendsFitPoints) (NSArray *friends, NSError * error);
+typedef void (^userFitPointsBlock)(NSNumber *fitPoints, NSError *error);
+typedef void (^userFriendsBlock) (NSArray *friends, NSError *error);
+typedef void (^userFriendsFitPointsBlock) (NSArray *friends, NSError *error);
+typedef void (^userActivitiesBlock) (NSArray *userActivities, NSError *error);
 
 @interface TTFacebookHandler : NSObject
 
@@ -18,10 +20,24 @@ typedef void (^userFriendsFitPoints) (NSArray *friends, NSError * error);
 
 -(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback;
 
--(void) getFriendsFitPoints:(userFriendsFitPoints) callback;
+-(void) getFriendsFitPoints:(userFriendsFitPointsBlock) callback;
+
+-(void) getCurrentUserActivities:(userActivitiesBlock) callback;
+
+-(void) getCurrentUserDailyStepCount;
+
+-(void) getCurrentUserHourlyStepHourly;
+
+-(void) getCurrentUserDailyCalorieCount;
 
 -(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints;
 
 -(void) addToCurrentUserFitPoints:(NSNumber *) fitPointsToAdd;
+
+-(void) addUserActivity:(TTUserActivity *) activity;
+
+-(void) updateCurrentUserHourlySteps:(NSNumber*) steps withDate:(NSDate*) hour;
+
+-(void) updateCurrentUserCalorieCount:(NSNumber*) calories withDate:(NSDate*) day;
 
 @end

@@ -47,6 +47,8 @@
 		5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
 		5CBA7A46190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A44190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
+		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
+		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
 		99C5A44A190C8504000B0F81 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A449190C8504000B0F81 /* FacebookSDK.framework */; };
 		99C5A44D190C8510000B0F81 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */; };
@@ -141,6 +143,10 @@
 		5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamHyperFitTests-Info.plist"; sourceTree = "<group>"; };
 		5CBA7A45190767620099C0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
+		99506C251912FEC800A7129F /* TTFacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFacebookFriend.h; sourceTree = "<group>"; };
+		99506C261912FEC800A7129F /* TTFacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookFriend.m; sourceTree = "<group>"; };
+		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
+		99506C2C1912FFCF00A7129F /* TTUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUserActivity.m; sourceTree = "<group>"; };
 		99C5A444190C49BF000B0F81 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		99C5A449190C8504000B0F81 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
@@ -258,6 +264,8 @@
 				99D88C881909B45A00E3E073 /* TFGestureRecognizer.m */,
 				99D88C8E1909B65B00E3E073 /* TFGesture.h */,
 				99D88C8F1909B65B00E3E073 /* TFGesture.m */,
+				99506C2B1912FFCF00A7129F /* TTUserActivity.h */,
+				99506C2C1912FFCF00A7129F /* TTUserActivity.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,9 +393,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		99506C241912FEB400A7129F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				99506C251912FEC800A7129F /* TTFacebookFriend.h */,
+				99506C261912FEC800A7129F /* TTFacebookFriend.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		99C5A448190C84CA000B0F81 /* FacebookIntegration */ = {
 			isa = PBXGroup;
 			children = (
+				99506C241912FEB400A7129F /* Models */,
 				99C5A44F190C8535000B0F81 /* TTFacebookHandler.h */,
 				99C5A450190C8535000B0F81 /* TTFacebookHandler.m */,
 			);
@@ -547,8 +565,10 @@
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,
 				5C51379E190C83310054E253 /* TTMainViewController.m in Sources */,
 				99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */,
+				99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */,
 				5C427A6A191231D200BABF95 /* TTSettingViewController.m in Sources */,
 				5C2626D41907796F001AA0E7 /* TMHeartbeatViewContoller.mm in Sources */,
+				99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */,
 				EF965BA21911AE4E0056C2A0 /* TTFriendRankingViewController.m in Sources */,
 				5C2626C619077822001AA0E7 /* TTViewController.m in Sources */,
 				5C51379B190C7B910054E253 /* TTSevenDaysView.m in Sources */,
