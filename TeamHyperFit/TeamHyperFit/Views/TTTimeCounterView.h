@@ -8,14 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTTimeCounterView;
+
+@protocol TTTimeCounterDelegate <NSObject>
+
+-(void)TTTimeCounterDidStarted:(TTTimeCounterView*) view;
+-(void)TTTimeCounterDidStoped:(TTTimeCounterView*) view;
+-(void)TTTimeCounterDidFinshed:(TTTimeCounterView*) view;
+
+@end
+
+
 @interface TTTimeCounterView : UIView
+
+@property (weak,nonatomic) id<TTTimeCounterDelegate> delegate;
 
 @property (strong, nonatomic) UIColor* barColor;
 
 @property (nonatomic) NSInteger timeSeconds;
 @property (nonatomic,readonly) BOOL isStarted;
 
--(void)pause;
+-(void)stop;
 -(void)start;
 -(void)reset;
 

@@ -13,10 +13,9 @@
 #define ToDeg(rad)		( (180.0 * (rad)) / M_PI )
 #define SQR(x)			( (x) * (x) )
 
-static const int SI_LINE_WIDTH      = 10;
-static const int SI_START_OFFSET    = 0;
+static const int SI_LINE_WIDTH      = 20;
 static const int SI_ARC_PADDING     = 0;
-static const int SI_GATE_PADDING    = 0;
+static const int SI_GATE_PADDING    = 10;
 
 @interface TTTimeCounterView()
 
@@ -68,18 +67,10 @@ static const int SI_GATE_PADDING    = 0;
     
     //! Set default time.
     self.timeSeconds = 30;
-    self.currentTime = 0;
-}
-
-#pragma mark - UIDynamicAnimatorDelegate Methods
-
-- (void)dynamicAnimatorWillResume:(UIDynamicAnimator*)animator {
+    self.currentTime = self.timeSeconds;
     
 }
 
-- (void)dynamicAnimatorDidPause:(UIDynamicAnimator*)animator {
-    
-}
 
 #pragma mark -- Drawing
 
@@ -123,28 +114,32 @@ static const int SI_GATE_PADDING    = 0;
     
     CGContextRestoreGState(ctx);
 
+    [self drawFontWithString:[NSString stringWithFormat:@"%d", self.currentTime] size:80 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
+    [self drawFontWithString:@"secondes" size:15 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 + 50 )];
+    
     /* Draw Gate */
-    
-    CGContextSaveGState(ctx);
-    
-    CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
-                    ToRad( 90+SI_START_OFFSET ),
-                    ToRad( (90-SI_START_OFFSET - (319 * ( 1.0 -  (self.currentTime/self.timeSeconds) ) ) ) ) , 0);
-    
-    [self.barColor setStroke];
-    
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
-    
-    CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
-    CGContextSetLineCap(ctx, kCGLineCapButt);
-    
-    CGContextDrawPath(ctx, kCGPathStroke);
-    
-    CGContextRestoreGState(ctx);
-    
-    [self drawFontWithString:@"TODAY FIT POINTS" size:12 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 30 )];
-    [self drawFontWithString:@"54,321" size:40 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
+    if (self.isStarted)
+    {
 
+        CGContextSaveGState(ctx);
+        
+        CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
+                        ToRad( 90 ),
+                        ToRad( (360 * ( 1.0 -  (self.currentTime/(float)self.timeSeconds) ) ) + 89 ) , 0);
+        
+        [self.barColor setStroke];
+        
+        CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
+        
+        CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
+        CGContextSetLineCap(ctx, kCGLineCapButt);
+        
+        CGContextDrawPath(ctx, kCGPathStroke);
+        
+        CGContextRestoreGState(ctx);
+    }
+        
+    
 }
 
 -(void)updateUI
@@ -152,6 +147,7 @@ static const int SI_GATE_PADDING    = 0;
     [self setNeedsDisplay];
 }
 
+#pragma mark -- Actions
 
 -(void)timeSeconds:(NSInteger)value
 {
@@ -170,26 +166,37 @@ static const int SI_GATE_PADDING    = 0;
     [self updateUI];
 }
 
--(void)pause
-{
-    if (self.isStarted) {
-        self.isStarted = NO;
-    }
-}
 -(void)start
 {
-    if (!self.isStarted) {
-        self.isStarted = YES;
+    if (!self.isStarted)
+    {
+        self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
         
+        self.isStarted = YES;
+        [self.delegate TTTimeCounterDidStarted:self];
         [self timeUpdate];
         
     }
 }
+
+-(void)stop
+{
+    if (self.isStarted)
+    {
+        self.barColor = [UIColor grayColor];
+        
+        self.isStarted = NO;
+        [self.delegate TTTimeCounterDidStoped:self];
+        
+        [self updateUI];
+    }
+}
+
 -(void)reset
 {
     if (self.isStarted) {
         self.isStarted = NO;
-        self.currentTime = 0;
+        self.currentTime = self.timeSeconds;
     }
 }
 
@@ -197,9 +204,20 @@ static const int SI_GATE_PADDING    = 0;
 {
     if (self.isStarted) {
         
-        [self performSelector:@selector(timeUpdate) withObject:nil afterDelay:1];
+        self.currentTime--;
         
-        // Update label
+        if( self.currentTime < 0 )
+        {
+            [self reset];
+            [self.delegate TTTimeCounterDidFinshed:self];
+            
+        }
+        else
+        {
+            [self performSelector:@selector(timeUpdate) withObject:nil afterDelay:1];
+        }
+        
+        [self updateUI];
     }
 }
 

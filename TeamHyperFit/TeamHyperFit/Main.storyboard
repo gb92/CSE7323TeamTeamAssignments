@@ -1276,9 +1276,10 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="Y0X-Sm-tHD">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUV-bV-4Bm" customClass="TTTimeCounterView">
-                                <rect key="frame" x="59" y="182" width="203" height="203"/>
+                                <rect key="frame" x="53" y="176" width="215" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.69962211277173914" green="0.69962211277173914" blue="0.69962211277173914" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1319,13 +1320,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-dt-Wif">
-                                <rect key="frame" x="89" y="242" width="143" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="80"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap any where to start or pause." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd9-Yc-gAq">
                                 <rect key="frame" x="25" y="400" width="281" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1334,15 +1328,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="seconds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVk-FL-LvZ">
-                                <rect key="frame" x="121" y="333" width="88" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1360,11 +1345,10 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="centerNumberLabel" destination="Dep-dt-Wif" id="0YZ-n3-3ca"/>
                         <outlet property="closeBigButton" destination="t7I-LP-hLa" id="PkE-ct-egz"/>
                         <outlet property="postImageView" destination="uwp-9f-Qiv" id="g2K-k8-zHV"/>
                         <outlet property="postLabel" destination="Sed-jG-K1D" id="4ro-Kf-fAA"/>
-                        <outlet property="timeLabel" destination="fVk-FL-LvZ" id="6LX-0N-Zwy"/>
+                        <outlet property="timeCounterView" destination="YUV-bV-4Bm" id="sfD-xQ-7mb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Myp-jD-AVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
