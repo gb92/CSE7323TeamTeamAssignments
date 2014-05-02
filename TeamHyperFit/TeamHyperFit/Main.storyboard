@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="u7r-TB-KOQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H6h-XZ-0M2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Stat View Controller - Stats View-->
@@ -1269,6 +1269,17 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
             </objects>
             <point key="canvasLocation" x="1698" y="2747"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="A0C-Zw-idq">
+            <objects>
+                <pageViewController storyboardIdentifier="ActivityPageView" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Zc0-AM-1lT" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="350"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDW-bn-ODb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2806" y="2241"/>
+        </scene>
         <!--Session View Controller-->
         <scene sceneID="LYR-at-qqc">
             <objects>
@@ -1363,6 +1374,144 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
             </objects>
             <point key="canvasLocation" x="1698" y="2083"/>
         </scene>
+        <!--Activity Selection Content View Controller-->
+        <scene sceneID="kgx-sD-7yU">
+            <objects>
+                <viewController storyboardIdentifier="ActivityContent" id="gtD-ao-Tcx" customClass="TTActivitySelectionContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nuw-tx-ReL"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Hw-dX-Rpd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4zY-rW-dUs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUSH-UPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsN-cK-Wsl">
+                                <rect key="frame" x="89" y="38" width="143" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="situpBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oOJ-U6-68h">
+                                <rect key="frame" x="76" y="92" width="169" height="166"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="350"/>
+                    <connections>
+                        <outlet property="activityImageView" destination="oOJ-U6-68h" id="6wj-c1-3NN"/>
+                        <outlet property="activityNameLabel" destination="QsN-cK-Wsl" id="TSe-tq-xXa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MQd-0q-0Oi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2448" y="2241"/>
+        </scene>
+        <!--Activity Selection Container View Controller-->
+        <scene sceneID="keE-lP-Z1r">
+            <objects>
+                <viewController id="H6h-XZ-0M2" customClass="TTActivitySelectionContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KQ6-hi-JfP"/>
+                        <viewControllerLayoutGuide type="bottom" id="WhL-db-amE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mqR-py-Grc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="N4t-3K-Qfx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ACTIVITIES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slQ-C9-een">
+                                <rect key="frame" x="115" y="31" width="110" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l87-Fe-LF5">
+                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1cM-gD-QTR"/>
+                                    <constraint firstAttribute="width" constant="44" id="pbe-25-ZDY"/>
+                                </constraints>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="BSR-px-ULI"/>
+                                    <action selector="onDismissButtonPressed:" destination="Eeu-4b-gF5" eventType="touchUpInside" id="eSh-0X-CTt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bs9-e3-9cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2448" y="2743"/>
+        </scene>
+        <!--Activity Collection View Controller-->
+        <scene sceneID="521-iM-M4o">
+            <objects>
+                <collectionViewController storyboardIdentifier="ActivityCollection" autoresizesArchivedViewToFullSize="NO" id="AIQ-Wc-5Tt" customClass="TTActivityCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="DjA-nn-vmg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Xf-yW-71Z">
+                            <size key="itemSize" width="115" height="160"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCell" id="0lf-Ub-JLO" customClass="TTActivityCollectionViewCell">
+                                <rect key="frame" x="0.0" y="5" width="115" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="115" height="160"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUSH-UPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwi-Is-aXA">
+                                            <rect key="frame" x="-14" y="15" width="143" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="situpBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="TqY-oh-HYp">
+                                            <rect key="frame" x="11" y="55" width="92" height="91"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.29464404496102409" green="0.58179772418478259" blue="0.43086982316705047" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="activityImageView" destination="TqY-oh-HYp" id="B2b-Jl-Se4"/>
+                                    <outlet property="activityNameLabel" destination="Dwi-Is-aXA" id="oaY-sp-Jzv"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="AIQ-Wc-5Tt" id="8Nv-t1-7Xs"/>
+                            <outlet property="delegate" destination="AIQ-Wc-5Tt" id="YK6-B3-aEh"/>
+                        </connections>
+                    </collectionView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="170"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A2m-s6-xLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2804" y="2742"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg2" width="320" height="568"/>
@@ -1376,6 +1525,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
         <image name="run" width="24" height="24"/>
         <image name="sessionCloseBtn" width="57" height="57"/>
         <image name="setting" width="24" height="24"/>
+        <image name="situpBigIcon" width="57" height="57"/>
         <image name="startButton" width="68" height="68"/>
         <image name="walk" width="35" height="54"/>
         <image name="walkingICO" width="24" height="24"/>
