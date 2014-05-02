@@ -10,4 +10,15 @@
 
 @implementation TFGesture
 
+-(id)initWithName:(NSString*)name imageName:(NSString*) imageName
+{
+    self = [self init];
+    
+    if (self) {
+        self.name = name;
+        self.imageName = imageName;
+    }
+    return self;
+}
+
 @end

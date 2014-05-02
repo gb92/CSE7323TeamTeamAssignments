@@ -7,6 +7,7 @@
 //
 
 #import "TTAppDelegate.h"
+#import "TFGesture.h"
 
 @implementation TTAppDelegate
 
@@ -19,7 +20,18 @@
     self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:serverURL port:serverPort];
     
     self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
-
+    
+    //! Pull Gestures from sever if avaliable.
+    //! Fake Data for now.
+    
+    self.gestures = [[NSArray alloc] initWithObjects:
+                     [[TFGesture alloc] initWithName:@"PushUp"   imageName:@"pushupBigIcon"],
+                     [[TFGesture alloc] initWithName:@"SitUp"    imageName:@"situpBigIcon"],
+                     [[TFGesture alloc] initWithName:@"JumpingJack" imageName:@"jumpingJackBigIcon"],
+                     [[TFGesture alloc] initWithName:@"Cruches"  imageName:@"cranchingBigIcon"],
+                     nil];
+    
+    
     return YES;
 }
 

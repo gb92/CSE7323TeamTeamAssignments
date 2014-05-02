@@ -10,24 +10,35 @@
 #import "TTActivitySelectionContentViewController.h"
 #import "TTActivityCollectionViewController.h"
 
+#import "TTAppDelegate.h"
+#import "TFGesture.h"
+
 @interface TTActivitySelectionContainerViewController ()<UIPageViewControllerDataSource>
 
 @property (strong, nonatomic) UIPageViewController* pageViewContoller;
 @property (strong, nonatomic) TTActivityCollectionViewController* collectionViewController;
-@property (strong, nonatomic) NSArray* activityImages;
-@property (strong, nonatomic) NSArray* activityNames;
+
+@property (strong, nonatomic) NSArray* gestures;
 
 @end
 
 @implementation TTActivitySelectionContainerViewController
 
+-(NSArray*)gestures
+{
+    if (!_gestures) {
+        _gestures = ((TTAppDelegate*)[[UIApplication sharedApplication]delegate]).gestures;
+    }
+    
+    return _gestures;
+}
+
+#pragma mark -- View Controller Life Cycle.
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
-    _activityImages = @[@"pushupBigIcon",@"jumpingJackBigIcon",@"situpBigIcon",@"cranchingBigIcon"];
-    _activityNames = @[@"Push Up",@"Jumping Jack",@"Sit Up",@"Crushes"];
     
     self.pageViewContoller = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityPageView"];
     self.pageViewContoller.dataSource = self;
@@ -63,7 +74,7 @@
 #pragma mark -- Contoller
 -(TTActivitySelectionContentViewController*)viewControllerAtIndex:(NSUInteger) index
 {
-    if (([self.activityImages count] == 0) || (index >= [self.activityImages count])) {
+    if (([self.gestures count] == 0) || (index >= [self.gestures count])) {
         return nil;
     }
     
@@ -71,8 +82,8 @@
     TTActivitySelectionContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityContent"];
     pageContentViewController.pageIndex = index;
     
-    pageContentViewController.activityImageName = self.activityImages[index];
-    pageContentViewController.activityName = self.activityNames[index];
+    pageContentViewController.activityImageName = ((TFGesture*)self.gestures[index]).imageName;
+    pageContentViewController.activityName = ((TFGesture*)self.gestures[index]).name;
     
     return pageContentViewController;
 }
@@ -98,7 +109,7 @@
     
     index ++;
     
-    if(index == [self.activityImages count])
+    if(index == [self.gestures count])
     {
         return nil;
     }
@@ -109,7 +120,7 @@
 
 -(NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return [self.activityNames count];
+    return [self.gestures count];
 }
 
 -(NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController

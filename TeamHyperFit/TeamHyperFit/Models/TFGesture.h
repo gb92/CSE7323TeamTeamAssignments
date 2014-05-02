@@ -10,4 +10,8 @@
 
 @interface TFGesture : NSObject
 
+-(id)initWithName:(NSString*)name imageName:(NSString*) imageName;
+@property(strong, nonatomic) NSString *name;
+@property(strong, nonatomic) NSString *imageName;
+
 @end

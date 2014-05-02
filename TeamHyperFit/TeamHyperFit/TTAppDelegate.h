@@ -17,4 +17,5 @@
 @property (strong, nonatomic) TTWebServiceManager* webServiceManager;
 
 @property (strong, nonatomic) MSClient *msClient;
+@property (strong, nonatomic) NSArray *gestures;
 @end

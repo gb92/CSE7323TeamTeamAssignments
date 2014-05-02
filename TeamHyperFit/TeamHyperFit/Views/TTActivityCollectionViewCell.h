@@ -10,6 +10,8 @@
 
 @interface TTActivityCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic) NSUInteger itemIndex;
+
 @property (weak, nonatomic) IBOutlet UILabel *activityNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *activityImageView;
 

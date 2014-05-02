@@ -9,11 +9,28 @@
 #import "TTActivityCollectionViewController.h"
 #import "TTActivityCollectionViewCell.h"
 
+#import "TTAppDelegate.h"
+#import "TFGesture.h"
+
 @interface TTActivityCollectionViewController ()
+
+@property (strong, nonatomic) NSArray* gestures;
 
 @end
 
 @implementation TTActivityCollectionViewController
+
+
+-(NSArray*)gestures
+{
+    if (!_gestures) {
+        _gestures = ((TTAppDelegate*)[[UIApplication sharedApplication]delegate]).gestures;
+    }
+    
+    return _gestures;
+}
+
+#pragma mark -- View Controller Life Cycle.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,8 +62,9 @@
 {
     TTActivityCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"ActivityCell" forIndexPath:indexPath];
     
-    cell.activityNameLabel.text = @"TestActivity";
-    cell.activityImageView.image = [UIImage imageNamed:@"situpBigIcon"];
+    cell.activityNameLabel.text = ((TFGesture*)self.gestures[indexPath.row]).name;
+    cell.activityImageView.image = [UIImage imageNamed:((TFGesture*)self.gestures[indexPath.row]).imageName];
+    cell.itemIndex = indexPath.row;
     
     return cell;
 }
