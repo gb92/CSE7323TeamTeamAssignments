@@ -13,15 +13,13 @@
 #define ToDeg(rad)		( (180.0 * (rad)) / M_PI )
 #define SQR(x)			( (x) * (x) )
 
-static const int SI_LINE_WIDTH = 30;
-static const int SI_START_OFFSET = 20;
-static const int SI_ARC_PADDING = 0;
-static const int SI_GATE_PADDING = 20;
+static const int SI_LINE_WIDTH       = 30;
+static const int SI_LINE_BG_WIDTH    = 40;
+static const int SI_START_OFFSET     = 30;
+static const int SI_ARC_PADDING      = 0;
+static const int SI_GATE_PADDING     = 20;
 
 @interface TMStepIndicaterView()<UIDynamicAnimatorDelegate>
-
-@property(nonatomic) float value;
-@property(nonatomic) float maxValue;
 
 @end
 
@@ -66,12 +64,13 @@ static const int SI_GATE_PADDING = 20;
     [self setOpaque:NO];
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0 ];
     self.maxValue = 100;
-    
-    //! For testing
-    self.value = 100;
-    self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
+    self.value = 0;
     
     self.defaultBounds = self.bounds;
+    
+    
+    //! For testing
+    self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
     
 }
 
@@ -108,7 +107,6 @@ static const int SI_GATE_PADDING = 20;
 -(void)drawFontWithString:(NSString*)text size:(int) size position:(CGPoint) point
 {
     
-    
     NSMutableAttributedString *displayText = [[NSMutableAttributedString alloc] initWithString:text];
     
     [displayText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size] range:NSMakeRange(0, text.length)];
@@ -131,42 +129,92 @@ static const int SI_GATE_PADDING = 20;
 {
     [super drawRect:rect];
     
-    radius = self.frame.size.width / 2 - SI_ARC_PADDING;
+    int valueToDraw = self.value;
+    int maxValueToDraw = self.maxValue;
+    
+    if( maxValueToDraw < 0 ) maxValueToDraw = 0;
+    
+    if( valueToDraw > maxValueToDraw ) valueToDraw = maxValueToDraw;
+    if( valueToDraw < 0 ) valueToDraw = 0;
+    
+    
+    const float haftWidth = self.frame.size.width/2;
+    const float haftHeight = self.frame.size.height/2;
+    
+    radius = haftWidth - SI_ARC_PADDING;
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
+    //! Draw Black Circle Background.
+    
     CGContextSaveGState(ctx);
     
-    CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius, ToRad(0), ToRad(360), 0);
+    CGContextAddArc(ctx, haftWidth, haftHeight, radius, ToRad(0), ToRad(360), 0);
     [[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f] setFill];
-
     
     CGContextDrawPath(ctx, kCGPathFill);
     
     CGContextRestoreGState(ctx);
 
-    /* Draw Gate */
+    //! Draw Background of Gate.
     
     CGContextSaveGState(ctx);
     
-    CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
-                    ToRad(90+SI_START_OFFSET),
-                    ToRad( (90-SI_START_OFFSET - (319 * ( 1.0 -  (self.value/self.maxValue) ) ) ) ) , 0);
+    CGContextAddArc(ctx, haftWidth, haftHeight, radius - SI_GATE_PADDING,
+                    ToRad( 90+SI_START_OFFSET ),
+                    ToRad( (89-SI_START_OFFSET) ), 0);
     
-    [self.barColor setStroke];
+    [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2f] setStroke];
     
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
-    
-    CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
-    CGContextSetLineCap(ctx, kCGLineCapButt);
+    CGContextSetLineWidth(ctx, SI_LINE_BG_WIDTH / 2);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
     
     CGContextDrawPath(ctx, kCGPathStroke);
     
     CGContextRestoreGState(ctx);
     
-    [self drawFontWithString:@"TODAY FIT POINTS" size:12 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 30 )];
-    [self drawFontWithString:@"54,321" size:40 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
+    //! Draw Gate.
+    
+    CGContextSaveGState(ctx);
+    
+    CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
+                    ToRad( 90+SI_START_OFFSET ),
+                    ToRad( (89-SI_START_OFFSET - (int)(360 * ( 1.0 -  (valueToDraw/(float)maxValueToDraw) ) ) ) ) , 0);
+    
+    [self.barColor setStroke];
+    
+    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 5, self.barColor.CGColor);
+    
+    CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
+    
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    CGContextRestoreGState(ctx);
+    
+    const int kMinCenterTextSize = 40;
+    const int kMaxCenterTextSize = 70;
+    float textSizeRange = kMaxCenterTextSize - kMinCenterTextSize;
+    
+    int columnOfValue = [self getNumberOfColumnFromNumber:self.value];
+    float textRatio = columnOfValue / 7.0f;
+    
+    int addTextSize = textSizeRange * (1.0f - textRatio);
+    
+    [self drawFontWithString:@"TODAY FIT POINTS" size:12 position:CGPointMake(haftWidth, haftHeight - 40 )];
+    [self drawFontWithString:[NSString stringWithFormat:@"%d", (int)self.value] size:kMinCenterTextSize + addTextSize position:CGPointMake(haftWidth, haftHeight )];
 
+    [self drawFontWithString:@"LAST WEEK" size:8 position:CGPointMake(haftWidth, haftHeight + 90 )];
+    [self drawFontWithString:[NSString stringWithFormat:@"%d", (int)self.maxValue] size:12 position:CGPointMake(haftWidth, haftHeight + 100 )];
+    
+}
+
+-(int)getNumberOfColumnFromNumber:(int)number
+{
+
+    NSString *textFromNumber = [NSString stringWithFormat:@"%d", number];
+    
+    return (uint)textFromNumber.length;
 }
 
 -(void)updateUI
@@ -178,41 +226,6 @@ static const int SI_GATE_PADDING = 20;
     
     [self setNeedsDisplay];
     
-}
-
--(void)setStepValue:(float)value
-{
-    if( value < 0 )
-    {
-        self.value = 0;
-    }
-    else if( value > self.maxValue)
-    {
-        self.value = self.maxValue;
-    }
-    else
-    {
-        self.value = value;
-    }
-    
-    [self updateUI];
-}
-
--(void)setMaxValue:(float)value
-{
-    if( value < 0 )
-    {
-        _maxValue = 0;
-    }
-    else
-    {
-        _maxValue = value;
-    }
-    
-    // Clamp current value to max value
-    if( value < _value ) _value = value;
-    
-    [self updateUI];
 }
 
 

@@ -262,8 +262,8 @@ static unsigned int DEFAULT_GOAL_STEPS = 4000;
     [self.goalStepLabel setText:[NSString stringWithFormat:@"%d",numberOfGoalSteps]];
     
     // Make sure you set max before set current value!
-    [self.stepIndicaterView setMaxValue:numberOfGoalSteps];
-    [self.stepIndicaterView setStepValue:self.numberOfSteps];
+//    [self.stepIndicaterView setMaxValue:numberOfGoalSteps];
+//    [self.stepIndicaterView setStepValue:self.numberOfSteps];
     
 }
 

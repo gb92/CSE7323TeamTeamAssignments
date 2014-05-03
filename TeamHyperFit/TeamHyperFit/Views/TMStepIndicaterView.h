@@ -25,7 +25,7 @@
 @property (nonatomic) CGRect defaultBounds;
 @property (strong, nonatomic) UIColor* barColor;
 
--(void)setStepValue:(float)value;
--(void)setMaxValue:(float)value;
+@property(nonatomic) int value;
+@property(nonatomic) int maxValue;
 
 @end

@@ -70,6 +70,11 @@
     self.friView.delegate = self;
     self.satView.delegate = self;
     
+    self.fitpointView.value = 50;
+    self.fitpointView.maxValue = 100;
+    
+    self.fitpointView.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
+    
     self.fitpointView.delegate = self;
     [self playYoyoEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:30.0f frequency:3.0 damping:0.3];
     
