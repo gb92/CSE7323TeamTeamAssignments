@@ -15,7 +15,12 @@
 @interface TTTransitionerViewController () <UIPageViewControllerDataSource,TTMainViewControllerDelegate, TTFriendRankingViewControllerDelegate, TTStatusViewControllerDelegate >
 
 @property (nonatomic) NSUInteger currentViewIndex;
-@property (strong, nonatomic) UIPageViewController *pageViewController;
+
+@property (strong, nonatomic) UIPageViewController          *pageViewController;
+@property (strong, nonatomic) TTStatusViewController        *statusViewController;
+@property (strong, nonatomic) TTMainViewController          *mainViewController;
+@property (strong, nonatomic) TTFriendRankingViewController *friendViewController;
+
 @end
 
 @implementation TTTransitionerViewController
@@ -32,15 +37,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    //! Initial all 3 views
+    self.statusViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"StatView"];
+    self.statusViewController.delegate = self;
+
+    self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TodayStateView"];
+    self.mainViewController.delegate = self;
     
-    //! Begin with Main Day State View
-    self.currentViewIndex = 1;
+    self.friendViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsView"];
+    self.friendViewController.delegate = self;
     
-    UIViewController* startView = [self getViewControllerAtIndex:self.currentViewIndex];
-    
+
+    //! Init page view.
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainPageView"];
     self.pageViewController.dataSource = self;
-    [self.pageViewController setViewControllers:@[startView] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self.pageViewController setViewControllers:@[self.mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
@@ -58,16 +70,12 @@
 #pragma mark TTMainViewDelegate
 -(void)TTMainViewControllerOnFriendsButtonPressed:(TTMainViewController*) view
 {
-    UIViewController* friendVC = [self getViewControllerAtIndex:2];
-    
-    [self.pageViewController setViewControllers:@[friendVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[self.friendViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
 
 -(void)TTMainViewControllerOnStatButtonPressed:(TTMainViewController*) view
 {
-    UIViewController* statVC = [self getViewControllerAtIndex:0];
-    
-    [self.pageViewController setViewControllers:@[statVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[self.statusViewController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -75,9 +83,7 @@
 
 -(void)TTFriendRankingViewControllerCloseButtonPressed:(TTFriendRankingViewController *)view
 {
-    UIViewController* mainVC = [self getViewControllerAtIndex:1];
-    
-    [self.pageViewController setViewControllers:@[mainVC] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[self.mainViewController] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -85,9 +91,7 @@
 
 -(void)TTStatusViewControllerOnCloseButtonPressed:(TTStatusViewController *)view
 {
-    UIViewController* mainVC = [self getViewControllerAtIndex:1];
-    
-    [self.pageViewController setViewControllers:@[mainVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self.pageViewController setViewControllers:@[self.mainViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
 
 
@@ -99,16 +103,13 @@
     UIViewController *returnVC = nil;
     switch (index) {
         case 0:
-            returnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"StatView"];
-            ((TTStatusViewController*)returnVC ).delegate = self;
+            returnVC = self.statusViewController;
             break;
         case 1:
-            returnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TodayStateView"];
-            ((TTMainViewController*)returnVC ).delegate = self;
+            returnVC = self.mainViewController;
             break;
         case 2:
-            returnVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FriendsView"];
-            ((TTFriendRankingViewController*)returnVC ).delegate = self;
+            returnVC = self.friendViewController;
             break;
         default:
             break;
