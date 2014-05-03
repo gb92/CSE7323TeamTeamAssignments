@@ -2,7 +2,7 @@
 //  TTActivitySelectionContentViewController.m
 //  TeamHyperFit
 //
-//  Created by ch484-mac5 on 5/2/14.
+//  Created by Chatchai Wangwiwiwattana on 5/2/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -18,6 +18,9 @@
 @end
 
 @implementation TTActivitySelectionContentViewController
+
+#pragma mark -
+#pragma mark ViewController Life Cycle.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,18 +41,21 @@
     [self.tabGestureRecognizer addTarget:self action:@selector(startSession)];
 }
 
--(void)startSession
-{
-    NSLog(@"Start Session %lu", (unsigned long)self.pageIndex);
-
-    TTSessionViewController* sessionVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionView"];
-    [self presentViewController:sessionVC animated:YES completion:^{}];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+
+-(void)startSession
+{
+
+    TTSessionViewController* sessionVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionView"];
+    [self presentViewController:sessionVC animated:YES completion:^{}];
+
+}
+
 
 @end

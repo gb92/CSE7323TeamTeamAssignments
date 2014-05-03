@@ -2,7 +2,7 @@
 //  TTSessionViewController.m
 //  TeamHyperFit
 //
-//  Created by Mark Wang on 4/26/14.
+//  Created by Chatchai Wangwiwiwattana on 4/26/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -34,6 +34,9 @@
     
     return _hearRateCounter;
 }
+
+#pragma mark -
+#pragma mark ViewController Life Cycle.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,22 +85,28 @@
     //[self performSelector:@selector(stopHearRate) withObject:nil afterDelay:10];
 }
 
--(void)stopHearRate
-{
-    [self.hearRateCounter stop];
-    NSLog(@"My heartRate is : %@", [self.hearRateCounter getHeartRate]);
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma mark Event Handling.
+
 - (IBAction)closeButton:(UIButton *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark -
+
+-(void)stopHearRate
+{
+    [self.hearRateCounter stop];
+    NSLog(@"My heartRate is : %@", [self.hearRateCounter getHeartRate]);
+}
+
 
 #pragma mark -- TTTimerViewDelegation
 

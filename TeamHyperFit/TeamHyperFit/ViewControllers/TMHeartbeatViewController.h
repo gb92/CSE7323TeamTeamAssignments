@@ -2,7 +2,7 @@
 //  TMHeartbeatview.h
 //  TeamFit
 //
-//  Created by ch484-mac6 on 3/12/14.
+//  Created by Chatchai Wangwiwiwattana on 3/12/14.
 //  Copyright (c) 2014 smu. All rights reserved.
 //
 

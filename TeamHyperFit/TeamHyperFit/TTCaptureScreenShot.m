@@ -2,7 +2,7 @@
 //  TTCaptureScreenShot.m
 //  TeamHyperFit
 //
-//  Created by ch484-mac7 on 4/30/14.
+//  Created by Chatchai Wangwiwiwattana on 4/30/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -75,27 +75,19 @@
     [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
     CIImage *result = [filter valueForKey:kCIOutputImageKey];
     
-//    CIFilter* gammaFilter = [CIFilter filterWithName:@"CIGammaAdjust"];
-//    [gammaFilter setValue:inputImage forKey:kCIInputImageKey];
-//    [gammaFilter setValue:@(20.0f)  forKey:@"inputPower"];
-    
-    // CIGaussianBlur has a tendency to shrink the image a little,
-    // this ensures it matches up exactly to the bounds of our original image
     CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
     
-    UIImage *returnImage = [UIImage imageWithCGImage:cgImage];//create a UIImage for this function to "return" so that ARC can manage the memory of the blur... ARC can't manage CGImageRefs so we need to release it before this function "returns" and ends.
-    CGImageRelease(cgImage);//release CGImageRef because ARC doesn't manage this on its own.
+    UIImage *returnImage = [self scaleIfNeeded:cgImage];
+    
+    CGImageRelease(cgImage);
     
     return returnImage;
-    
-    // *************** if you need scaling
-    // return [[self class] scaleIfNeeded:cgImage];
 }
 
 +(UIImage*) scaleIfNeeded:(CGImageRef)cgimg {
     bool isRetina = [[[UIDevice currentDevice] systemVersion] intValue] >= 4 && [[UIScreen mainScreen] scale] == 2.0;
     if (isRetina) {
-        return [UIImage imageWithCGImage:cgimg scale:2.0 orientation:UIImageOrientationUp];
+        return [UIImage imageWithCGImage:cgimg scale:1.95 orientation:UIImageOrientationUp];
     } else {
         return [UIImage imageWithCGImage:cgimg];
     }

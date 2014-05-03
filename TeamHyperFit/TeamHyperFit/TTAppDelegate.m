@@ -23,6 +23,7 @@
     
     //! Pull Gestures from sever if avaliable.
     //! Fake Data for now.
+#pragma waning - This is still Fake Data.
     
     self.gestures = [[NSArray alloc] initWithObjects:
                      [[TFGesture alloc] initWithName:@"PushUp"   imageName:@"pushupBigIcon"],
@@ -31,6 +32,32 @@
                      [[TFGesture alloc] initWithName:@"Cruches"  imageName:@"cranchingBigIcon"],
                      nil];
     
+    
+    self.userModel = [[TFUserModel alloc] init];
+    self.userModel.userID = @(123456);
+    self.userModel.username = @"MARK USER NAME";
+    self.userModel.firstName = @"Chatchai";
+    self.userModel.lastName = @"Wangwiwattana";
+    self.userModel.middleName = @"Mark";
+    self.userModel.fitPoints = @(45698);
+    self.userModel.goalFitPoints = @(50000);
+    self.userModel.calories = @(23125);
+    
+    NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       @(10000),@"Sunday",
+                                       @(30000),@"Monday",
+                                       @(2000),@"Tuesday",
+                                       @(0),@"Wednesday",
+                                       @(50000),@"Thursday",
+                                       @(0),@"Friday",
+                                       @(0),@"Saturday",
+                                       nil];
+    
+    NSNumber* goalThisWeek = @(50000);
+    
+    self.userModel.userStatistics = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     fitPointsThisWeek,@"fitpointsThisWeek",
+                                     goalThisWeek,@"goalThisWeek", nil];
     
     return YES;
 }

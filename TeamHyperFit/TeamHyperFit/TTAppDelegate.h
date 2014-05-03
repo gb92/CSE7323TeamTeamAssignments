@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "TTWebServiceManager.h"
+#import "TFUserModel.h"
+
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
 @interface TTAppDelegate : UIResponder <UIApplicationDelegate>
@@ -18,4 +20,6 @@
 
 @property (strong, nonatomic) MSClient *msClient;
 @property (strong, nonatomic) NSArray *gestures;
+@property (strong, nonatomic) TFUserModel *userModel;
+
 @end

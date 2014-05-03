@@ -2,7 +2,7 @@
 //  TMUIHeartrateIndicator.m
 //  TeamFit
 //
-//  Created by Mark Wang on 3/17/14.
+//  Created by Chatchai Wangwiwiwattana on 3/17/14.
 //  Copyright (c) 2014 smu. All rights reserved.
 //
 

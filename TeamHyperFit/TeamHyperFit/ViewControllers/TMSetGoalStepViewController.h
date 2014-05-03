@@ -2,7 +2,7 @@
 //  TMSetGoalStepViewController.h
 //  TeamFit
 //
-//  Created by Mark Wang on 2/27/14.
+//  Created by Rita on 2/27/14.
 //  Copyright (c) 2014 smu. All rights reserved.
 //
 

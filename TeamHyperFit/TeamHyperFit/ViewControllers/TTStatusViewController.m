@@ -2,7 +2,7 @@
 //  TTStatusViewController.m
 //  TeamHyperFit
 //
-//  Created by Mark Wang on 4/25/14.
+//  Created by Chatchai Wangwiwiwattana on 4/25/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -11,6 +11,9 @@
 #import "TTActionTableViewCell.h"
 #import "TTCaptureScreenShot.h"
 #import "TTInfoViewController.h"
+
+#import "TFUserModel.h"
+#import "TTAppDelegate.h"
 
 #import "UICountingLabel.h"
 
@@ -21,9 +24,23 @@
 @property (weak, nonatomic) IBOutlet UITableView *actionTableView;
 @property (weak, nonatomic) IBOutlet TTGraphView *fitpointGraphView;
 
+@property (strong, nonatomic) TFUserModel* userModel;
+
 @end
 
 @implementation TTStatusViewController
+
+-(TFUserModel*)userModel
+{
+    if (!_userModel) {
+        _userModel = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userModel;
+    }
+    
+    return _userModel;
+}
+
+#pragma mark -
+#pragma mark View Life Cycle.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,19 +60,11 @@
     
     //! Show graph only 2 weeks
     self.fitpointGraphView.numberOfColumn = @(14);
-    
-    //! Fake Data for now.
-    self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
-    
-    
-    self.stepsLabel.format = @"%d";
-    self.stepsLabel.method = UILabelCountingMethodEaseIn;
-    [self.stepsLabel countFrom:0 to:9854762 withDuration:0.5f];
-    
-    self.calorieLabel.format = @"%d";
-    self.calorieLabel.method = UILabelCountingMethodEaseIn;
-    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.7f];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self updateInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +78,20 @@
     [self.delegate TTStatusViewControllerOnCloseButtonPressed:self];
 }
 
+#pragma mark -
+-(void)updateInfo
+{
+    //! Fake Data for now.
+    self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
+    
+    self.stepsLabel.format = @"%d";
+    self.stepsLabel.method = UILabelCountingMethodEaseIn;
+    [self.stepsLabel countFrom:0 to:9854762 withDuration:0.5f];
+    
+    self.calorieLabel.format = @"%d";
+    self.calorieLabel.method = UILabelCountingMethodEaseIn;
+    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.7f];
+}
 
 #pragma mark --Table View Datasource
 

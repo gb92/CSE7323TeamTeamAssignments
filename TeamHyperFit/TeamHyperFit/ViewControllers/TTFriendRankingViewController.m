@@ -2,7 +2,7 @@
 //  TTFriendRankingViewController.m
 //  TeamHyperFit
 //
-//  Created by ch484-mac7 on 4/30/14.
+//  Created by Chatchai Wangwiwiwattana on 4/30/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -10,7 +10,12 @@
 #import "TTCircleImageView.h"
 #import "TTFriendTableViewCell.h"
 
+#import "TFUserModel.h"
+#import "TTAppDelegate.h"
+
 @interface TTFriendRankingViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) TFUserModel* userModel;
 
 @property (weak, nonatomic) IBOutlet TTCircleImageView *userPhotoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
@@ -19,10 +24,17 @@
 
 @implementation TTFriendRankingViewController
 
-- (IBAction)onCloseButtonPressed:(id)sender
+-(TFUserModel*)userModel
 {
-    [self.delegate TTFriendRankingViewControllerCloseButtonPressed:self];
+    if (!_userModel) {
+        _userModel = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userModel;
+    }
+    
+    return _userModel;
 }
+
+#pragma mark -
+#pragma mark ViewController Life Cycle.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,12 +50,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
     self.userPhotoImageView.image = [UIImage imageNamed:@"markImg"];
     
     self.friendTableView.delegate = self;
     self.friendTableView.dataSource = self;
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self updateInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +68,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark --Table View Datasource
+#pragma mark -
+#pragma mark Event Handling
+
+- (IBAction)onCloseButtonPressed:(id)sender
+{
+    [self.delegate TTFriendRankingViewControllerCloseButtonPressed:self];
+}
+
+#pragma mark -
+
+-(void)updateInfo
+{
+#pragma waning It is not yet impremented.
+}
+
+#pragma mark -
+#pragma mark Table View Datasource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

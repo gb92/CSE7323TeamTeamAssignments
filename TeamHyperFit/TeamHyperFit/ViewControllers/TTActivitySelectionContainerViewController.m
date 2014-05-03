@@ -2,7 +2,7 @@
 //  TTActivitySelectionContainerViewController.m
 //  TeamHyperFit
 //
-//  Created by ch484-mac5 on 5/2/14.
+//  Created by Chatchai Wangwiwiwattana on 5/2/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -33,7 +33,8 @@
     return _gestures;
 }
 
-#pragma mark -- View Controller Life Cycle.
+#pragma mark - 
+#pragma mark View Controller Life Cycle.
 
 - (void)viewDidLoad
 {
@@ -75,6 +76,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark Event Handling.
 
 - (IBAction)onClosePressed:(UIButton *)sender
 {

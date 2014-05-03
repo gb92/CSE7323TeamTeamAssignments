@@ -2,7 +2,7 @@
 //  TTTransitionerViewController.m
 //  TeamHyperFit
 //
-//  Created by Mark Wang on 5/2/14.
+//  Created by Chatchai Wangwiwiwattana on 5/2/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -68,6 +68,7 @@
 
 #pragma mark -
 #pragma mark TTMainViewDelegate
+
 -(void)TTMainViewControllerOnFriendsButtonPressed:(TTMainViewController*) view
 {
     [self.pageViewController setViewControllers:@[self.friendViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
