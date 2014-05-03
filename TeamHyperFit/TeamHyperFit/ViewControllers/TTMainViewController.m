@@ -72,6 +72,9 @@
     
     self.fitpointView.delegate = self;
     [self playYoyoEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:30.0f frequency:3.0 damping:0.3];
+    
+    //[self setupMotionEffect];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -97,6 +100,34 @@
 
 #pragma mark -
 #pragma mark UIDynamic
+
+
+-(void)setupMotionEffect
+{
+    // Set vertical effect
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.y"
+     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-10);
+    verticalMotionEffect.maximumRelativeValue = @(10);
+    
+    // Set horizontal effect
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.x"
+     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-10);
+    horizontalMotionEffect.maximumRelativeValue = @(10);
+    
+    // Create group to combine both
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    // Add both effects to your view
+    [self.fitpointView addMotionEffect:group];
+}
+
 
 -(void)playYoyoEffect:(UIView<ResizableDynamicItem>*) targetView force:(float) force frequency:(float) frequency damping:(float) damping
 {

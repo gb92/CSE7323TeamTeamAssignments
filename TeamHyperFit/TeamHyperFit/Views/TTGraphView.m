@@ -153,8 +153,6 @@ const int kLineWidth        = 2;
         
         [self calGraphPointsWithData:self.data canvas:canvasRect pointsOut:graphPoints numberOfColum:self.numberOfColumn ];
         
-        NSLog(@"datasizebeforedrawline : %ld",(long)dataSize);
-        
         [self drawGraphLine:ctx points:graphPoints numberOfPoints:dataSize ];
     }
 }
