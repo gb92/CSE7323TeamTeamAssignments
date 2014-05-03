@@ -20,9 +20,6 @@ static const int SI_GATE_PADDING = 3;
 
 @interface TTSevenDaysView()
 
-@property(nonatomic) float value;
-@property(nonatomic) float maxValue;
-
 @end
 
 @implementation TTSevenDaysView
@@ -111,34 +108,46 @@ static const int SI_GATE_PADDING = 3;
 {
     [super drawRect:rect];
     
-    radius = self.frame.size.width / 2 - SI_ARC_PADDING;
+    int valueToDraw = self.value;
+    int maxValueToDraw = self.maxValue;
+    
+    if( maxValueToDraw < 0 ) maxValueToDraw = 0;
+    
+    if( valueToDraw > maxValueToDraw ) valueToDraw = maxValueToDraw;
+    if( valueToDraw < 0 ) valueToDraw = 0;
+    
+    const float haftWidth = self.frame.size.width/2;
+    const float haftHeight = self.frame.size.height/2;
+    
+    radius = haftWidth - SI_ARC_PADDING;
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
+    //! Draw Black Circle Background.
     CGContextSaveGState(ctx);
     
-    CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius, ToRad(0), ToRad(360), 0);
+    CGContextAddArc(ctx, haftWidth, haftHeight, radius, ToRad(0), ToRad(360), 0);
     [[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f] setFill];
-    
     
     CGContextDrawPath(ctx, kCGPathFill);
     
     CGContextRestoreGState(ctx);
     
-    /* Draw Gate */
+    //! Draw Gate.
     
     CGContextSaveGState(ctx);
     
+    int targetAngle = (int)( (360 - (SI_START_OFFSET*2)) * ( 1.0f -  (valueToDraw/(float)maxValueToDraw) ) );
     CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
-                    ToRad(90+SI_START_OFFSET),
-                    ToRad( (90-SI_START_OFFSET - (319 * ( 1.0 -  (self.value/self.maxValue) ) ) ) ) , 0);
+                    ToRad( 90+SI_START_OFFSET ),
+                    ToRad( (90-SI_START_OFFSET) - targetAngle ) , 0);
     
     [self.barColor setStroke];
     
-    //CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, self.barColor.CGColor);
+    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 5, self.barColor.CGColor);
     
     CGContextSetLineWidth(ctx, SI_LINE_WIDTH / 2);
-    CGContextSetLineCap(ctx, kCGLineCapButt);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
     
     CGContextDrawPath(ctx, kCGPathStroke);
     
@@ -155,42 +164,6 @@ static const int SI_GATE_PADDING = 3;
     [self setNeedsDisplay];
     
 }
-
--(void)setStepValue:(float)value
-{
-    if( value < 0 )
-    {
-        self.value = 0;
-    }
-    else if( value > self.maxValue)
-    {
-        self.value = self.maxValue;
-    }
-    else
-    {
-        self.value = value;
-    }
-    
-    [self updateUI];
-}
-
--(void)setMaxValue:(float)value
-{
-    if( value < 0 )
-    {
-        _maxValue = 0;
-    }
-    else
-    {
-        _maxValue = value;
-    }
-    
-    // Clamp current value to max value
-    if( value < _value ) _value = value;
-    
-    [self updateUI];
-}
-
 
 
 @end

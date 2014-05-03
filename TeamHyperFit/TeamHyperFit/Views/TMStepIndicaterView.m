@@ -137,7 +137,6 @@ static const int SI_GATE_PADDING     = 20;
     if( valueToDraw > maxValueToDraw ) valueToDraw = maxValueToDraw;
     if( valueToDraw < 0 ) valueToDraw = 0;
     
-    
     const float haftWidth = self.frame.size.width/2;
     const float haftHeight = self.frame.size.height/2;
     
@@ -177,9 +176,10 @@ static const int SI_GATE_PADDING     = 20;
     
     CGContextSaveGState(ctx);
     
+    int targetAngle = (int)( (360 - (SI_START_OFFSET*2)) * ( 1.0f -  (valueToDraw/(float)maxValueToDraw) ) );
     CGContextAddArc(ctx, self.frame.size.width/2, self.frame.size.height/2, radius - SI_GATE_PADDING,
                     ToRad( 90+SI_START_OFFSET ),
-                    ToRad( (89-SI_START_OFFSET - (int)(360 * ( 1.0 -  (valueToDraw/(float)maxValueToDraw) ) ) ) ) , 0);
+                    ToRad( (90-SI_START_OFFSET) - targetAngle ) , 0);
     
     [self.barColor setStroke];
     

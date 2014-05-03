@@ -22,10 +22,10 @@
 
 @property (nonatomic) CGRect defaultBounds;
 
+@property(nonatomic) float value;
+@property(nonatomic) float maxValue;
+
 @property (strong, nonatomic) UIColor* barColor;
 @property (strong, nonatomic) NSString* text;
-
--(void)setStepValue:(float)value;
--(void)setMaxValue:(float)value;
 
 @end

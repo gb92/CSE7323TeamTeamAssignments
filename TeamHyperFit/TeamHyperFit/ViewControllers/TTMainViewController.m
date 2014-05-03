@@ -54,13 +54,13 @@
     self.friView.text = @"F";
     self.satView.text = @"Sa";
     
-    [self.sunView setStepValue:60];
-    [self.monView setStepValue:55];
-    [self.tueView setStepValue:89];
-    [self.wesView setStepValue:20];
-    [self.thuView setStepValue:0];
-    [self.friView setStepValue:10];
-    [self.satView setStepValue:35];
+    self.sunView.value= 60;
+    self.monView.value= 55;
+    self.tueView.value= 89;
+    self.wesView.value= 20;
+    self.thuView.value= 0;
+    self.friView.value= 10;
+    self.satView.value= 35;
     
     self.sunView.delegate = self;
     self.monView.delegate = self;
@@ -70,8 +70,8 @@
     self.friView.delegate = self;
     self.satView.delegate = self;
     
-    self.fitpointView.value = 50;
-    self.fitpointView.maxValue = 100;
+    self.fitpointView.value = 4497;
+    self.fitpointView.maxValue = 5000;
     
     self.fitpointView.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
     
