@@ -47,6 +47,9 @@
 		5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
 		5CBA7A46190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A44190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
+		5CECBDE919149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */; };
+		5CECBDEC1914A9E2003E40F5 /* TTTransitionerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */; };
+		5CECBDEF1914B18B003E40F5 /* TTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */; };
 		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
 		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
@@ -149,6 +152,12 @@
 		5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamHyperFitTests-Info.plist"; sourceTree = "<group>"; };
 		5CBA7A45190767620099C0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
+		5CECBDE719149F3A003E40F5 /* TTPositionToBoundsDynamicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPositionToBoundsDynamicItem.h; path = UIDynamics/TTPositionToBoundsDynamicItem.h; sourceTree = "<group>"; };
+		5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTPositionToBoundsDynamicItem.m; path = UIDynamics/TTPositionToBoundsDynamicItem.m; sourceTree = "<group>"; };
+		5CECBDEA1914A9E2003E40F5 /* TTTransitionerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTransitionerViewController.h; sourceTree = "<group>"; };
+		5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTransitionerViewController.m; sourceTree = "<group>"; };
+		5CECBDED1914B18B003E40F5 /* TTBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseViewController.h; sourceTree = "<group>"; };
+		5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTBaseViewController.m; sourceTree = "<group>"; };
 		99506C251912FEC800A7129F /* TTFacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFacebookFriend.h; sourceTree = "<group>"; };
 		99506C261912FEC800A7129F /* TTFacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookFriend.m; sourceTree = "<group>"; };
 		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
@@ -245,6 +254,8 @@
 		5C2626B419077822001AA0E7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5CECBDED1914B18B003E40F5 /* TTBaseViewController.h */,
+				5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */,
 				5C2626D21907796F001AA0E7 /* TMHeartbeatViewController.h */,
 				5C2626D31907796F001AA0E7 /* TMHeartbeatViewContoller.mm */,
 				5C2626B519077822001AA0E7 /* TMSetGoalStepViewController.h */,
@@ -273,6 +284,8 @@
 				EFF03DE2191436CF00CE326B /* TTActivitySelectionContentViewController.m */,
 				EFF03DE7191448B900CE326B /* TTActivityCollectionViewController.h */,
 				EFF03DE8191448B900CE326B /* TTActivityCollectionViewController.m */,
+				5CECBDEA1914A9E2003E40F5 /* TTTransitionerViewController.h */,
+				5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -368,6 +381,7 @@
 		5CBA7A22190767620099C0B9 /* TeamHyperFit */ = {
 			isa = PBXGroup;
 			children = (
+				5CECBDE619149EED003E40F5 /* UIDynamic */,
 				EF965BAD1911D73F0056C2A0 /* Transitions */,
 				EF965BA91911C5E10056C2A0 /* Utilities */,
 				99C5A448190C84CA000B0F81 /* FacebookIntegration */,
@@ -421,6 +435,15 @@
 				5CBA7A44190767620099C0B9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CECBDE619149EED003E40F5 /* UIDynamic */ = {
+			isa = PBXGroup;
+			children = (
+				5CECBDE719149F3A003E40F5 /* TTPositionToBoundsDynamicItem.h */,
+				5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */,
+			);
+			name = UIDynamic;
 			sourceTree = "<group>";
 		};
 		99506C241912FEB400A7129F /* Models */ = {
@@ -518,7 +541,7 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = APD62CDC25;
+						DevelopmentTeam = 8N25HJ2H24;
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
@@ -571,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CBA7A2D190767620099C0B9 /* TTAppDelegate.m in Sources */,
+				5CECBDE919149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m in Sources */,
 				5C2626C419077822001AA0E7 /* TMStatViewController.m in Sources */,
 				EF965BAC1911C6010056C2A0 /* TTCaptureScreenShot.m in Sources */,
 				EF965B9F1911AC800056C2A0 /* TTCircleImageView.m in Sources */,
@@ -589,8 +613,10 @@
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,
 				5C427A67191225E000BABF95 /* UICountingLabel.m in Sources */,
 				5C9ADF42190B68E400EB3729 /* TTActionTableViewCell.m in Sources */,
+				5CECBDEC1914A9E2003E40F5 /* TTTransitionerViewController.m in Sources */,
 				5C427A611912106D00BABF95 /* TTNOEffectTransition.m in Sources */,
 				EF965BA51911B1770056C2A0 /* TTFriendTableViewCell.m in Sources */,
+				5CECBDEF1914B18B003E40F5 /* TTBaseViewController.m in Sources */,
 				99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */,
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */,

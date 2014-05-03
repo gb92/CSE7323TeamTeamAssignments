@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTSevenDaysView;
+
+@protocol TTSevenDaysViewDelegate <NSObject>
+
+-(void)TTSevenDaysViewOnPressed:(TTSevenDaysView*)view;
+
+@end
 
 @interface TTSevenDaysView : UIView
+
+@property (weak, nonatomic) id<TTSevenDaysViewDelegate> delegate;
+
+@property (nonatomic) CGRect defaultBounds;
 
 @property (strong, nonatomic) UIColor* barColor;
 @property (strong, nonatomic) NSString* text;

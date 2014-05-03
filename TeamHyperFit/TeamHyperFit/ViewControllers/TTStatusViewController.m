@@ -66,21 +66,9 @@
 
 - (IBAction)closeButtonPressed:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate TTStatusViewControllerOnCloseButtonPressed:self];
 }
 
-//#pragma mark -- Sage
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if( [segue.identifier isEqualToString:@"info"] )
-//    {
-//        TTNOEffectTransitionDelegation* transitionDelegation =  [[TTNOEffectTransitionDelegation alloc] init];
-//        transitionDelegation.duration = @(2);
-//        
-//        TTInfoViewController* destVC = (TTInfoViewController*)segue.destinationViewController;
-//        destVC.transitioningDelegate =transitionDelegation;
-//    }
-//}
 
 #pragma mark --Table View Datasource
 

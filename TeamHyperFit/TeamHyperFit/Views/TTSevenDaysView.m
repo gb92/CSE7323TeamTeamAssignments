@@ -70,8 +70,20 @@ static const int SI_GATE_PADDING = 3;
     //! For testing
     self.value = 100;
     self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
+    
+    self.defaultBounds = self.bounds;
 }
 
+#pragma mark -
+#pragma mark Event Handling
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.delegate TTSevenDaysViewOnPressed:self];
+}
+
+#pragma mark -
+#pragma mark Drawing
 
 -(void)drawFontWithString:(NSString*)text size:(int) size position:(CGPoint) point
 {

@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTFriendRankingViewController;
+
+@protocol TTFriendRankingViewControllerDelegate <NSObject>
+
+-(void) TTFriendRankingViewControllerCloseButtonPressed:(TTFriendRankingViewController*) view;
+
+@end
+
 @interface TTFriendRankingViewController : UIViewController
+
+@property (weak, nonatomic) id<TTFriendRankingViewControllerDelegate> delegate;
 
 @end

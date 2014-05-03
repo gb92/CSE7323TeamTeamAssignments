@@ -21,7 +21,7 @@
 
 - (IBAction)onCloseButtonPressed:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate TTFriendRankingViewControllerCloseButtonPressed:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

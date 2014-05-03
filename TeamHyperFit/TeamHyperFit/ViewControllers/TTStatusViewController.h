@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTStatusViewController;
+
+@protocol TTStatusViewControllerDelegate <NSObject>
+
+-(void) TTStatusViewControllerOnCloseButtonPressed:(TTStatusViewController*) view;
+
+@end
+
 @interface TTStatusViewController : UIViewController
+
+@property (weak, nonatomic) id<TTStatusViewControllerDelegate> delegate;
 
 @end

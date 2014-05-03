@@ -23,10 +23,6 @@ static const int SI_GATE_PADDING = 20;
 @property(nonatomic) float value;
 @property(nonatomic) float maxValue;
 
-@property (strong, nonatomic) UIDynamicAnimator *animator;
-@property (strong, nonatomic) UIAttachmentBehavior *attachmentBehaviour;
-@property (strong, nonatomic) UIPushBehavior *pushBehaviour;
-
 @end
 
 @implementation TMStepIndicaterView
@@ -75,32 +71,16 @@ static const int SI_GATE_PADDING = 20;
     self.value = 100;
     self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
     
-    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
+    self.defaultBounds = self.bounds;
+    
 }
 
 #pragma mark -- Touch Events
 
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    NSLog(@"Begin!!!");
-//    
-//    UITouch *touch = [[event allTouches] anyObject];
-//    CGPoint location = [touch locationInView:touch.view];
-//    
-//    self.pushBehaviour = [[UIPushBehavior alloc]initWithItems:@[self] mode:UIPushBehaviorModeInstantaneous];
-//    self.pushBehaviour.pushDirection = CGVectorMake(0.01, 0);
-//    
-//    self.attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:self attachedToAnchor:location];
-//    self.attachmentBehaviour.anchorPoint = location;
-//    [self.attachmentBehaviour setLength:10];
-//    [self.attachmentBehaviour setFrequency:1];
-//    [self.attachmentBehaviour setDamping:10];
-//    
-//    [self.animator addBehavior:self.attachmentBehaviour];
-//    [self.animator addBehavior:self.pushBehaviour];
-//    
-//    self.pushBehaviour.active = YES;
-//}
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.delegate TMSetIndicaterViewPressed:self];
+}
 //
 //-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 //{

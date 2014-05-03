@@ -10,7 +10,9 @@
 #import "TTSevenDaysView.h"
 #import "TMStepCountViewController.h"
 
-@interface TTMainViewController ()
+#import "TTPositionToBoundsDynamicItem.h"
+
+@interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *sunView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *monView;
@@ -26,9 +28,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *calorieLabel;
 
 @property (strong, nonatomic) UIDynamicAnimator *animator;
-@property (strong, nonatomic) UIAttachmentBehavior *attachmentBehavior;
-@property (strong, nonatomic) UIPushBehavior *pushBehavior;
-@property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
 
 @end
 
@@ -63,14 +62,30 @@
     [self.friView setStepValue:10];
     [self.satView setStepValue:35];
     
-//    CGVector gravityDirection = {0.0, 0.01};
-//    
-//    self.gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.monView]];
-//    [self.gravityBehavior setGravityDirection:gravityDirection];
-//    
-//    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.monView];
-//    [self.animator addBehavior:self.gravityBehavior];
+    self.sunView.delegate = self;
+    self.monView.delegate = self;
+    self.tueView.delegate = self;
+    self.wesView.delegate = self;
+    self.thuView.delegate = self;
+    self.friView.delegate = self;
+    self.satView.delegate = self;
     
+    self.fitpointView.delegate = self;
+    [self playYoyoEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:30.0f frequency:3.0 damping:0.3];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}
+
+- (IBAction)onStatPressed:(id)sender
+{
+    [self.delegate TTMainViewControllerOnStatButtonPressed:self];
+}
+- (IBAction)onFriendsPressed:(id)sender
+{
+    [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,5 +94,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark -
+#pragma mark UIDynamic
+
+-(void)playYoyoEffect:(UIView<ResizableDynamicItem>*) targetView force:(float) force frequency:(float) frequency damping:(float) damping
+{
+    targetView.bounds = targetView.defaultBounds;
+
+    UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    
+    TTPositionToBoundsDynamicItem *boundDynamicItem = [[TTPositionToBoundsDynamicItem alloc] initWithTarget:targetView];
+    
+    // Create an attachment between the buttonBoundsDynamicItem and the initial
+    // value of the button's bounds.
+    UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:boundDynamicItem attachedToAnchor:boundDynamicItem.center];
+    [attachmentBehavior setFrequency:frequency];
+    [attachmentBehavior setDamping:damping];
+    [animator addBehavior:attachmentBehavior];
+    
+    UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[boundDynamicItem] mode:UIPushBehaviorModeInstantaneous];
+    pushBehavior.angle = M_PI_4;
+    pushBehavior.magnitude = force;
+    [animator addBehavior:pushBehavior];
+    
+    [pushBehavior setActive:TRUE];
+    
+    self.animator = animator;
+}
+
+
+#pragma mark -
+#pragma mark TMSetIndicaterViewDelegate
+
+-(void)TMSetIndicaterViewReachGoal:(TMStepIndicaterView *)view
+{
+    
+}
+
+-(void)TMSetIndicaterViewPressed:(TMStepIndicaterView *)view
+{
+    [self playYoyoEffect:(UIView<ResizableDynamicItem>*)view force:25.0f frequency:3.0 damping:0.3];
+}
+
+#pragma mark -
+#pragma mark TTSevenDayViewDelegate
+
+-(void)TTSevenDaysViewOnPressed:(TTSevenDaysView *)view
+{
+    [self playYoyoEffect:(UIView<ResizableDynamicItem>*)view force:0.2 frequency:3.0 damping:0.2];
+}
 
 @end

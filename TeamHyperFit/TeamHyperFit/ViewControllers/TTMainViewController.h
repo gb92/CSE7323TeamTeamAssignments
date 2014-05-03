@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTMainViewController;
+
+@protocol TTMainViewControllerDelegate <NSObject>
+
+-(void) TTMainViewControllerOnStatButtonPressed:(TTMainViewController*) view;
+-(void) TTMainViewControllerOnFriendsButtonPressed:(TTMainViewController*) view;
+
+@end
+
 @interface TTMainViewController : UIViewController
+
+@property (weak, nonatomic) id<TTMainViewControllerDelegate> delegate;
 
 @end

@@ -13,6 +13,7 @@
 @protocol TMSetIndicaterViewDelegate <NSObject>
 
 -(void)TMSetIndicaterViewReachGoal:(TMStepIndicaterView*) view;
+-(void)TMSetIndicaterViewPressed:(TMStepIndicaterView *) view;
 
 @end
 
@@ -21,7 +22,9 @@
 
 @property (weak,nonatomic) id<TMSetIndicaterViewDelegate> delegate;
 
+@property (nonatomic) CGRect defaultBounds;
 @property (strong, nonatomic) UIColor* barColor;
+
 -(void)setStepValue:(float)value;
 -(void)setMaxValue:(float)value;
 
