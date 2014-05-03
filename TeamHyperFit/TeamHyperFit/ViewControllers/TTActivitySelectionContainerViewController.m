@@ -13,13 +13,13 @@
 #import "TTAppDelegate.h"
 #import "TFGesture.h"
 
-@interface TTActivitySelectionContainerViewController ()<UIPageViewControllerDataSource>
+@interface TTActivitySelectionContainerViewController ()<UIPageViewControllerDataSource, TTActivityCollectionDelegate>
 
 @property (strong, nonatomic) UIPageViewController* pageViewContoller;
 @property (strong, nonatomic) TTActivityCollectionViewController* collectionViewController;
 
 @property (strong, nonatomic) NSArray* gestures;
-
+@property NSInteger currentActivityIndex;
 @end
 
 @implementation TTActivitySelectionContainerViewController
@@ -53,11 +53,16 @@
     [self.view addSubview:_pageViewContoller.view];
     [self.pageViewContoller didMoveToParentViewController:self];
     
+    self.currentActivityIndex = 0;
+    
     //----------------------------------------------------------------
     
     self.collectionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityCollection"];
     
     self.collectionViewController.view.frame = CGRectMake(0,self.view.frame.size.height - 170, self.view.frame.size.width, 170);
+    
+    
+    self.collectionViewController.delegate = self;
     
     [self addChildViewController:_collectionViewController];
     [self.view addSubview:_collectionViewController.view ];
@@ -69,6 +74,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onClosePressed:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -- Contoller
@@ -125,7 +135,30 @@
 
 -(NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
 {
-    return 0;
+    return self.currentActivityIndex;
+}
+
+#pragma mark -- TTActivityCollectionViewContollerDelegate
+-(void)TTActivityCollectionCellDidSelectedAtIndex:(NSInteger)itemIndex
+{
+    if (self.currentActivityIndex < itemIndex)
+    {
+        self.currentActivityIndex = itemIndex;
+        
+        TTActivitySelectionContentViewController *thePage = [self viewControllerAtIndex:itemIndex];
+        NSArray *viewControllers = @[thePage];
+        [self.pageViewContoller setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
+    else if(self.currentActivityIndex > itemIndex)
+    {
+        self.currentActivityIndex = itemIndex;
+        
+        TTActivitySelectionContentViewController *thePage = [self viewControllerAtIndex:itemIndex];
+        NSArray *viewControllers = @[thePage];
+        [self.pageViewContoller setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    }
+
+    
 }
 
 @end

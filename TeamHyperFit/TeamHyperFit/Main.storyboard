@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H6h-XZ-0M2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="u7r-TB-KOQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -654,7 +654,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="mcd-f0-uHu" kind="modal" id="Fyd-mc-gMu"/>
+                                    <segue destination="H6h-XZ-0M2" kind="modal" id="fnc-v3-gux"/>
                                 </connections>
                             </button>
                             <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pzh-dL-uLp" customClass="TMStepIndicaterView">
@@ -1278,12 +1278,12 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDW-bn-ODb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2806" y="2241"/>
+            <point key="canvasLocation" x="2478" y="2075"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="LYR-at-qqc">
             <objects>
-                <viewController id="mcd-f0-uHu" customClass="TTSessionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionView" id="mcd-f0-uHu" customClass="TTSessionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EH0-LN-50h"/>
                         <viewControllerLayoutGuide type="bottom" id="IVT-S9-cEP"/>
@@ -1372,7 +1372,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Myp-jD-AVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1698" y="2083"/>
+            <point key="canvasLocation" x="2842" y="2075"/>
         </scene>
         <!--Activity Selection Content View Controller-->
         <scene sceneID="kgx-sD-7yU">
@@ -1397,19 +1397,34 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <rect key="frame" x="76" y="92" width="169" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap any where to start." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egt-q8-SPn">
+                                <rect key="frame" x="20" y="276" width="281" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.28057065219999999" green="0.28057065219999999" blue="0.28057065219999999" alpha="0.47999999999999998" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="fQ4-fG-ugy" appends="YES" id="WRd-cM-chc"/>
+                        </connections>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="350"/>
                     <connections>
                         <outlet property="activityImageView" destination="oOJ-U6-68h" id="6wj-c1-3NN"/>
                         <outlet property="activityNameLabel" destination="QsN-cK-Wsl" id="TSe-tq-xXa"/>
+                        <outlet property="tabGestureRecognizer" destination="fQ4-fG-ugy" id="2mF-fz-Gjh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQd-0q-0Oi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="fQ4-fG-ugy"/>
             </objects>
-            <point key="canvasLocation" x="2448" y="2241"/>
+            <point key="canvasLocation" x="2121" y="2075"/>
         </scene>
         <!--Activity Selection Container View Controller-->
         <scene sceneID="keE-lP-Z1r">
@@ -1446,6 +1461,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <state key="normal" image="close"/>
                                 <connections>
                                     <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="BSR-px-ULI"/>
+                                    <action selector="onClosePressed:" destination="H6h-XZ-0M2" eventType="touchUpInside" id="9PJ-54-NhC"/>
                                     <action selector="onDismissButtonPressed:" destination="Eeu-4b-gF5" eventType="touchUpInside" id="eSh-0X-CTt"/>
                                 </connections>
                             </button>
@@ -1455,7 +1471,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs9-e3-9cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2448" y="2743"/>
+            <point key="canvasLocation" x="1704" y="2075"/>
         </scene>
         <!--Activity Collection View Controller-->
         <scene sceneID="521-iM-M4o">
@@ -1510,7 +1526,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2m-s6-xLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2804" y="2742"/>
+            <point key="canvasLocation" x="2121" y="2514"/>
         </scene>
     </scenes>
     <resources>

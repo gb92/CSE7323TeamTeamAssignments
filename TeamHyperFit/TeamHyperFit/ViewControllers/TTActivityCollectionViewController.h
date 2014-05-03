@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class TTActivityCollectionViewController;
+
+@protocol TTActivityCollectionDelegate <NSObject>
+
+-(void)TTActivityCollectionCellDidSelectedAtIndex:(NSInteger) itemIndex;
+
+@end
+
 @interface TTActivityCollectionViewController : UICollectionViewController
+
+@property (weak,nonatomic) id<TTActivityCollectionDelegate> delegate;
 
 @end

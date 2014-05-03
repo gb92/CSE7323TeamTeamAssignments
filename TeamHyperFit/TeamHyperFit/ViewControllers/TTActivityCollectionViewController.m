@@ -69,5 +69,11 @@
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath*)indexPath{
+    
+    
+    [self.delegate TTActivityCollectionCellDidSelectedAtIndex:indexPath.row];
+    
+}
 
 @end
