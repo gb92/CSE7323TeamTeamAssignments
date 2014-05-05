@@ -30,7 +30,6 @@
 		5C2626EA19078B6F001AA0E7 /* TTWebServiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2626E919078B6F001AA0E7 /* TTWebServiceManagerTests.m */; };
 		5C427A611912106D00BABF95 /* TTNOEffectTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C427A601912106D00BABF95 /* TTNOEffectTransition.m */; };
 		5C427A67191225E000BABF95 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C427A66191225E000BABF95 /* UICountingLabel.m */; };
-		5C427A6A191231D200BABF95 /* TTSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C427A69191231D200BABF95 /* TTSettingViewController.m */; };
 		5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C513797190C5FE90054E253 /* TTSessionViewController.m */; };
 		5C51379B190C7B910054E253 /* TTSevenDaysView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C51379A190C7B910054E253 /* TTSevenDaysView.m */; };
 		5C51379E190C83310054E253 /* TTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C51379D190C83310054E253 /* TTMainViewController.m */; };
@@ -50,6 +49,9 @@
 		5CECBDE919149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */; };
 		5CECBDEC1914A9E2003E40F5 /* TTTransitionerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */; };
 		5CECBDEF1914B18B003E40F5 /* TTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */; };
+		5CFEE0CD191814A700766F01 /* TTSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0CC191814A700766F01 /* TTSettingTableViewController.m */; };
+		5CFEE0D01918180800766F01 /* TTActivitySelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0CF1918180800766F01 /* TTActivitySelectionTableViewController.m */; };
+		5CFEE0D31918192300766F01 /* TTActivitySelectionViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0D21918192300766F01 /* TTActivitySelectionViewTableViewCell.m */; };
 		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
 		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
@@ -124,8 +126,6 @@
 		5C427A601912106D00BABF95 /* TTNOEffectTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTNOEffectTransition.m; path = Transitions/TTNOEffectTransition.m; sourceTree = "<group>"; };
 		5C427A65191225E000BABF95 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 		5C427A66191225E000BABF95 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
-		5C427A68191231D200BABF95 /* TTSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSettingViewController.h; sourceTree = "<group>"; };
-		5C427A69191231D200BABF95 /* TTSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSettingViewController.m; sourceTree = "<group>"; };
 		5C513796190C5FE90054E253 /* TTSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSessionViewController.h; sourceTree = "<group>"; };
 		5C513797190C5FE90054E253 /* TTSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSessionViewController.m; sourceTree = "<group>"; };
 		5C513799190C7B910054E253 /* TTSevenDaysView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSevenDaysView.h; sourceTree = "<group>"; };
@@ -158,6 +158,12 @@
 		5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTransitionerViewController.m; sourceTree = "<group>"; };
 		5CECBDED1914B18B003E40F5 /* TTBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBaseViewController.h; sourceTree = "<group>"; };
 		5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTBaseViewController.m; sourceTree = "<group>"; };
+		5CFEE0CB191814A700766F01 /* TTSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSettingTableViewController.h; sourceTree = "<group>"; };
+		5CFEE0CC191814A700766F01 /* TTSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSettingTableViewController.m; sourceTree = "<group>"; };
+		5CFEE0CE1918180800766F01 /* TTActivitySelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTActivitySelectionTableViewController.h; sourceTree = "<group>"; };
+		5CFEE0CF1918180800766F01 /* TTActivitySelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTActivitySelectionTableViewController.m; sourceTree = "<group>"; };
+		5CFEE0D11918192300766F01 /* TTActivitySelectionViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTActivitySelectionViewTableViewCell.h; sourceTree = "<group>"; };
+		5CFEE0D21918192300766F01 /* TTActivitySelectionViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTActivitySelectionViewTableViewCell.m; sourceTree = "<group>"; };
 		99506C251912FEC800A7129F /* TTFacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFacebookFriend.h; sourceTree = "<group>"; };
 		99506C261912FEC800A7129F /* TTFacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookFriend.m; sourceTree = "<group>"; };
 		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
@@ -276,8 +282,6 @@
 				EF965BA11911AE4E0056C2A0 /* TTFriendRankingViewController.m */,
 				EF965BA61911C5550056C2A0 /* TTInfoViewController.h */,
 				EF965BA71911C5550056C2A0 /* TTInfoViewController.m */,
-				5C427A68191231D200BABF95 /* TTSettingViewController.h */,
-				5C427A69191231D200BABF95 /* TTSettingViewController.m */,
 				EFF03DDE1914369D00CE326B /* TTActivitySelectionContainerViewController.h */,
 				EFF03DDF1914369D00CE326B /* TTActivitySelectionContainerViewController.m */,
 				EFF03DE1191436CF00CE326B /* TTActivitySelectionContentViewController.h */,
@@ -286,6 +290,10 @@
 				EFF03DE8191448B900CE326B /* TTActivityCollectionViewController.m */,
 				5CECBDEA1914A9E2003E40F5 /* TTTransitionerViewController.h */,
 				5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */,
+				5CFEE0CB191814A700766F01 /* TTSettingTableViewController.h */,
+				5CFEE0CC191814A700766F01 /* TTSettingTableViewController.m */,
+				5CFEE0CE1918180800766F01 /* TTActivitySelectionTableViewController.h */,
+				5CFEE0CF1918180800766F01 /* TTActivitySelectionTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -332,6 +340,8 @@
 				EF965BA41911B1770056C2A0 /* TTFriendTableViewCell.m */,
 				EFF03DE41914471700CE326B /* TTActivityCollectionViewCell.h */,
 				EFF03DE51914471700CE326B /* TTActivityCollectionViewCell.m */,
+				5CFEE0D11918192300766F01 /* TTActivitySelectionViewTableViewCell.h */,
+				5CFEE0D21918192300766F01 /* TTActivitySelectionViewTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -541,7 +551,7 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = APD62CDC25;
+						DevelopmentTeam = 8N25HJ2H24;
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
@@ -603,12 +613,15 @@
 				5C2626E819077D86001AA0E7 /* TTWebServiceManager.m in Sources */,
 				EFF03DE9191448B900CE326B /* TTActivityCollectionViewController.m in Sources */,
 				99D88C861909A1FA00E3E073 /* TFUserModel.m in Sources */,
+				5CFEE0CD191814A700766F01 /* TTSettingTableViewController.m in Sources */,
 				5C2626C519077822001AA0E7 /* TMStepCountViewController.m in Sources */,
+				5CFEE0D31918192300766F01 /* TTActivitySelectionViewTableViewCell.m in Sources */,
 				5C9ADF3F190B673E00EB3729 /* TTGraphView.m in Sources */,
 				EFF03DE3191436CF00CE326B /* TTActivitySelectionContentViewController.m in Sources */,
 				5C2626B319077802001AA0E7 /* APLGraphView.m in Sources */,
 				99C5A451190C8535000B0F81 /* TTFacebookHandler.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
+				5CFEE0D01918180800766F01 /* TTActivitySelectionTableViewController.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,
 				5C427A67191225E000BABF95 /* UICountingLabel.m in Sources */,
@@ -626,7 +639,6 @@
 				EFF03DE01914369D00CE326B /* TTActivitySelectionContainerViewController.m in Sources */,
 				EFF03DE61914471700CE326B /* TTActivityCollectionViewCell.m in Sources */,
 				99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */,
-				5C427A6A191231D200BABF95 /* TTSettingViewController.m in Sources */,
 				EF8D751A1912D50E00857EE3 /* TTTimeCounterView.m in Sources */,
 				EF9480701912E5810029E71F /* TTHeartRateCounter.mm in Sources */,
 				5C2626D41907796F001AA0E7 /* TMHeartbeatViewContoller.mm in Sources */,

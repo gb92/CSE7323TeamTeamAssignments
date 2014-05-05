@@ -22,4 +22,7 @@
 @property (strong, nonatomic) NSArray *gestures;
 @property (strong, nonatomic) TFUserModel *userModel;
 
+//! For Prototyping only! Please change to the real thing.
+@property (nonatomic) BOOL activitySessionMode;
+
 @end

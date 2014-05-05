@@ -14,6 +14,10 @@
 
 #import "TTPositionToBoundsDynamicItem.h"
 
+#import "TTActivitySelectionTableViewController.h"
+#import "TTActivitySelectionContainerViewController.h"
+
+
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
 @property (strong, nonatomic) TFUserModel *userModel;
@@ -110,6 +114,22 @@
 - (IBAction)onFriendsPressed:(id)sender
 {
     [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
+}
+- (IBAction)onStartActivityButtonPressed:(UIButton *)sender
+{
+    if( ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode )
+    {
+        TTActivitySelectionTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityTable"];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    else
+    {
+        TTActivitySelectionContainerViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityContainer"];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    
 }
 
 #pragma mark -
