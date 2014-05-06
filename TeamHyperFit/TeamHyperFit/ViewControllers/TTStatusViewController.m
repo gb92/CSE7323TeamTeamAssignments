@@ -17,7 +17,7 @@
 
 #import "UICountingLabel.h"
 
-@interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate, TTGraphViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICountingLabel *stepsLabel;
 @property (weak, nonatomic) IBOutlet UICountingLabel *calorieLabel;
@@ -59,7 +59,9 @@
     self.actionTableView.delegate = self;
     
     //! Show graph only 2 weeks
-    self.fitpointGraphView.numberOfColumn = @(14);
+    self.fitpointGraphView.numberOfColumn = @(7);
+    
+    self.fitpointGraphView.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,7 +95,8 @@
     [self.calorieLabel countFrom:0 to:9854762 withDuration:0.7f];
 }
 
-#pragma mark --Table View Datasource
+#pragma mark -
+#pragma mark Table View Datasource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -130,6 +133,15 @@
         cell.alpha = 1.0f;
     }];
     
+}
+
+#pragma mark -
+#pragma mark Table View Datasource
+
+-(void)TTGraphViewDidPressed:(TTGraphView *)sender
+{
+    sender.isShowPointNumber = !sender.isShowPointNumber;
+    [sender setNeedsDisplay];
 }
 
 @end
