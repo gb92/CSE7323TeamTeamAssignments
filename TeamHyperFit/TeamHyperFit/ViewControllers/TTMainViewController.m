@@ -16,7 +16,7 @@
 
 #import "TTActivitySelectionTableViewController.h"
 #import "TTActivitySelectionContainerViewController.h"
-
+#import "TTCongratulationViewController.h"
 
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
@@ -255,13 +255,18 @@
 
 -(void)TMSetIndicaterViewReachGoal:(TMStepIndicaterView *)view
 {
-    
+    TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 -(void)TMSetIndicaterViewPressed:(TMStepIndicaterView *)view
 {
     [self playJellyEffect:(UIView<ResizableDynamicItem>*)view force:25.0f frequency:3.0 damping:0.3];
     
+//    
+//    TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
+//    [self presentViewController:vc animated:YES completion:nil];
+//    
     [self startActivitySession];
 }
 

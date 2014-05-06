@@ -805,6 +805,63 @@
             </objects>
             <point key="canvasLocation" x="326" y="1416"/>
         </scene>
+        <!--Congratulation View Controller-->
+        <scene sceneID="lgZ-RD-ja2">
+            <objects>
+                <viewController storyboardIdentifier="CongratsView" id="SeG-Eo-J6B" customClass="TTCongratulationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jN7-R3-7kc"/>
+                        <viewControllerLayoutGuide type="bottom" id="iow-7t-Sg7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TYw-ht-AGG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xsj-D4-06W">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shield" translatesAutoresizingMaskIntoConstraints="NO" id="wBb-fZ-rEm">
+                                <rect key="frame" x="27" y="151" width="266" height="266"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P61-dI-uPQ">
+                                <rect key="frame" x="74" y="248" width="172" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You Reach Last Week FitPoints!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="314" translatesAutoresizingMaskIntoConstraints="NO" id="XKm-08-qbe">
+                                <rect key="frame" x="3" y="425" width="314" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.26108099489795922" green="0.26108099489795922" blue="0.26108099489795922" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="wBb-fZ-rEm" secondAttribute="centerY" id="DAg-1K-A4x"/>
+                            <constraint firstAttribute="trailing" secondItem="xsj-D4-06W" secondAttribute="trailing" id="dTp-eT-rkY"/>
+                            <constraint firstAttribute="centerX" secondItem="wBb-fZ-rEm" secondAttribute="centerX" id="dwy-9K-jrb"/>
+                            <constraint firstItem="xsj-D4-06W" firstAttribute="leading" secondItem="TYw-ht-AGG" secondAttribute="leading" id="gfM-nG-ZYc"/>
+                            <constraint firstItem="iow-7t-Sg7" firstAttribute="top" secondItem="xsj-D4-06W" secondAttribute="bottom" id="lQL-hf-uH8"/>
+                            <constraint firstItem="xsj-D4-06W" firstAttribute="top" secondItem="TYw-ht-AGG" secondAttribute="top" id="oFS-Vt-a9L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animatedView" destination="wBb-fZ-rEm" id="v27-zb-tI9"/>
+                        <outlet property="backgroundImage" destination="xsj-D4-06W" id="5SD-LF-mZN"/>
+                        <outlet property="fitpointLabel" destination="P61-dI-uPQ" id="cfh-6D-zf0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9T-Yi-rQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1125" y="755"/>
+        </scene>
         <!--Friend Ranking View Controller-->
         <scene sceneID="C35-ZF-Nda">
             <objects>
@@ -1272,6 +1329,24 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
             </objects>
             <point key="canvasLocation" x="2546" y="2075"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="rty-0h-kPN">
+            <objects>
+                <viewController id="VJ8-Ks-pEf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ntg-Iu-Fhk"/>
+                        <viewControllerLayoutGuide type="bottom" id="pLi-JC-3VV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5XU-bH-ayj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6gj-GH-UcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2941" y="2075"/>
+        </scene>
         <!--Activity Selection Content View Controller-->
         <scene sceneID="kgx-sD-7yU">
             <objects>
@@ -1565,6 +1640,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
         <image name="run" width="24" height="24"/>
         <image name="sessionCloseBtn" width="57" height="57"/>
         <image name="setting" width="24" height="24"/>
+        <image name="shield" width="266" height="266"/>
         <image name="situpBigIcon" width="57" height="57"/>
         <image name="statButtonArrow" width="58" height="37"/>
         <image name="walk" width="35" height="54"/>
