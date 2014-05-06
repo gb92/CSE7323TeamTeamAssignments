@@ -53,6 +53,7 @@
 		5CFEE0D01918180800766F01 /* TTActivitySelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0CF1918180800766F01 /* TTActivitySelectionTableViewController.m */; };
 		5CFEE0D31918192300766F01 /* TTActivitySelectionViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0D21918192300766F01 /* TTActivitySelectionViewTableViewCell.m */; };
 		5CFEE0D61919903700766F01 /* TTCongratulationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0D51919903700766F01 /* TTCongratulationViewController.m */; };
+		5CFEE0D919199FAE00766F01 /* TTA7ActivityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0D819199FAE00766F01 /* TTA7ActivityHandler.m */; };
 		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
 		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
@@ -167,6 +168,8 @@
 		5CFEE0D21918192300766F01 /* TTActivitySelectionViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTActivitySelectionViewTableViewCell.m; sourceTree = "<group>"; };
 		5CFEE0D41919903700766F01 /* TTCongratulationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCongratulationViewController.h; sourceTree = "<group>"; };
 		5CFEE0D51919903700766F01 /* TTCongratulationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCongratulationViewController.m; sourceTree = "<group>"; };
+		5CFEE0D719199FAE00766F01 /* TTA7ActivityHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTA7ActivityHandler.h; sourceTree = "<group>"; };
+		5CFEE0D819199FAE00766F01 /* TTA7ActivityHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTA7ActivityHandler.m; sourceTree = "<group>"; };
 		99506C251912FEC800A7129F /* TTFacebookFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFacebookFriend.h; sourceTree = "<group>"; };
 		99506C261912FEC800A7129F /* TTFacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookFriend.m; sourceTree = "<group>"; };
 		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 				99D88C8F1909B65B00E3E073 /* TFGesture.m */,
 				99506C2B1912FFCF00A7129F /* TTUserActivity.h */,
 				99506C2C1912FFCF00A7129F /* TTUserActivity.m */,
+				5CFEE0D719199FAE00766F01 /* TTA7ActivityHandler.h */,
+				5CFEE0D819199FAE00766F01 /* TTA7ActivityHandler.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -637,6 +642,7 @@
 				EF965BA51911B1770056C2A0 /* TTFriendTableViewCell.m in Sources */,
 				5CECBDEF1914B18B003E40F5 /* TTBaseViewController.m in Sources */,
 				99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */,
+				5CFEE0D919199FAE00766F01 /* TTA7ActivityHandler.m in Sources */,
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */,
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,

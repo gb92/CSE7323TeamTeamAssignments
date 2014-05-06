@@ -18,9 +18,12 @@
 #import "TTActivitySelectionContainerViewController.h"
 #import "TTCongratulationViewController.h"
 
+#import "TTA7ActivityHandler.h"
+
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
 @property (strong, nonatomic) TFUserModel *userModel;
+@property (strong, nonatomic) TTA7ActivityHandler *activityHandler;
 
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *sunView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *monView;
@@ -42,6 +45,15 @@
 @end
 
 @implementation TTMainViewController
+
+-(TTA7ActivityHandler*)activityHandler
+{
+    if (!_activityHandler) {
+        _activityHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).a7ActivityHandler;
+    }
+    
+    return _activityHandler;
+}
 
 -(TFUserModel*)userModel
 {
@@ -174,6 +186,24 @@
     
     self.fitpointView.value = (int)[self.userModel.fitPoints integerValue];
     self.fitpointView.maxValue = goalThisWeek;
+    
+    self.stepsLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activityHandler.numberOfSteps ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivesStepsUpdate:)
+                                                 name:@"stepsUpdate"
+                                               object:nil];
+    
+}
+
+-(void)receivesStepsUpdate:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"stepsUpdate"])
+    {
+        NSDictionary *userInfo = notification.object;
+        
+        self.stepsLabel.text = [NSString stringWithFormat:@"%d", [[userInfo objectForKey:@"steps"] intValue]];
+    }
 }
 
 #pragma mark -

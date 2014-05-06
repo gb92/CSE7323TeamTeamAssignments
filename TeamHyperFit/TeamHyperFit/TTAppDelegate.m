@@ -21,6 +21,11 @@
     
     self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
     
+    //!----------------------------------------------------------
+    self.a7ActivityHandler = [[TTA7ActivityHandler alloc] init];
+    //!----------------------------------------------------------
+    
+    //!------------------------------------------------------------------------------------------
     //! Pull Gestures from sever if avaliable.
     //! Fake Data for now.
 #pragma waning - This is still Fake Data.

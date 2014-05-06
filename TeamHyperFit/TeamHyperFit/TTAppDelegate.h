@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TTWebServiceManager.h"
 #import "TFUserModel.h"
+#import "TTA7ActivityHandler.h"
 
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
@@ -21,6 +22,8 @@
 @property (strong, nonatomic) MSClient *msClient;
 @property (strong, nonatomic) NSArray *gestures;
 @property (strong, nonatomic) TFUserModel *userModel;
+@property (strong, nonatomic) TTA7ActivityHandler* a7ActivityHandler;
+
 
 //! For Prototyping only! Please change to the real thing.
 @property (nonatomic) BOOL activitySessionMode;
