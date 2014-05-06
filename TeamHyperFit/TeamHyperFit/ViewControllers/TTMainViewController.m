@@ -115,24 +115,33 @@
 {
     [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
 }
+
+# warning Deplicated: button is no longer used.
 - (IBAction)onStartActivityButtonPressed:(UIButton *)sender
 {
-    if( ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode )
-    {
-        TTActivitySelectionTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityTable"];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-    else
-    {
-        TTActivitySelectionContainerViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityContainer"];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-    
+    [self startActivitySession];
 }
 
 #pragma mark -
+
+-(void)startActivitySession
+{
+    if( ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode )
+    {
+        
+        TTActivitySelectionContainerViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityContainer"];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        
+    }
+    else
+    {
+        
+        UINavigationController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityTable"];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+}
 
 -(void)updateInfo
 {
@@ -252,6 +261,8 @@
 -(void)TMSetIndicaterViewPressed:(TMStepIndicaterView *)view
 {
     [self playJellyEffect:(UIView<ResizableDynamicItem>*)view force:25.0f frequency:3.0 damping:0.3];
+    
+    [self startActivitySession];
 }
 
 #pragma mark -

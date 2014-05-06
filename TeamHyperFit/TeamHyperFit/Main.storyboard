@@ -438,7 +438,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlB-zR-c39">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STATES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlB-zR-c39">
                                 <rect key="frame" x="120" y="41" width="80" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -446,26 +446,19 @@
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-fg-QRw">
-                                <rect key="frame" x="278" y="40" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <segue destination="mJQ-um-Eww" kind="modal" identifier="info" modalTransitionStyle="crossDissolve" id="uXr-cA-ygi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysu-Ec-iQc">
-                                <rect key="frame" x="6" y="30" width="44" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-fg-QRw">
+                                <rect key="frame" x="276" y="30" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="UKP-jL-aDA"/>
-                                    <constraint firstAttribute="height" constant="44" id="kJn-IX-OJP"/>
+                                    <constraint firstAttribute="height" constant="44" id="0xn-G3-OB8"/>
+                                    <constraint firstAttribute="width" constant="44" id="7mW-Rp-xl4"/>
                                 </constraints>
-                                <state key="normal" image="close"/>
+                                <state key="normal" image="left2rightArrow"/>
                                 <connections>
-                                    <action selector="closeButtonPressed:" destination="4LL-o8-rRe" eventType="touchUpInside" id="qi7-6w-yG6"/>
+                                    <action selector="closeButtonPressed:" destination="4LL-o8-rRe" eventType="touchUpInside" id="Tay-FP-Px5"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETu-E7-uZx">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETu-E7-uZx">
                                 <rect key="frame" x="0.0" y="70" width="320" height="498"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -565,18 +558,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ipt-fg-QRw" firstAttribute="top" secondItem="mlB-zR-c39" secondAttribute="top" constant="-1" id="6Ya-xP-xGj"/>
+                            <constraint firstItem="ipt-fg-QRw" firstAttribute="top" secondItem="mlB-zR-c39" secondAttribute="top" constant="-11" id="6Ya-xP-xGj"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="KBn-0O-XpW" secondAttribute="leading" id="9Ay-cZ-Mqm"/>
-                            <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="-50" id="OFv-Mi-jnj"/>
-                            <constraint firstItem="mlB-zR-c39" firstAttribute="leading" secondItem="Ysu-Ec-iQc" secondAttribute="trailing" constant="70" id="OXr-ur-Rqx"/>
                             <constraint firstAttribute="trailing" secondItem="U4e-G3-zSb" secondAttribute="trailing" id="QKs-EK-5c8"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="top" secondItem="KBn-0O-XpW" secondAttribute="top" id="SqS-Es-3wW"/>
-                            <constraint firstItem="mlB-zR-c39" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="top" constant="11" id="Sxz-My-4gc"/>
-                            <constraint firstItem="ETu-E7-uZx" firstAttribute="top" secondItem="Ysu-Ec-iQc" secondAttribute="bottom" constant="-4" id="TxF-Xg-oLG"/>
                             <constraint firstItem="Wx4-GL-oe8" firstAttribute="top" secondItem="U4e-G3-zSb" secondAttribute="bottom" id="UFM-Xq-rli"/>
-                            <constraint firstItem="ipt-fg-QRw" firstAttribute="leading" secondItem="mlB-zR-c39" secondAttribute="trailing" constant="78" id="VS9-b1-f5O"/>
+                            <constraint firstItem="ipt-fg-QRw" firstAttribute="leading" secondItem="mlB-zR-c39" secondAttribute="trailing" constant="76" id="VS9-b1-f5O"/>
                             <constraint firstItem="U4e-G3-zSb" firstAttribute="top" secondItem="mlB-zR-c39" secondAttribute="bottom" constant="-63" id="WKo-dZ-KqK"/>
-                            <constraint firstItem="ipt-fg-QRw" firstAttribute="leading" secondItem="U4e-G3-zSb" secondAttribute="trailing" constant="-42" id="c9R-6b-JiP"/>
+                            <constraint firstItem="ipt-fg-QRw" firstAttribute="leading" secondItem="U4e-G3-zSb" secondAttribute="trailing" constant="-44" id="c9R-6b-JiP"/>
                             <constraint firstItem="ETu-E7-uZx" firstAttribute="leading" secondItem="KBn-0O-XpW" secondAttribute="leading" id="o89-kf-x2z"/>
                             <constraint firstAttribute="trailing" secondItem="ETu-E7-uZx" secondAttribute="trailing" id="uYT-oe-7Kf"/>
                             <constraint firstItem="Wx4-GL-oe8" firstAttribute="top" secondItem="ETu-E7-uZx" secondAttribute="bottom" id="uoA-B2-2FD"/>
@@ -636,13 +625,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBI-GZ-B67">
-                                <rect key="frame" x="44" y="466" width="50" height="50"/>
+                                <rect key="frame" x="35" y="469" width="70" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Aha-3M-4ed"/>
-                                    <constraint firstAttribute="height" constant="50" id="b0O-Gd-OfG"/>
+                                    <constraint firstAttribute="width" constant="70" id="Aha-3M-4ed"/>
+                                    <constraint firstAttribute="height" constant="60" id="b0O-Gd-OfG"/>
                                 </constraints>
-                                <state key="normal" image="graphButton">
+                                <state key="normal" image="statButtonArrow">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -650,27 +639,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRB-C9-Owm">
-                                <rect key="frame" x="222" y="466" width="50" height="50"/>
+                                <rect key="frame" x="215" y="469" width="70" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="4BH-by-h8M"/>
-                                    <constraint firstAttribute="height" constant="50" id="Ce6-6h-eto"/>
+                                    <constraint firstAttribute="width" constant="70" id="4BH-by-h8M"/>
+                                    <constraint firstAttribute="height" constant="60" id="Ce6-6h-eto"/>
                                 </constraints>
-                                <state key="normal" image="rankButton">
+                                <state key="normal" image="rankingButtonArrow">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onFriendsPressed:" destination="u7r-TB-KOQ" eventType="touchUpInside" id="Wst-wz-6jb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmv-Om-u4p">
-                                <rect key="frame" x="127" y="457" width="68" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="startButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onStartActivityButtonPressed:" destination="u7r-TB-KOQ" eventType="touchUpInside" id="t3j-6U-X4s"/>
                                 </connections>
                             </button>
                             <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pzh-dL-uLp" customClass="TMStepIndicaterView">
@@ -683,37 +662,37 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHd-xx-0cR" customClass="TTSevenDaysView">
-                                <rect key="frame" x="30" y="67" width="30" height="30"/>
+                                <rect key="frame" x="31" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00Q-U1-ex0" customClass="TTSevenDaysView">
-                                <rect key="frame" x="70" y="67" width="30" height="30"/>
+                                <rect key="frame" x="69" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SxW-9b-eE3" customClass="TTSevenDaysView">
-                                <rect key="frame" x="108" y="67" width="30" height="30"/>
+                                <rect key="frame" x="107" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qIM-dt-cm0" customClass="TTSevenDaysView">
-                                <rect key="frame" x="146" y="67" width="30" height="30"/>
+                                <rect key="frame" x="145" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LBu-N5-HGG" customClass="TTSevenDaysView">
-                                <rect key="frame" x="184" y="67" width="30" height="30"/>
+                                <rect key="frame" x="183" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-fg-e5q" customClass="TTSevenDaysView">
-                                <rect key="frame" x="222" y="67" width="30" height="30"/>
+                                <rect key="frame" x="221" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6bn-Xw-pwO" customClass="TTSevenDaysView">
-                                <rect key="frame" x="260" y="67" width="30" height="30"/>
+                                <rect key="frame" x="259" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -761,20 +740,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="MES-Vg-hyd" secondAttribute="trailing" id="15P-uR-zit"/>
-                            <constraint firstItem="aRB-C9-Owm" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" constant="-102" id="16W-3y-Bmb"/>
+                            <constraint firstItem="aRB-C9-Owm" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" constant="-99" id="16W-3y-Bmb"/>
                             <constraint firstItem="Mdw-31-y30" firstAttribute="leading" secondItem="MES-Vg-hyd" secondAttribute="trailing" constant="-64" id="3SN-Tw-E92"/>
-                            <constraint firstItem="aRB-C9-Owm" firstAttribute="leading" secondItem="MES-Vg-hyd" secondAttribute="trailing" constant="-98" id="6px-Ak-nfs"/>
+                            <constraint firstItem="aRB-C9-Owm" firstAttribute="leading" secondItem="MES-Vg-hyd" secondAttribute="trailing" constant="-105" id="6px-Ak-nfs"/>
                             <constraint firstAttribute="trailing" secondItem="pzh-dL-uLp" secondAttribute="trailing" constant="35" id="8I6-zS-MiB"/>
                             <constraint firstItem="MES-Vg-hyd" firstAttribute="leading" secondItem="tCo-Gh-BKf" secondAttribute="leading" id="KnL-Ir-a5c"/>
                             <constraint firstItem="MES-Vg-hyd" firstAttribute="top" secondItem="Mdw-31-y30" secondAttribute="bottom" constant="-64" id="OHC-4g-tv6"/>
-                            <constraint firstItem="Fmv-Om-u4p" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" constant="-111" id="Q1e-Yg-uCp"/>
                             <constraint firstItem="l3s-7f-0R2" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" id="R7a-vH-MiD"/>
                             <constraint firstItem="MES-Vg-hyd" firstAttribute="top" secondItem="Cdk-Za-vMe" secondAttribute="bottom" constant="-50" id="ZgA-Tg-CvG"/>
-                            <constraint firstItem="MES-Vg-hyd" firstAttribute="leading" secondItem="cBI-GZ-B67" secondAttribute="trailing" constant="-94" id="i7X-yd-Yvz"/>
-                            <constraint firstItem="aRB-C9-Owm" firstAttribute="leading" secondItem="Fmv-Om-u4p" secondAttribute="trailing" constant="27" id="kS4-8A-aw5"/>
+                            <constraint firstItem="MES-Vg-hyd" firstAttribute="leading" secondItem="cBI-GZ-B67" secondAttribute="trailing" constant="-105" id="i7X-yd-Yvz"/>
                             <constraint firstItem="pzh-dL-uLp" firstAttribute="leading" secondItem="tCo-Gh-BKf" secondAttribute="leading" constant="35" id="lVS-bI-6Zc"/>
                             <constraint firstAttribute="centerX" secondItem="Cdk-Za-vMe" secondAttribute="centerX" id="qQz-HG-dwP"/>
-                            <constraint firstItem="cBI-GZ-B67" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" constant="-102" id="say-Is-pf6"/>
+                            <constraint firstItem="cBI-GZ-B67" firstAttribute="top" secondItem="MES-Vg-hyd" secondAttribute="bottom" constant="-99" id="say-Is-pf6"/>
                             <constraint firstItem="MES-Vg-hyd" firstAttribute="top" secondItem="tCo-Gh-BKf" secondAttribute="top" id="tfP-nG-qDM"/>
                         </constraints>
                     </view>
@@ -922,26 +899,25 @@
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHG-s8-8j6">
-                                <rect key="frame" x="278" y="41" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-kg-uLw">
-                                <rect key="frame" x="6" y="30" width="44" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QM-kg-uLw">
+                                <rect key="frame" x="0.0" y="30" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="AFD-3O-5HV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="JlC-fH-yDb"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="eAk-AZ-dnA"/>
                                     <constraint firstAttribute="height" constant="44" id="l94-iB-Psa"/>
                                 </constraints>
-                                <state key="normal" image="close"/>
+                                <state key="normal" image="right2leftArrow"/>
                                 <connections>
-                                    <action selector="closeButtonPressed:" destination="4LL-o8-rRe" eventType="touchUpInside" id="dGI-gh-cbI"/>
-                                    <action selector="onCloseButtonPressed:" destination="hp6-nb-wcO" eventType="touchUpInside" id="8zI-Mg-aVN"/>
+                                    <action selector="onCloseButtonPressed:" destination="hp6-nb-wcO" eventType="touchUpInside" id="oXl-Wc-4Jy"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="8QM-kg-uLw" firstAttribute="leading" secondItem="EFQ-Nb-rhn" secondAttribute="leading" id="6eb-Pi-rqY"/>
+                            <constraint firstItem="8QM-kg-uLw" firstAttribute="top" secondItem="TJp-qR-yA6" secondAttribute="bottom" constant="10" id="BZF-4u-jil"/>
                             <constraint firstItem="hYg-uw-nRn" firstAttribute="top" secondItem="S20-yd-Lzh" secondAttribute="bottom" id="KMo-wI-j58"/>
                             <constraint firstItem="S20-yd-Lzh" firstAttribute="top" secondItem="EFQ-Nb-rhn" secondAttribute="top" id="SV5-vR-9Lh"/>
                             <constraint firstItem="S20-yd-Lzh" firstAttribute="leading" secondItem="EFQ-Nb-rhn" secondAttribute="leading" id="YFP-LK-8wB"/>
@@ -1198,7 +1174,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRI-VG-Xo5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089" y="2745"/>
+            <point key="canvasLocation" x="2132" y="2745"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="A0C-Zw-idq">
@@ -1209,7 +1185,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDW-bn-ODb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2478" y="2075"/>
+            <point key="canvasLocation" x="3392" y="2745"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="LYR-at-qqc">
@@ -1233,10 +1209,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.69962211277173914" green="0.69962211277173914" blue="0.69962211277173914" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qa-1g-uYr">
-                                <rect key="frame" x="278" y="42" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5C-NR-Df8">
                                 <rect key="frame" x="8" y="31" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1244,7 +1216,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                     <constraint firstAttribute="width" constant="44" id="rBA-K7-orq"/>
                                     <constraint firstAttribute="height" constant="44" id="tRC-tA-mNL"/>
                                 </constraints>
-                                <state key="normal" image="close"/>
+                                <state key="normal" image="right2leftArrow"/>
                                 <connections>
                                     <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="f2y-gi-wFP"/>
                                 </connections>
@@ -1282,7 +1254,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Y0X-Sm-tHD" firstAttribute="top" secondItem="8qa-1g-uYr" secondAttribute="bottom" constant="-64" id="88u-KK-C3H"/>
                             <constraint firstItem="IVT-S9-cEP" firstAttribute="top" secondItem="Y0X-Sm-tHD" secondAttribute="bottom" id="AeC-mS-lJ0"/>
                             <constraint firstItem="Y0X-Sm-tHD" firstAttribute="leading" secondItem="IpY-ah-tzW" secondAttribute="leading" id="BVh-w8-OSb"/>
                             <constraint firstItem="t7I-LP-hLa" firstAttribute="top" secondItem="Y0X-Sm-tHD" secondAttribute="bottom" constant="-77" id="HyQ-Tp-BWL"/>
@@ -1290,7 +1261,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                             <constraint firstAttribute="trailing" secondItem="Y0X-Sm-tHD" secondAttribute="trailing" id="VYV-M8-jtf"/>
                             <constraint firstItem="Y0X-Sm-tHD" firstAttribute="top" secondItem="IpY-ah-tzW" secondAttribute="top" id="Zkm-bI-gis"/>
                             <constraint firstItem="Y0X-Sm-tHD" firstAttribute="top" secondItem="f5C-NR-Df8" secondAttribute="bottom" constant="-75" id="qVt-6Z-gW0"/>
-                            <constraint firstItem="8qa-1g-uYr" firstAttribute="leading" secondItem="Y0X-Sm-tHD" secondAttribute="trailing" constant="-42" id="roK-OD-K5r"/>
                             <constraint firstAttribute="centerX" secondItem="t7I-LP-hLa" secondAttribute="centerX" id="vBp-qF-X80"/>
                         </constraints>
                     </view>
@@ -1303,7 +1273,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Myp-jD-AVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2842" y="2075"/>
+            <point key="canvasLocation" x="2546" y="2075"/>
         </scene>
         <!--Activity Selection Content View Controller-->
         <scene sceneID="kgx-sD-7yU">
@@ -1355,7 +1325,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQd-0q-0Oi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fQ4-fG-ugy"/>
             </objects>
-            <point key="canvasLocation" x="2121" y="2075"/>
+            <point key="canvasLocation" x="3035" y="2745"/>
         </scene>
         <!--Activity Selection Container View Controller-->
         <scene sceneID="keE-lP-Z1r">
@@ -1400,7 +1370,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs9-e3-9cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1704" y="2075"/>
+            <point key="canvasLocation" x="2618" y="2745"/>
         </scene>
         <!--Activity Collection View Controller-->
         <scene sceneID="521-iM-M4o">
@@ -1455,12 +1425,12 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2m-s6-xLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2478" y="2502"/>
+            <point key="canvasLocation" x="3392" y="3172"/>
         </scene>
         <!--Activity Selection Table View Controller-->
         <scene sceneID="UL4-dU-gtl">
             <objects>
-                <viewController storyboardIdentifier="ActivityTable" id="ju3-Kz-mPc" customClass="TTActivitySelectionTableViewController" sceneMemberID="viewController">
+                <viewController id="ju3-Kz-mPc" customClass="TTActivitySelectionTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0eQ-sH-t7t"/>
                         <viewControllerLayoutGuide type="bottom" id="jUQ-iL-CDn"/>
@@ -1474,6 +1444,17 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgs-oZ-3Vj">
+                                <rect key="frame" x="132" y="61" width="57" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="sessionCloseBtn">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="HQO-ls-oVb"/>
+                                    <action selector="onCloseButtonPressed:" destination="ju3-Kz-mPc" eventType="touchUpInside" id="vPn-tD-VGe"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ACTIVITIES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqn-rB-oR6">
                                 <rect key="frame" x="105" y="31" width="110" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1482,34 +1463,22 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feS-fc-xnd">
-                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="AqR-ie-cbV"/>
-                                    <constraint firstAttribute="width" constant="44" id="RjP-tU-2dr"/>
-                                </constraints>
-                                <state key="normal" image="close"/>
-                                <connections>
-                                    <action selector="onCloseButtonPressed:" destination="ju3-Kz-mPc" eventType="touchUpInside" id="mA8-nc-7RH"/>
-                                </connections>
-                            </button>
-                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CkG-cv-OaP">
-                                <rect key="frame" x="0.0" y="79" width="320" height="489"/>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CkG-cv-OaP">
+                                <rect key="frame" x="0.0" y="131" width="320" height="437"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="55" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="ActionCell" selectionStyle="gray" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" rowHeight="115" id="ybG-q4-fR6" customClass="TTActivitySelectionViewTableViewCell">
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="ActionCell" selectionStyle="none" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" editingAccessoryType="detailDisclosureButton" rowHeight="115" id="ybG-q4-fR6" customClass="TTActivitySelectionViewTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ybG-q4-fR6" id="Q77-iQ-ePf">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="114"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="273" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pushupBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Qxx-2E-2Ro">
-                                                    <rect key="frame" x="20" y="20" width="77" height="70"/>
+                                                    <rect key="frame" x="20" y="20" width="77" height="71"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUSH-UPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDn-Y3-aTB">
@@ -1540,13 +1509,14 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="chD-CB-33s"/>
                     <connections>
                         <outlet property="activityTableView" destination="CkG-cv-OaP" id="BQX-5B-cNJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKN-LU-nVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2484" y="2757"/>
+            <point key="canvasLocation" x="2132" y="2075"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z1e-dF-vuu">
@@ -1566,21 +1536,45 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
             </objects>
             <point key="canvasLocation" x="1704" y="2745"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="a1z-ef-sZj">
+            <objects>
+                <navigationController storyboardIdentifier="ActivityTable" automaticallyAdjustsScrollViewInsets="NO" id="Jp4-dw-qr3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NHw-dx-Cdw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="DMN-wD-Mrn">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="ju3-Kz-mPc" kind="relationship" relationship="rootViewController" id="aB4-47-mF1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="svv-eB-bkT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1704" y="2085"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg2" width="320" height="568"/>
         <image name="chart" width="24" height="24"/>
         <image name="close" width="20" height="20"/>
-        <image name="graphButton" width="40" height="40"/>
         <image name="heart" width="24" height="24"/>
+        <image name="left2rightArrow" width="14" height="23"/>
         <image name="pushup" width="30" height="30"/>
         <image name="pushupBigIcon" width="57" height="57"/>
-        <image name="rankButton" width="40" height="40"/>
+        <image name="rankingButtonArrow" width="58" height="36"/>
+        <image name="right2leftArrow" width="14" height="23"/>
         <image name="run" width="24" height="24"/>
         <image name="sessionCloseBtn" width="57" height="57"/>
         <image name="setting" width="24" height="24"/>
         <image name="situpBigIcon" width="57" height="57"/>
-        <image name="startButton" width="68" height="68"/>
+        <image name="statButtonArrow" width="58" height="37"/>
         <image name="walk" width="35" height="54"/>
         <image name="walkingICO" width="24" height="24"/>
     </resources>

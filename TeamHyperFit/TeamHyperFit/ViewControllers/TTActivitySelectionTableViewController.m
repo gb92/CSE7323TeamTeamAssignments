@@ -44,8 +44,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.navigationController.navigationBar.hidden = YES;
+    
     self.activityTableView.dataSource = self;
     self.activityTableView.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,6 +80,7 @@
     
     cell.activityNameLabel.text = ((TFGesture*)self.gestures[indexPath.row]).name;
     cell.activityImageView.image = [UIImage imageNamed:((TFGesture*)self.gestures[indexPath.row]).imageName];
+
     
     return cell;
 }
@@ -84,7 +88,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TTSessionViewController* sessionVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionView"];
-    [self presentViewController:sessionVC animated:YES completion:^{}];
+    [self.navigationController pushViewController:sessionVC animated:YES];
+     
 }
 
 //// Override to support conditional editing of the table view.
@@ -93,30 +98,34 @@
 //    // Return NO if you do not want the specified item to be editable.
 //    return YES;
 //}
-//
-//
-//
+
+
+
 //// Override to support editing the table view.
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    if (editingStyle == UITableViewCellEditingStyleDelete) {
 //        // Delete the row from the data source
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 //    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
 //        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //    }   
 //}
-
-
+//
+//
 //-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    if(indexPath.row == 0)
 //    {
-//        
+//        return  UITableViewCellEditingStyleNone;
+//    }
+//    else if(indexPath.row == 1)
+//    {
 //        return  UITableViewCellEditingStyleInsert;
 //    }
 //    else
 //    {
+//        
 //        return UITableViewCellEditingStyleDelete;
 //    }
 //}

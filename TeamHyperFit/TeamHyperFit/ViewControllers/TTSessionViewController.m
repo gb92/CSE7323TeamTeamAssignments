@@ -96,7 +96,8 @@
 
 - (IBAction)closeButton:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -
