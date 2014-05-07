@@ -18,6 +18,8 @@
 #import "TTActivitySelectionContainerViewController.h"
 #import "TTCongratulationViewController.h"
 
+#import "TTFacebookHandler.h"
+
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
 @property (strong, nonatomic) TFUserModel *userModel;
@@ -68,23 +70,7 @@
 {
     [super viewDidLoad];
     
-    self.sunView.text = @"S";
-    self.monView.text = @"M";
-    self.tueView.text = @"T";
-    self.wesView.text = @"W";
-    self.thuView.text = @"Th";
-    self.friView.text = @"F";
-    self.satView.text = @"Sa";
-    
-    self.fitpointView.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
-    
-    self.fitpointView.delegate = self;
-
-    self.isStepHiden = NO;
-
-    [self playJellyEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:50.0f frequency:3.0 damping:0.3];
-    
-    //[self setupMotionEffect];
+    [self setupUI];
     
 }
 
@@ -116,53 +102,17 @@
     [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
 }
 
-# warning Deplicated: button is no longer used.
-- (IBAction)onStartActivityButtonPressed:(UIButton *)sender
-{
-    [self startActivitySession];
-}
-
 #pragma mark -
 
--(void)startActivitySession
+-(void)setupUI
 {
-    if( ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode )
-    {
-        
-        TTActivitySelectionContainerViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityContainer"];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-        
-    }
-    else
-    {
-        
-        UINavigationController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityTable"];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-}
-
--(void)updateInfo
-{
-    NSDictionary* fitpointsThisWeek = [self.userModel.userStatistics objectForKey:@"fitpointsThisWeek"];
-    int goalThisWeek = (int)[[self.userModel.userStatistics objectForKey:@"goalThisWeek"] integerValue];
-    
-    self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
-    self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
-    self.tueView.value = [[fitpointsThisWeek objectForKey:@"Tuesday"]    integerValue];
-    self.wesView.value = [[fitpointsThisWeek objectForKey:@"Wednesday"]  integerValue];
-    self.thuView.value = [[fitpointsThisWeek objectForKey:@"Thursday"]   integerValue];
-    self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
-    self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
-    
-    self.sunView.maxValue = goalThisWeek;
-    self.monView.maxValue = goalThisWeek;
-    self.tueView.maxValue = goalThisWeek;
-    self.wesView.maxValue = goalThisWeek;
-    self.thuView.maxValue = goalThisWeek;
-    self.friView.maxValue = goalThisWeek;
-    self.satView.maxValue = goalThisWeek;
+    self.sunView.text = @"S";
+    self.monView.text = @"M";
+    self.tueView.text = @"T";
+    self.wesView.text = @"W";
+    self.thuView.text = @"Th";
+    self.friView.text = @"F";
+    self.satView.text = @"Sa";
     
     self.sunView.delegate = self;
     self.monView.delegate = self;
@@ -172,9 +122,60 @@
     self.friView.delegate = self;
     self.satView.delegate = self;
     
-    self.fitpointView.value = (int)[self.userModel.fitPoints integerValue];
-    self.fitpointView.maxValue = goalThisWeek;
+    self.fitpointView.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
+    
+    self.fitpointView.delegate = self;
+    
+    self.isStepHiden = NO;
+    
+    [self playJellyEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:50.0f frequency:3.0 damping:0.3];
+    
+    //[self setupMotionEffect];
 }
+
+-(void)startActivitySession
+{
+    UINavigationController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivityTable"];
+        
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+-(void)updateInfo
+{
+    [self.userModel updateUserInfo:^(NSError *error)
+    {
+        if( !error )
+        {
+            NSDictionary* fitpointsThisWeek = [self.userModel.userStatistics objectForKey:@"fitpointsThisWeek"];
+            int goalThisWeek = (int)[[self.userModel.userStatistics objectForKey:@"goalThisWeek"] integerValue];
+            
+            self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
+            self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
+            self.tueView.value = [[fitpointsThisWeek objectForKey:@"Tuesday"]    integerValue];
+            self.wesView.value = [[fitpointsThisWeek objectForKey:@"Wednesday"]  integerValue];
+            self.thuView.value = [[fitpointsThisWeek objectForKey:@"Thursday"]   integerValue];
+            self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
+            self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
+            
+            self.sunView.maxValue = goalThisWeek;
+            self.monView.maxValue = goalThisWeek;
+            self.tueView.maxValue = goalThisWeek;
+            self.wesView.maxValue = goalThisWeek;
+            self.thuView.maxValue = goalThisWeek;
+            self.friView.maxValue = goalThisWeek;
+            self.satView.maxValue = goalThisWeek;
+            
+            self.fitpointView.value = (int)[self.userModel.fitPoints integerValue];
+            self.fitpointView.maxValue = goalThisWeek;
+            
+            //! Update UI
+            [self.fitpointView setNeedsDisplay];
+            [self.sunView setNeedsDisplay];
+        }
+    }];
+
+}
+
 
 #pragma mark -
 #pragma mark UIDynamic

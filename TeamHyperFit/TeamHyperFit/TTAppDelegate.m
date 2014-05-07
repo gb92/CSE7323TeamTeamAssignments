@@ -8,6 +8,8 @@
 
 #import "TTAppDelegate.h"
 #import "TFGesture.h"
+#import <FacebookSDK/FacebookSDK.h>
+
 
 @implementation TTAppDelegate
 
@@ -20,6 +22,9 @@
     self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:serverURL port:serverPort];
     
     self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
+    
+    
+    [FBLoginView class];
     
     //! Pull Gestures from sever if avaliable.
     //! Fake Data for now.
@@ -62,6 +67,19 @@
                                      goalThisWeek,@"goalThisWeek", nil];
     
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    // You can add your app-specific url handling code here if needed
+    
+    return wasHandled;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -9,8 +9,11 @@
 #import "TTSettingTableViewController.h"
 #import "TTAppDelegate.h"
 
+#import <FacebookSDK/FacebookSDK.h>
+
 @interface TTSettingTableViewController ()
 @property (weak, nonatomic) IBOutlet UISwitch *activitySwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *facebookSwitch;
 
 @end
 
@@ -54,6 +57,15 @@
 - (IBAction)onActivitySelectionChanged:(UISwitch *)sender
 {
     ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode = sender.isOn;
+}
+- (IBAction)onFacebookSwitchChanged:(UISwitch *)sender
+{
+    if([self.facebookSwitch isOn])
+    {
+        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"facebookView"];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Table view data source

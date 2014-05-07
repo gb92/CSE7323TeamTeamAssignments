@@ -31,7 +31,14 @@
 
 -(void)getCurrentUserFitPoints:(userFitPointsBlock)callback
 {
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
+        if( error )
+        {
+            NSLog(@"%@", error);
+        }
+        
         NSLog(@"fb result: %@", result);
         
         NSDictionary *meDictionary=(NSDictionary *) result;
@@ -88,6 +95,7 @@
 {
     NSString *query=@"Select name, uid, pic_small from user where is_app_user = 1 and uid in (select uid2 from friend where uid1 = me()) order by concat(first_name,last_name) asc";
     NSDictionary *params=@{@"q":query};
+    
     [FBRequestConnection startWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", [error localizedDescription]);
@@ -150,7 +158,7 @@
                         
                         for(int j=0; j< [friends count]; j++)
                         {
-                            if([friendID isEqualToString:[friends[j] valueForKey:@"userID"]])
+                            if([friendID isEqualToString:[friends[j] valueForKey:@"uid"]])
                             {
                                 NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithDictionary:friends[j]];
                                 [dict setValue:friendFitPoints forKey:@"numFitPoints"];
@@ -169,7 +177,7 @@
     }];
 }
 
--(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints
+-(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints onFinish:(void(^)(NSError*)) onFinishedBlock
 {
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         NSLog(@"fb result: %@", result);
@@ -192,17 +200,23 @@
                 NSLog(@"Error reading item: %@", error);
                 return;
             }
+            
             NSLog(@"Total Count:%ld", totalCount);
             
             if(totalCount<=0)
             {
                 NSDictionary *item = @{@"userID":fbID,@"numFitPoints": fitPoints};
                 [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                    
+                    onFinishedBlock( error );
+                    
                     if (error) {
                         NSLog(@"Error inserting item: %@", error);
                         return;
                     }
                     NSLog(@"Inserted: %@", item);
+                    
+                    
                 }];
             }
             else if(totalCount>0)
@@ -211,6 +225,9 @@
                 [item setValue:fitPoints forKey:@"numFitPoints"];
                 
                 [table update:item completion:^(NSDictionary *item, NSError *error) {
+                    
+                    onFinishedBlock( error );
+                    
                     if(error){
                         NSLog(@"Error updating item %@", error);
                         return;
