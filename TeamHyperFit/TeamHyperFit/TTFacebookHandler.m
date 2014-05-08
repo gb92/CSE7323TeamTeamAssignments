@@ -10,10 +10,13 @@
 #import "TTAppDelegate.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import <FacebookSDK/FacebookSDK.h>
+
+
 @interface TTFacebookHandler()
 
 @property (weak, nonatomic) MSClient *client;
 @property (strong, nonatomic) NSString *fbID;
+
 @end
 
 @implementation TTFacebookHandler
@@ -29,65 +32,175 @@
     return _client;
 }
 
+-(void)getCurrentUserInformation:(userInformationBlock)callback
+{
+    NSLog(@"Begin getCurrentUserInformation");
+    FBSession *session=[[FBSession alloc]init];
+    
+    NSLog(@"Session current state: %u", session.state);
+    //NSLog(@"Session FBSessionStateOpen: %u", FBSessionStateOpen);
+    
+    if(session.state == FBSessionStateCreated || session.state == FBSessionStateCreatedTokenLoaded)
+    {
+        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            if(FB_ISSESSIONOPENWITHSTATE(status)) {
+                [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    if(error)
+                    {
+                        NSLog(@"Error while fetching current user information: %@", error);
+                        callback(nil, error);
+                        return;
+                    }
+                    NSLog(@"Fetch Current User Results: %@", result);
+                    
+                    NSDictionary *userMe=(NSDictionary *)result;
+                    
+                    TFUserModel *userInformation=[[TFUserModel alloc] init];
+                    userInformation.userID=[userMe valueForKeyPath:@"id"];
+                    userInformation.firstName=[userMe valueForKeyPath:@"first_name"];
+                    userInformation.lastName=[userMe valueForKeyPath:@"last_name"];
+                    
+                    callback(userInformation, error);
+                }];
+
+            }
+        }];
+
+    }
+    
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if(error)
+        {
+            NSLog(@"Error while fetching current user information: %@", error);
+            callback(nil, error);
+            return;
+        }
+        NSLog(@"Fetch Current User Results: %@", result);
+        
+        NSDictionary *userMe=(NSDictionary *)result;
+        
+        TFUserModel *userInformation=[[TFUserModel alloc] init];
+        userInformation.userID=[userMe valueForKeyPath:@"id"];
+        userInformation.firstName=[userMe valueForKeyPath:@"first_name"];
+        userInformation.lastName=[userMe valueForKeyPath:@"last_name"];
+        
+        callback(userInformation, error);
+    }];
+}
+
 -(void)getCurrentUserFitPoints:(userFitPointsBlock)callback
 {
-    [FBSession openActiveSessionWithAllowLoginUI:NO];
-    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
+    
+    [self getCurrentUserInformation:^(TFUserModel *userInformation, NSError *error) {
         if( error )
         {
             NSLog(@"%@", error);
         }
-        
-        NSLog(@"fb result: %@", result);
-        
-        NSDictionary *meDictionary=(NSDictionary *) result;
-        
-        NSString *fbID=[meDictionary valueForKey:@"id"];
-        
-        NSLog(@"FB ID: %@", fbID);
-        
-        MSTable *table = [self.client tableWithName:@"FitPoints"];
-        
-        MSQuery *query=[table query];
-        query.includeTotalCount=YES;
-        query.parameters=@{@"userID":fbID};
-        
-        [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+        else if(userInformation != nil)
+        {
+            MSTable *table = [self.client tableWithName:@"FitPoints"];
             
-            if (error) {
-                NSLog(@"Error reading item: %@", error);
-                return;
-                
-                callback(nil, error);
-            }
-            NSLog(@"Total Count:%ld", totalCount);
+            MSQuery *query=[table query];
+            query.includeTotalCount=YES;
+            query.parameters=@{@"userID":userInformation.userID};
             
-            if(totalCount<=0)
-            {
-                NSDictionary *item = @{@"userID":fbID,@"numFitPoints":@0};
-                [table insert:item completion:^(NSDictionary *item, NSError *error) {
-                    if (error) {
-                        NSLog(@"Error inserting item: %@", error);
-                        callback(nil, error);
-                        return;
-                    }
-                    NSLog(@"Inserted: %@", item);
-                    callback(@0, nil);
-                }];
+            [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
                 
+                if (error) {
+                    NSLog(@"Error reading item: %@", error);
+                    return;
+                    
+                    callback(nil, error);
+                }
+                NSLog(@"Total Count:%ld", totalCount);
                 
-            }
-            else if(totalCount>0)
-            {
-                NSDictionary *item = (NSDictionary *)items[0];
-                NSNumber *fitPoints=[item valueForKey:@"numFitPoints"];
+                if(totalCount<=0)
+                {
+                    NSDictionary *item = @{@"userID":userInformation.userID,@"numFitPoints":@0};
+                    [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                        if (error) {
+                            NSLog(@"Error inserting item: %@", error);
+                            callback(nil, error);
+                            return;
+                        }
+                        NSLog(@"Inserted: %@", item);
+                        callback(@0, nil);
+                    }];
+                    
+                    
+                }
+                else if(totalCount>0)
+                {
+                    NSDictionary *item = (NSDictionary *)items[0];
+                    NSNumber *fitPoints=[item valueForKey:@"numFitPoints"];
+                    
+                    callback(fitPoints, nil);
+                }
+            }];
+        }
+        else
+        {
+            NSLog(@"Both UserInformation and Error are nil...");
+        }
+    }];
+}
+-(void) getCurrentUserInformationWithFitPoints:(userInformationFitPointsBlock)callback
+{
+    [self getCurrentUserInformation:^(TFUserModel *userInformation, NSError *error) {
+        if( error )
+        {
+            NSLog(@"Error Getting Current User Information: %@", error);
+        }
+        else if(userInformation != nil)
+        {
+            MSTable *table = [self.client tableWithName:@"FitPoints"];
+            
+            MSQuery *query=[table query];
+            query.includeTotalCount=YES;
+            query.parameters=@{@"userID":userInformation.userID};
+            
+            [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
                 
-                callback(fitPoints, nil);
-            }
-        }];
-
-        
+                if (error) {
+                    NSLog(@"Error reading item: %@", error);
+                    return;
+                    
+                    callback(userInformation, error);
+                }
+                NSLog(@"Total Count:%ld", totalCount);
+                
+                if(totalCount<=0)
+                {
+                    NSDictionary *item = @{@"userID":userInformation.userID,@"numFitPoints":@0};
+                    [table insert:item completion:^(NSDictionary *item, NSError *error) {
+                        if (error) {
+                            NSLog(@"Error inserting item: %@", error);
+                            callback(nil, error);
+                            return;
+                        }
+                        NSLog(@"Inserted: %@", item);
+                        
+                        userInformation.fitPoints=0;
+                        
+                        callback(userInformation, nil);
+                    }];
+                    
+                    
+                }
+                else if(totalCount>0)
+                {
+                    NSDictionary *item = (NSDictionary *)items[0];
+                    NSNumber *fitPoints=[item valueForKey:@"numFitPoints"];
+                    
+                    userInformation.fitPoints=fitPoints;
+                    callback(userInformation, error);
+                }
+            }];
+        }
+        else
+        {
+            NSLog(@"Both UserInformation and Error are nil...");
+        }
     }];
 }
 
@@ -294,6 +407,11 @@
 
 }
 
-
+-(void) getCurrentUserActivities:(userActivitiesBlock)callback
+{
+    
+    
+    
+}
 
 @end

@@ -8,15 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import "Models/TTUserActivity.h"
+#import "Models/TFUserModel.h"
 
+typedef void (^userInformationBlock)(TFUserModel* userInformation, NSError *error);
 typedef void (^userFitPointsBlock)(NSNumber *fitPoints, NSError *error);
+typedef void (^userInformationFitPointsBlock)(TFUserModel* userInformation, NSError *error);
 typedef void (^userFriendsBlock) (NSArray *friends, NSError *error);
 typedef void (^userFriendsFitPointsBlock) (NSArray *friends, NSError *error);
 typedef void (^userActivitiesBlock) (NSArray *userActivities, NSError *error);
 
 @interface TTFacebookHandler : NSObject
 
+-(void) getCurrentUserInformation:(userInformationBlock) callback;
+
 -(void) getCurrentUserFitPoints:(userFitPointsBlock) callback;
+
+-(void) getCurrentUserInformationWithFitPoints:(userInformationFitPointsBlock) callback;
 
 -(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback;
 

@@ -10,7 +10,7 @@
 
 @interface TFUserModel : NSObject
 
-@property (strong, nonatomic) NSNumber *userID;
+@property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;

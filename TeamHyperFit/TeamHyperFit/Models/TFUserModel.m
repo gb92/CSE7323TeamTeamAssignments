@@ -99,6 +99,7 @@
             onFinish(error);
         }];
     }
+    /*
 
     [self.fbHandler getFriendsFitPoints:^(NSArray *friends, NSError *error) {
         if(!error)
@@ -111,6 +112,7 @@
         
     }];
     
+     */
 }
 
 @end

@@ -21,9 +21,10 @@
     self.webServiceManager = [[TTWebServiceManager alloc] initWithURL:serverURL port:serverPort];
     
     self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
-    
+    [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorInformational]];
     
     [FBLoginView class];
+    [FBProfilePictureView class];
     
     //!----------------------------------------------------------
     self.a7ActivityHandler = [[TTA7ActivityHandler alloc] init];
