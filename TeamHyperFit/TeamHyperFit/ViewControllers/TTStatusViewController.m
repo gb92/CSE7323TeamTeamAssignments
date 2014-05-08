@@ -17,8 +17,11 @@
 
 #import "UICountingLabel.h"
 
+#import "UIScrollView+GifPullToRefresh.h"
+
 @interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate, TTGraphViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 @property (strong, nonatomic) TTA7ActivityHandler *activityHandler;
 
 @property (weak, nonatomic) IBOutlet UICountingLabel *stepsLabel;
@@ -74,6 +77,8 @@
     self.fitpointGraphView.numberOfColumn = @(7);
     
     self.fitpointGraphView.delegate = self;
+    
+    [self setupPullToRefresh];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,6 +98,35 @@
 }
 
 #pragma mark -
+
+-(void)setupPullToRefresh
+{
+    
+    NSMutableArray *TwitterMusicDrawingImgs = [NSMutableArray array];
+    NSMutableArray *TwitterMusicLoadingImgs = [NSMutableArray array];
+    for (int i  = 0; i <= 27; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"sun_00%03d.png",i];
+        [TwitterMusicDrawingImgs addObject:[UIImage imageNamed:fileName]];
+    }
+    
+    for (int i  = 28; i <= 109; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"sun_00%03d.png",i];
+        [TwitterMusicLoadingImgs addObject:[UIImage imageNamed:fileName]];
+    }
+    
+    [self.containerScrollView addPullToRefreshWithDrawingImgs:TwitterMusicDrawingImgs andLoadingImgs:TwitterMusicLoadingImgs andActionHandler:^{
+        
+        [self updateInfo];
+        
+        [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:3];
+        
+    }];
+    
+    self.containerScrollView.alwaysBounceVertical = YES;
+    
+    
+}
+
 -(void)updateInfo
 {
     //! Fake Data for now.

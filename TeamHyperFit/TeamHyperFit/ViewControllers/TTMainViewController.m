@@ -20,10 +20,13 @@
 
 #import "TTFacebookHandler.h"
 
+#import "UIScrollView+GifPullToRefresh.h"
+
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
 @property (strong, nonatomic) TFUserModel *userModel;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *sunView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *monView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *tueView;
@@ -130,7 +133,38 @@
     
     [self playJellyEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:50.0f frequency:3.0 damping:0.3];
     
+    [self setupPullToRefresh];
+    
     //[self setupMotionEffect];
+}
+
+-(void)setupPullToRefresh
+{
+
+    
+    NSMutableArray *TwitterMusicDrawingImgs = [NSMutableArray array];
+    NSMutableArray *TwitterMusicLoadingImgs = [NSMutableArray array];
+    for (int i  = 0; i <= 27; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"sun_00%03d.png",i];
+        [TwitterMusicDrawingImgs addObject:[UIImage imageNamed:fileName]];
+    }
+    
+    for (int i  = 28; i <= 109; i++) {
+        NSString *fileName = [NSString stringWithFormat:@"sun_00%03d.png",i];
+        [TwitterMusicLoadingImgs addObject:[UIImage imageNamed:fileName]];
+    }
+
+    [self.containerScrollView addPullToRefreshWithDrawingImgs:TwitterMusicDrawingImgs andLoadingImgs:TwitterMusicLoadingImgs andActionHandler:^{
+
+        [self updateInfo];
+        
+        [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:3];
+        
+    }];
+    
+    self.containerScrollView.alwaysBounceVertical = YES;
+    
+
 }
 
 -(void)startActivitySession
@@ -171,7 +205,12 @@
             //! Update UI
             [self.fitpointView setNeedsDisplay];
             [self.sunView setNeedsDisplay];
+            
+            
         }
+        
+        [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:1];
+        
     }];
 
 }
