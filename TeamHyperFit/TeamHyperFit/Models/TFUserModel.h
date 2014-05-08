@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSNumber *calories;
 @property (strong, nonatomic) NSDictionary *userStatistics;
 
+-(void)updateUserInfo:(void(^)(NSError* error)) onFinish;
  
 @end

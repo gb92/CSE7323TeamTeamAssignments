@@ -30,7 +30,7 @@ typedef void (^userActivitiesBlock) (NSArray *userActivities, NSError *error);
 
 -(void) getCurrentUserDailyCalorieCount;
 
--(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints;
+-(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints onFinish:(void(^)(NSError*)) onFinishedBlock;
 
 -(void) addToCurrentUserFitPoints:(NSNumber *) fitPointsToAdd;
 
