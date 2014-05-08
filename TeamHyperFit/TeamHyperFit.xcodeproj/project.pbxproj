@@ -167,8 +167,8 @@
 		5CFEE0D919199FAE00766F01 /* TTA7ActivityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEE0D819199FAE00766F01 /* TTA7ActivityHandler.m */; };
 		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
 		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
+		99B2B25E191C4DFD001E9965 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B2B25D191C4DFD001E9965 /* FacebookSDK.framework */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
-		99C5A44A190C8504000B0F81 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A449190C8504000B0F81 /* FacebookSDK.framework */; };
 		99C5A44D190C8510000B0F81 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */; };
 		99C5A44E190C8510000B0F81 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */; };
 		99C5A451190C8535000B0F81 /* TTFacebookHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C5A450190C8535000B0F81 /* TTFacebookHandler.m */; };
@@ -401,6 +401,7 @@
 		99506C261912FEC800A7129F /* TTFacebookFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookFriend.m; sourceTree = "<group>"; };
 		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
 		99506C2C1912FFCF00A7129F /* TTUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUserActivity.m; sourceTree = "<group>"; };
+		99B2B25D191C4DFD001E9965 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		99C5A444190C49BF000B0F81 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		99C5A449190C8504000B0F81 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
@@ -458,6 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99B2B25E191C4DFD001E9965 /* FacebookSDK.framework in Frameworks */,
 				EF94806D1912E4210029E71F /* XCTest.framework in Frameworks */,
 				5CBA7A1F190767620099C0B9 /* CoreGraphics.framework in Frameworks */,
 				5C2626E4190779F3001AA0E7 /* QuartzCore.framework in Frameworks */,
@@ -473,7 +475,6 @@
 				5C2626D61907798C001AA0E7 /* opencv2.framework in Frameworks */,
 				5CBA7A1D190767620099C0B9 /* Foundation.framework in Frameworks */,
 				99C5A44E190C8510000B0F81 /* WindowsAzureMobileServices.framework in Frameworks */,
-				99C5A44A190C8504000B0F81 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +739,7 @@
 		5CBA7A1B190767620099C0B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99B2B25D191C4DFD001E9965 /* FacebookSDK.framework */,
 				EF94806C1912E4210029E71F /* XCTest.framework */,
 				99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */,
 				99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */,
@@ -1263,6 +1265,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Users/gavinbenedict/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamHyperFit/TeamHyperFit-Prefix.pch";
@@ -1286,6 +1289,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Users/gavinbenedict/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamHyperFit/TeamHyperFit-Prefix.pch";
