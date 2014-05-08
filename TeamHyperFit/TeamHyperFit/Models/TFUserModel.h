@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TTUserBaseModel.h"
 
-@interface TFUserModel : NSObject
+@interface TFUserModel : TTUserBaseModel
 
 @property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *username;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) NSNumber *calories;
 @property (strong, nonatomic) NSDictionary *userStatistics;
 
--(void)updateUserInfo:(void(^)(NSError* error)) onFinish;
+@property (nonatomic) BOOL isDirty;
+
  
 @end

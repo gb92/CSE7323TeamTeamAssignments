@@ -7,25 +7,14 @@
 //
 
 #import "TFUserModel.h"
-#import "TTFacebookHandler.h"
+
 
 @interface TFUserModel()
 
-@property (nonatomic, strong) TTFacebookHandler* fbHandler;
-@property (nonatomic) BOOL isDirty;
 
 @end
 
 @implementation TFUserModel
-
--(TTFacebookHandler*)fbHandler
-{
-    if (!_fbHandler) {
-        _fbHandler = [[TTFacebookHandler alloc] init];
-    }
-    
-    return _fbHandler;
-}
 
 -(id)init
 {

@@ -180,6 +180,9 @@
 		99D88C9B1909C66C00E3E073 /* TTMotionDataBufferTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D88C9A1909C66C00E3E073 /* TTMotionDataBufferTests.m */; };
 		EF22B7A5191ADC5000D373CD /* TTFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF22B7A4191ADC5000D373CD /* TTFacebookViewController.m */; };
 		EF8D751A1912D50E00857EE3 /* TTTimeCounterView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8D75191912D50E00857EE3 /* TTTimeCounterView.m */; };
+		EF8F046E191C351A00794DEC /* TTUserBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F046D191C351A00794DEC /* TTUserBaseModel.m */; };
+		EF8F0471191C35C900794DEC /* TTUserInfoHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F0470191C35C900794DEC /* TTUserInfoHandler.m */; };
+		EF8F0474191C35FC00794DEC /* TTFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F0473191C35FC00794DEC /* TTFriendModel.m */; };
 		EF94806D1912E4210029E71F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF94806C1912E4210029E71F /* XCTest.framework */; };
 		EF9480701912E5810029E71F /* TTHeartRateCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */; };
 		EF965B9F1911AC800056C2A0 /* TTCircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965B9E1911AC800056C2A0 /* TTCircleImageView.m */; };
@@ -421,6 +424,12 @@
 		EF22B7A4191ADC5000D373CD /* TTFacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFacebookViewController.m; sourceTree = "<group>"; };
 		EF8D75181912D50E00857EE3 /* TTTimeCounterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTimeCounterView.h; sourceTree = "<group>"; };
 		EF8D75191912D50E00857EE3 /* TTTimeCounterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTimeCounterView.m; sourceTree = "<group>"; };
+		EF8F046C191C351A00794DEC /* TTUserBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserBaseModel.h; sourceTree = "<group>"; };
+		EF8F046D191C351A00794DEC /* TTUserBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUserBaseModel.m; sourceTree = "<group>"; };
+		EF8F046F191C35C900794DEC /* TTUserInfoHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserInfoHandler.h; sourceTree = "<group>"; };
+		EF8F0470191C35C900794DEC /* TTUserInfoHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUserInfoHandler.m; sourceTree = "<group>"; };
+		EF8F0472191C35FC00794DEC /* TTFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTFriendModel.h; sourceTree = "<group>"; };
+		EF8F0473191C35FC00794DEC /* TTFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTFriendModel.m; sourceTree = "<group>"; };
 		EF94806C1912E4210029E71F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EF94806E1912E5810029E71F /* TTHeartRateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTHeartRateCounter.h; sourceTree = "<group>"; };
 		EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TTHeartRateCounter.mm; sourceTree = "<group>"; };
@@ -656,8 +665,14 @@
 			children = (
 				EF94806E1912E5810029E71F /* TTHeartRateCounter.h */,
 				EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */,
+				EF8F046C191C351A00794DEC /* TTUserBaseModel.h */,
+				EF8F046D191C351A00794DEC /* TTUserBaseModel.m */,
 				99D88C841909A1FA00E3E073 /* TFUserModel.h */,
 				99D88C851909A1FA00E3E073 /* TFUserModel.m */,
+				EF8F0472191C35FC00794DEC /* TTFriendModel.h */,
+				EF8F0473191C35FC00794DEC /* TTFriendModel.m */,
+				EF8F046F191C35C900794DEC /* TTUserInfoHandler.h */,
+				EF8F0470191C35C900794DEC /* TTUserInfoHandler.m */,
 				5C2626E619077D86001AA0E7 /* TTWebServiceManager.h */,
 				5C2626E719077D86001AA0E7 /* TTWebServiceManager.m */,
 				99D88C871909B45A00E3E073 /* TFGestureRecognizer.h */,
@@ -909,7 +924,8 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = ELJL6XCWJA;
+						DevelopmentTeam = APD62CDC25;
+ 					e29fc6539089d719bb50548340cb7d8af2135243
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
@@ -1105,6 +1121,7 @@
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
 				EF22B7A5191ADC5000D373CD /* TTFacebookViewController.m in Sources */,
 				5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */,
+				EF8F0471191C35C900794DEC /* TTUserInfoHandler.m in Sources */,
 				5C2626C119077822001AA0E7 /* TMSetGoalStepViewController.m in Sources */,
 				5C51379E190C83310054E253 /* TTMainViewController.m in Sources */,
 				99D88C891909B45A00E3E073 /* TFGestureRecognizer.m in Sources */,
@@ -1117,7 +1134,9 @@
 				99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */,
 				EF965BA21911AE4E0056C2A0 /* TTFriendRankingViewController.m in Sources */,
 				5C2626C619077822001AA0E7 /* TTViewController.m in Sources */,
+				EF8F0474191C35FC00794DEC /* TTFriendModel.m in Sources */,
 				5C51379B190C7B910054E253 /* TTSevenDaysView.m in Sources */,
+				EF8F046E191C351A00794DEC /* TTUserBaseModel.m in Sources */,
 				99D88C931909BB2600E3E073 /* RingBuffer.m in Sources */,
 				99D88C901909B65B00E3E073 /* TFGesture.m in Sources */,
 			);

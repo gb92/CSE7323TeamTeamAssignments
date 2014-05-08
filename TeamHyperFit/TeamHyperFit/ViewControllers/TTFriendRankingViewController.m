@@ -18,7 +18,7 @@
 @interface TTFriendRankingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 
-@property (strong, nonatomic) TFUserModel* userModel;
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
 
 @property (weak, nonatomic) IBOutlet TTCircleImageView *userPhotoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
@@ -27,14 +27,15 @@
 
 @implementation TTFriendRankingViewController
 
--(TFUserModel*)userModel
+-(TTUserInfoHandler *)userInfoHandler
 {
-    if (!_userModel) {
-        _userModel = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userModel;
+    if (!_userInfoHandler) {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
     }
     
-    return _userModel;
+    return _userInfoHandler;
 }
+
 
 #pragma mark -
 #pragma mark ViewController Life Cycle.
