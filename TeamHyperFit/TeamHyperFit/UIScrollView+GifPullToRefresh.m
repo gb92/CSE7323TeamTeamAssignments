@@ -62,7 +62,7 @@ static char UIScrollViewGifPullToRefresh;
     
     CHGifRefreshControl *view = [[CHGifRefreshControl alloc] initWithFrame:CGRectMake(0, -GifRefreshControlHeight, self.bounds.size.width, GifRefreshControlHeight)];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
-        view.originalContentInsectY = GifRefreshControlHeight;
+        view.originalContentInsectY = 10;
     }
         
     view.scrollView = self;
@@ -157,11 +157,11 @@ static char UIScrollViewGifPullToRefresh;
 - (void)scrollViewContentOffsetChanged
 {
     if (_state != GifPullToRefreshStateLoading) {
-        if (self.scrollView.isDragging && self.scrollView.contentOffset.y + self.originalContentInsectY < -GifRefreshControlHeight && !_isTrigged) {
+        if (self.scrollView.isDragging && self.scrollView.contentOffset.y  < -GifRefreshControlHeight && !_isTrigged) {
             _isTrigged = YES;
         }
         else {
-            if (self.scrollView.isDragging && self.scrollView.contentOffset.y + self.originalContentInsectY > -GifRefreshControlHeight) {
+            if (self.scrollView.isDragging && self.scrollView.contentOffset.y > -GifRefreshControlHeight) {
                 _isTrigged = NO;
             }
             [self setState:GifPullToRefreshStateDrawing];
