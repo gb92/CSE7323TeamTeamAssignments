@@ -19,6 +19,8 @@
 
 @interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate, TTGraphViewDelegate>
 
+@property (strong, nonatomic) TTA7ActivityHandler *activityHandler;
+
 @property (weak, nonatomic) IBOutlet UICountingLabel *stepsLabel;
 @property (weak, nonatomic) IBOutlet UICountingLabel *calorieLabel;
 @property (weak, nonatomic) IBOutlet UITableView *actionTableView;
@@ -29,6 +31,16 @@
 @end
 
 @implementation TTStatusViewController
+
+-(TTA7ActivityHandler*)activityHandler
+{
+    if (!_activityHandler) {
+        _activityHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).a7ActivityHandler;
+    }
+    
+    return _activityHandler;
+}
+
 
 -(TFUserModel*)userModel
 {
@@ -86,13 +98,17 @@
     //! Fake Data for now.
     self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
     
-    self.stepsLabel.format = @"%d";
-    self.stepsLabel.method = UILabelCountingMethodEaseIn;
-    [self.stepsLabel countFrom:0 to:9854762 withDuration:0.5f];
+    [self.activityHandler queryNumberOfStepsFromDay:7 toDay:-1 withHandler:^(NSInteger steps, NSError* error){
+    
+        self.stepsLabel.format = @"%d";
+        self.stepsLabel.method = UILabelCountingMethodEaseOut;
+        [self.stepsLabel countFrom:steps - 10 to:steps withDuration:0.5f];
+        
+    }];
     
     self.calorieLabel.format = @"%d";
-    self.calorieLabel.method = UILabelCountingMethodEaseIn;
-    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.7f];
+    self.calorieLabel.method = UILabelCountingMethodEaseOut;
+    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.5f];
 }
 
 #pragma mark -

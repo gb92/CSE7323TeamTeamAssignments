@@ -29,35 +29,14 @@
 
 -(id)init
 {
-    NSDate *now = [NSDate date];
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-    
-    
-    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
-    
-    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
-    NSLog(@"timeToRemove: %ld", timeToRemove);
-    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
-    NSDate *yesterday = [NSDate dateWithTimeInterval:-60*60*24 sinceDate:today];
-    
-    NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-dd-YYYY hh:mm:ss"];
-    NSLog(@"NSDate today: %@",[formatter stringFromDate:today]);
-    NSLog(@"NSDate yesterday: %@", [formatter stringFromDate:yesterday]);
-    NSLog(@"NSDate now: %@", [formatter stringFromDate:now]);
-    
-    [self.cmStepCounter queryStepCountStartingFrom:yesterday to:today toQueue:[NSOperationQueue mainQueue]
-                                       withHandler:^(NSInteger numberOfSteps, NSError *error) {
+    [self queryNumberOfStepsFromDay:1 toDay:0 withHandler:^(NSInteger numberOfSteps, NSError *error) {
                                            self.numberOfYesterdaySteps = numberOfSteps;
                                            
                                        }];
     
-    
-    [self.cmStepCounter queryStepCountStartingFrom:today to:now toQueue:[NSOperationQueue mainQueue]
-                                       withHandler:^(NSInteger numberOfSteps, NSError *error) {
+    //! (today = -1) => now
+    [self queryNumberOfStepsFromDay:0 toDay:-1 withHandler:^(NSInteger numberOfSteps, NSError *error) {
                                            
                                            self.numberOfStepsSinceMorningUntilOpenApp = numberOfSteps;
                                            self.numberOfSteps = numberOfSteps;
@@ -83,6 +62,51 @@
     return self;
 }
 
+
+//! if (toDay < 0) then (toDay = Now).
+
+-(void) queryNumberOfStepsFromDay:(NSInteger)fromDay toDay:(NSInteger) toDay withHandler:(stepCallBack) handler
+{
+    assert(fromDay <= 7);
+    assert(fromDay > toDay);
+    
+    if(fromDay > 7 )
+    {
+        fromDay = 7;
+    }
+    if( toDay > fromDay )
+    {
+        toDay = fromDay;
+    }
+    
+    NSDate *now = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    
+    
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    NSDate *timeFromDay = [NSDate dateWithTimeInterval:-(60*60*24*fromDay) sinceDate:today];
+    NSDate *timeToDay = [NSDate dateWithTimeInterval:-(60*60*24*toDay) sinceDate:today];
+   
+    if ( toDay < 0 ) {
+        timeToDay = now;
+    }
+        
+    
+    [self.cmStepCounter queryStepCountStartingFrom:timeFromDay to:timeToDay toQueue:[NSOperationQueue mainQueue]
+                                       withHandler:^(NSInteger numberOfSteps, NSError *error) {
+                                           
+                                           handler( numberOfSteps, error);
+                                           
+                                       }];
+    
+}
 
 @end
 

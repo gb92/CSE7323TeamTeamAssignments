@@ -193,7 +193,6 @@
                                              selector:@selector(receivesStepsUpdate:)
                                                  name:@"stepsUpdate"
                                                object:nil];
-    
 }
 
 -(void)receivesStepsUpdate:(NSNotification *) notification
