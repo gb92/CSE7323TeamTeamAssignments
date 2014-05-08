@@ -22,36 +22,26 @@
 @interface TTStatusViewController ()<UITableViewDataSource, UITableViewDelegate, TTGraphViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
-@property (strong, nonatomic) TTA7ActivityHandler *activityHandler;
 
 @property (weak, nonatomic) IBOutlet UICountingLabel *stepsLabel;
 @property (weak, nonatomic) IBOutlet UICountingLabel *calorieLabel;
 @property (weak, nonatomic) IBOutlet UITableView *actionTableView;
 @property (weak, nonatomic) IBOutlet TTGraphView *fitpointGraphView;
 
-@property (strong, nonatomic) TFUserModel* userModel;
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
 
 @end
 
 @implementation TTStatusViewController
 
--(TTA7ActivityHandler*)activityHandler
+
+-(TTUserInfoHandler *)userInfoHandler
 {
-    if (!_activityHandler) {
-        _activityHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).a7ActivityHandler;
+    if (!_userInfoHandler) {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
     }
     
-    return _activityHandler;
-}
-
-
--(TFUserModel*)userModel
-{
-    if (!_userModel) {
-        _userModel = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userModel;
-    }
-    
-    return _userModel;
+    return _userInfoHandler;
 }
 
 #pragma mark -
@@ -131,18 +121,16 @@
 {
     //! Fake Data for now.
     self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
+
+    int steps = [self.userInfoHandler.userInfo.todaySteps intValue];
+    self.stepsLabel.format = @"%d";
+    self.stepsLabel.method = UILabelCountingMethodEaseOut;
+    [self.stepsLabel countFrom:steps - 10 to:steps withDuration:0.5f];
     
-    [self.activityHandler queryNumberOfStepsFromDay:7 toDay:-1 withHandler:^(NSInteger steps, NSError* error){
-    
-        self.stepsLabel.format = @"%d";
-        self.stepsLabel.method = UILabelCountingMethodEaseOut;
-        [self.stepsLabel countFrom:steps - 10 to:steps withDuration:0.5f];
-        
-    }];
-    
+    int caluries = [self.userInfoHandler.userInfo.calories intValue];
     self.calorieLabel.format = @"%d";
     self.calorieLabel.method = UILabelCountingMethodEaseOut;
-    [self.calorieLabel countFrom:0 to:9854762 withDuration:0.5f];
+    [self.calorieLabel countFrom:caluries-10 to:caluries withDuration:0.5f];
 }
 
 #pragma mark -

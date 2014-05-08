@@ -10,6 +10,7 @@
 #import "TTSevenDaysView.h"
 #import "TMStepCountViewController.h"
 #import "TFUserModel.h"
+#import "TTUserInfoHandler.h"
 #import "TTAppDelegate.h"
 
 #import "TTPositionToBoundsDynamicItem.h"
@@ -24,7 +25,7 @@
 
 @interface TTMainViewController () <TMSetIndicaterViewDelegate, TTSevenDaysViewDelegate>
 
-@property (strong, nonatomic) TFUserModel *userModel;
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *sunView;
@@ -48,13 +49,13 @@
 
 @implementation TTMainViewController
 
--(TFUserModel*)userModel
+-(TTUserInfoHandler *)userInfoHandler
 {
-    if (!_userModel) {
-        _userModel = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userModel;
+    if (!_userInfoHandler) {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
     }
     
-    return _userModel;
+    return _userInfoHandler;
 }
 
 #pragma mark -
@@ -74,6 +75,8 @@
     [super viewDidLoad];
     
     [self setupUI];
+    
+//    [self.userModel addObserver:self forKeyPath:@"fitPoints" options:NSKeyValueObservingOptionNew context:nil];
     
 }
 
@@ -105,6 +108,15 @@
     [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if( [keyPath isEqualToString:@"fitPoints"])
+    {
+        NSLog(@"Yah");
+    }
+}
+
+
 #pragma mark -
 
 -(void)setupUI
@@ -135,13 +147,12 @@
     
     [self setupPullToRefresh];
     
+    
     //[self setupMotionEffect];
 }
 
 -(void)setupPullToRefresh
 {
-
-    
     NSMutableArray *TwitterMusicDrawingImgs = [NSMutableArray array];
     NSMutableArray *TwitterMusicLoadingImgs = [NSMutableArray array];
     for (int i  = 0; i <= 27; i++) {
@@ -176,12 +187,12 @@
 
 -(void)updateInfo
 {
-    [self.userModel updateUserInfo:^(NSError *error)
+    [self.userInfoHandler updateUserInfo:^(TFUserModel* userInfo, NSError *error)
     {
         if( !error )
         {
-            NSDictionary* fitpointsThisWeek = [self.userModel.userStatistics objectForKey:@"fitpointsThisWeek"];
-            int goalThisWeek = (int)[[self.userModel.userStatistics objectForKey:@"goalThisWeek"] integerValue];
+            NSDictionary* fitpointsThisWeek = [userInfo.userStatistics objectForKey:@"fitpointsThisWeek"];
+            int goalThisWeek = (int)[[userInfo.userStatistics objectForKey:@"goalThisWeek"] integerValue];
             
             self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
             self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
@@ -199,13 +210,12 @@
             self.friView.maxValue = goalThisWeek;
             self.satView.maxValue = goalThisWeek;
             
-            self.fitpointView.value = (int)[self.userModel.fitPoints integerValue];
+            self.fitpointView.value = (int)[userInfo.fitPoints integerValue];
             self.fitpointView.maxValue = goalThisWeek;
             
             //! Update UI
             [self.fitpointView setNeedsDisplay];
             [self.sunView setNeedsDisplay];
-            
             
         }
         
@@ -308,6 +318,7 @@
 //    [self presentViewController:vc animated:YES completion:nil];
 //    
     [self startActivitySession];
+    
 }
 
 #pragma mark -

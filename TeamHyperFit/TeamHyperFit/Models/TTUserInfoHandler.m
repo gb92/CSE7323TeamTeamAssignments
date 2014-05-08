@@ -1,0 +1,166 @@
+//
+//  TTUserInfoHandler.m
+//  TeamHyperFit
+//
+//  Created by ch484-mac5 on 5/8/14.
+//  Copyright (c) 2014 SMU. All rights reserved.
+//
+
+#import "TTUserInfoHandler.h"
+#import "TTFacebookHandler.h"
+
+#import "TTA7ActivityHandler.h"
+
+@interface TTUserInfoHandler()
+
+@property (nonatomic, strong) TTFacebookHandler* fbHandler;
+@property (strong, nonatomic) TTA7ActivityHandler* a7ActivityHandler;
+
+@end
+
+@implementation TTUserInfoHandler
+
+-(TTFacebookHandler*)fbHandler
+{
+    if (!_fbHandler) {
+        _fbHandler = [[TTFacebookHandler alloc] init];
+    }
+    
+    return _fbHandler;
+}
+
+-(TTA7ActivityHandler*)a7ActivityHandler
+{
+    if (!_a7ActivityHandler) {
+        _a7ActivityHandler = [[TTA7ActivityHandler alloc]init];
+        
+    }
+    
+    return _a7ActivityHandler;
+}
+
+-(id)init
+{
+    self = [super init];
+    if (self)
+    {
+
+#warning These are fake data, please Change it.
+        
+        self.userInfo = [[TFUserModel alloc] init];
+        self.userInfo.userID = @(123456);
+        self.userInfo.username = @"MARK USER NAME";
+        self.userInfo.firstName = @"Chatchai";
+        self.userInfo.lastName = @"Wangwiwattana";
+        self.userInfo.middleName = @"Mark";
+        self.userInfo.fitPoints = @(45698);
+        self.userInfo.goalFitPoints = @(50000);
+        self.userInfo.calories = @(23125);
+        
+        NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @(10000),@"Sunday",
+                                           @(30000),@"Monday",
+                                           @(2000),@"Tuesday",
+                                           @(0),@"Wednesday",
+                                           @(50000),@"Thursday",
+                                           @(0),@"Friday",
+                                           @(0),@"Saturday",
+                                           nil];
+        
+        NSNumber* goalThisWeek = @(50000);
+        
+        self.userInfo.userStatistics = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         fitPointsThisWeek,@"fitpointsThisWeek",
+                                         goalThisWeek,@"goalThisWeek", nil];
+    }
+    
+    return self;
+}
+
+-(void)requestInfoFromServer:(void(^)(NSError* error)) onFinish
+{
+    if( !self.userInfo.isDirty )
+    {
+        [self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
+            if( !error )
+            {
+                self.userInfo.fitPoints = fitPoints;
+            }
+            
+            if(onFinish != nil)
+                onFinish( error );
+            
+        }];
+    }
+    else
+    {
+        NSLog(@"The object is dirty. Please sync info to server first.");
+    }
+}
+
+-(void)syncInfoToServer:(void(^)(NSError* error)) onFinish
+{
+#warning Vulnerable to get Attack!
+    //! It is bad to do this, it vernerable for hacking.!!!!
+    [self.fbHandler updateCurrentUserFitPoints: self.userInfo.fitPoints onFinish:^(NSError* error)
+     {
+         if( !error )
+         {
+             self.userInfo.isDirty = NO;
+         }
+         
+         if(onFinish != nil)
+             onFinish(error);
+         
+     }];
+    
+}
+
+-(void)updateUserInfo:(void(^)( TFUserModel*, NSError* error)) onFinish
+{
+    //! ----- Get Step info from A7 handler----------------
+    //!
+    [self.a7ActivityHandler queryNumberOfStepsFromDay:0 toDay:-1 withHandler:^(NSInteger numberOfStep, NSError *error)
+    {
+        if(!error)
+        {
+            self.userInfo.todaySteps = @(numberOfStep);
+        }
+    }];
+    
+    //! ----- Sync User Info -------------------------------
+    //!
+    if( self.userInfo.isDirty )
+    {
+        [self syncInfoToServer:^(NSError* error)
+         {
+             if( !error )
+             {
+                 [self requestInfoFromServer:nil];
+             }
+         }];
+    }
+    else
+    {
+        [self requestInfoFromServer:nil];
+    }
+    
+    
+    //! ----- Get Friends Info -------------------------------
+    //!
+    [self.fbHandler getFriendsFitPoints:^(NSArray *friends, NSError *error) {
+        if(!error)
+        {
+            if( [friends count] > 0 )
+            {
+                NSLog(@"s : %@", [friends[0] objectForKey:@"name"] );
+            }
+        }
+        
+        if(onFinish != nil)
+            onFinish(self.userInfo, error);
+    }];
+    
+}
+
+@end
