@@ -19,6 +19,7 @@ static const int SI_GATE_PADDING    = 10;
 
 @interface TTTimeCounterView()
 
+@property (nonatomic, readwrite) NSInteger timeSeconds;
 @property(nonatomic) NSInteger currentTime;
 @property(nonatomic,readwrite) BOOL isStarted;
 
@@ -118,7 +119,7 @@ static const int SI_GATE_PADDING    = 10;
     [self drawFontWithString:@"secondes" size:15 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 + 50 )];
     
     /* Draw Gate */
-    if (self.isStarted)
+    if (self.isDrawGate)
     {
 
         CGContextSaveGState(ctx);
@@ -149,20 +150,22 @@ static const int SI_GATE_PADDING    = 10;
 
 #pragma mark -- Actions
 
--(void)timeSeconds:(NSInteger)value
+-(void)setTimeSeconds:(NSInteger)timeSeconds;
 {
-    if( value < 0 )
+    if( timeSeconds < 0 )
     {
         _timeSeconds = 0;
     }
     else
     {
-        _timeSeconds = value;
+        _timeSeconds = timeSeconds;
     }
     
     // Clamp current value to max value
-    if( value < _timeSeconds ) _timeSeconds = value;
+    if( timeSeconds < _timeSeconds ) _timeSeconds = timeSeconds;
 
+    _currentTime = _timeSeconds;
+    
     [self updateUI];
 }
 
@@ -170,12 +173,29 @@ static const int SI_GATE_PADDING    = 10;
 {
     if (!self.isStarted)
     {
+        [self reset];
+        [self resume];
+    }
+}
+
+-(void)resume
+{
+    if (!self.isStarted)
+    {
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterWillStart:)])
+        {
+            [self.delegate TTTimeCounterWillStart:self];
+        }
+        
         self.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
-        
         self.isStarted = YES;
-        [self.delegate TTTimeCounterDidStarted:self];
-        [self timeUpdate];
         
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterDidStarted:)])
+        {
+            [self.delegate TTTimeCounterDidStarted:self];
+        }
+        
+        [self timeUpdate];
     }
 }
 
@@ -183,10 +203,19 @@ static const int SI_GATE_PADDING    = 10;
 {
     if (self.isStarted)
     {
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterWillStop:)])
+        {
+            [self.delegate TTTimeCounterWillStop:self];
+        }
+        
         self.barColor = [UIColor grayColor];
         
         self.isStarted = NO;
-        [self.delegate TTTimeCounterDidStoped:self];
+        
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterDidStoped:)])
+        {
+            [self.delegate TTTimeCounterDidStoped:self];
+        }
         
         [self updateUI];
     }
@@ -194,7 +223,8 @@ static const int SI_GATE_PADDING    = 10;
 
 -(void)reset
 {
-    if (self.isStarted) {
+    if (self.isStarted)
+    {
         self.isStarted = NO;
         self.currentTime = self.timeSeconds;
     }
@@ -202,22 +232,40 @@ static const int SI_GATE_PADDING    = 10;
 
 -(void)timeUpdate
 {
-    if (self.isStarted) {
+    if (self.isStarted)
+    {
+        
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterWillUpdate:)])
+        {
+            [self.delegate TTTimeCounterWillUpdate:self];
+        }
         
         self.currentTime--;
         
         if( self.currentTime < 0 )
         {
             [self reset];
-            [self.delegate TTTimeCounterDidFinshed:self];
             
+            if( [self.delegate respondsToSelector:@selector(TTTimeCounterDidFinshed:)])
+            {
+                [self.delegate TTTimeCounterDidFinshed:self];
+            }
         }
         else
         {
+#warning BUG!!!
+            //! BUG! This timer will not be cancel although I stop the component.
+            //! I will call this funciton multiple time, if users spam the component.
+            //!
             [self performSelector:@selector(timeUpdate) withObject:nil afterDelay:1];
         }
-        
+
         [self updateUI];
+        
+        if ([self.delegate respondsToSelector:@selector(TTTimeCounterDidUpdate:)])
+        {
+            [self.delegate TTTimeCounterDidUpdate:self];
+        }
     }
 }
 

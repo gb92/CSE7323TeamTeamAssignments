@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gw3-Iv-8aU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gw3-Iv-8aU">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -1171,11 +1171,11 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                             </tableViewSection>
                             <tableViewSection headerTitle="Social" id="jE3-Lm-aUC">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="91" id="xeb-SC-5hw">
-                                        <rect key="frame" x="0.0" y="279" width="320" height="91"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="71" id="xeb-SC-5hw">
+                                        <rect key="frame" x="0.0" y="279" width="320" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xeb-SC-5hw" id="T5W-ub-YZG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrU-fF-dnA">
@@ -1186,25 +1186,27 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Connect with Facebook." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="182" translatesAutoresizingMaskIntoConstraints="NO" id="EF5-RL-Rfx">
-                                                    <rect key="frame" x="69" y="23" width="182" height="57"/>
+                                                    <rect key="frame" x="69" y="30" width="182" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q0p-eg-oT1">
-                                                    <rect key="frame" x="251" y="29" width="51" height="31"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBM-zX-Mdf">
+                                                    <rect key="frame" x="20" y="0.0" width="281" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="onTintColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
                                                     <connections>
-                                                        <action selector="onFacebookSwitchChanged:" destination="IZh-4Y-LGB" eventType="valueChanged" id="j7J-bL-yE6"/>
+                                                        <segue destination="iPM-jd-DFL" kind="modal" id="bnN-BE-lcr"/>
                                                     </connections>
-                                                </switch>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Cgw-ww-IZT">
-                                        <rect key="frame" x="0.0" y="370" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="350" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cgw-ww-IZT" id="jKV-Xl-jgL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1212,7 +1214,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cXW-4P-oeN">
-                                        <rect key="frame" x="0.0" y="414" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="394" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cXW-4P-oeN" id="kMf-jM-3ZL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1237,7 +1239,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                     </navigationItem>
                     <connections>
                         <outlet property="activitySwitch" destination="sfF-GU-qNv" id="4A7-Ph-1p4"/>
-                        <outlet property="facebookSwitch" destination="Q0p-eg-oT1" id="eox-as-usD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRI-VG-Xo5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1253,7 +1254,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDW-bn-ODb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3392" y="2745"/>
+            <point key="canvasLocation" x="4884" y="2793"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="LYR-at-qqc">
@@ -1399,7 +1400,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQd-0q-0Oi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fQ4-fG-ugy"/>
             </objects>
-            <point key="canvasLocation" x="3035" y="2745"/>
+            <point key="canvasLocation" x="4527" y="2793"/>
         </scene>
         <!--Activity Selection Container View Controller-->
         <scene sceneID="keE-lP-Z1r">
@@ -1444,7 +1445,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs9-e3-9cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2618" y="2745"/>
+            <point key="canvasLocation" x="4110" y="2793"/>
         </scene>
         <!--Activity Collection View Controller-->
         <scene sceneID="521-iM-M4o">
@@ -1499,7 +1500,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2m-s6-xLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3392" y="3172"/>
+            <point key="canvasLocation" x="4884" y="3220"/>
         </scene>
         <!--Activity Selection Table View Controller-->
         <scene sceneID="UL4-dU-gtl">
@@ -1618,7 +1619,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CDK-0u-TcB" customClass="FBLoginView">
-                                <rect key="frame" x="0.0" y="239" width="320" height="90"/>
+                                <rect key="frame" x="87" y="372" width="147" height="41"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -1632,16 +1633,38 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                     <action selector="onCloseButtonPressed:" destination="iPM-jd-DFL" eventType="touchUpInside" id="Ewg-4x-UBK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Firstname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iC1-FB-Npl">
+                                <rect key="frame" x="0.0" y="287" width="320" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lastname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fm1-H7-BOF">
+                                <rect key="frame" x="0.0" y="322" width="320" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alq-NQ-hKa" customClass="TTCircleImageView">
+                                <rect key="frame" x="98" y="147" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="facebookButton" destination="CDK-0u-TcB" id="lpf-zS-juT"/>
+                        <outlet property="imageView" destination="alq-NQ-hKa" id="AWD-Hg-Sfx"/>
+                        <outlet property="lastnameLabel" destination="fm1-H7-BOF" id="mu3-Rl-oF5"/>
+                        <outlet property="nameLabel" destination="iC1-FB-Npl" id="NtU-jk-B6R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAL-QZ-CUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2132" y="3406"/>
+            <point key="canvasLocation" x="2618" y="3441"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a1z-ef-sZj">

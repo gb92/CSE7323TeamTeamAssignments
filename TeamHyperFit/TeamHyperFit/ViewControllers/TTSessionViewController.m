@@ -9,6 +9,16 @@
 #import "TTSessionViewController.h"
 #import "TTHeartRateCounter.h"
 #import "TTTimeCounterView.h"
+#import "TTSoundEffect.h"
+
+typedef enum
+{
+    SS_REST,
+    SS_PREPARE,
+    SS_IN_SESSION,
+    SS_PAUSE
+    
+} SessionState;
 
 @interface TTSessionViewController ()<UIGestureRecognizerDelegate,TTTimeCounterDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *closeBigButton;
@@ -16,6 +26,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet TTTimeCounterView *timeCounterView;
+
+
+@property (strong ,nonatomic) TTSoundEffect *preparingSound;
+@property (strong, nonatomic) TTSoundEffect *startSound;
+
+@property (nonatomic) SessionState sessionState;
 
 - (IBAction)closeButton:(UIButton *)sender;
 
@@ -25,6 +41,23 @@
 
 @implementation TTSessionViewController
 
+-(TTSoundEffect*)startSound
+{
+    if (!_startSound) {
+        _startSound = [[TTSoundEffect alloc]initWithSoundNamed:@"beepStart.wav"];
+    }
+    
+    return _startSound;
+}
+
+-(TTSoundEffect*)preparingSound
+{
+    if (!_preparingSound) {
+        _preparingSound = [[TTSoundEffect alloc] initWithSoundNamed:@"beep.wav"];
+    }
+    
+    return _preparingSound;
+}
 
 -(TTHeartRateCounter*)hearRateCounter
 {
@@ -59,18 +92,27 @@
     [self.view addGestureRecognizer:tapGestureRecognize];
     
     self.timeCounterView.delegate = self;
+    self.timeCounterView.isDrawGate = NO;
     
     self.closeBigButton.hidden = YES;
     
+    self.sessionState = SS_REST;
 }
-
 
 -(void)singleTapGestureRecognizer:(UITapGestureRecognizer *)recognizer
 {
     if (!self.timeCounterView.isStarted)
     {
-        [self.timeCounterView start];
-        [self hideCloseBigButton];
+        if( self.sessionState == SS_REST)
+        {
+            [self.timeCounterView start];
+            [self hideCloseBigButton];
+        }
+        else
+        {
+            [self.timeCounterView resume];
+        }
+
     }
     else
     {
@@ -102,27 +144,67 @@
 
 #pragma mark -
 
--(void)stopHearRate
-{
-    [self.hearRateCounter stop];
-    NSLog(@"My heartRate is : %@", [self.hearRateCounter getHeartRate]);
-}
 
 
 #pragma mark -- TTTimerViewDelegation
 
 -(void)TTTimeCounterDidFinshed:(TTTimeCounterView *)view
 {
-    NSLog(@"This Session is done.");
-    [self showCloseBigButton];
+    //[self showCloseBigButton];
+    
+    if (self.sessionState == SS_IN_SESSION)
+    {
+        self.sessionState = SS_REST;
+        self.timeCounterView.isDrawGate = NO;
+        
+        NSLog(@"End Session; Change to Rest..");
+        [self.startSound play];
+    }
+    else if( self.sessionState == SS_PREPARE)
+    {
+        NSLog(@"Going to Start!, Reset values");
+        
+        [self.timeCounterView setTimeSeconds:30];
+        self.sessionState = SS_IN_SESSION;
+        
+        [self.timeCounterView start];
+        
+        [self.startSound play];
+    }
 }
--(void)TTTimeCounterDidStarted:(TTTimeCounterView *)view
+
+-(void)TTTimeCounterWillStart:(TTTimeCounterView *)sender
 {
-    NSLog(@"This Session is started.");
+    self.timeCounterView.isDrawGate = YES;
+    
+    if( self.sessionState == SS_REST )
+    {
+        NSLog(@"Prepare to start; Add 3 seconds count down.");
+        [self.timeCounterView setTimeSeconds:3];
+        self.sessionState = SS_PREPARE;
+    }
+    else if( self.sessionState == SS_PAUSE)
+    {
+        self.sessionState = SS_IN_SESSION;
+    }
 }
+
 -(void)TTTimeCounterDidStoped:(TTTimeCounterView *)view
 {
-    NSLog(@"This Session is stop by user.");
+    if( self.sessionState == SS_IN_SESSION )
+    {
+        self.sessionState = SS_PAUSE;
+    }
+}
+
+-(void)TTTimeCounterDidUpdate:(TTTimeCounterView *)sender
+{
+    if (self.sessionState == SS_PREPARE)
+    {
+        //! Play Sound.
+        NSLog(@"player sound");
+        [self.preparingSound play];
+    }
 }
 
 #pragma mark -- Controls animation

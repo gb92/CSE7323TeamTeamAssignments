@@ -12,9 +12,17 @@
 
 @protocol TTTimeCounterDelegate <NSObject>
 
--(void)TTTimeCounterDidStarted:(TTTimeCounterView*) view;
--(void)TTTimeCounterDidStoped:(TTTimeCounterView*) view;
--(void)TTTimeCounterDidFinshed:(TTTimeCounterView*) view;
+@optional
+-(void)TTTimeCounterWillStart:(TTTimeCounterView*) sender;
+-(void)TTTimeCounterDidStarted:(TTTimeCounterView*) sender;
+
+-(void)TTTimeCounterWillStop:(TTTimeCounterView *)sender;
+-(void)TTTimeCounterDidStoped:(TTTimeCounterView*) sender;
+
+-(void)TTTimeCounterDidFinshed:(TTTimeCounterView*) sender;
+
+-(void)TTTimeCounterWillUpdate:(TTTimeCounterView*) sender;
+-(void)TTTimeCounterDidUpdate:(TTTimeCounterView*) sender;
 
 @end
 
@@ -25,12 +33,16 @@
 
 @property (strong, nonatomic) UIColor* barColor;
 
-@property (nonatomic) NSInteger timeSeconds;
-@property (nonatomic,readonly) BOOL isStarted;
+@property (nonatomic, readonly) NSInteger timeSeconds;
+@property (nonatomic, readonly) BOOL isStarted;
+
+@property (nonatomic ) BOOL isDrawGate;
 
 -(void)stop;
 -(void)start;
+-(void)resume;
 -(void)reset;
 
+-(void)setTimeSeconds:(NSInteger)timeSeconds;
 
 @end

@@ -52,11 +52,8 @@
         self.userInfo.username = @"MARK USER NAME";
         self.userInfo.firstName = @"Chatchai";
         self.userInfo.lastName = @"Wangwiwattana";
-        self.userInfo.middleName = @"Mark";
         self.userInfo.fitPoints = @(45698);
-        self.userInfo.goalFitPoints = @(50000);
-        self.userInfo.calories = @(23125);
-        
+
         NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
                                            @(10000),@"Sunday",
                                            @(30000),@"Monday",

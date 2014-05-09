@@ -8,13 +8,32 @@
 
 #import "TTFacebookViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "TTCircleImageView.h"
+#import "TTUserInfoHandler.h"
+#import "TTAppDelegate.h"
 
 @interface TTFacebookViewController ()
 @property (weak, nonatomic) IBOutlet FBLoginView *facebookButton;
+@property (weak, nonatomic) IBOutlet TTCircleImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastnameLabel;
+
+
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
 
 @end
 
 @implementation TTFacebookViewController
+
+-(TTUserInfoHandler *)userInfoHandler
+{
+    if (!_userInfoHandler) {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
+    }
+    
+    return _userInfoHandler;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,8 +47,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.facebookButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+
     self.facebookButton.delegate=self;
+    
+    FBSession *currentSession=[FBSession activeSession];
+    
+    if(currentSession.state == FBSessionStateOpen)
+    {
+        //! Get from Facebook handler.
+        self.imageView.image = [UIImage imageNamed:@"noone"];
+        self.nameLabel.text = self.userInfoHandler.userInfo.firstName;
+        self.lastnameLabel.text = self.userInfoHandler.userInfo.lastName;
+    }
+    else
+    {
+        self.imageView.image = [UIImage imageNamed:@"noone"];
+        self.nameLabel.text = @"";
+        self.lastnameLabel.text = @"";
+    }
 }
 
 - (void)didReceiveMemoryWarning
