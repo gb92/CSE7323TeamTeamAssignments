@@ -15,6 +15,7 @@
 @interface TTFacebookViewController ()
 @property (weak, nonatomic) IBOutlet FBLoginView *facebookButton;
 @property (weak, nonatomic) IBOutlet TTCircleImageView *imageView;
+@property (strong, nonatomic) FBProfilePictureView *profPicView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastnameLabel;
 
@@ -24,6 +25,16 @@
 @end
 
 @implementation TTFacebookViewController
+
+-(FBProfilePictureView*) profPicView
+{
+    if(_profPicView == nil)
+    {
+        _profPicView=[[FBProfilePictureView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
+        [self.view addSubview:_profPicView];
+    }
+    return _profPicView;
+}
 
 -(TTUserInfoHandler *)userInfoHandler
 {
@@ -139,5 +150,6 @@
 -(void) loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
     NSLog(@"The loginview successfully fetched user data: %@", user);
+    self.profPicView.profileID=user.id;
 }
 @end
