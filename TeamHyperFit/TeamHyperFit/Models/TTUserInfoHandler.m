@@ -92,7 +92,7 @@
             
             if(onFinish != nil)
                 onFinish( error );
-            
+            /*
             [self.fbHandler updateCurrentUserDailySteps:@(32) withDate:[NSDate date] withUserID:self.userInfo.userID];
             
             NSCalendar *cal = [NSCalendar currentCalendar];
@@ -114,6 +114,28 @@
             [self.fbHandler getUserSteps:yesterday  to:tomorrow forIDs:@[self.userInfo.userID] response:^(NSArray *usersSteps, NSError *error) {
                 //do something
             }];
+             */
+            
+            TTUserActivity *tempActivity=[[TTUserActivity alloc]init];
+            tempActivity.userID=userInformation.userID;
+            tempActivity.activity=jumpingJacks;
+            tempActivity.numRepetitions=@(32);
+            
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+            
+            [components setHour:0];
+            [components setMinute:-10];
+            [components setSecond:-22];
+            NSDate *start=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
+            [components setMinute:-8];
+            [components setSecond:-31];
+            NSDate *end=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
+            
+            tempActivity.startTime=start;
+            tempActivity.endTime=end;
+            
+            [self.fbHandler addUserActivity:tempActivity];
            
         }];
     }

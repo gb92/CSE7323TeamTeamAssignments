@@ -42,7 +42,7 @@ typedef void (^stepsBlock) (NSArray *usersSteps, NSError *error);
 
 -(void) addUserActivity:(TTUserActivity *) activity;
 
--(void) getCurrentUserActivities:(userActivitiesBlock) callback;
+-(void) getUserActivities:(NSString*)userID from:(NSDate *) fromDate to:(NSDate*)toDate response:(userActivitiesBlock) callback;
 
 -(void) updateCurrentUserDailySteps:(NSNumber*) steps withDate:(NSDate*) day withUserID:(NSString *) userID;
 

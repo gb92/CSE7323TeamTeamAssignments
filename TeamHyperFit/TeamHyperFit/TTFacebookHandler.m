@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) NSDateFormatter* dateFormat;
 
+@property (strong, nonatomic) NSDateFormatter* dateWithTimeFormat;
+
 @end
 
 @implementation TTFacebookHandler
@@ -43,6 +45,17 @@
         [_dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     }
     return _dateFormat;
+}
+
+-(NSDateFormatter *) dateWithTimeFormat
+{
+    if(_dateWithTimeFormat == nil)
+    {
+        _dateWithTimeFormat=[[NSDateFormatter alloc]init];
+        [_dateWithTimeFormat setDateFormat:@"yyyy-MM-dd mm:ss"];
+        [_dateWithTimeFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }
+    return _dateWithTimeFormat;
 }
 
 -(void)getCurrentUserInformation:(userInformationBlock)callback
@@ -520,4 +533,28 @@
     
 }
 
+-(void) addUserActivity:(TTUserActivity *)activity
+{
+    MSTable *table=[self.client tableWithName:@"Activities"];
+    
+    NSString *activityString=[TTUserActivity activityString:activity.activity];
+    
+    NSDictionary *item=@{@"userID": activity.userID,
+                         @"activity":activityString,
+                         @"startTime":[self.dateWithTimeFormat stringFromDate:activity.startTime],
+                         @"endTime":[self.dateWithTimeFormat stringFromDate:activity.endTime],
+                         @"numRepetitions":activity.numRepetitions};
+    [table insert:item completion:^(NSDictionary *item, NSError *error) {
+        if(error)
+        {
+            NSLog(@"Error while inserting activity:%@", error);
+        }
+    }];
+    
+}
+
+-(void) getCurrentUserActivities:(NSDate *)fromDate to:(NSDate *)toDate response:(userActivitiesBlock)callback
+{
+    
+}
 @end
