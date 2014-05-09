@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "TFUserModel.h"
 #import "TTFriendModel.h"
+#import "TTFacebookHandler.h"
 
-@interface TTUserInfoHandler : NSObject
+@interface TTUserInfoHandler : NSObject <TTFacebookHandlerDelegate>
 
 @property (strong, nonatomic) TFUserModel *userInfo;
 @property (strong, nonatomic) NSMutableArray *friendsInfo;
+@property (nonatomic, strong) TTFacebookHandler* fbHandler;
 
 -(void)updateUserInfo:(void(^)( TFUserModel*, NSError* error)) onFinish;
 
