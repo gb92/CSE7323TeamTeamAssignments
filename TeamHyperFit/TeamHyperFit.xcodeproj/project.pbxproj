@@ -186,6 +186,7 @@
 		EF8F0477191C7CAD00794DEC /* TTSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F0476191C7CAD00794DEC /* TTSoundEffect.m */; };
 		EF8F047A191C7EDF00794DEC /* beepStart.wav in Resources */ = {isa = PBXBuildFile; fileRef = EF8F0478191C7EDF00794DEC /* beepStart.wav */; };
 		EF8F047B191C7EDF00794DEC /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = EF8F0479191C7EDF00794DEC /* beep.wav */; };
+		EF8F0480191C82D200794DEC /* TTSessionSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8F047F191C82D200794DEC /* TTSessionSummaryViewController.m */; };
 		EF94806D1912E4210029E71F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF94806C1912E4210029E71F /* XCTest.framework */; };
 		EF9480701912E5810029E71F /* TTHeartRateCounter.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */; };
 		EF965B9F1911AC800056C2A0 /* TTCircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965B9E1911AC800056C2A0 /* TTCircleImageView.m */; };
@@ -438,6 +439,8 @@
 		EF8F0476191C7CAD00794DEC /* TTSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSoundEffect.m; sourceTree = "<group>"; };
 		EF8F0478191C7EDF00794DEC /* beepStart.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beepStart.wav; sourceTree = "<group>"; };
 		EF8F0479191C7EDF00794DEC /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
+		EF8F047E191C82D200794DEC /* TTSessionSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSessionSummaryViewController.h; sourceTree = "<group>"; };
+		EF8F047F191C82D200794DEC /* TTSessionSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSessionSummaryViewController.m; sourceTree = "<group>"; };
 		EF94806C1912E4210029E71F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EF94806E1912E5810029E71F /* TTHeartRateCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTHeartRateCounter.h; sourceTree = "<group>"; };
 		EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TTHeartRateCounter.mm; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 				5CFEE0D51919903700766F01 /* TTCongratulationViewController.m */,
 				EF22B7A3191ADC5000D373CD /* TTFacebookViewController.h */,
 				EF22B7A4191ADC5000D373CD /* TTFacebookViewController.m */,
+				EF8F047E191C82D200794DEC /* TTSessionSummaryViewController.h */,
+				EF8F047F191C82D200794DEC /* TTSessionSummaryViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1137,6 +1142,7 @@
 				99C5A451190C8535000B0F81 /* TTFacebookHandler.m in Sources */,
 				5C25CFA3191B579A00BC365D /* UIScrollView+GifPullToRefresh.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
+				EF8F0480191C82D200794DEC /* TTSessionSummaryViewController.m in Sources */,
 				5CFEE0D01918180800766F01 /* TTActivitySelectionTableViewController.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "TTSessionViewController.h"
+#import "TTSessionSummaryViewController.h"
 #import "TTHeartRateCounter.h"
 #import "TTTimeCounterView.h"
 #import "TTSoundEffect.h"
@@ -20,8 +21,7 @@ typedef enum
     
 } SessionState;
 
-@interface TTSessionViewController ()<UIGestureRecognizerDelegate,TTTimeCounterDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *closeBigButton;
+@interface TTSessionViewController ()<UIGestureRecognizerDelegate,TTTimeCounterDelegate, TTSessionSummaryViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
@@ -94,8 +94,6 @@ typedef enum
     self.timeCounterView.delegate = self;
     self.timeCounterView.isDrawGate = NO;
     
-    self.closeBigButton.hidden = YES;
-    
     self.sessionState = SS_REST;
 }
 
@@ -106,7 +104,6 @@ typedef enum
         if( self.sessionState == SS_REST)
         {
             [self.timeCounterView start];
-            [self hideCloseBigButton];
         }
         else
         {
@@ -144,9 +141,14 @@ typedef enum
 
 #pragma mark -
 
+#pragma mark -- TTSessionSummaryDelegate
+-(void)TTSessionSummaryViewControllerOnCloseButtonPressed:(TTSessionSummaryViewController *)sender
+{
+    [sender dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
-
-#pragma mark -- TTTimerViewDelegation
+#pragma mark -- TTTimerViewDelegate
 
 -(void)TTTimeCounterDidFinshed:(TTTimeCounterView *)view
 {
@@ -159,6 +161,15 @@ typedef enum
         
         NSLog(@"End Session; Change to Rest..");
         [self.startSound play];
+        
+        
+        //! Open session summery vc.
+        TTSessionSummaryViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummary"];
+        
+        //! @TODO: Update summary information such as Activity name and image.
+        vc.delegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+        
     }
     else if( self.sessionState == SS_PREPARE)
     {
@@ -205,47 +216,6 @@ typedef enum
         NSLog(@"player sound");
         [self.preparingSound play];
     }
-}
-
-#pragma mark -- Controls animation
-
--(void)showCloseBigButton
-{
-    const int kOffset = 20;
-    
-    CGRect originalFrame = self.closeBigButton.frame;
-    CGRect startFrame = originalFrame;
-    startFrame.origin.y += kOffset;
-    
-    self.closeBigButton.hidden = NO;
-    self.closeBigButton.alpha = 0.0f;
-    self.closeBigButton.frame = startFrame;
-    
-    [UIView animateWithDuration:0.5f animations:^{
-    
-        self.closeBigButton.frame = originalFrame;
-        self.closeBigButton.alpha = 1.0f;
-        
-    }];
-}
-
--(void)hideCloseBigButton
-{
-    const int kOffset = 20;
-
-    CGRect originalFrame = self.closeBigButton.frame;
-    CGRect startFrame = originalFrame;
-    startFrame.origin.y += kOffset;
-
-    self.closeBigButton.alpha = 1.0f;
-
-    [UIView animateWithDuration:0.5f animations:^{
-        
-        self.closeBigButton.frame = startFrame;
-        self.closeBigButton.alpha = 0.0f;
-        
-    }];
-
 }
 
 @end

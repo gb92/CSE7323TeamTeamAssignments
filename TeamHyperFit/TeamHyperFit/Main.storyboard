@@ -1285,16 +1285,6 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                     <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="f2y-gi-wFP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7I-LP-hLa">
-                                <rect key="frame" x="132" y="491" width="57" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="sessionCloseBtn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeButton:" destination="mcd-f0-uHu" eventType="touchUpInside" id="wua-Cs-ruX"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pushupBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uwp-9f-Qiv">
                                 <rect key="frame" x="59" y="82" width="57" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1317,12 +1307,8 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="t7I-LP-hLa" secondAttribute="centerX" id="vBp-qF-X80"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="closeBigButton" destination="t7I-LP-hLa" id="PkE-ct-egz"/>
                         <outlet property="postImageView" destination="uwp-9f-Qiv" id="g2K-k8-zHV"/>
                         <outlet property="postLabel" destination="Sed-jG-K1D" id="4ro-Kf-fAA"/>
                         <outlet property="timeCounterView" destination="YUV-bV-4Bm" id="sfD-xQ-7mb"/>
@@ -1332,10 +1318,10 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
             </objects>
             <point key="canvasLocation" x="2546" y="2075"/>
         </scene>
-        <!--View Controller-->
+        <!--Session Summary View Controller-->
         <scene sceneID="rty-0h-kPN">
             <objects>
-                <viewController id="VJ8-Ks-pEf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionSummary" id="VJ8-Ks-pEf" customClass="TTSessionSummaryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ntg-Iu-Fhk"/>
                         <viewControllerLayoutGuide type="bottom" id="pLi-JC-3VV"/>
@@ -1343,8 +1329,87 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                     <view key="view" contentMode="scaleToFill" id="5XU-bH-ayj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWA-TU-Avy">
+                                <rect key="frame" x="12" y="180" width="297" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Reps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f83-as-v2p">
+                                        <rect key="frame" x="10" y="0.0" width="152" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g32-hf-n3b">
+                                        <rect key="frame" x="129" y="11" width="148" height="86"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="80"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XjR-Ah-dpd">
+                                <rect key="frame" x="12" y="295" width="297" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fitpoints Aquired" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2k-mT-A8s">
+                                        <rect key="frame" x="-5" y="0.0" width="137" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="75" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVO-R7-2lW">
+                                        <rect key="frame" x="131" y="11" width="146" height="86"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="80"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUSH-UPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNu-DI-ZZf">
+                                <rect key="frame" x="124" y="88" width="143" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Great Job!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgq-Mb-n00">
+                                <rect key="frame" x="80" y="140" width="161" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pushupBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="avT-Wo-zet">
+                                <rect key="frame" x="54" y="75" width="57" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7I-LP-hLa">
+                                <rect key="frame" x="132" y="443" width="57" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="sessionCloseBtn">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseButtonPressed:" destination="VJ8-Ks-pEf" eventType="touchUpInside" id="wJj-19-AWK"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="activityImageView" destination="avT-Wo-zet" id="N6N-oT-cYC"/>
+                        <outlet property="activityNameLabel" destination="gNu-DI-ZZf" id="fPM-QP-2FW"/>
+                        <outlet property="closeButton" destination="t7I-LP-hLa" id="OtP-Bt-7Rz"/>
+                        <outlet property="fitpointsLabel" destination="jVO-R7-2lW" id="0qX-zr-F7A"/>
+                        <outlet property="rapsNumberLabel" destination="g32-hf-n3b" id="SK5-Uu-loe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gj-GH-UcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
