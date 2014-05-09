@@ -31,7 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.activityNameLabel.text = self.activityName;
+    self.activityImageView.image = [UIImage imageNamed:self.activityImageName];
+    
 }
 
 - (void)didReceiveMemoryWarning

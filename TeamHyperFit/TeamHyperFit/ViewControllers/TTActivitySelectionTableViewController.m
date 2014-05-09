@@ -87,7 +87,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+//    TTActivitySelectionViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActionCell" forIndexPath:indexPath];
+    
+    
     TTSessionViewController* sessionVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionView"];
+    
+    sessionVC.activityName = ((TFGesture*)self.gestures[indexPath.row]).name;
+    sessionVC.activityImageName = ((TFGesture*)self.gestures[indexPath.row]).imageName;
     [self.navigationController pushViewController:sessionVC animated:YES];
      
 }

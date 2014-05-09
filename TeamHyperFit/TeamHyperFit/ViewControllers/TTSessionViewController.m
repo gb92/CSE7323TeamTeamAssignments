@@ -84,6 +84,9 @@ typedef enum
 {
     [super viewDidLoad];
 
+    self.postLabel.text = self.activityName;
+    self.postImageView.image = [UIImage imageNamed:self.activityImageName];
+    
     // single tap gesture recognizer
     UITapGestureRecognizer *tapGestureRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureRecognizer:)];
     tapGestureRecognize.delegate = self;
@@ -166,7 +169,9 @@ typedef enum
         //! Open session summery vc.
         TTSessionSummaryViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummary"];
         
-        //! @TODO: Update summary information such as Activity name and image.
+        vc.activityName = self.activityName;
+        vc.activityImageName = self.activityImageName;
+        
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];
         

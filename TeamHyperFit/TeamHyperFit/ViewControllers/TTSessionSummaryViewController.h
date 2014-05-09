@@ -20,4 +20,7 @@
 
 @property (weak, nonatomic) id<TTSessionSummaryViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) NSString *activityName;
+@property (strong, nonatomic) NSString *activityImageName;
+
 @end

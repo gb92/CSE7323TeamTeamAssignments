@@ -10,4 +10,7 @@
 
 @interface TTSessionViewController : UIViewController
 
+@property (strong, nonatomic) NSString *activityName;
+@property (strong, nonatomic) NSString *activityImageName;
+
 @end
