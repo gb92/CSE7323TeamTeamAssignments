@@ -15,10 +15,9 @@
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
-@property (strong, nonatomic) NSString *middleName;
 @property (strong, nonatomic) NSNumber *fitPoints;
 @property (strong, nonatomic) NSNumber *goalFitPoints;
-@property (strong, nonatomic) NSNumber *calories;
+//@property (strong, nonatomic) NSNumber *calories;
 @property (strong, nonatomic) NSDictionary *userStatistics;
 
 @property (nonatomic) BOOL isDirty;

@@ -127,10 +127,10 @@
     self.stepsLabel.method = UILabelCountingMethodEaseOut;
     [self.stepsLabel countFrom:steps - 10 to:steps withDuration:0.5f];
     
-    int caluries = [self.userInfoHandler.userInfo.calories intValue];
+    //int caluries = [self.userInfoHandler.userInfo.calories intValue];
     self.calorieLabel.format = @"%d";
     self.calorieLabel.method = UILabelCountingMethodEaseOut;
-    [self.calorieLabel countFrom:caluries-10 to:caluries withDuration:0.5f];
+    //[self.calorieLabel countFrom:caluries-10 to:caluries withDuration:0.5f];
 }
 
 #pragma mark -

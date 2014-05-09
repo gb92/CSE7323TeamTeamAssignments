@@ -17,34 +17,40 @@ typedef void (^userFriendsBlock) (NSArray *friends, NSError *error);
 typedef void (^userFriendsFitPointsBlock) (NSArray *friends, NSError *error);
 typedef void (^userActivitiesBlock) (NSArray *userActivities, NSError *error);
 
+typedef void (^fitPointsBlock) (NSArray *usersFitPoints, NSError *error);
+typedef void (^stepsBlock) (NSArray *usersSteps, NSError *error);
+
 @interface TTFacebookHandler : NSObject
 
--(void) getCurrentUserInformation:(userInformationBlock) callback;
+-(void) getCurrentUserInformation:(userInformationBlock) callback; //complete
 
--(void) getCurrentUserFitPoints:(userFitPointsBlock) callback;
+-(void) getCurrentUserFitPoints:(userFitPointsBlock) callback; //complete
 
--(void) getCurrentUserInformationWithFitPoints:(userInformationFitPointsBlock) callback;
+-(void) getCurrentUserInformationWithFitPoints:(userInformationFitPointsBlock) callback; //complete
 
--(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback;
+-(void) getCurrentUserFriendsWithApp:(userFriendsBlock) callback; //complete
 
--(void) getFriendsFitPoints:(userFriendsFitPointsBlock) callback;
+-(void) getFriendsFitPoints:(userFriendsFitPointsBlock) callback; //complete
 
--(void) getCurrentUserActivities:(userActivitiesBlock) callback;
+-(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints onFinish:(void(^)(NSError*)) onFinishedBlock; //complete
 
--(void) getCurrentUserDailyStepCount;
+-(void) addToCurrentUserFitPoints:(NSNumber *) fitPointsToAdd;//complete
 
--(void) getCurrentUserHourlyStepHourly;
+-(void) getUserSteps: (NSDate *)fromDate to:(NSDate *) toDate forIDs:(NSArray *)userIDs response:(stepsBlock) callback; //complete
 
--(void) getCurrentUserDailyCalorieCount;
-
--(void) updateCurrentUserFitPoints:(NSNumber *) fitPoints onFinish:(void(^)(NSError*)) onFinishedBlock;
-
--(void) addToCurrentUserFitPoints:(NSNumber *) fitPointsToAdd;
+-(void) getFitPoints: (NSDate *)fromDate to:(NSDate *)toDate forIDs:(NSArray *) userIDs  response:(fitPointsBlock) callback; //complete
 
 -(void) addUserActivity:(TTUserActivity *) activity;
 
--(void) updateCurrentUserHourlySteps:(NSNumber*) steps withDate:(NSDate*) hour;
+-(void) getCurrentUserActivities:(userActivitiesBlock) callback;
 
--(void) updateCurrentUserCalorieCount:(NSNumber*) calories withDate:(NSDate*) day;
+-(void) updateCurrentUserDailySteps:(NSNumber*) steps withDate:(NSDate*) day withUserID:(NSString *) userID;
+
+/*
+ 
+ -(void) updateCurrentUserCalorieCount:(NSNumber*) calories withDate:(NSDate*) day;
+
+ -(void) getCurrentUserDailyCalorieCount;
+*/
 
 @end

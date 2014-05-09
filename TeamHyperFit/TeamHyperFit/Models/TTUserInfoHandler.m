@@ -55,7 +55,7 @@
         self.userInfo.middleName = @"Mark";
         self.userInfo.fitPoints = @(45698);
         self.userInfo.goalFitPoints = @(50000);
-        self.userInfo.calories = @(23125);
+        //self.userInfo.calories = @(23125);
         
         NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
                                            @(10000),@"Sunday",
@@ -81,21 +81,48 @@
 {
     if( !self.userInfo.isDirty )
     {
-        [self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
+        //[self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
+        [self.fbHandler getCurrentUserInformationWithFitPoints:^(TFUserModel *userInformation, NSError *error){
+            
             if( !error )
             {
-                self.userInfo.fitPoints = fitPoints;
+                self.userInfo.userID=userInformation.userID;
+                self.userInfo.fitPoints = userInformation.fitPoints;
             }
             
             if(onFinish != nil)
                 onFinish( error );
             
+            [self.fbHandler updateCurrentUserDailySteps:@(32) withDate:[NSDate date] withUserID:self.userInfo.userID];
+            
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+            
+            [components setHour:-[components hour]];
+            [components setMinute:-[components minute]];
+            [components setSecond:-[components second]];
+            NSDate *today = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
+            
+            [components setHour:-24];
+            [components setMinute:0];
+            [components setSecond:0];
+            NSDate *yesterday = [cal dateByAddingComponents:components toDate: today options:0];
+            
+            [components setHour: 24];
+            NSDate *tomorrow=[cal dateByAddingComponents:components toDate:today options:0];
+            
+            [self.fbHandler getUserSteps:yesterday  to:tomorrow forIDs:@[self.userInfo.userID] response:^(NSArray *usersSteps, NSError *error) {
+                //do something
+            }];
+           
         }];
     }
     else
     {
         NSLog(@"The object is dirty. Please sync info to server first.");
     }
+    
+
 }
 
 -(void)syncInfoToServer:(void(^)(NSError* error)) onFinish

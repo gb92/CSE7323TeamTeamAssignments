@@ -30,9 +30,6 @@
     [FBProfilePictureView class];
     
     self.userInforHandler = [TTUserInfoHandler new];
-    //!----------------------------------------------------------
-    self.a7ActivityHandler = [[TTA7ActivityHandler alloc] init];
-    //!----------------------------------------------------------
     
     //!------------------------------------------------------------------------------------------
     //! Pull Gestures from sever if avaliable.

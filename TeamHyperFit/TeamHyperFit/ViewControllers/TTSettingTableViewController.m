@@ -43,6 +43,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.activitySwitch setOn:((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode];
+    
+    FBSession *currentSession=[FBSession activeSession];
+    if(currentSession.state == FBSessionStateOpen)
+    {
+        [self.facebookSwitch setOn:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +71,10 @@
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"facebookView"];
         
         [self presentViewController:vc animated:YES completion:nil];
+    }
+    else
+    {
+        [[FBSession activeSession] closeAndClearTokenInformation];
     }
 }
 
