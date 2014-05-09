@@ -17,6 +17,10 @@
 @property (weak, nonatomic) MSClient *client;
 @property (strong, nonatomic) NSString *fbID;
 
+@property (strong, nonatomic) NSDateFormatter* dateFormat;
+
+@property (strong, nonatomic) NSDateFormatter* dateWithTimeFormat;
+
 @end
 
 @implementation TTFacebookHandler
@@ -30,6 +34,28 @@
         _client=appDelegate.msClient;
     }
     return _client;
+}
+
+-(NSDateFormatter *) dateFormat
+{
+    if(_dateFormat == nil)
+    {
+        _dateFormat=[[NSDateFormatter alloc] init];
+        [_dateFormat setDateFormat:@"yyyy-MM-dd"];
+        [_dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }
+    return _dateFormat;
+}
+
+-(NSDateFormatter *) dateWithTimeFormat
+{
+    if(_dateWithTimeFormat == nil)
+    {
+        _dateWithTimeFormat=[[NSDateFormatter alloc]init];
+        [_dateWithTimeFormat setDateFormat:@"yyyy-MM-dd mm:ss"];
+        [_dateWithTimeFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }
+    return _dateWithTimeFormat;
 }
 
 -(void)getCurrentUserInformation:(userInformationBlock)callback
@@ -144,6 +170,7 @@
         }
     }];
 }
+
 -(void) getCurrentUserInformationWithFitPoints:(userInformationFitPointsBlock)callback
 {
     [self getCurrentUserInformation:^(TFUserModel *userInformation, NSError *error) {
@@ -392,6 +419,7 @@
             else if(totalCount>0)
             {
                 NSDictionary *item = (NSDictionary *)items[0];
+                NSNumber* currentFitPoints=[item valueForKey:@""];
                 [item setValue:fitPointsToAdd forKey:@"numFitPoints"];
                 
                 [table update:item completion:^(NSDictionary *item, NSError *error) {
@@ -407,11 +435,126 @@
 
 }
 
--(void) getCurrentUserActivities:(userActivitiesBlock)callback
+-(void) getUserSteps:(NSDate *)fromDate to:(NSDate *)toDate forIDs:(NSArray *)userIDs response:(stepsBlock)callback
 {
+    MSTable *table= [self.client tableWithName:@"StepsTaken"];
+    [table readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+        
+        if(error)
+        {
+            NSLog(@"Error while retrieving user step information: %@",error);
+            callback(nil, error);
+            return;
+        }
+        
+        NSMutableArray *userStepsToReturn=[[NSMutableArray alloc] init];
+        for(int i=0; i<[userIDs count]; i++)
+        {
+            NSMutableDictionary *dict= [[NSMutableDictionary alloc]init];
+            [dict setObject:userIDs[i] forKey:@"userID"];
+            [dict setObject:[[NSMutableArray alloc] init] forKey:@"steps"];
+            [userStepsToReturn addObject:dict];
+        }
+        
+        for(int i=0; i<[items count]; i++)
+        {
+            NSDictionary *currentItem=(NSDictionary *)items[i];
+            NSString *userID=[currentItem valueForKey:@"userID"];
+            
+            if([userIDs containsObject:userID])
+            {
+                NSDate *dayOfSteps=[self.dateFormat dateFromString:[currentItem valueForKey:@"date"]];
+                NSNumber *numSteps=(NSNumber *)[currentItem valueForKey:@"numSteps"];
+                if([[toDate earlierDate:[fromDate laterDate:dayOfSteps]] isEqual:dayOfSteps])
+                {
+                    //the steps are recorded in the correct date range
+                    NSUInteger index=[userIDs indexOfObject:userID];
+                    NSDictionary* userSteps=(NSDictionary *)userStepsToReturn[index];
+                    
+                    NSMutableArray *stepsWithDates=(NSMutableArray *)[userSteps valueForKey:@"steps"];
+                    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                    [dict setObject:dayOfSteps forKey:@"date"];
+                    [dict setObject:numSteps forKey:@"steps"];
+                    [stepsWithDates addObject:dict];
+                }
+            
+            }
+        }
+        NSLog(@"userStepsToReturn: %@", userStepsToReturn);
+        callback(userStepsToReturn, error);
+    }];
+}
+
+//adds steps to current step value in database for day
+-(void) updateCurrentUserDailySteps:(NSNumber *)steps withDate:(NSDate *)day withUserID:(NSString *)userID
+{
+    NSString* dateString=[self.dateFormat stringFromDate:day];
+    
+    MSTable *table= [self.client tableWithName:@"StepsTaken"];
+    MSQuery *query=[table query];
     
     
+    query.includeTotalCount=YES;
+    query.parameters=@{@"userID":userID,
+                       @"date":dateString};
+    
+    [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+       if(totalCount >0)
+       {
+           NSDictionary *item=(NSDictionary *)items[0];
+           NSNumber* numSteps=[item valueForKey:@"numSteps"];
+           
+           NSNumber* updatedSteps=[NSNumber numberWithInt:([numSteps intValue]+ [steps intValue])];
+           
+           [item setValue:updatedSteps forKey:@"numSteps"];
+           
+           [table update:item completion:^(NSDictionary *item, NSError *error)
+           {
+               if(error)
+               {
+                   NSLog(@"Error while Updating Steps: %@", error);
+               }
+           }];
+       }
+       else
+       {
+           NSDictionary *item=@{@"userID":userID,
+                                @"date":dateString,
+                                @"numSteps":steps};
+           [table insert:item completion:^(NSDictionary *item, NSError *error)
+           {
+               if(error)
+               {
+                   NSLog(@"Error while Updating Steps: %@", error);
+               }
+           }];
+       }
+    }];
     
 }
 
+-(void) addUserActivity:(TTUserActivity *)activity
+{
+    MSTable *table=[self.client tableWithName:@"Activities"];
+    
+    NSString *activityString=[TTUserActivity activityString:activity.activity];
+    
+    NSDictionary *item=@{@"userID": activity.userID,
+                         @"activity":activityString,
+                         @"startTime":[self.dateWithTimeFormat stringFromDate:activity.startTime],
+                         @"endTime":[self.dateWithTimeFormat stringFromDate:activity.endTime],
+                         @"numRepetitions":activity.numRepetitions};
+    [table insert:item completion:^(NSDictionary *item, NSError *error) {
+        if(error)
+        {
+            NSLog(@"Error while inserting activity:%@", error);
+        }
+    }];
+    
+}
+
+-(void) getCurrentUserActivities:(NSDate *)fromDate to:(NSDate *)toDate response:(userActivitiesBlock)callback
+{
+    
+}
 @end

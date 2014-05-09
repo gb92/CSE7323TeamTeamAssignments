@@ -10,9 +10,4 @@
 
 @interface TTFacebookFriend : NSObject
 
-@property (strong, nonatomic) NSString *userID;
-@property (strong, nonatomic) NSString *profilePictureURL;
-@property BOOL hasFitPointsValue;
-@property (strong, nonatomic) NSNumber *currentFitPointsValue;
-
 @end

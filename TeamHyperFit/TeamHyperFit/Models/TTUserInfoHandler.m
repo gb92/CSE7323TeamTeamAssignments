@@ -78,21 +78,70 @@
 {
     if( !self.userInfo.isDirty )
     {
-        [self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
+        //[self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
+        [self.fbHandler getCurrentUserInformationWithFitPoints:^(TFUserModel *userInformation, NSError *error){
+            
             if( !error )
             {
-                self.userInfo.fitPoints = fitPoints;
+                self.userInfo.userID=userInformation.userID;
+                self.userInfo.fitPoints = userInformation.fitPoints;
             }
             
             if(onFinish != nil)
                 onFinish( error );
+            /*
+            [self.fbHandler updateCurrentUserDailySteps:@(32) withDate:[NSDate date] withUserID:self.userInfo.userID];
             
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+            
+            [components setHour:-[components hour]];
+            [components setMinute:-[components minute]];
+            [components setSecond:-[components second]];
+            NSDate *today = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
+            
+            [components setHour:-24];
+            [components setMinute:0];
+            [components setSecond:0];
+            NSDate *yesterday = [cal dateByAddingComponents:components toDate: today options:0];
+            
+            [components setHour: 24];
+            NSDate *tomorrow=[cal dateByAddingComponents:components toDate:today options:0];
+            
+            [self.fbHandler getUserSteps:yesterday  to:tomorrow forIDs:@[self.userInfo.userID] response:^(NSArray *usersSteps, NSError *error) {
+                //do something
+            }];
+             */
+            
+            TTUserActivity *tempActivity=[[TTUserActivity alloc]init];
+            tempActivity.userID=userInformation.userID;
+            tempActivity.activity=jumpingJacks;
+            tempActivity.numRepetitions=@(32);
+            
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+            
+            [components setHour:0];
+            [components setMinute:-10];
+            [components setSecond:-22];
+            NSDate *start=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
+            [components setMinute:-8];
+            [components setSecond:-31];
+            NSDate *end=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
+            
+            tempActivity.startTime=start;
+            tempActivity.endTime=end;
+            
+            [self.fbHandler addUserActivity:tempActivity];
+           
         }];
     }
     else
     {
         NSLog(@"The object is dirty. Please sync info to server first.");
     }
+    
+
 }
 
 -(void)syncInfoToServer:(void(^)(NSError* error)) onFinish

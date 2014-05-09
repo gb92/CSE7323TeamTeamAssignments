@@ -130,7 +130,7 @@
     int caluries = 10000;
     self.calorieLabel.format = @"%d";
     self.calorieLabel.method = UILabelCountingMethodEaseOut;
-    [self.calorieLabel countFrom:caluries-10 to:caluries withDuration:0.5f];
+    //[self.calorieLabel countFrom:caluries-10 to:caluries withDuration:0.5f];
 }
 
 #pragma mark -

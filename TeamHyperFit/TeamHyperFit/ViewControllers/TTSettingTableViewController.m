@@ -42,6 +42,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.activitySwitch setOn:((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode];
+    
+    FBSession *currentSession=[FBSession activeSession];
+    if(currentSession.state == FBSessionStateOpen)
+    {
+        [self.facebookSwitch setOn:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning

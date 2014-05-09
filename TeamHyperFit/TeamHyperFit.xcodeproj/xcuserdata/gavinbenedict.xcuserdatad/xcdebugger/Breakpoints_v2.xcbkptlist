@@ -9,44 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeamHyperFit/Models/TFUserModel.m"
-            timestampString = "421272040.894682"
+            filePath = "TeamHyperFit/TTFacebookHandler.m"
+            timestampString = "421299896.809737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-requestInfoFromServer:"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-getCurrentUserInformation:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TFUserModel requestInfoFromServer:]"
-                  moduleName = "TeamHyperFit"
-                  urlString = "file:///Users/gavinbenedict/Documents/Code%20Projects/CSE7323TeamTeamAssignments/TeamHyperFit/TeamHyperFit/Models/TFUserModel.m"
-                  timestampString = "421276757.000514"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__37-[TFUserModel requestInfoFromServer:]_block_invoke"
-                  moduleName = "TeamHyperFit"
-                  urlString = "file:///Users/gavinbenedict/Documents/Code%20Projects/CSE7323TeamTeamAssignments/TeamHyperFit/TeamHyperFit/Models/TFUserModel.m"
-                  timestampString = "421276757.000909"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,12 +26,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamHyperFit/TTFacebookHandler.m"
-            timestampString = "421284089.028893"
+            timestampString = "421299896.809737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-getCurrentUserInformation:"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "-getUserSteps:to:forIDs:response:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamHyperFit/TTFacebookHandler.m"
+            timestampString = "421299896.809737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
+            landmarkName = "-getUserSteps:to:forIDs:response:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamHyperFit/TTFacebookHandler.m"
+            timestampString = "421299896.809737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
+            landmarkName = "-getUserSteps:to:forIDs:response:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
