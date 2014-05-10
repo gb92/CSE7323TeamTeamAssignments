@@ -76,7 +76,7 @@
     
     [self setupUI];
     
-//    [self.userModel addObserver:self forKeyPath:@"fitPoints" options:NSKeyValueObservingOptionNew context:nil];
+    [self.userInfoHandler.userInfo addObserver:self forKeyPath:@"todaySteps" options:NSKeyValueObservingOptionNew context:nil];
     
 }
 
@@ -96,6 +96,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark -
 #pragma mark Event Handling.
 
@@ -110,9 +115,9 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if( [keyPath isEqualToString:@"fitPoints"])
+    if( [keyPath isEqualToString:@"todaySteps"])
     {
-        NSLog(@"Yah");
+        self.stepsLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.todaySteps intValue] ];
     }
 }
 
@@ -167,7 +172,13 @@
 
     [self.containerScrollView addPullToRefreshWithDrawingImgs:TwitterMusicDrawingImgs andLoadingImgs:TwitterMusicLoadingImgs andActionHandler:^{
 
-        [self updateInfo];
+        [self.userInfoHandler updateUserInfo:^(TFUserModel* userInfo, NSError *error)
+        {
+            if( !error )
+            {
+                [self updateInfo];
+            }
+        }];
         
         [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:3];
         
@@ -187,41 +198,35 @@
 
 -(void)updateInfo
 {
-    [self.userInfoHandler updateUserInfo:^(TFUserModel* userInfo, NSError *error)
-    {
-        if( !error )
-        {
-            NSDictionary* fitpointsThisWeek = [userInfo.userStatistics objectForKey:@"fitpointsThisWeek"];
-            int goalThisWeek = (int)[[userInfo.userStatistics objectForKey:@"goalThisWeek"] integerValue];
-            
-            self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
-            self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
-            self.tueView.value = [[fitpointsThisWeek objectForKey:@"Tuesday"]    integerValue];
-            self.wesView.value = [[fitpointsThisWeek objectForKey:@"Wednesday"]  integerValue];
-            self.thuView.value = [[fitpointsThisWeek objectForKey:@"Thursday"]   integerValue];
-            self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
-            self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
-            
-            self.sunView.maxValue = goalThisWeek;
-            self.monView.maxValue = goalThisWeek;
-            self.tueView.maxValue = goalThisWeek;
-            self.wesView.maxValue = goalThisWeek;
-            self.thuView.maxValue = goalThisWeek;
-            self.friView.maxValue = goalThisWeek;
-            self.satView.maxValue = goalThisWeek;
-            
-            self.fitpointView.value = (int)[userInfo.fitPoints integerValue];
-            self.fitpointView.maxValue = goalThisWeek;
-            
-            //! Update UI
-            [self.fitpointView setNeedsDisplay];
-            [self.sunView setNeedsDisplay];
-            
-        }
-        
-        [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:1];
-        
-    }];
+    NSDictionary* fitpointsThisWeek = [self.userInfoHandler.userInfo.userStatistics objectForKey:@"fitpointsThisWeek"];
+    int goalThisWeek = (int)[[self.userInfoHandler.userInfo.userStatistics objectForKey:@"goalThisWeek"] integerValue];
+    
+    self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
+    self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
+    self.tueView.value = [[fitpointsThisWeek objectForKey:@"Tuesday"]    integerValue];
+    self.wesView.value = [[fitpointsThisWeek objectForKey:@"Wednesday"]  integerValue];
+    self.thuView.value = [[fitpointsThisWeek objectForKey:@"Thursday"]   integerValue];
+    self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
+    self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
+    
+    self.sunView.maxValue = goalThisWeek;
+    self.monView.maxValue = goalThisWeek;
+    self.tueView.maxValue = goalThisWeek;
+    self.wesView.maxValue = goalThisWeek;
+    self.thuView.maxValue = goalThisWeek;
+    self.friView.maxValue = goalThisWeek;
+    self.satView.maxValue = goalThisWeek;
+    
+    self.fitpointView.value = (int)[self.userInfoHandler.userInfo.fitPoints integerValue];
+    self.fitpointView.maxValue = goalThisWeek;
+    
+    //! Update UI
+    [self.fitpointView setNeedsDisplay];
+    [self.sunView setNeedsDisplay];
+
+    [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:1];
+
+    self.stepsLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.todaySteps intValue] ];
 
 }
 

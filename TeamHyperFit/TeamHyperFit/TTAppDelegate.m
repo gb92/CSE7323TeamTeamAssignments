@@ -12,9 +12,10 @@
 
 @implementation TTAppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [FBLoginView class];
+    self.userInforHandler = [TTUserInfoHandler new];
     
     NSDictionary *appDictionary=[[NSBundle mainBundle] infoDictionary];
     NSString *serverURL=[appDictionary valueForKey:@"TeamFitServerURL"];
@@ -25,12 +26,10 @@
     self.msClient=[MSClient clientWithApplicationURLString:@"https://teamfit.azure-mobile.net/" applicationKey:@"qfHPkCDfjbGcpfzkLUYbDtmOiCugGZ68"];
     
     [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorInformational]];
-    
+
     [FBLoginView class];
     [FBProfilePictureView class];
     
-    self.userInforHandler = [TTUserInfoHandler new];
-
     //!------------------------------------------------------------------------------------------
     //! Pull Gestures from sever if avaliable.
     //! Fake Data for now.

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Models/TTUserActivity.h"
 #import "Models/TFUserModel.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 typedef void (^userInformationBlock)(TFUserModel* userInformation, NSError *error);
 typedef void (^userFitPointsBlock)(NSNumber *fitPoints, NSError *error);
@@ -20,7 +21,26 @@ typedef void (^userActivitiesBlock) (NSArray *userActivities, NSError *error);
 typedef void (^fitPointsBlock) (NSArray *usersFitPoints, NSError *error);
 typedef void (^stepsBlock) (NSArray *usersSteps, NSError *error);
 
-@interface TTFacebookHandler : NSObject
+
+@protocol TTFacebookHandlerDelegate <NSObject>
+
+-(void)TTFacebookHandlerOnLoginSuccessfully:(id<FBGraphUser>)user;
+-(void)TTFacebookHandlerOnLogoutSuccessfully;
+
+@end
+
+
+
+
+@interface TTFacebookHandler : NSObject <FBLoginViewDelegate>
+
+@property (weak, nonatomic) id<TTFacebookHandlerDelegate> delegate;
+@property (nonatomic) BOOL isLogin;
+
+-(void) getProfileImageByID:(NSNumber*)ID callback:(void(^)( UIImage* image, NSError* error )) callback;
+-(void) getUserInfoToUserModel:(TFUserModel*) outUserModel;
+
+//-------------------------------------------------
 
 -(void) getCurrentUserInformation:(userInformationBlock) callback; //complete
 
