@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet TTCircleImageView *userPhotoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
+@property (weak, nonatomic) IBOutlet UILabel *fitpoitLabel;
 
 @end
 
@@ -100,6 +101,7 @@
     [self.containerScrollView addPullToRefreshWithDrawingImgs:TwitterMusicDrawingImgs andLoadingImgs:TwitterMusicLoadingImgs andActionHandler:^{
         
         [self updateInfo];
+        [self reloadFriendList];
         
         [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:3];
         
@@ -107,12 +109,26 @@
     
     self.containerScrollView.alwaysBounceVertical = YES;
     
-    
+}
+
+-(void)reloadFriendList
+{
+    [self.userInfoHandler updateFriendsInfo:^(NSError *error)
+     {
+         [self.friendTableView reloadData];
+         [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:0];
+     }];
 }
 
 -(void)updateInfo
 {
-#pragma waning It is not yet impremented.
+    self.fitpoitLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.fitPoints intValue] + [self.userInfoHandler.userInfo.todaySteps intValue] ];
+    self.userPhotoImageView.image = self.userInfoHandler.userInfo.profileImage;
+
+    if( [self.userInfoHandler.friendsInfo count] <= 0 )
+    {
+        [self reloadFriendList];
+    }
 }
 
 #pragma mark -
@@ -125,16 +141,18 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [self.userInfoHandler.friendsInfo count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TTFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
     
-    cell.nameLabel.text = @"Chatchai W.";
-    cell.fitPointLabel.text = @"9,874,512";
-    cell.photoCircularImageView.image = [UIImage imageNamed:@"markImg"];
+    TTFriendModel* friend = ((TTFriendModel*)self.userInfoHandler.friendsInfo[indexPath.row]);
+    
+    cell.nameLabel.text = friend.firstName;
+    cell.fitPointLabel.text = [NSString stringWithFormat:@"%d", [friend.fitPoints intValue]];
+    cell.photoCircularImageView.image = friend.profileImage;
     
     return cell;
 }

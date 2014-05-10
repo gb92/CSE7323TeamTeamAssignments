@@ -177,6 +177,7 @@
             if( !error )
             {
                 [self updateInfo];
+                [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:0];
             }
         }];
         
@@ -185,7 +186,6 @@
     }];
     
     self.containerScrollView.alwaysBounceVertical = YES;
-    
 
 }
 
@@ -209,6 +209,14 @@
     self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
     self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
     
+    [self.sunView setNeedsDisplay];
+    [self.monView setNeedsDisplay];
+    [self.tueView setNeedsDisplay];
+    [self.wesView setNeedsDisplay];
+    [self.thuView setNeedsDisplay];
+    [self.friView setNeedsDisplay];
+    [self.satView setNeedsDisplay];
+    
     self.sunView.maxValue = goalThisWeek;
     self.monView.maxValue = goalThisWeek;
     self.tueView.maxValue = goalThisWeek;
@@ -217,12 +225,12 @@
     self.friView.maxValue = goalThisWeek;
     self.satView.maxValue = goalThisWeek;
     
-    self.fitpointView.value = (int)[self.userInfoHandler.userInfo.fitPoints integerValue];
+    self.fitpointView.value = (int)([self.userInfoHandler.userInfo.fitPoints integerValue] + [self.userInfoHandler.userInfo.todaySteps integerValue]);
     self.fitpointView.maxValue = goalThisWeek;
     
     //! Update UI
     [self.fitpointView setNeedsDisplay];
-    [self.sunView setNeedsDisplay];
+    
 
     [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:1];
 

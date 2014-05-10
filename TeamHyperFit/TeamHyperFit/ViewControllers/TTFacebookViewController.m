@@ -54,6 +54,12 @@
     [self.userInfoHandler.userInfo addObserver:self forKeyPath:@"firstName" options:NSKeyValueObservingOptionNew context:nil];
     [self.userInfoHandler.userInfo addObserver:self forKeyPath:@"lastName" options:NSKeyValueObservingOptionNew context:nil];
     [self.userInfoHandler.userInfo addObserver:self forKeyPath:@"profileImage" options:NSKeyValueObservingOptionNew context:nil];
+    
+    self.nameLabel.text     = self.userInfoHandler.userInfo.firstName;
+    self.lastnameLabel.text = self.userInfoHandler.userInfo.lastName;
+    self.imageView.image    = self.userInfoHandler.userInfo.profileImage;
+    [self.imageView setNeedsDisplay];
+
 }
 
 - (void)didReceiveMemoryWarning

@@ -23,7 +23,5 @@
 @property (strong, nonatomic) NSArray *gestures;
 @property (strong, nonatomic) TTUserInfoHandler *userInforHandler;
 
-//! For Prototyping only! Please change to the real thing.
-@property (nonatomic) BOOL activitySessionMode;
 
 @end
