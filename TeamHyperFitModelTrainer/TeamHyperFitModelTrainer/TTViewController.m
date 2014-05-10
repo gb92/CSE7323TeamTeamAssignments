@@ -18,6 +18,7 @@
 @property (strong, nonatomic) TFGestureRecognizer *gestureRecognizer;
 
 @property (strong, nonatomic) NSString *gestureLabel;
+@property (weak, nonatomic) IBOutlet UITextView *resultTextField;
 
 @property NSInteger rowSelected;
 
@@ -45,6 +46,9 @@
     
     self.gestureLabel=@"Jumping Jack";
     self.rowSelected=0;
+    
+    [self.gestureRecognizer addObserver:self forKeyPath:@"log" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,6 +119,18 @@
     
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if( [keyPath isEqualToString:@"log"]){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        self.resultTextField.text = self.gestureRecognizer.log;
+        
+        });
+        
+    }
+}
+
 
 - (IBAction)startStopGesturePressed:(id)sender {
     
@@ -133,16 +149,16 @@
 
 - (IBAction)uploadGesturePressed:(id)sender {
     
-    [self.gestureRecognizer uploadTrainingData:self.rowSelected withLabel:self.gestureLabel];
+    [self.gestureRecognizer uploadTrainingData:20 withLabel:self.gestureLabel];
 }
 
 - (IBAction)predictGesturePressed:(id)sender {
-    [self.gestureRecognizer makeTrainingPrediction:self.rowSelected];
+    [self.gestureRecognizer makeTrainingPrediction:20];
     
 }
 
 - (IBAction)trainModelPressed:(id)sender {
-    [self.gestureRecognizer trainModel:self.rowSelected];
+    [self.gestureRecognizer trainModel:20];
 }
 
 @end

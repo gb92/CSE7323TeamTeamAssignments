@@ -5,46 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D7A57255-10C0-4679-99F4-B4D192BB0E61</string>
+	<string>16D6AC7F-FA73-4048-AD86-3DFE3B14096E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TeamHyperFit</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>268B650E-AE06-4A0F-9DED-83BDD5D49D62</key>
+		<key>789187EB-BEB7-4CDB-8E80-484E98EA927A</key>
 		<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TeamHyperFit/TeamHyperFit.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>268B650E-AE06-4A0F-9DED-83BDD5D49D62</key>
+		<key>789187EB-BEB7-4CDB-8E80-484E98EA927A</key>
 		<string>../../..</string>
-		<key>E633373A-114C-43A8-8FD1-9BC9DEDF1693</key>
-		<string>../../../../../../Downloads/MotionDemoSMU</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>268B650E-AE06-4A0F-9DED-83BDD5D49D62</string>
+	<string>789187EB-BEB7-4CDB-8E80-484E98EA927A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>268B650E-AE06-4A0F-9DED-83BDD5D49D62</string>
+			<string>789187EB-BEB7-4CDB-8E80-484E98EA927A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CSE7323TeamTeamAssignments</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E633373A-114C-43A8-8FD1-9BC9DEDF1693</string>
-			<key>IDESourceControlWCCName</key>
-			<string>MotionDemoSMU</string>
 		</dict>
 	</array>
 </dict>

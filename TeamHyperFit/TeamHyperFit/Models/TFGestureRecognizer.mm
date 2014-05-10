@@ -55,8 +55,7 @@ BOOL CurrentlyGesturing;
 
 float *sampledGesture;
 int windowSize = 100;
-float threshold = .325;
-
+float threshold = .30;
 
 
 
@@ -301,17 +300,21 @@ float threshold = .325;
         NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
         
         // we should get back the feature data from the server and the label it parsed
-        NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-        NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-        NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+        NSString *prediction = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+
+        NSLog(@"prediction : %@",prediction);
         
-        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
-        {
-            //TFGesture *gesture=[[TFGesture alloc] init];
-            // TODO: add data to the gesture object
-            
-            //[self.delegate gestureRecognized:gesture];
-        }
+        NSString *result = [NSString stringWithFormat:@"prediction : %@",prediction];
+        
+        self.log = result;
+        
+//        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
+//        {
+//            //TFGesture *gesture=[[TFGesture alloc] init];
+//            // TODO: add data to the gesture object
+//            
+//            //[self.delegate gestureRecognized:gesture];
+//        }
     }];
     
 }
@@ -360,17 +363,19 @@ float threshold = .325;
             {
                 CurrentlyGesturing=YES;
                 NSLog(@"Detected start Gesture at Start of New Frames");
+                self.log = (@"Detected start Gesture at Start of New Frames");
             }
             else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
             {
                 CurrentlyGesturing=NO;
                 NSLog(@"Detected End Gesture at Start of New Frames");
-                
+                self.log = (@"Detected End Gesture at Start of New Frames");
                 [self uploadGestureBuffer];
             }
             if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
             {
                 NSLog(@"Gesture Started");
+                self.log = (@"Gesture Started");
                 CurrentlyGesturing=YES;
             }
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
@@ -439,13 +444,15 @@ float threshold = .325;
             {
                 CurrentlyGesturing=YES;
                 NSLog(@"Detected start Gesture at Start of New Frames");
+                self.log = (@"Detected start Gesture at Start of New Frames");
             }
             else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
             {
                 CurrentlyGesturing=NO;
                 NSLog(@"Detected End Gesture at Start of New Frames");
-                
+                self.log = (@"Detected End Gesture at Start of New Frames");
                 //[self uploadGestureBuffer];
+                
             }
             if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
             {
@@ -455,7 +462,6 @@ float threshold = .325;
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
             {
                 CurrentlyGesturing = NO;
-                //[self uploadGestureBuffer];
                 
             }
             if(CurrentlyGesturing)
@@ -514,13 +520,15 @@ float threshold = .325;
             NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
             NSLog(@"received %@ and %@",featuresResponse,labelResponse);
             
-            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
-            {
-                //TFGesture *gesture=[[TFGesture alloc] init];
-                // TODO: add data to the gesture object
-                
-                //[self.delegate gestureRecognized:gesture];
-            }
+            self.log = [NSString stringWithFormat:@"received %@ and %@",featuresResponse,labelResponse ];
+            
+//            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
+//            {
+//                //TFGesture *gesture=[[TFGesture alloc] init];
+//                // TODO: add data to the gesture object
+//                
+//                //[self.delegate gestureRecognized:gesture];
+//            }
         }];
 
         
@@ -531,7 +539,7 @@ float threshold = .325;
 
 -(void)makeTrainingPrediction:(NSInteger)datasetID
 {
-    [self uploadDownSampledGesture];
+    [self uploadGestureBuffer];
 }
 
 -(void) uploadGestureBuffer
@@ -570,22 +578,27 @@ float threshold = .325;
     NSDictionary *dataToSendToServer=@{@"dsid":self.modelDataSetID};
     
     [self.ttWebServiceManager sendGet:dataToSendToServer to:predictRequest callback:^(NSData *data) {
-        NSLog(@"Train Model Response:%@", data);
+        NSLog(@"Train Model Response:");
         NSError *error=[[NSError alloc] init];
         NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
         
         // we should get back the feature data from the server and the label it parsed
-        NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-        NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-        NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+        NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"resubAccuracy_knn"]];
+        NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"resubAccuracy_svm"]];
         
-        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
-        {
-            //TFGesture *gesture=[[TFGesture alloc] init];
-            // TODO: add data to the gesture object
-            
-            //[self.delegate gestureRecognized:gesture];
-        }
+        
+        NSString *result = [NSString stringWithFormat:@"knn %@, svm: %@",featuresResponse,labelResponse];
+        
+        NSLog(@"%@",result);
+
+        self.log = result;
+//        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
+//        {
+//            //TFGesture *gesture=[[TFGesture alloc] init];
+//            // TODO: add data to the gesture object
+//            
+//            //[self.delegate gestureRecognized:gesture];
+//        }
     }];
 
 }

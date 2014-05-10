@@ -23,8 +23,8 @@
 		99B2B29A191DA8F3001E9965 /* TeamHyperFitModelTrainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B2B299191DA8F3001E9965 /* TeamHyperFitModelTrainerTests.m */; };
 		99B2B2A5191DB160001E9965 /* TFGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99B2B2A4191DB160001E9965 /* TFGestureRecognizer.mm */; };
 		99B2B2A8191DB16A001E9965 /* TTWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B2B2A7191DB16A001E9965 /* TTWebServiceManager.m */; };
-		99B2B2AB191DB1D4001E9965 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99B2B2AA191DB1D4001E9965 /* RingBuffer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		99B2B2AD191DBF5D001E9965 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B2B2AC191DBF5D001E9965 /* Accelerate.framework */; };
+		EF4EE665191E8B2D00C6B3FB /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = EF4EE664191E8B2D00C6B3FB /* RingBuffer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +61,9 @@
 		99B2B2A4191DB160001E9965 /* TFGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TFGestureRecognizer.mm; path = ../../TeamHyperFit/TeamHyperFit/Models/TFGestureRecognizer.mm; sourceTree = "<group>"; };
 		99B2B2A6191DB16A001E9965 /* TTWebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTWebServiceManager.h; path = ../../TeamHyperFit/TeamHyperFit/Models/TTWebServiceManager.h; sourceTree = "<group>"; };
 		99B2B2A7191DB16A001E9965 /* TTWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTWebServiceManager.m; path = ../../TeamHyperFit/TeamHyperFit/Models/TTWebServiceManager.m; sourceTree = "<group>"; };
-		99B2B2A9191DB1D4001E9965 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingBuffer.h; path = ../../../../../Downloads/MotionDemoSMU/MotionDemoSMU/RingBuffer.h; sourceTree = "<group>"; };
-		99B2B2AA191DB1D4001E9965 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RingBuffer.mm; path = ../../../../../Downloads/MotionDemoSMU/MotionDemoSMU/RingBuffer.mm; sourceTree = "<group>"; };
 		99B2B2AC191DBF5D001E9965 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		EF4EE663191E8B2D00C6B3FB /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		EF4EE664191E8B2D00C6B3FB /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RingBuffer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +125,8 @@
 		99B2B274191DA8F3001E9965 /* TeamHyperFitModelTrainer */ = {
 			isa = PBXGroup;
 			children = (
+				EF4EE663191E8B2D00C6B3FB /* RingBuffer.h */,
+				EF4EE664191E8B2D00C6B3FB /* RingBuffer.mm */,
 				99B2B27D191DA8F3001E9965 /* TTAppDelegate.h */,
 				99B2B27E191DA8F3001E9965 /* TTAppDelegate.m */,
 				99B2B280191DA8F3001E9965 /* Main.storyboard */,
@@ -134,8 +136,6 @@
 				99B2B2A7191DB16A001E9965 /* TTWebServiceManager.m */,
 				99B2B2A3191DB160001E9965 /* TFGestureRecognizer.h */,
 				99B2B2A4191DB160001E9965 /* TFGestureRecognizer.mm */,
-				99B2B2A9191DB1D4001E9965 /* RingBuffer.h */,
-				99B2B2AA191DB1D4001E9965 /* RingBuffer.mm */,
 				99B2B286191DA8F3001E9965 /* Images.xcassets */,
 				99B2B275191DA8F3001E9965 /* Supporting Files */,
 			);
@@ -219,6 +219,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = edu.smu.cse7323;
 				TargetAttributes = {
+					99B2B26A191DA8F3001E9965 = {
+						DevelopmentTeam = APD62CDC25;
+					};
 					99B2B28B191DA8F3001E9965 = {
 						TestTargetID = 99B2B26A191DA8F3001E9965;
 					};
@@ -272,7 +275,7 @@
 				99B2B27F191DA8F3001E9965 /* TTAppDelegate.m in Sources */,
 				99B2B27B191DA8F3001E9965 /* main.m in Sources */,
 				99B2B285191DA8F3001E9965 /* TTViewController.m in Sources */,
-				99B2B2AB191DB1D4001E9965 /* RingBuffer.mm in Sources */,
+				EF4EE665191E8B2D00C6B3FB /* RingBuffer.mm in Sources */,
 				99B2B2A8191DB16A001E9965 /* TTWebServiceManager.m in Sources */,
 				99B2B2A5191DB160001E9965 /* TFGestureRecognizer.mm in Sources */,
 			);
@@ -356,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -388,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -399,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamHyperFitModelTrainer/TeamHyperFitModelTrainer-Prefix.pch";
 				INFOPLIST_FILE = "TeamHyperFitModelTrainer/TeamHyperFitModelTrainer-Info.plist";
@@ -412,6 +416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamHyperFitModelTrainer/TeamHyperFitModelTrainer-Prefix.pch";
 				INFOPLIST_FILE = "TeamHyperFitModelTrainer/TeamHyperFitModelTrainer-Info.plist";
@@ -479,6 +484,7 @@
 				99B2B29F191DA8F3001E9965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99B2B2A0191DA8F3001E9965 /* Build configuration list for PBXNativeTarget "TeamHyperFitModelTrainerTests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +493,7 @@
 				99B2B2A2191DA8F3001E9965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

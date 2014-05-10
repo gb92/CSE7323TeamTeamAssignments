@@ -26,4 +26,7 @@
 -(void)makeTrainingPrediction:(NSInteger) datasetID;
 
 -(void)trainModel:(NSInteger) datasetID;
+
+@property (strong, nonatomic) NSString *log;
+
 @end
