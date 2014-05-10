@@ -23,7 +23,7 @@ typedef enum
     
 } SessionState;
 
-@interface TTSessionViewController ()<UIGestureRecognizerDelegate,TTTimeCounterDelegate, TTSessionSummaryViewControllerDelegate>
+@interface TTSessionViewController ()<UIGestureRecognizerDelegate,TTTimeCounterDelegate, TTSessionSummaryViewControllerDelegate, TFGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
@@ -99,7 +99,7 @@ typedef enum
 {
     [super viewDidLoad];
 
-    
+    self.gestureRecognizer.delegate = self;
     
     self.postLabel.text = self.activityName;
     self.postImageView.image = [UIImage imageNamed:self.activityImageName];
@@ -253,6 +253,16 @@ typedef enum
         NSLog(@"player sound");
         [self.preparingSound play];
     }
+}
+
+-(void)TFGestureRecognizerDidDetectBegin:(TFGestureRecognizer *)sender
+{
+    [self.preparingSound play];
+}
+
+-(void)TFGestureRecognizerDidDetectEnd:(TFGestureRecognizer *)sender
+{
+    [self.startSound play];
 }
 
 @end

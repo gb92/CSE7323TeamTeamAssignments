@@ -55,8 +55,8 @@ float *motionVector;
 BOOL CurrentlyGesturing;
 
 float *sampledGesture;
-int windowSize = 40;
-float threshold = .25;
+int windowSize = 60;
+float threshold = .18;
 
 //-(NSArray*) gestureTypeCount
 //{
@@ -433,24 +433,33 @@ float threshold = .25;
                 CurrentlyGesturing=YES;
                 NSLog(@"Detected start Gesture at Start of New Frames");
                 self.log = (@"Detected start Gesture at Start of New Frames");
+                
+                [self.delegate TFGestureRecognizerDidDetectBegin:self];
             }
             else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
             {
                 CurrentlyGesturing=NO;
                 NSLog(@"Detected End Gesture at Start of New Frames");
                 self.log = (@"Detected End Gesture at Start of New Frames");
+                [self.delegate TFGestureRecognizerDidDetectEnd:self];
+                
                 [self uploadGestureBuffer];
             }
             if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
             {
                 NSLog(@"Gesture Started");
                 self.log = (@"Gesture Started");
+                
+                [self.delegate TFGestureRecognizerDidDetectBegin:self];
+                
                 CurrentlyGesturing=YES;
             }
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
             {
                 NSLog(@"Gesture Started");
                 self.log = (@"Gesture Started");
+                [self.delegate TFGestureRecognizerDidDetectEnd:self];
+                
                 CurrentlyGesturing = NO;
                 [self uploadGestureBuffer];
                 
@@ -516,6 +525,7 @@ float threshold = .25;
                 CurrentlyGesturing=YES;
                 NSLog(@"Detected start Gesture at Start of New Frames");
                 self.log = (@"Detected start Gesture at Start of New Frames");
+                [self.delegate TFGestureRecognizerDidDetectBegin:self];
             }
             else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
             {
@@ -523,6 +533,7 @@ float threshold = .25;
                 NSLog(@"Detected End Gesture at Start of New Frames");
                 self.log = (@"Detected End Gesture at Start of New Frames");
                 //[self uploadGestureBuffer];
+                [self.delegate TFGestureRecognizerDidDetectEnd:self];
                 
             }
             if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
@@ -530,13 +541,14 @@ float threshold = .25;
                 NSLog(@"Gesture Started");
                 self.log = (@"Gesture Started");
                 CurrentlyGesturing=YES;
+                [self.delegate TFGestureRecognizerDidDetectBegin:self];
             }
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
             {
                 NSLog(@"Gesture Ended");
                 self.log = (@"Gesture Ended");
                 CurrentlyGesturing = NO;
-                
+                [self.delegate TFGestureRecognizerDidDetectEnd:self];
             }
             if(CurrentlyGesturing)
             {

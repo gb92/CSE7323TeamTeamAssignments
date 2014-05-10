@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class TFGestureRecognizer;
+
+@protocol TFGestureRecognizerDelegate <NSObject>
+
+-(void)TFGestureRecognizerDidDetectBegin:(TFGestureRecognizer*) sender;
+-(void)TFGestureRecognizerDidDetectEnd:(TFGestureRecognizer*) sender;
+
+@end
+
 @interface TFGestureRecognizer : NSObject
 
-@property (nonatomic, assign)id delegate;
+@property (weak, nonatomic)id<TFGestureRecognizerDelegate> delegate;
 
 @property (strong, nonatomic) NSNumber *modelDataSetID;
 
