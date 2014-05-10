@@ -19,6 +19,8 @@
 	<dict>
 		<key>268B650E-AE06-4A0F-9DED-83BDD5D49D62</key>
 		<string>../../..</string>
+		<key>E633373A-114C-43A8-8FD1-9BC9DEDF1693</key>
+		<string>../../../../../../Downloads/MotionDemoSMU</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/gb92/CSE7323TeamTeamAssignments.git</string>
@@ -35,6 +37,14 @@
 			<string>268B650E-AE06-4A0F-9DED-83BDD5D49D62</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CSE7323TeamTeamAssignments</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E633373A-114C-43A8-8FD1-9BC9DEDF1693</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MotionDemoSMU</string>
 		</dict>
 	</array>
 </dict>

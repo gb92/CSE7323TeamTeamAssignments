@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TTMotionDataBufferDelegate.h"
 
-@interface TFGestureRecognizer : NSObject <TTMotionDataBufferDelegate>
+@interface TFGestureRecognizer : NSObject
 
 @property (nonatomic, assign)id delegate;
 
@@ -21,4 +20,10 @@
 -(void) startGestureCapture;
 -(void) stopGestureCapture;
 
+-(void) startTrainingGestureCapture;
+-(void) uploadTrainingData:(NSInteger) datasetID withLabel:(NSString *) label;
+
+-(void)makeTrainingPrediction:(NSInteger) datasetID;
+
+-(void)trainModel:(NSInteger) datasetID;
 @end
