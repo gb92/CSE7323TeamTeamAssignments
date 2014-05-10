@@ -27,6 +27,9 @@ class UploadLabeledDatapointHandler(BaseHandler):
 		label = data['label'];
 		sess  = data['dsid']
 
+		print ("id:");
+		print (sess); 
+
 		dbid = self.db.labeledinstances.insert(
 			{"feature":fvals,"label":label,"dsid":sess}
 			);
@@ -48,6 +51,9 @@ class UpdateModelForDatasetId(BaseHandler):
 		'''
 		dsid = self.get_int_arg("dsid",default=0);
 
+		print ('id:');
+		print (dsid);
+
 		# create feature vectors from database
 		f=[];
 		for a in self.db.labeledinstances.find({"dsid":dsid}):
@@ -58,6 +64,8 @@ class UpdateModelForDatasetId(BaseHandler):
 		for a in self.db.labeledinstances.find({"dsid":dsid}):
 			l.append(a['label'])
 
+		result = self.db.labeledinstances.group(['label'], {"dsid":dsid},{'list':[]},'function(obj, prev){ prev.list.push(obj)}');
+
 		# fit the model to the data
 		c_knn = KNeighborsClassifier(n_neighbors=3);
 
@@ -67,7 +75,10 @@ class UpdateModelForDatasetId(BaseHandler):
 		acc_knn = -1
 		acc_svm = -1
 
-		if l:
+		print(f);
+		print(l);
+
+		if len(result)>=2:
 			c_knn.fit(f,l); # training
 			lstar_knn = c_knn.predict(f);
 			acc_knn = sum(lstar_knn==l)/float(len(l));
@@ -75,9 +86,6 @@ class UpdateModelForDatasetId(BaseHandler):
 
 			c_svm.fit(f,l); # training
 			lstar_svm = c_svm.predict(f);
-
-			print(f)
-			print(lstar_svm)
 
 			acc_svm = sum(lstar_svm==l)/float(len(l));
 			bytes_svm = pickle.dumps(c_svm);
@@ -110,7 +118,7 @@ class PredictOneFromDatasetId(BaseHandler):
 		if model == 'svm':
 			c2 = pickle.loads(tmp['model_svm'])
 		else:
-			c2 = pickle.loads(tep['model_knn'])
+			c2 = pickle.loads(tmp['model_knn'])
 
 		predLabel = c2.predict(fvals);
 		self.write_json({"prediction":str(predLabel)})
