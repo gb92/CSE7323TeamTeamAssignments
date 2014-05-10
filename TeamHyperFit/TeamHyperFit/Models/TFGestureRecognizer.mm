@@ -14,9 +14,9 @@
 #import <CoreMotion/CoreMotion.h>
 
 
-#import "TTMotionDataBuffer.h"
+//#import "TTMotionDataBuffer.h"
 #import "TTWebServiceManager.h"
-#import "TFGestureRecognizerDelegate.h"
+//#import "TFGestureRecognizerDelegate.h"
 
 #define kBufferLength 1024
 #define numberOfFeatures 30
@@ -24,8 +24,8 @@
 @interface TFGestureRecognizer()
 
 @property (strong, nonatomic) CMMotionManager *cmMotionManager;
-@property (strong, nonatomic) TTMotionDataBuffer *ttMotionDataBuffer;
-@property (weak, nonatomic) TTWebServiceManager *ttWebServiceManager;
+//@property (strong, nonatomic) TTMotionDataBuffer *ttMotionDataBuffer;
+@property (strong, nonatomic) TTWebServiceManager *ttWebServiceManager;
 
 @property (strong,nonatomic) CMMotionManager *cmDeviceMotionManager;
 @property (strong,nonatomic) NSMutableArray *gestureBuffer;
@@ -66,6 +66,7 @@ float threshold = .325;
     {
         self=[super init];
         self.modelDataSetID=modelDSID;
+        
     }
     return self;
 }
@@ -77,15 +78,6 @@ float threshold = .325;
         _modelDataSetID=@(0);
     }
     return _modelDataSetID;
-}
-
--(TTMotionDataBuffer *) ttMotionDataBuffer
-{
-    if(_ttMotionDataBuffer == nil)
-    {
-        _ttMotionDataBuffer= [[TTMotionDataBuffer alloc] initWithBufferLength:50];
-    }
-    return _ttMotionDataBuffer;
 }
 
 -(CMMotionManager *) cmMotionManager
@@ -102,13 +94,23 @@ float threshold = .325;
     return _cmMotionManager;
 }
 
+-(NSMutableArray *) gestureBuffer
+{
+    if(_gestureBuffer == nil)
+    {
+        _gestureBuffer=[[NSMutableArray alloc] init];
+    }
+    return _gestureBuffer;
+}
+
 -(TTWebServiceManager *) ttWebServiceManager
 {
     if(_ttWebServiceManager == nil)
     {
-        TTAppDelegate *appDelegate=(TTAppDelegate *)[[UIApplication sharedApplication]delegate];
         
-        _ttWebServiceManager=appDelegate.webServiceManager;
+        _ttWebServiceManager=[[TTWebServiceManager alloc] init];
+        _ttWebServiceManager.serverURL=@"http://teamhyperfit.cloudapp.net";
+        _ttWebServiceManager.serverPort=@(8000);
     }
     
     return _ttWebServiceManager;
@@ -134,10 +136,38 @@ float threshold = .325;
     return _motionCaptureQueue;
 }
 
+-(void) dealloc
+{
+    free(motionDataX);
+    free(motionDataY);
+    free(motionDataZ);
+    free(motionVector);
+    
+    delete sampledGesture;
+}
+
 -(void) startGestureCapture
 {
     if(updatesQueue == nil)
         updatesQueue=dispatch_queue_create("edu.smu.TeamTeam", DISPATCH_QUEUE_CONCURRENT);
+    
+    if(ringBufferX == nil)
+    {
+        
+        ringBufferX = new RingBuffer(kBufferLength,2);
+        ringBufferY = new RingBuffer(kBufferLength,2);
+        ringBufferZ = new RingBuffer(kBufferLength,2);
+        ringBufferVector = new RingBuffer(kBufferLength,2);
+        
+        motionDataX = (float*)calloc(kBufferLength,sizeof(float));
+        motionDataY = (float*)calloc(kBufferLength,sizeof(float));
+        motionDataZ = (float*)calloc(kBufferLength,sizeof(float));
+        motionVector = (float*)calloc(kBufferLength,sizeof(float));
+        
+        //create the sampled gesture buffer
+        sampledGesture = new float[numberOfFeatures*3];
+
+    }
     
     if(self.cmMotionManager)
     {
@@ -176,6 +206,68 @@ float threshold = .325;
     }
 }
 
+-(void) startTrainingGestureCapture
+{
+    if(updatesQueue == nil)
+        updatesQueue=dispatch_queue_create("edu.smu.TeamTeam", DISPATCH_QUEUE_CONCURRENT);
+    
+    if(self.cmMotionManager)
+    {
+        if (![self.cmMotionManager isDeviceMotionActive]) {
+            [self.cmMotionManager startDeviceMotionUpdates];
+        }
+        
+        if(ringBufferX == nil)
+        {
+            
+            ringBufferX = new RingBuffer(kBufferLength,2);
+            ringBufferY = new RingBuffer(kBufferLength,2);
+            ringBufferZ = new RingBuffer(kBufferLength,2);
+            ringBufferVector = new RingBuffer(kBufferLength,2);
+            
+            motionDataX = (float*)calloc(kBufferLength,sizeof(float));
+            motionDataY = (float*)calloc(kBufferLength,sizeof(float));
+            motionDataZ = (float*)calloc(kBufferLength,sizeof(float));
+            motionVector = (float*)calloc(kBufferLength,sizeof(float));
+            
+            //create the sampled gesture buffer
+            sampledGesture = new float[numberOfFeatures*3];
+            
+        }
+
+        
+        [self.cmMotionManager setDeviceMotionUpdateInterval:1.0/100.0];
+        [self.cmMotionManager
+         startDeviceMotionUpdatesToQueue:self.motionCaptureQueue
+         withHandler:^(CMDeviceMotion *motion, NSError *error) {
+             
+             float dX = motion.userAcceleration.x;
+             float dY = motion.userAcceleration.y;
+             float dZ = motion.userAcceleration.z;
+             float dV = sqrt(pow(dX,2)+pow(dY,2)+pow(dZ,2));
+             
+             ringBufferX->AddNewFloatData(&dX, 1);
+             ringBufferY->AddNewFloatData(&dY, 1);
+             ringBufferZ->AddNewFloatData(&dZ, 1);
+             ringBufferVector->AddNewFloatData(&dV, 1);
+             
+         }];
+        
+        /*
+         self.updateTimer=[NSTimer scheduledTimerWithTimeInterval:1.0/50.0
+         target:self
+         selector:@selector(update:)
+         userInfo:nil
+         repeats:YES];
+         */
+        self.performUpdates=YES;
+        dispatch_async(updatesQueue, ^{
+            [self updateTraining];
+        });
+        
+    }
+}
+
 -(void) stopGestureCapture
 {
     [self.cmMotionManager stopDeviceMotionUpdates];
@@ -187,7 +279,7 @@ float threshold = .325;
     NSLog(@"Acceleration Data Buffer Filled!");
     
     NSDictionary *appDictionary=[[NSBundle mainBundle] infoDictionary];
-    NSString *predictRequest=[appDictionary valueForKey:@"TeamFitPredictRequest"];
+    NSString *predictRequest=@"PredictOne"; //[appDictionary valueForKey:@"TeamFitPredictRequest"];
     
     NSMutableArray *downsampledGesture=[[NSMutableArray alloc] init];
     
@@ -198,8 +290,9 @@ float threshold = .325;
     
     //NSArray *downsampledGesture=[[NSArray alloc] initWith]
     
-    NSDictionary *dataToSendToServer=@{@"data": downsampledGesture,
-                                       @"dsid":self.modelDataSetID};
+    NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
+                                       @"dsid":self.modelDataSetID,
+                                       @"model":@"lkanwlkd"};
     
     
     [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {
@@ -214,10 +307,10 @@ float threshold = .325;
         
         if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
         {
-            TFGesture *gesture=[[TFGesture alloc] init];
+            //TFGesture *gesture=[[TFGesture alloc] init];
             // TODO: add data to the gesture object
             
-            [self.delegate gestureRecognized:gesture];
+            //[self.delegate gestureRecognized:gesture];
         }
     }];
     
@@ -303,7 +396,86 @@ float threshold = .325;
     }
 }
 
--(void) uploadGestureBuffer
+-(void) updateTraining
+{
+    if(self.performUpdates)
+    {
+        
+        // plot
+        ringBufferX->FetchFreshData2(motionDataX, kBufferLength, 0, 1);
+        ringBufferY->FetchFreshData2(motionDataY, kBufferLength, 0, 1);
+        ringBufferZ->FetchFreshData2(motionDataZ, kBufferLength, 0, 1);
+        
+        SInt64 numberOfNewFrames = ringBufferVector->NumUnreadFrames();
+        ringBufferVector->FetchFreshData2(motionVector, kBufferLength, 0, 1);
+        
+        //float* slidingWindowData=[self slidingWindow];
+        
+        float *motionVectorWindowed = new float[kBufferLength-windowSize+1];
+        float *gestureDetectedVector = new float[kBufferLength-windowSize+1];
+        
+        for(int n=kBufferLength-windowSize;n>=0;n--)
+        {
+            motionVectorWindowed[n]=0;
+            for(int p=n+windowSize-1;p>=n;p--)
+            {
+                motionVectorWindowed[n]+=motionVector[p];
+            }
+            
+            motionVectorWindowed[n] = motionVectorWindowed[n]/windowSize;
+            
+            
+            //gesture detection for plotting :D
+            gestureDetectedVector[n]=0;
+            if(motionVectorWindowed[n]>threshold)
+            {
+                gestureDetectedVector[n]=1;
+            }
+        }
+        
+        for(int n=(kBufferLength-windowSize)-numberOfNewFrames; n<kBufferLength-windowSize-1;n++)
+        {
+            if(!CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==1)
+            {
+                CurrentlyGesturing=YES;
+                NSLog(@"Detected start Gesture at Start of New Frames");
+            }
+            else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
+            {
+                CurrentlyGesturing=NO;
+                NSLog(@"Detected End Gesture at Start of New Frames");
+                
+                //[self uploadGestureBuffer];
+            }
+            if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
+            {
+                NSLog(@"Gesture Started");
+                CurrentlyGesturing=YES;
+            }
+            else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
+            {
+                CurrentlyGesturing = NO;
+                //[self uploadGestureBuffer];
+                
+            }
+            if(CurrentlyGesturing)
+            {
+                [self.gestureBuffer addObject:@(motionDataX[n+windowSize-1])];
+                [self.gestureBuffer addObject:@(motionDataY[n+windowSize-1])];
+                [self.gestureBuffer addObject:@(motionDataZ[n+windowSize-1])];
+            }
+        }
+        
+        delete [] motionVectorWindowed;
+        delete [] gestureDetectedVector;
+        
+        dispatch_async(updatesQueue, ^{
+            [self updateTraining];
+        });
+    }
+}
+
+-(void)uploadTrainingData:(NSInteger)datasetID withLabel:(NSString *)label
 {
     if([self.gestureBuffer count] > 0)
     {
@@ -312,13 +484,69 @@ float threshold = .325;
         [self.gestureBuffer removeAllObjects];
         self.gestureBuffer=nil;
         //SEND TO SERVER HERE
-        [self uploadDownSampledGesture];
+        
+        NSLog(@"Acceleration Data Buffer Filled!");
+        
+        NSDictionary *appDictionary=[[NSBundle mainBundle] infoDictionary];
+        NSString *predictRequest=@"AddDataPoint"; //[appDictionary valueForKey:@"TeamFitPredictRequest"];
+        
+        NSMutableArray *downsampledGesture=[[NSMutableArray alloc] init];
+        
+        for(int i=0;i<numberOfFeatures*3;i++)
+        {
+            [downsampledGesture addObject:@(sampledGesture[i])];
+        }
+        
+        //NSArray *downsampledGesture=[[NSArray alloc] initWith]
+        
+        NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
+                                           @"dsid":self.modelDataSetID,
+                                           @"label":label};
+        
+        
+        [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {
+            
+            NSError *error=[[NSError alloc] init];
+            NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+            
+            // we should get back the feature data from the server and the label it parsed
+            NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
+            NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
+            NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+            
+            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
+            {
+                //TFGesture *gesture=[[TFGesture alloc] init];
+                // TODO: add data to the gesture object
+                
+                //[self.delegate gestureRecognized:gesture];
+            }
+        }];
+
         
         
         NSLog(@"Gesture Done!");
     }
 }
 
+-(void)makeTrainingPrediction:(NSInteger)datasetID
+{
+    [self uploadDownSampledGesture];
+}
+
+-(void) uploadGestureBuffer
+{
+    if([self.gestureBuffer count] > 0)
+    {
+        NSLog(@"Gesture Buffer Count:%lu",(unsigned long)[self.gestureBuffer count]);
+        [self downsampleGesture];
+        [self.gestureBuffer removeAllObjects];
+        self.gestureBuffer=nil;
+        [self uploadDownSampledGesture];
+        
+        NSLog(@"Gesture Done!");
+    }
+}
 -(void) downsampleGesture
 {
     
@@ -334,6 +562,32 @@ float threshold = .325;
     }
     NSLog(@"Completed Downsampling Gesture");
     return;
+}
+
+-(void) trainModel:(NSInteger)datasetID
+{
+    NSString *predictRequest=@"UpdateModel";
+    NSDictionary *dataToSendToServer=@{@"dsid":self.modelDataSetID};
+    
+    [self.ttWebServiceManager sendGet:dataToSendToServer to:predictRequest callback:^(NSData *data) {
+        NSLog(@"Train Model Response:%@", data);
+        NSError *error=[[NSError alloc] init];
+        NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+        
+        // we should get back the feature data from the server and the label it parsed
+        NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
+        NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
+        NSLog(@"received %@ and %@",featuresResponse,labelResponse);
+        
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(gestureRecognized:)])
+        {
+            //TFGesture *gesture=[[TFGesture alloc] init];
+            // TODO: add data to the gesture object
+            
+            //[self.delegate gestureRecognized:gesture];
+        }
+    }];
+
 }
 
 @end

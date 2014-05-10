@@ -39,7 +39,7 @@
 
 -(id)init
 {
-    if ([super init])
+    if (self=[super init])
     {
         
     }
@@ -49,7 +49,7 @@
 
 -(id)initWithURL:(NSString*) url port:(NSNumber*) port
 {
-    if ([super init])
+    if (self=[super init])
     {
         self.serverURL = url;
         self.serverPort = port;
