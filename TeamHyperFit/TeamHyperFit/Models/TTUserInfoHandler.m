@@ -224,6 +224,66 @@
         
         
     }];
+    
+
+    
+    NSDate* now = [NSDate date];
+    NSArray *ids = @[self.userInfo.userID];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+    
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    
+    NSDate *timeToDay = [NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today];
+
+    
+    [self.fbHandler getUserSteps:timeToDay to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error) {
+       
+        NSLog(@">>>>%@", usersFitPoints[0]);
+        
+    }];
+    
+//    [self.fbHandler updateCurrentUserDailySteps:@(5000) withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//        [self.fbHandler updateCurrentUserDailySteps:@(3000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//        [self.fbHandler updateCurrentUserDailySteps:@(2000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//        [self.fbHandler updateCurrentUserDailySteps:@(1000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*3) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//    
+//    [self.fbHandler updateCurrentUserDailySteps:@(3000) withDate:today withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateCurrentUserDailySteps:@(4000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today] withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateCurrentUserDailySteps:@(6000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today] withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateCurrentUserDailySteps:@(2000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*3) sinceDate:today] withUserID:@"10201988014288633"];
+//    
+//    
+//    [self.fbHandler updateFitPoints:@(1500) withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//    [self.fbHandler updateFitPoints:@(3000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//    [self.fbHandler updateFitPoints:@(2500) withDate:[NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//    [self.fbHandler updateFitPoints:@(100) withDate:[NSDate dateWithTimeInterval:-(60*60*24*3) sinceDate:today] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
+//    
+//    [self.fbHandler updateFitPoints:@(3000) withDate:today withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateFitPoints:@(5000) withDate:[NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today] withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateFitPoints:@(2500) withDate:[NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today] withUserID:@"10201988014288633"];
+//    
+//    [self.fbHandler updateFitPoints:@(4400) withDate:[NSDate dateWithTimeInterval:-(60*60*24*3) sinceDate:today] withUserID:@"10201988014288633"];
+    
+    
 }
 
 #pragma mark -

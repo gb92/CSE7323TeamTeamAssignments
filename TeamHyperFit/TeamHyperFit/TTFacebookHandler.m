@@ -468,14 +468,18 @@
                 if([[toDate earlierDate:[fromDate laterDate:dayOfSteps]] isEqual:dayOfSteps])
                 {
                     //the steps are recorded in the correct date range
-                    NSUInteger index=[userIDs indexOfObject:userID];
-                    NSDictionary* userSteps=(NSDictionary *)userStepsToReturn[index];
+                    NSInteger index=[userIDs indexOfObject:userID];
                     
-                    NSMutableArray *stepsWithDates=(NSMutableArray *)[userSteps valueForKey:@"steps"];
-                    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-                    [dict setObject:dayOfSteps forKey:@"date"];
-                    [dict setObject:numSteps forKey:@"steps"];
-                    [stepsWithDates addObject:dict];
+                    if( index != NSNotFound )
+                    {
+                        NSDictionary* userSteps=(NSDictionary *)userStepsToReturn[index];
+                        
+                        NSMutableArray *stepsWithDates=(NSMutableArray *)[userSteps valueForKey:@"steps"];
+                        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                        [dict setObject:dayOfSteps forKey:@"date"];
+                        [dict setObject:numSteps forKey:@"steps"];
+                        [stepsWithDates addObject:dict];
+                    }
                 }
             
             }
@@ -496,17 +500,14 @@
     
     query.includeTotalCount=YES;
     query.parameters=@{@"userID":userID,
-                       @"date":dateString};
+                       @"date":dateString };
     
     [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
        if(totalCount >0)
        {
            NSDictionary *item=(NSDictionary *)items[0];
-           NSNumber* numSteps=[item valueForKey:@"numSteps"];
            
-           NSNumber* updatedSteps=[NSNumber numberWithInt:([numSteps intValue]+ [steps intValue])];
-           
-           [item setValue:updatedSteps forKey:@"numSteps"];
+           [item setValue:steps forKey:@"numSteps"];
            
            [table update:item completion:^(NSDictionary *item, NSError *error)
            {
@@ -529,6 +530,51 @@
                }
            }];
        }
+    }];
+    
+}
+
+//adds steps to current step value in database for day
+-(void) updateFitPoints:(NSNumber *)fitPoints withDate:(NSDate *)day withUserID:(NSString *)userID
+{
+    NSString* dateString=[self.dateFormat stringFromDate:day];
+    
+    MSTable *table= [self.client tableWithName:@"FitPoints"];
+    MSQuery *query=[table query];
+    
+    
+    query.includeTotalCount=YES;
+    query.parameters=@{@"userID":userID,
+                       @"date":dateString };
+    
+    [query readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+        if(totalCount >0)
+        {
+            NSDictionary *item=(NSDictionary *)items[0];
+            
+            [item setValue:fitPoints forKey:@"numFitPoints"];
+            
+            [table update:item completion:^(NSDictionary *item, NSError *error)
+             {
+                 if(error)
+                 {
+                     NSLog(@"Error while Updating Fitpoints: %@", error);
+                 }
+             }];
+        }
+        else
+        {
+            NSDictionary *item=@{@"userID":userID,
+                                 @"date":dateString,
+                                 @"numFitPoints":fitPoints};
+            [table insert:item completion:^(NSDictionary *item, NSError *error)
+             {
+                 if(error)
+                 {
+                     NSLog(@"Error while Updating Steps: %@", error);
+                 }
+             }];
+        }
     }];
     
 }

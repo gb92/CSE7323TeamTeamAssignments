@@ -39,7 +39,7 @@
 @property (weak, nonatomic) IBOutlet TMStepIndicaterView *fitpointView;
 
 @property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *calorieLabel;
+
 
 @property (nonatomic) BOOL isStepHiden;
 
@@ -118,6 +118,8 @@
     if( [keyPath isEqualToString:@"todaySteps"])
     {
         self.stepsLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.todaySteps intValue] ];
+        
+        self.fitpointView.value = (int)([self.userInfoHandler.userInfo.fitPoints integerValue] + [self.userInfoHandler.userInfo.todaySteps integerValue]);
     }
 }
 
@@ -241,24 +243,6 @@
 
 #pragma mark -
 #pragma mark UIDynamic
-
--(void)setStepHiden:(BOOL)hidden
-{
-    if (hidden)
-    {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.stepsLabel.alpha = 0.0f;
-            self.calorieLabel.alpha = 0.0f;
-        }];
-    }
-    else
-    {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.stepsLabel.alpha = 1.0f;
-            self.calorieLabel.alpha = 1.0f;
-        }];
-    }
-}
 
 -(void)setupMotionEffect
 {
