@@ -19,7 +19,7 @@
 //#import "TFGestureRecognizerDelegate.h"
 
 #define kBufferLength 1024
-#define numberOfFeatures 90 //MUST BE A MULTIPLE OF 3
+#define numberOfFeatures 10 //MUST BE A MULTIPLE OF 3
 
 @interface TFGestureRecognizer()
 
@@ -54,7 +54,7 @@ float *motionVector;
 BOOL CurrentlyGesturing;
 
 float *sampledGesture;
-int windowSize = 100;
+int windowSize = 20;
 float threshold = .25;
 
 
@@ -398,6 +398,7 @@ float threshold = .25;
         delete [] gestureDetectedVector;
         
         dispatch_async(updatesQueue, ^{
+            [NSThread sleepForTimeInterval:0.2];
             [self update];
         });
     }
@@ -481,6 +482,7 @@ float threshold = .25;
         delete [] gestureDetectedVector;
         
         dispatch_async(updatesQueue, ^{
+            [NSThread sleepForTimeInterval:0.2];
             [self updateTraining];
         });
     }
@@ -491,6 +493,14 @@ float threshold = .25;
     if([self.gestureBuffer count] > 0)
     {
         NSLog(@"Gesture Buffer Count:%lu",(unsigned long)[self.gestureBuffer count]);
+        if([self.gestureBuffer count] < numberOfFeatures*3)
+        {
+            [self.gestureBuffer removeAllObjects];
+            self.gestureBuffer=nil;
+            NSLog(@"Not enough gestures! Cancelling upload.");
+            self.log=(@"Not enough gestures! Cancelling upload.");
+            return;
+        }
         [self downsampleGesture];
         [self.gestureBuffer removeAllObjects];
         self.gestureBuffer=nil;
@@ -552,6 +562,14 @@ float threshold = .25;
     if([self.gestureBuffer count] > 0)
     {
         NSLog(@"Gesture Buffer Count:%lu",(unsigned long)[self.gestureBuffer count]);
+        if([self.gestureBuffer count] < numberOfFeatures*3)
+        {
+            [self.gestureBuffer removeAllObjects];
+            self.gestureBuffer=nil;
+            NSLog(@"Not enough gestures! Cancelling upload.");
+            self.log=(@"Not enough gestures! Cancelling upload.");
+            return;
+        }
         [self downsampleGesture];
         [self.gestureBuffer removeAllObjects];
         self.gestureBuffer=nil;
