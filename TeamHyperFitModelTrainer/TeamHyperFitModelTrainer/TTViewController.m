@@ -148,17 +148,19 @@
 }
 
 - (IBAction)uploadGesturePressed:(id)sender {
-    
-    [self.gestureRecognizer uploadTrainingData:20 withLabel:self.gestureLabel];
+    self.gestureRecognizer.modelDataSetID = @(22);
+    [self.gestureRecognizer uploadTrainingData:22 withLabel:self.gestureLabel];
 }
 
 - (IBAction)predictGesturePressed:(id)sender {
-    [self.gestureRecognizer makeTrainingPrediction:20];
+    self.gestureRecognizer.modelDataSetID = @(22);
+    [self.gestureRecognizer makeTrainingPrediction:22];
     
 }
 
 - (IBAction)trainModelPressed:(id)sender {
-    [self.gestureRecognizer trainModel:20];
+    self.gestureRecognizer.modelDataSetID = @(22);
+    [self.gestureRecognizer trainModel:22];
 }
 
 @end

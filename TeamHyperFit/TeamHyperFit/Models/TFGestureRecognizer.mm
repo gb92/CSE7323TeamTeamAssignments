@@ -19,7 +19,7 @@
 //#import "TFGestureRecognizerDelegate.h"
 
 #define kBufferLength 1024
-#define numberOfFeatures 30
+#define numberOfFeatures 90 //MUST BE A MULTIPLE OF 3
 
 @interface TFGestureRecognizer()
 
@@ -35,7 +35,7 @@
 @property BOOL performUpdates;
 
 @property (strong, nonatomic) NSOperationQueue *motionCaptureQueue;
-@property (strong, nonatomic) NSOperationQueue *updatesQueue;
+//@property (strong, nonatomic) NSOperationQueue *updatesQueue;
 @end
 
 @implementation TFGestureRecognizer
@@ -55,7 +55,7 @@ BOOL CurrentlyGesturing;
 
 float *sampledGesture;
 int windowSize = 100;
-float threshold = .30;
+float threshold = .25;
 
 
 
@@ -115,15 +115,15 @@ float threshold = .30;
     return _ttWebServiceManager;
 }
 
--(NSOperationQueue *) updatesQueue
-{
-    if(_updatesQueue == nil)
-    {
-        _updatesQueue=[[NSOperationQueue alloc] init];
-        _updatesQueue.maxConcurrentOperationCount=1;
-    }
-    return _updatesQueue;
-}
+//-(NSOperationQueue *) updatesQueue
+//{
+//    if(_updatesQueue == nil)
+//    {
+//        _updatesQueue=[[NSOperationQueue alloc] init];
+//        _updatesQueue.maxConcurrentOperationCount=1;
+//    }
+//    return _updatesQueue;
+//}
 
 -(NSOperationQueue *) motionCaptureQueue
 {
@@ -291,7 +291,7 @@ float threshold = .30;
     
     NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
                                        @"dsid":self.modelDataSetID,
-                                       @"model":@"lkanwlkd"};
+                                       @"model":@"svm"};
     
     
     [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {
@@ -380,6 +380,8 @@ float threshold = .30;
             }
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
             {
+                NSLog(@"Gesture Started");
+                self.log = (@"Gesture Started");
                 CurrentlyGesturing = NO;
                 [self uploadGestureBuffer];
                 
@@ -457,10 +459,13 @@ float threshold = .30;
             if(gestureDetectedVector[n]==0 && gestureDetectedVector[n+1]==1)
             {
                 NSLog(@"Gesture Started");
+                self.log = (@"Gesture Started");
                 CurrentlyGesturing=YES;
             }
             else if(gestureDetectedVector[n]==1 && gestureDetectedVector[n+1]==0)
             {
+                NSLog(@"Gesture Ended");
+                self.log = (@"Gesture Ended");
                 CurrentlyGesturing = NO;
                 
             }
@@ -563,9 +568,9 @@ float threshold = .30;
     //NSLog(@"Downsampled: \n");
     for(int i=0; i<numberOfFeatures*3; i=i+3)
     {
-        sampledGesture[i] = [self.gestureBuffer[(int) floorf(i*samplingRate)] floatValue];
-        sampledGesture[i+1] = [self.gestureBuffer[(int) floorf((i*samplingRate)+1)] floatValue];
-        sampledGesture[i+2] = [self.gestureBuffer[(int) floorf((i*samplingRate)+2)] floatValue];
+        sampledGesture[i] = [self.gestureBuffer[((int) floorf((i*samplingRate)/3))*3] floatValue];
+        sampledGesture[i+1] = [self.gestureBuffer[((int) floorf((i*samplingRate)/3))*3+1] floatValue];
+        sampledGesture[i+2] = [self.gestureBuffer[((int) floorf((i*samplingRate)/3))*3+2] floatValue];
         //NSLog(@"%f, ",sampledGesture[i]);
     }
     NSLog(@"Completed Downsampling Gesture");
