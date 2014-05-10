@@ -168,7 +168,6 @@
 		99506C271912FEC800A7129F /* TTFacebookFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C261912FEC800A7129F /* TTFacebookFriend.m */; };
 		99506C2D1912FFCF00A7129F /* TTUserActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99506C2C1912FFCF00A7129F /* TTUserActivity.m */; };
 		99B2B25E191C4DFD001E9965 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99B2B25D191C4DFD001E9965 /* FacebookSDK.framework */; };
-		99B2B261191D6CEF001E9965 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99B2B260191D6CEF001E9965 /* RingBuffer.mm */; };
 		99C5A445190C49BF000B0F81 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A444190C49BF000B0F81 /* opencv2.framework */; };
 		99C5A44D190C8510000B0F81 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */; };
 		99C5A44E190C8510000B0F81 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C5A44C190C8510000B0F81 /* WindowsAzureMobileServices.framework */; };
@@ -194,6 +193,7 @@
 		EF965BA51911B1770056C2A0 /* TTFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965BA41911B1770056C2A0 /* TTFriendTableViewCell.m */; };
 		EF965BA81911C5550056C2A0 /* TTInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965BA71911C5550056C2A0 /* TTInfoViewController.m */; };
 		EF965BAC1911C6010056C2A0 /* TTCaptureScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = EF965BAB1911C6010056C2A0 /* TTCaptureScreenShot.m */; };
+		EFCC4BB4191ED337002F9CD7 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFCC4BB3191ED337002F9CD7 /* RingBuffer.mm */; };
 		EFF03DE01914369D00CE326B /* TTActivitySelectionContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF03DDF1914369D00CE326B /* TTActivitySelectionContainerViewController.m */; };
 		EFF03DE3191436CF00CE326B /* TTActivitySelectionContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF03DE2191436CF00CE326B /* TTActivitySelectionContentViewController.m */; };
 		EFF03DE61914471700CE326B /* TTActivityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF03DE51914471700CE326B /* TTActivityCollectionViewCell.m */; };
@@ -406,8 +406,6 @@
 		99506C2B1912FFCF00A7129F /* TTUserActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUserActivity.h; sourceTree = "<group>"; };
 		99506C2C1912FFCF00A7129F /* TTUserActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUserActivity.m; sourceTree = "<group>"; };
 		99B2B25D191C4DFD001E9965 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		99B2B25F191D6CEF001E9965 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RingBuffer.h; path = ../../../../../Downloads/MotionDemoSMU/MotionDemoSMU/RingBuffer.h; sourceTree = "<group>"; };
-		99B2B260191D6CEF001E9965 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RingBuffer.mm; path = ../../../../../Downloads/MotionDemoSMU/MotionDemoSMU/RingBuffer.mm; sourceTree = "<group>"; };
 		99C5A444190C49BF000B0F81 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		99C5A449190C8504000B0F81 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		99C5A44B190C8510000B0F81 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
@@ -454,6 +452,8 @@
 		EF965BA71911C5550056C2A0 /* TTInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTInfoViewController.m; sourceTree = "<group>"; };
 		EF965BAA1911C6010056C2A0 /* TTCaptureScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCaptureScreenShot.h; sourceTree = "<group>"; };
 		EF965BAB1911C6010056C2A0 /* TTCaptureScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCaptureScreenShot.m; sourceTree = "<group>"; };
+		EFCC4BB2191ED337002F9CD7 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		EFCC4BB3191ED337002F9CD7 /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RingBuffer.mm; sourceTree = "<group>"; };
 		EFF03DDE1914369D00CE326B /* TTActivitySelectionContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTActivitySelectionContainerViewController.h; sourceTree = "<group>"; };
 		EFF03DDF1914369D00CE326B /* TTActivitySelectionContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTActivitySelectionContainerViewController.m; sourceTree = "<group>"; };
 		EFF03DE1191436CF00CE326B /* TTActivitySelectionContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTActivitySelectionContentViewController.h; sourceTree = "<group>"; };
@@ -512,6 +512,8 @@
 		5C2626B019077802001AA0E7 /* ThirdParties */ = {
 			isa = PBXGroup;
 			children = (
+				EFCC4BB2191ED337002F9CD7 /* RingBuffer.h */,
+				EFCC4BB3191ED337002F9CD7 /* RingBuffer.mm */,
 				5C2626B119077802001AA0E7 /* APLGraphView.h */,
 				5C2626B219077802001AA0E7 /* APLGraphView.m */,
 			);
@@ -691,8 +693,6 @@
 		5CBA7A23190767620099C0B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				99B2B25F191D6CEF001E9965 /* RingBuffer.h */,
-				99B2B260191D6CEF001E9965 /* RingBuffer.mm */,
 				5C427A65191225E000BABF95 /* UICountingLabel.h */,
 				5C427A66191225E000BABF95 /* UICountingLabel.m */,
 				5CBA7A24190767620099C0B9 /* TeamHyperFit-Info.plist */,
@@ -958,7 +958,7 @@
 				ORGANIZATIONNAME = SMU;
 				TargetAttributes = {
 					5CBA7A18190767620099C0B9 = {
-						DevelopmentTeam = ELJL6XCWJA;
+						DevelopmentTeam = APD62CDC25;
 					};
 					5CBA7A39190767620099C0B9 = {
 						TestTargetID = 5CBA7A18190767620099C0B9;
@@ -1143,7 +1143,7 @@
 				5C25CFA3191B579A00BC365D /* UIScrollView+GifPullToRefresh.m in Sources */,
 				5C2626D019077834001AA0E7 /* TMUIHeartrateIndicator.m in Sources */,
 				EF8F0480191C82D200794DEC /* TTSessionSummaryViewController.m in Sources */,
-				99B2B261191D6CEF001E9965 /* RingBuffer.mm in Sources */,
+				EFCC4BB4191ED337002F9CD7 /* RingBuffer.mm in Sources */,
 				5CFEE0D01918180800766F01 /* TTActivitySelectionTableViewController.m in Sources */,
 				5C2626CF19077834001AA0E7 /* TMStepIndicaterView.m in Sources */,
 				5C2626D119077834001AA0E7 /* TMUIStairImageView.m in Sources */,

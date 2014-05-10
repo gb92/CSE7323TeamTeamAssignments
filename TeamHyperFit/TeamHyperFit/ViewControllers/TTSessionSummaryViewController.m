@@ -34,7 +34,7 @@
     
     self.activityNameLabel.text = self.activityName;
     self.activityImageView.image = [UIImage imageNamed:self.activityImageName];
-    
+    self.logTextArea.text = self.log;
 }
 
 - (void)didReceiveMemoryWarning

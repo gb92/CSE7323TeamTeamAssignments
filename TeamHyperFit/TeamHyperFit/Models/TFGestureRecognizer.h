@@ -26,7 +26,11 @@
 -(void)makeTrainingPrediction:(NSInteger) datasetID;
 
 -(void)trainModel:(NSInteger) datasetID;
+-(void)clearGesturePredictedData;
 
 @property (strong, nonatomic) NSString *log;
 
+-(NSString*)printGestureResult;
+
 @end
+

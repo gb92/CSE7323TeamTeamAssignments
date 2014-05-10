@@ -41,6 +41,7 @@
 @implementation TFGestureRecognizer
 {
     dispatch_queue_t updatesQueue;
+    int gestureTypeCount[4];
 }
 RingBuffer *ringBufferX;
 RingBuffer *ringBufferY;
@@ -57,7 +58,14 @@ float *sampledGesture;
 int windowSize = 20;
 float threshold = .25;
 
-
+//-(NSArray*) gestureTypeCount
+//{
+//    if (!_gestureTypeCount) {
+//        _gestureTypeCount = @[@(0),@(0),@(0),@(0)];
+//    }
+//    
+//    return _gestureTypeCount;
+//}
 
 -(id) initWithModelDSID:(NSNumber *)modelDSID
 {
@@ -145,8 +153,50 @@ float threshold = .25;
     delete sampledGesture;
 }
 
+-(void)clearGesturePredictedData
+{
+    for(int i=0; i<4; i++)
+    {
+        gestureTypeCount[i] = 0;
+    }
+}
+
+-(NSString*)printGestureResult
+{
+    NSString *result;
+    for(int i=0; i<4; i++)
+    {
+        NSString *gestureName;
+        
+        if( i == 0 )
+        {
+            gestureName = @"jumping jack";
+        }
+        else if( i == 1 )
+        {
+            gestureName = @"push up";
+        }
+        else if( i == 2 )
+        {
+            gestureName = @"sit up";
+        }
+        else
+        {
+            gestureName = @"Squat?";
+        }
+        
+        result = [NSString stringWithFormat:@"%@ \n %@ : %d", result, gestureName, gestureTypeCount[i] ];
+    }
+    
+    self.log = result;
+    NSLog(@"%@",result);
+    return result;
+}
+
 -(void) startGestureCapture
 {
+    
+    NSLog(@"Start Gesture Capture.");
     if(updatesQueue == nil)
         updatesQueue=dispatch_queue_create("edu.smu.TeamTeam", DISPATCH_QUEUE_CONCURRENT);
     
@@ -204,6 +254,7 @@ float threshold = .25;
         self.performUpdates=YES;
     }
 }
+
 
 -(void) startTrainingGestureCapture
 {
@@ -269,6 +320,7 @@ float threshold = .25;
 
 -(void) stopGestureCapture
 {
+    NSLog(@"Stop Update Traning");
     [self.cmMotionManager stopDeviceMotionUpdates];
     self.performUpdates=NO;
 }
@@ -302,6 +354,23 @@ float threshold = .25;
         // we should get back the feature data from the server and the label it parsed
         NSString *prediction = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
 
+        if( [prediction isEqualToString:@"[u'Jumping Jack']"])
+        {
+            gestureTypeCount[0]++;
+        }
+        else if( [prediction isEqualToString:@"[u'Push Ups']"])
+        {
+            gestureTypeCount[1]++;
+        }
+        else if( [prediction isEqualToString:@"[u'Sit Ups']"])
+        {
+            gestureTypeCount[2]++;
+        }
+        else
+        {
+            gestureTypeCount[3]++;
+        }
+        
         NSLog(@"prediction : %@",prediction);
         
         NSString *result = [NSString stringWithFormat:@"prediction : %@",prediction];
@@ -408,7 +477,6 @@ float threshold = .25;
 {
     if(self.performUpdates)
     {
-        
         // plot
         ringBufferX->FetchFreshData2(motionDataX, kBufferLength, 0, 1);
         ringBufferY->FetchFreshData2(motionDataY, kBufferLength, 0, 1);

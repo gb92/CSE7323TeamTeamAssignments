@@ -10,6 +10,7 @@
 #import "TTWebServiceManager.h"
 #import "TTUserInfoHandler.h"
 #import "TTA7ActivityHandler.h"
+#import "TFGestureRecognizer.h"
 
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
@@ -23,5 +24,5 @@
 @property (strong, nonatomic) NSArray *gestures;
 @property (strong, nonatomic) TTUserInfoHandler *userInforHandler;
 
-
+@property (strong, nonatomic) TFGestureRecognizer *gestrueRecognizer;
 @end

@@ -12,6 +12,15 @@
 
 @implementation TTAppDelegate
 
+-(TFGestureRecognizer*)gestrueRecognizer
+{
+    if (!_gestrueRecognizer) {
+        _gestrueRecognizer = [[TFGestureRecognizer alloc] init];
+        _gestrueRecognizer.modelDataSetID = @(10);
+    }
+    
+    return  _gestrueRecognizer;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

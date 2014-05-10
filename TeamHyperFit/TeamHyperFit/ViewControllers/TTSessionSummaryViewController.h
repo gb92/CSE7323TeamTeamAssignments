@@ -22,5 +22,6 @@
 
 @property (strong, nonatomic) NSString *activityName;
 @property (strong, nonatomic) NSString *activityImageName;
-
+@property (weak, nonatomic) IBOutlet UITextView *logTextArea;
+@property (strong, nonatomic) NSString *log;
 @end

@@ -11,6 +11,8 @@
 #import "TTHeartRateCounter.h"
 #import "TTTimeCounterView.h"
 #import "TTSoundEffect.h"
+#import "TFGestureRecognizer.h"
+#import "TTAppDelegate.h"
 
 typedef enum
 {
@@ -35,7 +37,11 @@ typedef enum
 
 - (IBAction)closeButton:(UIButton *)sender;
 
-@property (strong, nonatomic) TTHeartRateCounter* hearRateCounter;
+@property (strong, nonatomic) TTHeartRateCounter *hearRateCounter;
+
+@property (strong, nonatomic) TFGestureRecognizer *gestureRecognizer;
+
+@property (nonatomic) int numberOfCorrectGesture;
 
 @end
 
@@ -68,6 +74,15 @@ typedef enum
     return _hearRateCounter;
 }
 
+-(TFGestureRecognizer*)gestureRecognizer
+{
+    if (!_gestureRecognizer) {
+        _gestureRecognizer = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).gestrueRecognizer;
+    }
+    
+    return _gestureRecognizer;
+}
+
 #pragma mark -
 #pragma mark ViewController Life Cycle.
 
@@ -84,6 +99,8 @@ typedef enum
 {
     [super viewDidLoad];
 
+    
+    
     self.postLabel.text = self.activityName;
     self.postImageView.image = [UIImage imageNamed:self.activityImageName];
     
@@ -112,7 +129,6 @@ typedef enum
         {
             [self.timeCounterView resume];
         }
-
     }
     else
     {
@@ -125,6 +141,8 @@ typedef enum
     //[self.hearRateCounter start];
     
     //[self performSelector:@selector(stopHearRate) withObject:nil afterDelay:10];
+    
+    [self.gestureRecognizer stopGestureCapture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,6 +183,9 @@ typedef enum
         NSLog(@"End Session; Change to Rest..");
         [self.startSound play];
         
+        [self.gestureRecognizer stopGestureCapture];
+        
+        
         
         //! Open session summery vc.
         TTSessionSummaryViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummary"];
@@ -172,13 +193,20 @@ typedef enum
         vc.activityName = self.activityName;
         vc.activityImageName = self.activityImageName;
         
+        vc.log = [self.gestureRecognizer printGestureResult];
+        
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];
+    
         
     }
     else if( self.sessionState == SS_PREPARE)
     {
         NSLog(@"Going to Start!, Reset values");
+        self.numberOfCorrectGesture = 0;
+        
+        [self.gestureRecognizer clearGesturePredictedData];
+        [self.gestureRecognizer startGestureCapture];
         
         [self.timeCounterView setTimeSeconds:30];
         self.sessionState = SS_IN_SESSION;
@@ -186,6 +214,7 @@ typedef enum
         [self.timeCounterView start];
         
         [self.startSound play];
+        
     }
 }
 
@@ -202,6 +231,8 @@ typedef enum
     else if( self.sessionState == SS_PAUSE)
     {
         self.sessionState = SS_IN_SESSION;
+        
+        [self.gestureRecognizer startGestureCapture];
     }
 }
 
@@ -210,6 +241,7 @@ typedef enum
     if( self.sessionState == SS_IN_SESSION )
     {
         self.sessionState = SS_PAUSE;
+        [self.gestureRecognizer stopGestureCapture];
     }
 }
 
