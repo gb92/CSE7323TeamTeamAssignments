@@ -55,7 +55,7 @@ float *motionVector;
 BOOL CurrentlyGesturing;
 
 float *sampledGesture;
-int windowSize = 20;
+int windowSize = 40;
 float threshold = .25;
 
 //-(NSArray*) gestureTypeCount
