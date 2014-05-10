@@ -35,8 +35,6 @@
     //! Fake Data for now.
 #pragma waning - This is still Fake Data.
     
-    self.activitySessionMode = 0;
-    
     self.gestures = [[NSArray alloc] initWithObjects:
                      [[TFGesture alloc] initWithName:@"PushUp"   imageName:@"pushupBigIcon"],
                      [[TFGesture alloc] initWithName:@"SitUp"    imageName:@"situpBigIcon"],

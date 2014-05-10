@@ -48,11 +48,15 @@
     return _a7ActivityHandler;
 }
 
+#pragma mark -
+#pragma View Controller Life Cycle
+
 -(id)init
 {
     self = [super init];
     if (self)
     {
+        self.friendsInfo = [[NSMutableArray alloc] init];
         self.fbHandler.delegate = self;
         
         //! Register to the A7 realtime update.
@@ -112,7 +116,7 @@
         self.userInfo.firstName     = firstname;
         self.userInfo.lastName      = [defaults objectForKey:@"lastname"];
         self.userInfo.age           = [defaults integerForKey:@"age"];
-        self.userInfo.fitPoints     = @([defaults integerForKey:@"fitPoints"]);
+        self.userInfo.fitPoints     = @([defaults integerForKey:@"fitpoints"]);
         self.userInfo.todaySteps    = @([defaults integerForKey:@"steps"]);
         
         NSData *imageData           = [defaults dataForKey:@"image"];
@@ -142,19 +146,16 @@
 }
 
 
+
+#pragma mark -
+#pragma notification center
+
 - (void) receivesStepsUpdate:(NSNotification *) notification
 {
     if ([[notification name] isEqualToString:@"stepsUpdate"])
     {
         [self updateSteps];
     }
-}
-
--(void)downloadProfileImage
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=200&width=200", self.userInfo.userID ]];
-    
-    self.userInfo.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 }
 
 
@@ -170,8 +171,13 @@
     self.userInfo.gender = [user objectForKey:@"gender"];
     self.userInfo.userID = [user objectForKey:@"id"];
     
-    [self performSelectorInBackground:@selector(downloadProfileImage) withObject:nil];
-	
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=200&width=200", self.userInfo.userID ]];
+        
+        self.userInfo.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    });
+    
 }
 
 
@@ -179,6 +185,45 @@
 {
     NSLog(@"Log out!");
     //[self setUserInfoToDefaultValue];
+}
+
+
+//! Bref: only use for unblock load profile from facebook loging delegation.
+-(void)downloadProfile
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=200&width=200", self.userInfo.userID ]];
+    
+    self.userInfo.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+}
+
+#pragma mark -
+#pragma friends
+
+-(void)updateFriendsInfo:(void(^)( NSError* error )) callback
+{
+    [self.friendsInfo removeAllObjects];
+    
+    [self.fbHandler getCurrentUserFriendsWithApp:^(NSArray *friends, NSError *error)
+    {
+        for ( NSDictionary *friend in friends)
+        {
+            TTFriendModel *friendObj = [[TTFriendModel alloc] init];
+            friendObj.firstName = [friend objectForKey:@"name"];
+            friendObj.userID = [friend objectForKey:@"uid"];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=200&width=200", friendObj.userID ]];
+                
+            friendObj.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            
+            
+            [self.friendsInfo addObject:friendObj];
+            
+        }
+        
+        callback( error );
+        
+        
+    }];
 }
 
 #pragma mark -

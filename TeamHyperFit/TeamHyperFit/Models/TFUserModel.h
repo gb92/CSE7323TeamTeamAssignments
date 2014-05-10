@@ -17,7 +17,6 @@
 /*"male" , "female"*/
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic) NSInteger age;
-@property (nonatomic, strong) UIImage* profileImage;
 
 @property (nonatomic) BOOL isDirty;
 

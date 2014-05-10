@@ -19,4 +19,5 @@
 
 -(void)updateUserInfo:(void(^)( TFUserModel*, NSError* error)) onFinish;
 
+-(void)updateFriendsInfo:(void(^)( NSError* error )) callback;
 @end

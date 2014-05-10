@@ -58,22 +58,6 @@
     return _dateWithTimeFormat;
 }
 
--(void) getProfileImageByID:(NSNumber*)ID callback:(void(^)( UIImage* image, NSError* error )) callback;
-{
-#warning This is block Thread! Please change.
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?height=200&width=200", ID ]];
-    
-    //! Get from Facebook handler.
-    if( callback != NULL )
-        callback( [UIImage imageWithData:[NSData dataWithContentsOfURL:url]], nil );
-}
-
--(void) getUserInfoToUserModel:(TFUserModel*) outUserModel
-{
-    
-}
-
 -(void)getCurrentUserInformation:(userInformationBlock)callback
 {
     NSLog(@"Begin getCurrentUserInformation");

@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSNumber *userID;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
+@property (nonatomic, strong) UIImage* profileImage;
 
 @property (strong, nonatomic) NSNumber *fitPoints;
 @property (strong, nonatomic) NSNumber *todaySteps;

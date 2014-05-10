@@ -41,7 +41,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.activitySwitch setOn:((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode];
+
     
 }
 
@@ -53,10 +53,6 @@
 - (IBAction)onCloseButtonPressed:(id)sender {
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-- (IBAction)onActivitySelectionChanged:(UISwitch *)sender
-{
-    ((TTAppDelegate*)[UIApplication sharedApplication].delegate).activitySessionMode = sender.isOn;
 }
 
 
