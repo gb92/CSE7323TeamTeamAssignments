@@ -21,7 +21,9 @@
 @property (weak, nonatomic) IBOutlet UITextView *resultTextField;
 
 @property NSInteger rowSelected;
+@property (weak, nonatomic) IBOutlet UIPickerView *datasetIdPicker;
 
+@property (strong, nonatomic) NSNumber *currentlySelectedDSID;
 @end
 
 @implementation TTViewController
@@ -36,10 +38,22 @@
     return _gestureRecognizer;
 }
 
+-(NSNumber *) currentlySelectedDSID
+{
+    if(_currentlySelectedDSID == nil)
+    {
+        _currentlySelectedDSID=@(0);
+    }
+    return _currentlySelectedDSID;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.datasetIdPicker.dataSource=self;
+    self.datasetIdPicker.delegate=self;
     
     self.gesturePicker.dataSource=self;
     self.gesturePicker.delegate=self;
@@ -59,7 +73,14 @@
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 4;
+    if([pickerView isEqual:self.gesturePicker])
+    {
+        return 4;
+    }
+    else
+    {
+        return 50;
+    }
 }
 
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -69,52 +90,66 @@
 
 -(NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if(row == 0)
+    if([pickerView isEqual:self.gesturePicker])
     {
-        return @"Jumping Jack";
-    }
-    else if(row == 1)
-    {
-        return @"Push Ups";
-    }
-    else if(row == 2)
-    {
-        return @"Sit Ups";
-    }
-    else if(row ==3)
-    {
-        return @"Squats";
+        if(row == 0)
+        {
+            return @"Jumping Jack";
+        }
+        else if(row == 1)
+        {
+            return @"Push Ups";
+        }
+        else if(row == 2)
+        {
+            return @"Sit Ups";
+        }
+        else if(row ==3)
+        {
+            return @"Squats";
+        }
+        else
+        {
+            return @"Error";
+        }
     }
     else
     {
-        return @"Error";
+        return [NSString stringWithFormat:@"%ld",row];
     }
 }
 
 -(void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.rowSelected=row+5;
-    NSLog(@"Row Selected: %ld", self.rowSelected);
-    
-    if(row == 0)
+    if([pickerView isEqual:self.gesturePicker])
     {
-        self.gestureLabel=@"Jumping Jack";
-    }
-    else if(row == 1)
-    {
-        self.gestureLabel= @"Push Ups";
-    }
-    else if(row == 2)
-    {
-        self.gestureLabel= @"Sit Ups";
-    }
-    else if(row ==3)
-    {
-        self.gestureLabel= @"Squats";
+        self.rowSelected=row+5;
+        NSLog(@"Row Selected: %ld", self.rowSelected);
+        
+        if(row == 0)
+        {
+            self.gestureLabel=@"Jumping Jack";
+        }
+        else if(row == 1)
+        {
+            self.gestureLabel= @"Push Ups";
+        }
+        else if(row == 2)
+        {
+            self.gestureLabel= @"Sit Ups";
+        }
+        else if(row ==3)
+        {
+            self.gestureLabel= @"Squats";
+        }
+        else
+        {
+            self.gestureLabel= @"Error";
+        }
     }
     else
     {
-        self.gestureLabel= @"Error";
+        self.currentlySelectedDSID=[NSNumber numberWithInteger:row];
     }
     
 }
@@ -148,18 +183,18 @@
 }
 
 - (IBAction)uploadGesturePressed:(id)sender {
-    self.gestureRecognizer.modelDataSetID = @(22);
+    self.gestureRecognizer.modelDataSetID = self.currentlySelectedDSID;
     [self.gestureRecognizer uploadTrainingData:22 withLabel:self.gestureLabel];
 }
 
 - (IBAction)predictGesturePressed:(id)sender {
-    self.gestureRecognizer.modelDataSetID = @(22);
+    self.gestureRecognizer.modelDataSetID = self.currentlySelectedDSID;
     [self.gestureRecognizer makeTrainingPrediction:22];
     
 }
 
 - (IBAction)trainModelPressed:(id)sender {
-    self.gestureRecognizer.modelDataSetID = @(22);
+    self.gestureRecognizer.modelDataSetID = self.currentlySelectedDSID;
     [self.gestureRecognizer trainModel:22];
 }
 
