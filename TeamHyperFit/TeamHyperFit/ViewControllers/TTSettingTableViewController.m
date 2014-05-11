@@ -8,15 +8,49 @@
 
 #import "TTSettingTableViewController.h"
 #import "TTAppDelegate.h"
+#import "TFGestureRecognizer.h"
 
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface TTSettingTableViewController ()
-@property (weak, nonatomic) IBOutlet UISwitch *activitySwitch;
+#define MIN_AGE 7
+#define AGE_RANGE 50
+
+@interface TTSettingTableViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
+@property (strong, nonatomic) TFGestureRecognizer *gestureRecognizer;
+
+
+@property (weak, nonatomic) IBOutlet UIPickerView *agePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *genderPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *trainingModelPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *trainingDatasetPickerView;
+@property (weak, nonatomic) IBOutlet UISwitch *heartRateSwitch;
+
 
 @end
 
 @implementation TTSettingTableViewController
+
+-(TFGestureRecognizer*)gestureRecognizer
+{
+    if (!_gestureRecognizer) {
+        _gestureRecognizer = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).gestrueRecognizer;
+    }
+    
+    return _gestureRecognizer;
+}
+
+-(TTUserInfoHandler*)userInfoHandler
+{
+    if(!_userInfoHandler)
+    {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
+        
+    }
+    
+    return _userInfoHandler;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,99 +71,98 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-
+    /*Example */
+    /*
+    self.settingModel.isHeartRateEnable = YES;
     
+    self.userInfoHandler.userInfo.age = 10;
+    self.userInfoHandler.userInfo.gender = @"male"; //@"female"
+    */
+	[self.agePickerView selectRow:(self.userInfoHandler.userInfo.age + MIN_AGE)
+					  inComponent:0
+						 animated:NO];
+	
+	[self.genderPickerView selectRow:[[self.userInfoHandler.userInfo.gender lowercaseString] isEqualToString:@"male"] ? 0 : 1
+						 inComponent:0
+							animated:NO];
+	
+	[self.trainingModelPickerView selectRow:self.gestureRecognizer.gestureModelMode == TM_MODEL_KNN ? 0 : 1
+								inComponent:0
+								   animated:NO];
+	
+	[self.trainingDatasetPickerView selectRow:[self.gestureRecognizer.modelDataSetID intValue]
+								  inComponent:0
+									 animated:NO];
+	
+#warning it is error prone. Please change.
+    [[NSUserDefaults standardUserDefaults] boolForKey:@"heartRateEnable"];
+	self.heartRateSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"heartRateEnable"];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - Handling actions
+
+- (IBAction)onCloseButtonPressed:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (IBAction)onCloseButtonPressed:(id)sender {
-    
+#warning it is error prone. Please change.
+    [[NSUserDefaults standardUserDefaults] setBool:self.heartRateSwitch.on forKey:@"heartRateEnable"];
+	
+    self.gestureRecognizer.gestureModelMode = [self.trainingModelPickerView selectedRowInComponent:0] == 0 ? TM_MODEL_KNN : TM_MODEL_SVM;
+	self.gestureRecognizer.modelDataSetID = @([self.trainingDatasetPickerView selectedRowInComponent:0]);
+	self.userInfoHandler.userInfo.age = [self.agePickerView selectedRowInComponent:0];
+	self.userInfoHandler.userInfo.gender = [self.genderPickerView selectedRowInComponent:0] == 0 ? @"male" : @"female";
+	
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 3;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
-    
-    return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Pciker view data source
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+	return 1;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+	if (pickerView.tag == 0) // age picker
+	{
+		return AGE_RANGE;
+	}
+	else if (pickerView.tag == 1) // gender picker
+	{
+		return 2;
+	}
+	else if (pickerView.tag == 2) // training model picker
+	{
+		return 2;
+	}
+	else if (pickerView.tag == 3) // training dataset id picker
+	{
+		return 51;
+	}
+	return 0;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
+	if (pickerView.tag == 0) // age picker
+	{
+		return [NSString stringWithFormat:@"%ld", row + MIN_AGE];
+	}
+	else if (pickerView.tag == 1) // gender picker
+	{
+		return row == 0 ? @"Male" : @"Female";
+	}
+	else if (pickerView.tag == 2) // training model picker
+	{
+		return row == 0 ? @"KNN" : @"SVM";
+	}
+	else if (pickerView.tag == 3) // training dataset id picker
+	{
+		return [NSString stringWithFormat:@"%ld", (long)row];
+	}
+	
+	return @"";
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

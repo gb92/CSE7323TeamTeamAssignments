@@ -2,7 +2,7 @@
 //  TTHeartRateCounter.m
 //  TeamHyperFit
 //
-//  Created by Rita on 4/30/14.
+//  Created by ch484-mac7 on 4/30/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -52,6 +52,17 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
     return  _videoCamera;
 }
 
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.currentHeartRate = @(6);
+    }
+    
+    return self;
+}
+
 -(void)start
 {
 
@@ -99,6 +110,46 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
     return self.isStarted;
 }
 
+- (NSString *)heartRateZoneForGender:(TTGender)gender atAge:(NSUInteger)age
+{
+	int heartRate = [[self getHeartRate] intValue];
+	NSLog(@"Heart Rate: %i", heartRate);
+	
+	int maximumHeartRate;
+	if (gender == TTGenderMale)
+	{
+		maximumHeartRate = 214 - (age * 0.8);
+	}
+	else
+	{
+		maximumHeartRate = 209 - (age * 0.7);
+	}
+
+	NSLog(@"Maximum Heart Rate: %i", maximumHeartRate);
+	if (heartRate >= maximumHeartRate*0.5 && heartRate < maximumHeartRate*0.6)
+	{
+		return @"VERY LIGHT";
+	}
+	else if (heartRate >= maximumHeartRate*0.6 && heartRate < maximumHeartRate*0.7)
+	{
+		return @"LIGHT";
+	}
+	else if (heartRate >= maximumHeartRate*0.7 && heartRate < maximumHeartRate*0.8)
+	{
+		return @"MODERATE";
+	}
+	else if (heartRate >= maximumHeartRate*0.8 && heartRate < maximumHeartRate*0.9)
+	{
+		return @"HARD";
+	}
+	else if (heartRate >= maximumHeartRate*0.9 && heartRate < maximumHeartRate)
+	{
+		return @"MAXIMUM";
+	}
+	else
+		return @"Resting";
+}
+
 #ifdef __cplusplus
 -(void)processImage:(Mat&)image;
 {
@@ -128,10 +179,10 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
     {
         [self normalizeData: meanOfRedValues scaleFactor:6 ];
         
-        NSLog(@"Hear Rate : %@\n", self.currentHeartRate);
+        //NSLog(@"Hear Rate : %@\n", self.currentHeartRate);
         
         float newHeartRate = [self countLocalMaximaFromArray:meanOfRedValues] - 1 /* (-1) Error at the edge of data */;
-        self.currentHeartRate = @(newHeartRate);//[NSNumber numberWithInt:(newHeartRate + [self.currentHeartRate intValue] ) / 2.0];
+        self.currentHeartRate = [NSNumber numberWithInt:(newHeartRate + [self.currentHeartRate intValue] ) / 2.0];
         
         NSLog(@"Hear Rate new : %f\n", newHeartRate);
         

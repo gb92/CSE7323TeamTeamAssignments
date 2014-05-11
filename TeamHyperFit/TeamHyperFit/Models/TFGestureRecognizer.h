@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    TM_MODEL_SVM,
+    TM_MODEL_KNN
+    
+} TTModelMode;
+
+
 @class TFGestureRecognizer;
 
 @protocol TFGestureRecognizerDelegate <NSObject>
@@ -22,7 +30,7 @@
 @property (weak, nonatomic)id<TFGestureRecognizerDelegate> delegate;
 
 @property (strong, nonatomic) NSNumber *modelDataSetID;
-
+@property (nonatomic) TTModelMode gestureModelMode;
 
 -(id) initWithModelDSID:(NSNumber *)modelDSID;
 

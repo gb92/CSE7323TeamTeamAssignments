@@ -12,6 +12,7 @@
 #import "TTTimeCounterView.h"
 #import "TTSoundEffect.h"
 #import "TFGestureRecognizer.h"
+#import "TTUserInfoHandler.h"
 #import "TTAppDelegate.h"
 
 typedef enum
@@ -28,31 +29,29 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet TTTimeCounterView *timeCounterView;
+@property (weak, nonatomic) IBOutlet UILabel *modelIDLabel;
 
+- (IBAction)closeButton:(UIButton *)sender;
 
 @property (strong ,nonatomic) TTSoundEffect *preparingSound;
 @property (strong, nonatomic) TTSoundEffect *startSound;
 
 @property (nonatomic) SessionState sessionState;
 
-- (IBAction)closeButton:(UIButton *)sender;
-
+@property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
 @property (strong, nonatomic) TTHeartRateCounter *hearRateCounter;
-
 @property (strong, nonatomic) TFGestureRecognizer *gestureRecognizer;
+
+
 
 @property (nonatomic) int numberOfCorrectGesture;
 
-@property (weak, nonatomic) IBOutlet UITextField *modelIDText;
+@property (nonatomic) BOOL isHeartRateEnable;
 
 @end
 
 @implementation TTSessionViewController
 
-- (IBAction)onModelTextChange:(id)sender
-{
-    self.gestureRecognizer.modelDataSetID = @([self.modelIDText.text intValue]);
-}
 
 -(TTSoundEffect*)startSound
 {
@@ -79,6 +78,15 @@ typedef enum
     }
     
     return _hearRateCounter;
+}
+
+-(TTUserInfoHandler*)userInfoHandler
+{
+    if (!_userInfoHandler) {
+        _userInfoHandler = ((TTAppDelegate*)[UIApplication sharedApplication].delegate).userInforHandler;
+    }
+    
+    return _userInfoHandler;
 }
 
 -(TFGestureRecognizer*)gestureRecognizer
@@ -115,8 +123,6 @@ typedef enum
 
 -(void)singleTapGestureRecognizer:(UITapGestureRecognizer *)recognizer
 {
-    [self.modelIDText endEditing:YES];
-    
     if (!self.timeCounterView.isStarted)
     {
         if( self.sessionState == SS_REST)
@@ -174,7 +180,9 @@ typedef enum
     
     self.sessionState = SS_REST;
     
-    self.modelIDText.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
+    self.modelIDLabel.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
+    
+    self.isHeartRateEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"heartRateEnable"];
 }
 
 #pragma mark -
@@ -208,9 +216,8 @@ typedef enum
         NSLog(@"End Session; Change to Rest..");
         [self.startSound play];
         
+        [self.hearRateCounter stop];
         [self.gestureRecognizer stopGestureCapture];
-        
-        
         
         //! Open session summery vc.
         TTSessionSummaryViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummary"];
@@ -234,6 +241,10 @@ typedef enum
         NSLog(@"Going to Start!, Reset values");
         self.numberOfCorrectGesture = 0;
         
+        if (self.isHeartRateEnable)
+        {
+            [self.hearRateCounter start];
+        }
         [self.gestureRecognizer clearGesturePredictedData];
         [self.gestureRecognizer startGestureCapture];
         
@@ -261,6 +272,11 @@ typedef enum
     {
         self.sessionState = SS_IN_SESSION;
         
+        //! Measure Heart rate and Gesture.
+        if (self.isHeartRateEnable)
+        {
+            [self.hearRateCounter start];
+        }
         [self.gestureRecognizer startGestureCapture];
     }
 }
@@ -270,6 +286,9 @@ typedef enum
     if( self.sessionState == SS_IN_SESSION )
     {
         self.sessionState = SS_PAUSE;
+        
+        //! Stop measure heart rate.
+        [self.hearRateCounter stop];
         [self.gestureRecognizer stopGestureCapture];
     }
 }
@@ -281,6 +300,19 @@ typedef enum
         //! Play Sound.
         NSLog(@"player sound");
         [self.preparingSound play];
+    }
+    else if (self.sessionState == SS_IN_SESSION )
+    {
+        //! Read Heart Rate.
+        if([self.hearRateCounter isStated])
+        {
+            int age = (int)self.userInfoHandler.userInfo.age;
+            int gender = 0;
+            if( [self.userInfoHandler.userInfo.gender isEqualToString:@"female"])
+                gender = 1;
+            
+            NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
+        }
     }
 }
 
