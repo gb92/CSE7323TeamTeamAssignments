@@ -366,7 +366,7 @@ float threshold = .18;
     
     NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
                                        @"dsid":self.modelDataSetID,
-                                       @"model":@"k"};
+                                       @"model":predictionModel};
     
     
     [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {
