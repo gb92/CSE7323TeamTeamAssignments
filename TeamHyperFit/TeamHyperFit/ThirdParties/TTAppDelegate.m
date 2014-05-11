@@ -12,6 +12,7 @@
 
 @implementation TTAppDelegate
 
+
 -(TFGestureRecognizer*)gestrueRecognizer
 {
     if (!_gestrueRecognizer) {

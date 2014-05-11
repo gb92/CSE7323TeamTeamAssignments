@@ -67,6 +67,19 @@ float threshold = .18;
 //    return _gestureTypeCount;
 //}
 
+-(id) init{
+    
+    self = [super init];
+    if(self)
+    {
+        self.modelDataSetID = 0;
+        NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+        self.modelDataSetID = @([userDefault integerForKey:@"gestureModelID"]);
+        self.gestureModelMode = (TTModelMode)[userDefault integerForKey:@"gestureModelMode"];
+    }
+    return self;
+}
+
 -(id) initWithModelDSID:(NSNumber *)modelDSID
 {
     if(self == nil)
@@ -145,6 +158,10 @@ float threshold = .18;
 
 -(void) dealloc
 {
+    NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setInteger:[self.modelDataSetID intValue] forKey:@"gestureModelID"];
+    [userDefault setInteger:self.gestureModelMode forKey:@"gestureModelMode"];
+    
     free(motionDataX);
     free(motionDataY);
     free(motionDataZ);
@@ -341,9 +358,13 @@ float threshold = .18;
     
     //NSArray *downsampledGesture=[[NSArray alloc] initWith]
     
+    NSString *predictionModel = @"svm";
+    if( self.gestureModelMode == TM_MODEL_KNN )
+        predictionModel = @"knn";
+    
     NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
                                        @"dsid":self.modelDataSetID,
-                                       @"model":@"svm"};
+                                       @"model":predictionModel};
     
     
     [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {

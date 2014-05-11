@@ -258,7 +258,8 @@
 
     
     
-    [self.fbHandler getUserSteps:beginningOfWeek to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error) {
+    [self.fbHandler getUserSteps:beginningOfWeek to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
+    {
        
         NSLog(@">>>>%@", usersFitPoints[0]);
         

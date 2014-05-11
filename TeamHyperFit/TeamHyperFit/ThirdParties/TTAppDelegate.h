@@ -12,6 +12,7 @@
 #import "TTA7ActivityHandler.h"
 #import "TFGestureRecognizer.h"
 
+
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
 @interface TTAppDelegate : UIResponder <UIApplicationDelegate>
@@ -25,4 +26,5 @@
 @property (strong, nonatomic) TTUserInfoHandler *userInforHandler;
 
 @property (strong, nonatomic) TFGestureRecognizer *gestrueRecognizer;
+
 @end
