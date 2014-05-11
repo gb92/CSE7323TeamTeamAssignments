@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    TM_MODEL_SVM,
+    TM_MODEL_KNN
+    
+} TTModelMode;
+
 @interface TTSettingModel : NSObject
+
+@property (nonatomic) TTModelMode gestureModelMode;
+@property (nonatomic) NSInteger datasetID;
+@property (nonatomic) BOOL isHeartRateEnable;
 
 @end

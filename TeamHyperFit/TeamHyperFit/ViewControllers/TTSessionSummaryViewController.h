@@ -20,8 +20,14 @@
 
 @property (weak, nonatomic) id<TTSessionSummaryViewControllerDelegate> delegate;
 
+
 @property (strong, nonatomic) NSString *activityName;
 @property (strong, nonatomic) NSString *activityImageName;
+@property (nonatomic) NSInteger numberRaps;
+
+//! Only For Testing
+#warning Please Remove This Testing Code.
 @property (weak, nonatomic) IBOutlet UITextView *logTextArea;
 @property (strong, nonatomic) NSString *log;
+
 @end

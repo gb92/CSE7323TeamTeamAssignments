@@ -34,6 +34,11 @@
     
     self.activityNameLabel.text = self.activityName;
     self.activityImageView.image = [UIImage imageNamed:self.activityImageName];
+    self.fitpointsLabel.text = [NSString stringWithFormat:@"%ld", self.numberRaps * 100];
+    self.rapsNumberLabel.text = [NSString stringWithFormat:@"%ld", self.numberRaps];
+    
+    #warning Please Remove This Test code.
+    //! Only for testing.
     self.logTextArea.text = self.log;
 }
 

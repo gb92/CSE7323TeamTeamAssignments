@@ -157,6 +157,7 @@
 		5CBA7A3E190767620099C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBA7A20190767620099C0B9 /* UIKit.framework */; };
 		5CBA7A46190767620099C0B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA7A44190767620099C0B9 /* InfoPlist.strings */; };
 		5CBA7A48190767620099C0B9 /* TeamHyperFitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */; };
+		5CD3C3C8191F5F3500C7A1FF /* TTSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3C3C7191F5F3500C7A1FF /* TTSettingModel.m */; };
 		5CECBDE919149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */; };
 		5CECBDEC1914A9E2003E40F5 /* TTTransitionerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEB1914A9E2003E40F5 /* TTTransitionerViewController.m */; };
 		5CECBDEF1914B18B003E40F5 /* TTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CECBDEE1914B18B003E40F5 /* TTBaseViewController.m */; };
@@ -385,6 +386,8 @@
 		5CBA7A43190767620099C0B9 /* TeamHyperFitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeamHyperFitTests-Info.plist"; sourceTree = "<group>"; };
 		5CBA7A45190767620099C0B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5CBA7A47190767620099C0B9 /* TeamHyperFitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamHyperFitTests.m; sourceTree = "<group>"; };
+		5CD3C3C6191F5F3500C7A1FF /* TTSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSettingModel.h; sourceTree = "<group>"; };
+		5CD3C3C7191F5F3500C7A1FF /* TTSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSettingModel.m; sourceTree = "<group>"; };
 		5CECBDE719149F3A003E40F5 /* TTPositionToBoundsDynamicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPositionToBoundsDynamicItem.h; path = UIDynamics/TTPositionToBoundsDynamicItem.h; sourceTree = "<group>"; };
 		5CECBDE819149F3A003E40F5 /* TTPositionToBoundsDynamicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTPositionToBoundsDynamicItem.m; path = UIDynamics/TTPositionToBoundsDynamicItem.m; sourceTree = "<group>"; };
 		5CECBDEA1914A9E2003E40F5 /* TTTransitionerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTransitionerViewController.h; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 		5C2626C71907782B001AA0E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5CD3C3C6191F5F3500C7A1FF /* TTSettingModel.h */,
+				5CD3C3C7191F5F3500C7A1FF /* TTSettingModel.m */,
 				EF94806E1912E5810029E71F /* TTHeartRateCounter.h */,
 				EF94806F1912E5810029E71F /* TTHeartRateCounter.mm */,
 				EF8F046C191C351A00794DEC /* TTUserBaseModel.h */,
@@ -1156,6 +1161,7 @@
 				99D88C961909BEB000E3E073 /* TTMotionDataBuffer.m in Sources */,
 				5CFEE0D919199FAE00766F01 /* TTA7ActivityHandler.m in Sources */,
 				5CBA7A29190767620099C0B9 /* main.m in Sources */,
+				5CD3C3C8191F5F3500C7A1FF /* TTSettingModel.m in Sources */,
 				EF22B7A5191ADC5000D373CD /* TTFacebookViewController.m in Sources */,
 				EF8F0477191C7CAD00794DEC /* TTSoundEffect.m in Sources */,
 				5C513798190C5FE90054E253 /* TTSessionViewController.m in Sources */,

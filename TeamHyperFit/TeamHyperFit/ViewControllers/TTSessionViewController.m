@@ -108,24 +108,10 @@ typedef enum
 
     self.gestureRecognizer.delegate = self;
     
-    self.postLabel.text = self.activityName;
-    self.postImageView.image = [UIImage imageNamed:self.activityImageName];
-    
-    // single tap gesture recognizer
-    UITapGestureRecognizer *tapGestureRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureRecognizer:)];
-    tapGestureRecognize.delegate = self;
-    tapGestureRecognize.numberOfTapsRequired = 1;
-//    [tapGestureRecognize requireGestureRecognizerToFail:dtapGestureRecognize];
-    [self.view addGestureRecognizer:tapGestureRecognize];
-    
-    self.timeCounterView.delegate = self;
-    self.timeCounterView.isDrawGate = NO;
-    
-    self.sessionState = SS_REST;
-    
-    self.modelIDText.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
+    [self setupUI];
     
 }
+
 
 -(void)singleTapGestureRecognizer:(UITapGestureRecognizer *)recognizer
 {
@@ -169,6 +155,29 @@ typedef enum
 }
 
 #pragma mark -
+
+-(void)setupUI
+{
+    
+    self.postLabel.text = self.activityName;
+    self.postImageView.image = [UIImage imageNamed:self.activityImageName];
+    
+    // single tap gesture recognizer
+    UITapGestureRecognizer *tapGestureRecognize = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureRecognizer:)];
+    tapGestureRecognize.delegate = self;
+    tapGestureRecognize.numberOfTapsRequired = 1;
+    //    [tapGestureRecognize requireGestureRecognizerToFail:dtapGestureRecognize];
+    [self.view addGestureRecognizer:tapGestureRecognize];
+    
+    self.timeCounterView.delegate = self;
+    self.timeCounterView.isDrawGate = NO;
+    
+    self.sessionState = SS_REST;
+    
+    self.modelIDText.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
+}
+
+#pragma mark -
 #pragma mark Event Handling.
 
 - (IBAction)closeButton:(UIButton *)sender
@@ -178,7 +187,6 @@ typedef enum
 }
 
 #pragma mark -
-
 #pragma mark -- TTSessionSummaryDelegate
 -(void)TTSessionSummaryViewControllerOnCloseButtonPressed:(TTSessionSummaryViewController *)sender
 {
@@ -209,8 +217,12 @@ typedef enum
         
         vc.activityName = self.activityName;
         vc.activityImageName = self.activityImageName;
+        //vc.numberRaps = [self.gestureRecognizer getRapsByActivityID: ];
         
+        //! Only for testing.
+#warning Please Remove This Test code.
         vc.log = [self.gestureRecognizer printGestureResult];
+        //! --- End testing code.
         
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];

@@ -155,7 +155,7 @@
     //! Open Congratuations View controller only one time a day!
     //!
     TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
-    vc.fitPoints = [self.userInfoHandler.userInfo.fitPoints integerValue];
+    vc.fitPoints = [self.userInfoHandler.userInfo.fitPoints integerValue] + [self.userInfoHandler.userInfo.todaySteps intValue];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
