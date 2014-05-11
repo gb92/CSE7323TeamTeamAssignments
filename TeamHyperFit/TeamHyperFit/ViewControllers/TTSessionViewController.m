@@ -43,9 +43,16 @@ typedef enum
 
 @property (nonatomic) int numberOfCorrectGesture;
 
+@property (weak, nonatomic) IBOutlet UITextField *modelIDText;
+
 @end
 
 @implementation TTSessionViewController
+
+- (IBAction)onModelTextChange:(id)sender
+{
+    self.gestureRecognizer.modelDataSetID = @([self.modelIDText.text intValue]);
+}
 
 -(TTSoundEffect*)startSound
 {
@@ -115,10 +122,15 @@ typedef enum
     self.timeCounterView.isDrawGate = NO;
     
     self.sessionState = SS_REST;
+    
+    self.modelIDText.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
+    
 }
 
 -(void)singleTapGestureRecognizer:(UITapGestureRecognizer *)recognizer
 {
+    [self.modelIDText endEditing:YES];
+    
     if (!self.timeCounterView.isStarted)
     {
         if( self.sessionState == SS_REST)
@@ -149,6 +161,8 @@ typedef enum
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    [self.gestureRecognizer stopGestureCapture];
 }
 
 #pragma mark -

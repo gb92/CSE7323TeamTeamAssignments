@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) NSArray* gestures;
 
+
 @end
 
 @implementation TTActivitySelectionTableViewController
@@ -96,7 +97,7 @@
     sessionVC.activityName = ((TFGesture*)self.gestures[indexPath.row]).name;
     sessionVC.activityImageName = ((TFGesture*)self.gestures[indexPath.row]).imageName;
     [self.navigationController pushViewController:sessionVC animated:YES];
-     
+    
 }
 
 //// Override to support conditional editing of the table view.
