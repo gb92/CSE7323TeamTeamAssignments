@@ -1131,7 +1131,21 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fk-AE-opV">
-                                <rect key="frame" x="68" y="37" width="43" height="32"/>
+                                <rect key="frame" x="66" y="37" width="43" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="150 bpm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26s-UI-3n5">
+                                <rect key="frame" x="160" y="456" width="108" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zY-kW-JzO">
+                                <rect key="frame" x="53" y="456" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1145,7 +1159,7 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap any where to start or pause." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd9-Yc-gAq">
-                                <rect key="frame" x="25" y="399" width="281" height="83"/>
+                                <rect key="frame" x="25" y="416" width="281" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.28057065217391308" green="0.28057065217391308" blue="0.28057065217391308" alpha="0.47999999999999998" colorSpace="calibratedRGB"/>
@@ -1157,6 +1171,8 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                         <color key="backgroundColor" red="0.27058823529999998" green="0.71764705880000002" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="heartRateLabel" destination="26s-UI-3n5" id="fje-K7-O5I"/>
+                        <outlet property="heartRateZone" destination="3zY-kW-JzO" id="JWb-vN-494"/>
                         <outlet property="modelIDLabel" destination="avH-vF-cDQ" id="zTi-UG-vUu"/>
                         <outlet property="postImageView" destination="uwp-9f-Qiv" id="g2K-k8-zHV"/>
                         <outlet property="postLabel" destination="Sed-jG-K1D" id="4ro-Kf-fAA"/>
