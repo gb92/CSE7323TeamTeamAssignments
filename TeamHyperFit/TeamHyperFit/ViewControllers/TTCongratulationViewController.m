@@ -11,7 +11,9 @@
 #import "TTNOEffectTransition.h"
 
 @interface TTCongratulationViewController ()<UIViewControllerTransitioningDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *animatedView;
+@property (weak, nonatomic) IBOutlet UILabel *fitpointLabel;
 
 @property (nonatomic) CGRect defaultSize;
 @property (nonatomic) CGRect endSize;
@@ -57,6 +59,8 @@
     tempRect.size.height = 0;
     
     self.endSize = tempRect;
+    
+    self.fitpointLabel.text = [NSString stringWithFormat:@"%ld", (long)self.fitPoints];
     
 }
 

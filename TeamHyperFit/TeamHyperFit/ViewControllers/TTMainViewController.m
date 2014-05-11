@@ -35,13 +35,11 @@
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *thuView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *friView;
 @property (weak, nonatomic) IBOutlet TTSevenDaysView *satView;
-
 @property (weak, nonatomic) IBOutlet TMStepIndicaterView *fitpointView;
-
 @property (weak, nonatomic) IBOutlet UILabel *stepsLabel;
 
 
-@property (nonatomic) BOOL isStepHiden;
+@property (nonatomic) BOOL didMeetTodayGoal;
 
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 
@@ -78,6 +76,33 @@
     
     [self.userInfoHandler.userInfo addObserver:self forKeyPath:@"todaySteps" options:NSKeyValueObservingOptionNew context:nil];
     
+//-------------------------------------------------------------------------------
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+    
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    NSDate *dateMeetGoal = [defaults objectForKey:@"dateMeetGoal"];
+    
+#warning Bug Compare Date Alwasy get different date!.
+    
+    if( ([dateMeetGoal compare:today] != NSOrderedSame) )
+    {
+        self.didMeetTodayGoal = NO;
+    }
+    else
+    {
+        self.didMeetTodayGoal = YES;
+    }
 }
 
 -(void)viewDidLayoutSubviews
@@ -88,6 +113,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self updateInfo];
+    [self checkMeetGoal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,6 +138,26 @@
 {
     [self.delegate TTMainViewControllerOnFriendsButtonPressed:self];
 }
+- (IBAction)testButton:(id)sender
+{
+    NSDate* now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:today forKey:@"dateMeetGoal"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.didMeetTodayGoal = YES;
+    
+    //! Open Congratuations View controller only one time a day!
+    //!
+    TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
+    vc.fitPoints = [self.userInfoHandler.userInfo.fitPoints integerValue];
+    [self presentViewController:vc animated:YES completion:nil];
+}
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -120,11 +166,43 @@
         self.stepsLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.todaySteps intValue] ];
         
         self.fitpointView.value = (int)([self.userInfoHandler.userInfo.fitPoints integerValue] + [self.userInfoHandler.userInfo.todaySteps integerValue]);
+        [self checkMeetGoal];
     }
 }
 
 
 #pragma mark -
+
+-(void)checkMeetGoal
+{
+    
+    if ( self.didMeetTodayGoal )
+    {
+        return;
+    }
+    
+    if( ([self.userInfoHandler.userInfo.fitPoints integerValue] + [self.userInfoHandler.userInfo.todaySteps integerValue]) > [self.userInfoHandler.userInfo.goalFitPoints integerValue] )
+    {
+        
+        NSDate* now = [NSDate date];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+        NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+        long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+        NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:today forKey:@"dateMeetGoal"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        self.didMeetTodayGoal = YES;
+        
+        //! Open Congratuations View controller only one time a day!
+        //!
+        TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
+        vc.fitPoints = [self.userInfoHandler.userInfo.fitPoints integerValue];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+}
 
 -(void)setupUI
 {
@@ -147,8 +225,7 @@
     self.fitpointView.barColor = [UIColor colorWithRed:(178.0f/255.0f) green:(218.0f/255.0f) blue:(89.0f/255.0f) alpha:1];
     
     self.fitpointView.delegate = self;
-    
-    self.isStepHiden = NO;
+
     
     [self playJellyEffect: (UIView<ResizableDynamicItem>*)self.fitpointView force:50.0f frequency:3.0 damping:0.3];
     
@@ -201,7 +278,7 @@
 -(void)updateInfo
 {
     NSDictionary* fitpointsThisWeek = [self.userInfoHandler.userInfo.userStatistics objectForKey:@"fitpointsThisWeek"];
-    int goalThisWeek = (int)[[self.userInfoHandler.userInfo.userStatistics objectForKey:@"goalThisWeek"] integerValue];
+    int goalThisWeek = [self.userInfoHandler.userInfo.goalFitPoints intValue];
     
     self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
     self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
@@ -237,6 +314,8 @@
     [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:1];
 
     self.stepsLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.todaySteps intValue] ];
+    
+    [self checkMeetGoal];
 
 }
 
@@ -310,10 +389,6 @@
 {
     [self playJellyEffect:(UIView<ResizableDynamicItem>*)view force:25.0f frequency:3.0 damping:0.3];
     
-//    
-//    TTCongratulationViewController* vc = (TTCongratulationViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"CongratsView"];
-//    [self presentViewController:vc animated:YES completion:nil];
-//    
     [self startActivitySession];
     
 }

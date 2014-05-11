@@ -153,7 +153,10 @@ typedef enum
     //[self.hearRateCounter start];
     
     //[self performSelector:@selector(stopHearRate) withObject:nil afterDelay:10];
-    
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
     [self.gestureRecognizer stopGestureCapture];
 }
 

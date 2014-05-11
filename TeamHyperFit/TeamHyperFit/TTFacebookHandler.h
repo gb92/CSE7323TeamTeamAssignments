@@ -37,8 +37,11 @@ typedef void (^stepsBlock) (NSArray *usersSteps, NSError *error);
 @property (weak, nonatomic) id<TTFacebookHandlerDelegate> delegate;
 @property (nonatomic) BOOL isLogin;
 
+
 -(void) getProfileImageByID:(NSNumber*)ID callback:(void(^)( UIImage* image, NSError* error )) callback;
 -(void) getUserInfoToUserModel:(TFUserModel*) outUserModel;
+
+-(id)init;
 
 //-------------------------------------------------
 

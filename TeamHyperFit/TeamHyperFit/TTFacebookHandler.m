@@ -2,7 +2,7 @@
 //  TTFacebookHandler.m
 //  TeamHyperFit
 //
-//  Created by Gavin Benedict on 4/26/14.
+//  Created by Gavin Benedict : Chatchai Wangwiwattana on 4/26/14.
 //  Copyright (c) 2014 SMU. All rights reserved.
 //
 
@@ -13,6 +13,8 @@
 
 
 @interface TTFacebookHandler()
+
+@property (strong, nonatomic) FBSession* session;
 
 @property (weak, nonatomic) MSClient *client;
 @property (strong, nonatomic) NSString *fbID;
@@ -58,15 +60,21 @@
     return _dateWithTimeFormat;
 }
 
+-(id)init
+{
+    if ( self = [super init])
+    {
+        self.session=[[FBSession alloc]init];
+        
+        [self getCurrentUserInformation:nil];
+    }
+    
+    return  self;
+}
+
 -(void)getCurrentUserInformation:(userInformationBlock)callback
 {
-    NSLog(@"Begin getCurrentUserInformation");
-    FBSession *session=[[FBSession alloc]init];
-    
-    NSLog(@"Session current state: %u", session.state);
-    //NSLog(@"Session FBSessionStateOpen: %u", FBSessionStateOpen);
-    
-    if(session.state == FBSessionStateCreated || session.state == FBSessionStateCreatedTokenLoaded)
+    if(self.session.state == FBSessionStateCreated || self.session.state == FBSessionStateCreatedTokenLoaded)
     {
         [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             if(FB_ISSESSIONOPENWITHSTATE(status)) {
@@ -74,7 +82,8 @@
                     if(error)
                     {
                         NSLog(@"Error while fetching current user information: %@", error);
-                        callback(nil, error);
+                        if( callback )
+                            callback(nil, error);
                         return;
                     }
                     NSLog(@"Fetch Current User Results: %@", result);
@@ -86,32 +95,15 @@
                     userInformation.firstName=[userMe valueForKeyPath:@"first_name"];
                     userInformation.lastName=[userMe valueForKeyPath:@"last_name"];
                     
-                    callback(userInformation, error);
+                    if( callback )
+                        callback(userInformation, error);
                 }];
 
             }
         }];
 
     }
-    
-    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if(error)
-        {
-            NSLog(@"Error while fetching current user information: %@", error);
-            callback(nil, error);
-            return;
-        }
-        NSLog(@"Fetch Current User Results: %@", result);
-        
-        NSDictionary *userMe=(NSDictionary *)result;
-        
-        TFUserModel *userInformation=[[TFUserModel alloc] init];
-        userInformation.userID=[userMe valueForKeyPath:@"id"];
-        userInformation.firstName=[userMe valueForKeyPath:@"first_name"];
-        userInformation.lastName=[userMe valueForKeyPath:@"last_name"];
-        
-        callback(userInformation, error);
-    }];
+
 }
 
 -(void)getCurrentUserFitPoints:(userFitPointsBlock)callback

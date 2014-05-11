@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong,nonatomic) UIImage* image;
-@property (weak, nonatomic) IBOutlet UILabel *fitpointLabel;
+
+
+@property (nonatomic) NSInteger fitPoints;
 
 @end

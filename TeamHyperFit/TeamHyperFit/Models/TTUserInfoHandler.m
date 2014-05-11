@@ -86,6 +86,7 @@
     self.userInfo.firstName = @"First Name";
     self.userInfo.lastName = @"Last Name";
     self.userInfo.fitPoints = @(0);
+    self.userInfo.goalFitPoints = @(10000);
     self.userInfo.profileImage = [UIImage imageNamed:@"noone"];
     
     NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -97,12 +98,9 @@
                                        @(0),@"Friday",
                                        @(0),@"Saturday",
                                        nil];
-    
-    NSNumber* goalThisWeek = @(5000);
-    
+
     self.userInfo.userStatistics = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    fitPointsThisWeek,@"fitpointsThisWeek",
-                                    goalThisWeek,@"goalThisWeek", nil];
+                                    fitPointsThisWeek,@"fitpointsThisWeek", nil];
 }
 
 -(void)retriveState
@@ -118,6 +116,7 @@
         self.userInfo.age           = [defaults integerForKey:@"age"];
         self.userInfo.fitPoints     = @([defaults integerForKey:@"fitpoints"]);
         self.userInfo.todaySteps    = @([defaults integerForKey:@"steps"]);
+        self.userInfo.goalFitPoints = @([defaults integerForKey:@"goalFitpoints"]);
         
         NSData *imageData           = [defaults dataForKey:@"image"];
         self.userInfo.profileImage  = [UIImage imageWithData:imageData];
@@ -138,6 +137,7 @@
     [defaults setInteger:self.userInfo.age forKey:@"age"];
     [defaults setInteger:[self.userInfo.todaySteps intValue] forKey:@"steps"];
     [defaults setInteger:[self.userInfo.fitPoints intValue] forKey:@"fitpoints"];
+    [defaults setInteger:[self.userInfo.goalFitPoints intValue] forKey:@"goalFitpoints"];
     [defaults setObject:imageData forKey:@"image"];
     
     [defaults synchronize];

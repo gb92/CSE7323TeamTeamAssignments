@@ -20,5 +20,7 @@
 
 @property (nonatomic) BOOL isDirty;
 
+@property (nonatomic, strong) NSNumber *goalFitPoints;
+
  
 @end
