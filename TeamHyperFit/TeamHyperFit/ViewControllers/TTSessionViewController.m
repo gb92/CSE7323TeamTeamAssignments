@@ -42,6 +42,8 @@ typedef enum
 @property (strong, nonatomic) TTHeartRateCounter *hearRateCounter;
 @property (strong, nonatomic) TFGestureRecognizer *gestureRecognizer;
 
+@property (weak, nonatomic) IBOutlet UILabel *heartRateZone;
+@property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
 
 
 @property (nonatomic) int numberOfCorrectGesture;
@@ -150,6 +152,7 @@ typedef enum
 -(void)viewDidDisappear:(BOOL)animated
 {
     [self.gestureRecognizer stopGestureCapture];
+    [self.hearRateCounter stop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -312,6 +315,9 @@ typedef enum
                 gender = 1;
             
             NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
+            
+            self.heartRateLabel.text = [NSString stringWithFormat:@"%@ bpm", [self.hearRateCounter getHeartRate]];
+            self.heartRateZone.text = [self.hearRateCounter heartRateZoneForGender:gender atAge:age];
         }
     }
 }
