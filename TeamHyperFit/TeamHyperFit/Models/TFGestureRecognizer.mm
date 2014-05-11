@@ -339,11 +339,13 @@ float threshold = .18;
         [downsampledGesture addObject:@(sampledGesture[i])];
     }
     
+    NSLog(@"datasetid:%ld", [self.modelDataSetID integerValue]);
+    
     //NSArray *downsampledGesture=[[NSArray alloc] initWith]
     
     NSDictionary *dataToSendToServer=@{@"feature": downsampledGesture,
                                        @"dsid":self.modelDataSetID,
-                                       @"model":@"svm"};
+                                       @"model":@"k"};
     
     
     [self.ttWebServiceManager sendPost:dataToSendToServer to:predictRequest callback:^(NSData *data) {
@@ -530,6 +532,8 @@ float threshold = .18;
             else if(CurrentlyGesturing && n==((kBufferLength-windowSize)-numberOfNewFrames) && gestureDetectedVector[n]==0)
             {
                 CurrentlyGesturing=NO;
+                self.performUpdates=NO;
+                [self stopGestureCapture];
                 NSLog(@"Detected End Gesture at Start of New Frames");
                 self.log = (@"Detected End Gesture at Start of New Frames");
                 //[self uploadGestureBuffer];
@@ -548,6 +552,8 @@ float threshold = .18;
                 NSLog(@"Gesture Ended");
                 self.log = (@"Gesture Ended");
                 CurrentlyGesturing = NO;
+                self.performUpdates=NO;
+                [self stopGestureCapture];
                 [self.delegate TFGestureRecognizerDidDetectEnd:self];
             }
             if(CurrentlyGesturing)
