@@ -969,6 +969,7 @@
                         <outlet property="containerScrollView" destination="SBx-QV-lHA" id="zdd-52-8Xo"/>
                         <outlet property="fitpoitLabel" destination="bz0-ky-vaV" id="MQw-1Q-fOz"/>
                         <outlet property="friendTableView" destination="ReT-Xa-cdI" id="7dP-aC-DHE"/>
+                        <outlet property="nameLabel" destination="3FE-tk-0jb" id="eFg-dV-6lL"/>
                         <outlet property="userPhotoImageView" destination="WPc-8k-y7G" id="DjJ-1S-izT"/>
                     </connections>
                 </viewController>

@@ -69,7 +69,6 @@ typedef void (^stepsBlock) (NSArray *usersSteps, NSError *error);
 
 -(void) updateCurrentUserDailySteps:(NSNumber*) steps withDate:(NSDate*) day withUserID:(NSString *) userID;
 
--(void) updateFitPoints:(NSNumber *)fitPoints withDate:(NSDate *)day withUserID:(NSString *)userID;
-
+-(void) updateFitPoints:(NSNumber *)fitPoints withDate:(NSDate *)day withUserID:(NSString *)userID callback:(void(^)(NSError*)) callback;
 
 @end

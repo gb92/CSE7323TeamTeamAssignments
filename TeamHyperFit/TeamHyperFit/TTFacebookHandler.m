@@ -427,6 +427,65 @@
 
 }
 
+-(void) getFitPoints:(NSDate *)fromDate to:(NSDate *)toDate forIDs:(NSArray *)userIDs response:(fitPointsBlock)callback
+{
+    MSTable *table= [self.client tableWithName:@"FitPoints"];
+    [table readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+        
+        if(error)
+        {
+            NSLog(@"Error while retrieving user step information: %@",error);
+            callback(nil, error);
+            return;
+        }
+        
+        NSMutableArray *userStepsToReturn=[[NSMutableArray alloc] init];
+        for(int i=0; i<[userIDs count]; i++)
+        {
+            NSMutableDictionary *dict= [[NSMutableDictionary alloc]init];
+            [dict setObject:userIDs[i] forKey:@"userID"];
+            [dict setObject:[[NSMutableArray alloc] init] forKey:@"fitPoints"];
+            [userStepsToReturn addObject:dict];
+        }
+        
+        for(int i=0; i<[items count]; i++)
+        {
+            NSDictionary *currentItem=(NSDictionary *)items[i];
+            NSString *userID=[currentItem valueForKey:@"userID"];
+            
+            if([userIDs containsObject:userID])
+            {
+                NSString *theDateString = [currentItem valueForKey:@"date"];
+                if ([theDateString length] > 0)
+                {
+                    NSDate *dayOfSteps=[self.dateFormat dateFromString:theDateString];
+                    NSNumber *numSteps=(NSNumber *)[currentItem valueForKey:@"numFitPoints"];
+                    if([[toDate earlierDate:[fromDate laterDate:dayOfSteps]] isEqual:dayOfSteps])
+                    {
+                        //the steps are recorded in the correct date range
+                        NSInteger index=[userIDs indexOfObject:userID];
+                        
+                        if( index != NSNotFound )
+                        {
+                            NSDictionary* userSteps=(NSDictionary *)userStepsToReturn[index];
+                            
+                            NSMutableArray *stepsWithDates=(NSMutableArray *)[userSteps valueForKey:@"fitPoints"];
+                            NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                            [dict setObject:dayOfSteps forKey:@"date"];
+                            [dict setObject:numSteps forKey:@"fitPoints"];
+                            [stepsWithDates addObject:dict];
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        NSLog(@"userStepsToReturn: %@", userStepsToReturn);
+        callback(userStepsToReturn, error);
+    }];
+}
+
 -(void) getUserSteps:(NSDate *)fromDate to:(NSDate *)toDate forIDs:(NSArray *)userIDs response:(stepsBlock)callback
 {
     MSTable *table= [self.client tableWithName:@"StepsTaken"];
@@ -527,7 +586,7 @@
 }
 
 //adds steps to current step value in database for day
--(void) updateFitPoints:(NSNumber *)fitPoints withDate:(NSDate *)day withUserID:(NSString *)userID
+-(void) updateFitPoints:(NSNumber *)fitPoints withDate:(NSDate *)day withUserID:(NSString *)userID callback:(void(^)(NSError*)) callback
 {
     NSString* dateString=[self.dateFormat stringFromDate:day];
     
@@ -567,6 +626,9 @@
                  }
              }];
         }
+        
+        if( callback )
+            callback( error );
     }];
     
 }

@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet TTCircleImageView *userPhotoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
 @property (weak, nonatomic) IBOutlet UILabel *fitpoitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -59,6 +60,7 @@
     
     self.friendTableView.delegate = self;
     self.friendTableView.dataSource = self;
+
     
     [self setupPullToRefresh];
 }
@@ -125,6 +127,8 @@
     self.fitpoitLabel.text = [NSString stringWithFormat:@"%d", [self.userInfoHandler.userInfo.fitPoints intValue] + [self.userInfoHandler.userInfo.todaySteps intValue] ];
     self.userPhotoImageView.image = self.userInfoHandler.userInfo.profileImage;
 
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.userInfoHandler.userInfo.firstName ,self.userInfoHandler.userInfo.lastName];
+    
     if( [self.userInfoHandler.friendsInfo count] <= 0 )
     {
         [self reloadFriendList];

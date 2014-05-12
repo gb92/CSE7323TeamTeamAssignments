@@ -17,6 +17,7 @@
 
 @end
 
+
 @implementation TTUserInfoHandler
 
 -(TFUserModel*)userInfo
@@ -69,7 +70,7 @@
         //!
         [self setUserInfoToDefaultValue];
         [self retriveState];
-        
+
     }
     
     return self;
@@ -79,6 +80,7 @@
 {
     [self saveState];
 }
+
 
 -(void)setUserInfoToDefaultValue
 {
@@ -328,62 +330,28 @@
 {
     if( !self.userInfo.isDirty )
     {
-        //[self.fbHandler getCurrentUserFitPoints:^(NSNumber *fitPoints, NSError *error){
-        [self.fbHandler getCurrentUserInformationWithFitPoints:^(TFUserModel *userInformation, NSError *error){
+        NSDate* now = [NSDate date];
+
+          NSCalendar *calendar = [NSCalendar currentCalendar];
+        
+          unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+        
+          NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+        
+          long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+        
+          NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+        
+          NSDate *timeToDay = [NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today];
+        
+        [self.fbHandler getFitPoints:timeToDay to:today forIDs:@[self.userInfo.userID] response:^(NSArray *usersFitPoints, NSError *error) {
             
-            if( !error )
+            if( [usersFitPoints count] > 0)
             {
-                self.userInfo.userID=userInformation.userID;
-                self.userInfo.fitPoints = userInformation.fitPoints;
+                NSLog(@"%@",usersFitPoints[0]);
             }
             
-            if(onFinish != nil)
-                onFinish( error );
-            /*
-            [self.fbHandler updateCurrentUserDailySteps:@(32) withDate:[NSDate date] withUserID:self.userInfo.userID];
-            
-            NSCalendar *cal = [NSCalendar currentCalendar];
-            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
-            
-            [components setHour:-[components hour]];
-            [components setMinute:-[components minute]];
-            [components setSecond:-[components second]];
-            NSDate *today = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
-            
-            [components setHour:-24];
-            [components setMinute:0];
-            [components setSecond:0];
-            NSDate *yesterday = [cal dateByAddingComponents:components toDate: today options:0];
-            
-            [components setHour: 24];
-            NSDate *tomorrow=[cal dateByAddingComponents:components toDate:today options:0];
-            
-            [self.fbHandler getUserSteps:yesterday  to:tomorrow forIDs:@[self.userInfo.userID] response:^(NSArray *usersSteps, NSError *error) {
-                //do something
-            }];
-             */
-            
-            TTUserActivity *tempActivity=[[TTUserActivity alloc]init];
-            tempActivity.userID=userInformation.userID;
-            tempActivity.activity=jumpingJacks;
-            tempActivity.numRepetitions=@(32);
-            
-            NSCalendar *cal = [NSCalendar currentCalendar];
-            NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
-            
-            [components setHour:0];
-            [components setMinute:-10];
-            [components setSecond:-22];
-            NSDate *start=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
-            [components setMinute:-8];
-            [components setSecond:-31];
-            NSDate *end=[cal dateByAddingComponents:components toDate:[NSDate date] options:0];
-            
-            tempActivity.startTime=start;
-            tempActivity.endTime=end;
-            
-            [self.fbHandler addUserActivity:tempActivity];
-           
+            //self.userInfo.fitPoints = usersFitPoints[0];
         }];
     }
     else
@@ -398,17 +366,39 @@
 {
 #warning Vulnerable to get Attack!
     //! It is bad to do this, it vernerable for hacking.!!!!
-    [self.fbHandler updateCurrentUserFitPoints: self.userInfo.fitPoints onFinish:^(NSError* error)
-     {
-         if( !error )
-         {
-             self.userInfo.isDirty = NO;
-         }
-         
-         if(onFinish != nil)
-             onFinish(error);
-         
-     }];
+    
+    NSDate* now = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+    
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    
+    
+    [self.fbHandler updateFitPoints:self.userInfo.fitPoints withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID] callback:^(NSError *error) {
+        
+        if (onFinish) {
+            onFinish(error);
+        }
+        
+    }];
+    
+//    [self.fbHandler updateCurrentUserFitPoints: self.userInfo.fitPoints onFinish:^(NSError* error)
+//     {
+//         if( !error )
+//         {
+//             self.userInfo.isDirty = NO;
+//         }
+//         
+//         if(onFinish != nil)
+//             onFinish(error);
+//         
+//     }];
 }
 
 -(void)updateSteps
@@ -430,8 +420,8 @@
     
     //! ----- Sync User Info -------------------------------
     //!
-    if( self.userInfo.isDirty )
-    {
+    //if( self.userInfo.isDirty )
+    //{
         [self syncInfoToServer:^(NSError* error)
          {
              if( !error )
@@ -439,11 +429,11 @@
                  [self requestInfoFromServer:nil];
              }
          }];
-    }
-    else
-    {
-        [self requestInfoFromServer:nil];
-    }
+//    }
+//    else
+//    {
+//        [self requestInfoFromServer:nil];
+//    }
     
     
     //! ----- Get Friends Info -------------------------------

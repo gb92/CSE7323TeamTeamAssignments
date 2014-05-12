@@ -47,9 +47,7 @@ typedef enum
 
 
 @property (nonatomic) int numberOfCorrectGesture;
-
 @property (nonatomic) BOOL isHeartRateEnable;
-
 @property (nonatomic) NSInteger resultCount;
 
 @end
@@ -146,9 +144,7 @@ typedef enum
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self.hearRateCounter start];
-    
-    //[self performSelector:@selector(stopHearRate) withObject:nil afterDelay:10];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated
