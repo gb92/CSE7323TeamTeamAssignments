@@ -44,7 +44,8 @@ typedef enum
 
 @property (weak, nonatomic) IBOutlet UILabel *heartRateZone;
 @property (weak, nonatomic) IBOutlet UILabel *heartRateLabel;
-
+@property (strong, nonatomic) NSMutableArray *heartRateData;
+@property (strong, nonatomic) NSMutableArray *heartRateZoneData;
 
 @property (nonatomic) int numberOfCorrectGesture;
 @property (nonatomic) BOOL isHeartRateEnable;
@@ -117,7 +118,8 @@ typedef enum
     [super viewDidLoad];
 
     self.gestureRecognizer.delegate = self;
-    
+    self.heartRateData = [[NSMutableArray alloc] init];
+    self.heartRateZoneData = [[NSMutableArray alloc] init];
     [self setupUI];
     
 }
@@ -298,6 +300,8 @@ typedef enum
         
         self.userInfoHandler.userInfo.fitPoints = @( [self.userInfoHandler.userInfo.fitPoints intValue] + vc.numberRaps * 100);
         
+        vc.heartRateData = self.heartRateData;
+        vc.heartRateZone = self.heartRateZoneData;
         vc.log = result;
         NSLog(@"%@",result);
         
@@ -317,6 +321,9 @@ typedef enum
         
         if (self.isHeartRateEnable)
         {
+            [self.heartRateData removeAllObjects];
+            [self.heartRateZoneData removeAllObjects];
+            
             [self.hearRateCounter start];
         }
         [self.gestureRecognizer clearGesturePredictedData];
@@ -368,6 +375,8 @@ typedef enum
     }
 }
 
+int timeCount = 0;
+
 -(void)TTTimeCounterDidUpdate:(TTTimeCounterView *)sender
 {
     if (self.sessionState == SS_PREPARE)
@@ -378,18 +387,30 @@ typedef enum
     }
     else if (self.sessionState == SS_IN_SESSION )
     {
-        //! Read Heart Rate.
-        if([self.hearRateCounter isStated])
+        timeCount++;
+        if( timeCount % 3 == 0 )
         {
-            int age = (int)self.userInfoHandler.userInfo.age;
-            int gender = 0;
-            if( [self.userInfoHandler.userInfo.gender isEqualToString:@"female"])
-                gender = 1;
-            
-            NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
-            
-            self.heartRateLabel.text = [NSString stringWithFormat:@"%@ bpm", [self.hearRateCounter getHeartRate]];
-            self.heartRateZone.text = [self.hearRateCounter heartRateZoneForGender:gender atAge:age];
+            //! Read Heart Rate.
+            if([self.hearRateCounter isStated])
+            {
+                
+                
+                int age = (int)self.userInfoHandler.userInfo.age;
+                int gender = 0;
+                if( [self.userInfoHandler.userInfo.gender isEqualToString:@"female"])
+                    gender = 1;
+                
+                NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
+                
+                float heartRate = [[self.hearRateCounter getHeartRate] floatValue];
+                NSString *heartRateZoneText =[self.hearRateCounter heartRateZoneForGender:gender atAge:age];
+                
+                self.heartRateLabel.text = [NSString stringWithFormat:@"%.2f bpm", heartRate];
+                self.heartRateZone.text = heartRateZoneText;
+                
+                [self.heartRateData addObject: @(heartRate)];
+                [self.heartRateZoneData addObject:heartRateZoneText];
+            }
         }
     }
 }

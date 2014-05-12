@@ -7,6 +7,7 @@
 //
 
 #import "TTSessionSummaryViewController.h"
+#import "TTHeartRateGraph.h"
 
 @interface TTSessionSummaryViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *rapsNumberLabel;
@@ -14,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *activityNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *activityImageView;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet TTHeartRateGraph *heartRateView;
+
+@property (weak, nonatomic) IBOutlet UILabel *warningView;
 
 @end
 
@@ -37,9 +41,20 @@
     self.fitpointsLabel.text = [NSString stringWithFormat:@"%ld", self.numberRaps * 100];
     self.rapsNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)self.numberRaps];
     
+    if ([self.heartRateData count] > 0)
+    {
+        self.heartRateView.data = [NSArray arrayWithArray:self.heartRateData];
+        self.heartRateView.dataLabel = [NSArray arrayWithArray:self.heartRateZone];
+    }
+    else
+    {
+        [self.warningView setHidden:YES];
+    }
+    
     #warning Please Remove This Test code.
     //! Only for testing.
     self.logTextArea.text = self.log;
+    
 }
 
 - (void)didReceiveMemoryWarning

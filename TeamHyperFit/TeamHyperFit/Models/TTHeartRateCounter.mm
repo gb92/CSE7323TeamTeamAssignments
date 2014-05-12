@@ -14,7 +14,7 @@
 using namespace cv;
 
 static const int kFramesPerSec = 24;
-static const int kSampleSecond = 5;
+static const int kSampleSecond = 3;
 
 @interface TTHeartRateCounter() <CvVideoCameraDelegate>
 
@@ -31,6 +31,8 @@ static const int kSampleSecond = 5;
 std::vector<float> meanOfRedValues;
 std::vector<float>maximumValueList;
 #endif
+    
+    NSInteger timeCount;
 }
 
 static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
@@ -57,7 +59,7 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
     self = [super init];
     if(self)
     {
-        self.currentHeartRate = @(6);
+        self.currentHeartRate = @(0);
     }
     
     return self;
@@ -102,7 +104,7 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 
 -(NSNumber*)getHeartRate
 {
-    return @([self.currentHeartRate floatValue] * 60.0f / kSampleSecond);
+    return @(([self.currentHeartRate floatValue] ) * 60.0 / ( timeCount / kFramesPerSec ) );
 }
 
 -(BOOL)isStated
@@ -169,6 +171,7 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 //			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
 //		{
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
+            timeCount++;
 //		}
 //        else
 //        {
@@ -181,10 +184,10 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
         
         //NSLog(@"Hear Rate : %@\n", self.currentHeartRate);
         
-        float newHeartRate = [self countLocalMaximaFromArray:meanOfRedValues] - 1 /* (-1) Error at the edge of data */;
-        self.currentHeartRate = [NSNumber numberWithInt:(newHeartRate + [self.currentHeartRate intValue] ) / 2.0];
+        int newHeartRate = [self countLocalMaximaFromArray:meanOfRedValues] /* (-1) Error at the edge of data */;
+        self.currentHeartRate = @([self.currentHeartRate intValue] + newHeartRate);
         
-        NSLog(@"Hear Rate new : %f\n", newHeartRate);
+        NSLog(@"Hear Rate new : %d\n", newHeartRate);
         
         std::vector<float>drawingBuffer;
         drawingBuffer.assign(meanOfRedValues.begin(), meanOfRedValues.end());

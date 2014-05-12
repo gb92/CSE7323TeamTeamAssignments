@@ -116,7 +116,7 @@ static const int SI_GATE_PADDING    = 10;
     CGContextRestoreGState(ctx);
 
     [self drawFontWithString:[NSString stringWithFormat:@"%ld", (long)self.currentTime] size:80 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 )];
-    [self drawFontWithString:@"secondes" size:15 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 + 50 )];
+    [self drawFontWithString:@"seconds" size:15 position:CGPointMake(self.frame.size.width/2, self.frame.size.height/2 + 50 )];
     
     /* Draw Gate */
     if (self.isDrawGate)

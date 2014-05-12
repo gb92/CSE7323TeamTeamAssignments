@@ -24,7 +24,8 @@
 @property (strong, nonatomic) NSString *activityName;
 @property (strong, nonatomic) NSString *activityImageName;
 @property (nonatomic) NSInteger numberRaps;
-
+@property (strong, nonatomic) NSMutableArray *heartRateData;
+@property (strong, nonatomic) NSMutableArray *heartRateZone;
 //! Only For Testing
 #warning Please Remove This Testing Code.
 @property (weak, nonatomic) IBOutlet UITextView *logTextArea;
