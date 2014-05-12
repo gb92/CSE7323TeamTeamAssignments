@@ -49,7 +49,7 @@
                      [[TFGesture alloc] initWithName:@"PushUp"   imageName:@"pushupBigIcon"],
                      [[TFGesture alloc] initWithName:@"SitUp"    imageName:@"situpBigIcon"],
                      [[TFGesture alloc] initWithName:@"JumpingJack" imageName:@"jumpingJackBigIcon"],
-                     [[TFGesture alloc] initWithName:@"Cruches"  imageName:@"cranchingBigIcon"],
+                     [[TFGesture alloc] initWithName:@"Squat"  imageName:@"cranchingBigIcon"],
                      nil];
     
     

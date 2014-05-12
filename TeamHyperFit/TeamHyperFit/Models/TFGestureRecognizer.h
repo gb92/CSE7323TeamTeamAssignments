@@ -32,6 +32,11 @@ typedef enum
 @property (strong, nonatomic) NSNumber *modelDataSetID;
 @property (nonatomic) TTModelMode gestureModelMode;
 
+@property (nonatomic) NSInteger jumpingJackNumber;
+@property (nonatomic) NSInteger pushUpNumber;
+@property (nonatomic) NSInteger sitUpNumber;
+@property (nonatomic) NSInteger squartNumber;
+
 -(id) initWithModelDSID:(NSNumber *)modelDSID;
 
 -(void) startGestureCapture;

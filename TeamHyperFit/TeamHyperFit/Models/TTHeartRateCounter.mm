@@ -165,15 +165,15 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
         // and push data to the buffer.
         //
 		
-        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 255) ||
-			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
-		{
+//        if ((avgPixelIntensity[0] < 50 && avgPixelIntensity[1] < 50 && avgPixelIntensity[2] > 200 && avgPixelIntensity[2] < 255) ||
+//			(avgPixelIntensity[0] < 10 && avgPixelIntensity[1] < 10 && avgPixelIntensity[2] > 45 && avgPixelIntensity[2] < 113)) // Changed: Consider dark red as a sample
+//		{
             meanOfRedValues.push_back( avgPixelIntensity.val[2] );
-		}
-        else
-        {
-			NSLog(@"Please place your finger at the back camera of the phone.");
-        }
+//		}
+//        else
+//        {
+//			NSLog(@"Please place your finger at the back camera of the phone.");
+//        }
     }
     else
     {

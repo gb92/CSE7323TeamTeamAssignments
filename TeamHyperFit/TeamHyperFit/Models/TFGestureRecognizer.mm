@@ -176,11 +176,16 @@ float threshold = .18;
     {
         gestureTypeCount[i] = 0;
     }
+    
+    self.jumpingJackNumber = 0;
+    self.squartNumber = 0;
+    self.sitUpNumber = 0;
+    self.pushUpNumber = 0;
 }
 
 -(NSString*)printGestureResult
 {
-    NSString *result;
+    NSString *result = @"";
     for(int i=0; i<4; i++)
     {
         NSString *gestureName;
@@ -378,18 +383,22 @@ float threshold = .18;
         if( [prediction isEqualToString:@"[u'Jumping Jack']"])
         {
             gestureTypeCount[0]++;
+            self.jumpingJackNumber++;
         }
         else if( [prediction isEqualToString:@"[u'Push Ups']"])
         {
             gestureTypeCount[1]++;
+            self.pushUpNumber++;
         }
         else if( [prediction isEqualToString:@"[u'Sit Ups']"])
         {
             gestureTypeCount[2]++;
+            self.sitUpNumber++;
         }
         else
         {
             gestureTypeCount[3]++;
+            self.squartNumber++;
         }
         
         NSLog(@"prediction : %@",prediction);

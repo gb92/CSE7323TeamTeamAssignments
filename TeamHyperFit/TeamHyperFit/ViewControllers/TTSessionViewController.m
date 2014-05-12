@@ -50,6 +50,8 @@ typedef enum
 
 @property (nonatomic) BOOL isHeartRateEnable;
 
+@property (nonatomic) NSInteger resultCount;
+
 @end
 
 @implementation TTSessionViewController
@@ -231,7 +233,45 @@ typedef enum
         
         //! Only for testing.
 #warning Please Remove This Test code.
-        vc.log = [self.gestureRecognizer printGestureResult];
+        
+        int gestureTypeCount[4];
+        
+        for(int i=0; i<4;i++)
+        {
+            gestureTypeCount[i] = 0;
+        }
+        gestureTypeCount[ self.activityType ] = (int)self.resultCount;
+        
+        NSString *result = @"";
+        for(int i=0; i<4; i++)
+        {
+            NSString *gestureName;
+            
+            if( i == 0 )
+            {
+                gestureName = @"Push Up";
+            }
+            else if( i == 1 )
+            {
+                gestureName = @"Sit Up";
+            }
+            else if( i == 2 )
+            {
+                gestureName = @"Jumping Jack";
+            }
+            else
+            {
+                gestureName = @"Squat";
+            }
+            
+            result = [NSString stringWithFormat:@"%@ \n %@ : %d", result, gestureName, gestureTypeCount[i] ];
+        }
+        
+        vc.log = result;
+        NSLog(@"%@",result);
+        
+        
+        //vc.log = [self.gestureRecognizer printGestureResult];
         //! --- End testing code.
         
         vc.delegate = self;
@@ -280,6 +320,7 @@ typedef enum
         {
             [self.hearRateCounter start];
         }
+        self.resultCount = 0;
         [self.gestureRecognizer startGestureCapture];
     }
 }
@@ -330,6 +371,7 @@ typedef enum
 -(void)TFGestureRecognizerDidDetectEnd:(TFGestureRecognizer *)sender
 {
     [self.startSound play];
+    self.resultCount ++;
 }
 
 @end

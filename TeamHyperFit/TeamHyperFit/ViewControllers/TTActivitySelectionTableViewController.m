@@ -96,6 +96,7 @@
     
     sessionVC.activityName = ((TFGesture*)self.gestures[indexPath.row]).name;
     sessionVC.activityImageName = ((TFGesture*)self.gestures[indexPath.row]).imageName;
+    sessionVC.activityType = indexPath.row;
     [self.navigationController pushViewController:sessionVC animated:YES];
     
 }
