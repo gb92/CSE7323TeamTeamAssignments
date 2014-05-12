@@ -16,9 +16,9 @@
 const int kPaddingLeft      = 10;
 const int kPaddingRight     = 10;
 const int kPaddingBottom    = 10;
-const int kPaddingTop       = 20;
+const int kPaddingTop       = 30;
 
-const int kGraphPadding     = 10;
+const int kGraphPadding     = 30;
 
 const int kDotSize          = 3;
 const int kLineWidth        = 2;
@@ -318,7 +318,10 @@ typedef enum
     {
         for ( int i=0; i < (int)numberOfPoints; i++ )
         {
-            [self drawFontWithString: (NSString*)self.dataLabel[i] size:10 position:CGPointMake(points[i].x, points[i].y - 12) align:TTG_CENTER];
+            if( i % 2 == 1 )
+            {
+                [self drawFontWithString: (NSString*)self.dataLabel[i] size:10 position:CGPointMake(points[i].x, points[i].y - 12) align:TTG_CENTER];
+            }
         }
     }
     

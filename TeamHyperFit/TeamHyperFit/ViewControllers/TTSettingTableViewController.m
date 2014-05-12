@@ -22,10 +22,10 @@
 
 
 @property (weak, nonatomic) IBOutlet UIPickerView *agePickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *genderPickerView;
-@property (weak, nonatomic) IBOutlet UIPickerView *trainingModelPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *trainingDatasetPickerView;
 @property (weak, nonatomic) IBOutlet UISwitch *heartRateSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *trainingModelSegment;
 
 
 @end
@@ -82,13 +82,12 @@
 					  inComponent:0
 						 animated:NO];
 	
-	[self.genderPickerView selectRow:[[self.userInfoHandler.userInfo.gender lowercaseString] isEqualToString:@"male"] ? 0 : 1
-						 inComponent:0
-							animated:NO];
+	[self.genderSegment setSelectedSegmentIndex:
+     ([[self.userInfoHandler.userInfo.gender lowercaseString]
+       isEqualToString:@"male"]) ? 0 : 1 ];
+    
 	
-	[self.trainingModelPickerView selectRow:self.gestureRecognizer.gestureModelMode == TM_MODEL_KNN ? 0 : 1
-								inComponent:0
-								   animated:NO];
+	[self.trainingModelSegment setSelectedSegmentIndex:self.gestureRecognizer.gestureModelMode == TM_MODEL_KNN ? 0 : 1];
 	
 	[self.trainingDatasetPickerView selectRow:[self.gestureRecognizer.modelDataSetID intValue]
 								  inComponent:0
@@ -106,15 +105,17 @@
 #warning it is error prone. Please change.
     [[NSUserDefaults standardUserDefaults] setBool:self.heartRateSwitch.on forKey:@"heartRateEnable"];
 	
-    self.gestureRecognizer.gestureModelMode = [self.trainingModelPickerView selectedRowInComponent:0] == 0 ? TM_MODEL_KNN : TM_MODEL_SVM;
+    self.gestureRecognizer.gestureModelMode = [self.trainingModelSegment selectedSegmentIndex] == 0 ? TM_MODEL_KNN : TM_MODEL_SVM;
 	self.gestureRecognizer.modelDataSetID = @([self.trainingDatasetPickerView selectedRowInComponent:0]);
 	self.userInfoHandler.userInfo.age = [self.agePickerView selectedRowInComponent:0];
-	self.userInfoHandler.userInfo.gender = [self.genderPickerView selectedRowInComponent:0] == 0 ? @"male" : @"female";
+	self.userInfoHandler.userInfo.gender = [self.genderSegment selectedSegmentIndex] == 0 ? @"male" : @"female";
 	
     [[NSUserDefaults standardUserDefaults] setInteger:self.userInfoHandler.userInfo.age forKey:@"age"];
     [[NSUserDefaults standardUserDefaults] setObject:self.userInfoHandler.userInfo.gender forKey:@"gender"];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 

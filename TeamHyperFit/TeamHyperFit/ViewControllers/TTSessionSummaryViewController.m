@@ -43,12 +43,9 @@
     
     if ([self.heartRateData count] > 0)
     {
+        [self.warningView setHidden:YES];
         self.heartRateView.data = [NSArray arrayWithArray:self.heartRateData];
         self.heartRateView.dataLabel = [NSArray arrayWithArray:self.heartRateZone];
-    }
-    else
-    {
-        [self.warningView setHidden:YES];
     }
     
     #warning Please Remove This Test code.

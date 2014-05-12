@@ -18,6 +18,8 @@
 @property (nonatomic, strong) TTFacebookHandler* fbHandler;
 
 -(void)updateUserInfo:(void(^)( TFUserModel*, NSError* error)) onFinish;
-
 -(void)updateFriendsInfo:(void(^)( NSError* error )) callback;
+-(void)saveState;
+-(void)syncInfoToServer:(void(^)(NSError* error)) onFinish;
+
 @end

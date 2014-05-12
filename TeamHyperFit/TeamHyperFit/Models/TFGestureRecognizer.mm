@@ -164,6 +164,7 @@ float threshold = .18;
     NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setInteger:[self.modelDataSetID intValue] forKey:@"gestureModelID"];
     [userDefault setInteger:self.gestureModelMode forKey:@"gestureModelMode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     free(motionDataX);
     free(motionDataY);

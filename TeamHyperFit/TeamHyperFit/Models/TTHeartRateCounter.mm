@@ -115,7 +115,7 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 - (NSString *)heartRateZoneForGender:(TTGender)gender atAge:(NSUInteger)age
 {
 	int heartRate = [[self getHeartRate] intValue];
-	NSLog(@"Heart Rate: %i", heartRate);
+	//NSLog(@"Heart Rate: %i", heartRate);
 	
 	int maximumHeartRate;
 	if (gender == TTGenderMale)
@@ -127,26 +127,26 @@ static const int MEAN_OF_RED_VALUES_ARRAY_SIZE = kSampleSecond * kFramesPerSec;
 		maximumHeartRate = 209 - (age * 0.7);
 	}
 
-	NSLog(@"Maximum Heart Rate: %i", maximumHeartRate);
+	//NSLog(@"Maximum Heart Rate: %i", maximumHeartRate);
 	if (heartRate >= maximumHeartRate*0.5 && heartRate < maximumHeartRate*0.6)
 	{
-		return @"VERY LIGHT";
+		return @"VeryLight";
 	}
 	else if (heartRate >= maximumHeartRate*0.6 && heartRate < maximumHeartRate*0.7)
 	{
-		return @"LIGHT";
+		return @"Light";
 	}
 	else if (heartRate >= maximumHeartRate*0.7 && heartRate < maximumHeartRate*0.8)
 	{
-		return @"MODERATE";
+		return @"Moderate";
 	}
 	else if (heartRate >= maximumHeartRate*0.8 && heartRate < maximumHeartRate*0.9)
 	{
-		return @"HARD";
+		return @"Hard";
 	}
 	else if (heartRate >= maximumHeartRate*0.9 && heartRate < maximumHeartRate)
 	{
-		return @"MAXIMUM";
+		return @"Maximum";
 	}
 	else
 		return @"Resting";

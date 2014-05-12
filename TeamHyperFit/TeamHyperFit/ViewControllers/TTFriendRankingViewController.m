@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
 @property (weak, nonatomic) IBOutlet UILabel *fitpoitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *FriendLoading;
 
 @end
 
@@ -60,7 +61,8 @@
     
     self.friendTableView.delegate = self;
     self.friendTableView.dataSource = self;
-
+    
+    [self.FriendLoading stopAnimating];
     
     [self setupPullToRefresh];
 }
@@ -68,7 +70,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self updateInfo];
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -102,6 +106,7 @@
     
     [self.containerScrollView addPullToRefreshWithDrawingImgs:TwitterMusicDrawingImgs andLoadingImgs:TwitterMusicLoadingImgs andActionHandler:^{
         
+        [self.FriendLoading startAnimating];
         [self updateInfo];
         [self reloadFriendList];
         
@@ -115,9 +120,12 @@
 
 -(void)reloadFriendList
 {
+    [self.FriendLoading startAnimating];
     [self.userInfoHandler updateFriendsInfo:^(NSError *error)
      {
          [self.friendTableView reloadData];
+         [self.FriendLoading stopAnimating];
+         
          [self.containerScrollView performSelector:@selector(didFinishPullToRefresh) withObject:nil afterDelay:0];
      }];
 }

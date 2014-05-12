@@ -252,10 +252,6 @@ typedef enum
         
         vc.activityName = self.activityName;
         vc.activityImageName = self.activityImageName;
-        //vc.numberRaps = [self.gestureRecognizer getRapsByActivityID: ];
-        
-        //! Only for testing.
-#warning Please Remove This Test code.
         
         int gestureTypeCount[4];
         
@@ -305,10 +301,11 @@ typedef enum
         vc.log = result;
         NSLog(@"%@",result);
         
+        [self.userInfoHandler saveState];
+        [self.userInfoHandler performSelectorInBackground:@selector(syncInfoToServer:) withObject:nil];
         
         //vc.log = [self.gestureRecognizer printGestureResult];
-        //! --- End testing code.
-        
+
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];
     
@@ -400,7 +397,7 @@ int timeCount = 0;
                 if( [self.userInfoHandler.userInfo.gender isEqualToString:@"female"])
                     gender = 1;
                 
-                NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
+//                NSLog(@"heartRate : %@, %@",[self.hearRateCounter getHeartRate], [self.hearRateCounter heartRateZoneForGender:gender atAge:age]);
                 
                 float heartRate = [[self.hearRateCounter getHeartRate] floatValue];
                 NSString *heartRateZoneText =[self.hearRateCounter heartRateZoneForGender:gender atAge:age];
