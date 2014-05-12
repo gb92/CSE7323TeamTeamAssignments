@@ -119,6 +119,7 @@
         self.userInfo.fitPoints     = @([defaults integerForKey:@"fitpoints"]);
         self.userInfo.todaySteps    = @([defaults integerForKey:@"steps"]);
         self.userInfo.goalFitPoints = @([defaults integerForKey:@"goalFitpoints"]);
+        self.userInfo.userID        = @([[defaults stringForKey:@"userID"] integerValue]);
         
         NSData *imageData           = [defaults dataForKey:@"image"];
         self.userInfo.profileImage  = [UIImage imageWithData:imageData];
@@ -140,6 +141,8 @@
     [defaults setInteger:[self.userInfo.todaySteps intValue] forKey:@"steps"];
     [defaults setInteger:[self.userInfo.fitPoints intValue] forKey:@"fitpoints"];
     [defaults setInteger:[self.userInfo.goalFitPoints intValue] forKey:@"goalFitpoints"];
+    [defaults setObject:[NSString stringWithFormat:@"%ld",[self.userInfo.userID integerValue]] forKey:@"userID"];
+    
     [defaults setObject:imageData forKey:@"image"];
     
     [defaults synchronize];
@@ -426,14 +429,23 @@
     {
         [self.fbHandler getFitPoints:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:@[self.userInfo.userID] response:^(NSArray *usersFitPoints, NSError *error) {
             
-            if( [usersFitPoints count] > 0)
+            if( !error )
             {
-                NSArray *theFitPoint = [usersFitPoints[0] objectForKey:@"fitPoints" ];
-                for (int i=0; i<[theFitPoint count]; i++)
+                if( [usersFitPoints count] > 0)
                 {
-                    self.userInfo.fitPoints = [theFitPoint[i] objectForKey:@"fitPoints"];
+                    NSArray *theFitPoint = [usersFitPoints[0] objectForKey:@"fitPoints" ];
+                    for (int i=0; i<[theFitPoint count]; i++)
+                    {
+                        self.userInfo.fitPoints = [theFitPoint[i] objectForKey:@"fitPoints"];
+                    }
                 }
             }
+            
+            if (onFinish)
+            {
+                onFinish(error);
+            }
+            
         }];
     }
     else
@@ -450,6 +462,8 @@
     //! It is bad to do this, it vernerable for hacking.!!!!
     
     [self.fbHandler updateFitPoints:self.userInfo.fitPoints withDate:[self getTodayAtMidNight] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID] callback:^(NSError *error) {
+        
+        [self.fbHandler updateCurrentUserDailySteps:self.userInfo.todaySteps withDate:[self getTodayAtMidNight] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
         
         if (onFinish) {
             onFinish(error);
