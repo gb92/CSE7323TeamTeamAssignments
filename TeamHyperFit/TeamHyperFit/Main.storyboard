@@ -1487,15 +1487,15 @@ The calorie was first defined by Nicolas Clément in 1824 as a unit of heat,[3] 
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="55" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="ActionCell" selectionStyle="none" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" rowHeight="115" id="ybG-q4-fR6" customClass="TTActivitySelectionViewTableViewCell">
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="ActionCell" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" rowHeight="115" id="ybG-q4-fR6" customClass="TTActivitySelectionViewTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ybG-q4-fR6" id="Q77-iQ-ePf">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pushupBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Qxx-2E-2Ro">
-                                                    <rect key="frame" x="20" y="20" width="77" height="71"/>
+                                                    <rect key="frame" x="-5" y="20" width="124" height="71"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUSH-UPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDn-Y3-aTB">
