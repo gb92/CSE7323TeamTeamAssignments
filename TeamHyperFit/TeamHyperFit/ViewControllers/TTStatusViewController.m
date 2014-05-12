@@ -16,6 +16,7 @@
 #import "TTAppDelegate.h"
 
 #import "UICountingLabel.h"
+#import "TFGesture.h"
 
 #import "UIScrollView+GifPullToRefresh.h"
 
@@ -28,10 +29,20 @@
 @property (weak, nonatomic) IBOutlet TTGraphView *fitpointGraphView;
 
 @property (strong, nonatomic) TTUserInfoHandler *userInfoHandler;
+@property (strong, nonatomic) NSArray* gestures;
 
 @end
 
 @implementation TTStatusViewController
+
+-(NSArray*)gestures
+{
+    if (!_gestures) {
+        _gestures = ((TTAppDelegate*)[[UIApplication sharedApplication]delegate]).gestures;
+    }
+    
+    return _gestures;
+}
 
 
 -(TTUserInfoHandler *)userInfoHandler
@@ -116,15 +127,45 @@
     
 }
 
+-(NSInteger)getWeekdayFromDate:(NSDate*) date
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setLocale:[NSLocale currentLocale]];
+    
+    NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:date];
+    NSInteger weekday = [weekdayComponents weekday];
+    
+    return weekday;
+}
+
+
 -(void)updateInfo
 {
-    //! Fake Data for now.
-    self.fitpointGraphView.data = [[NSArray alloc] initWithObjects:@(1),@(5),@(2),@(4),@(6),@(5),@(3),@(0),@(10),@(6),@(7),@(5), nil];
+    NSMutableArray *dateData = [[NSMutableArray alloc] init];
+    [dateData addObjectsFromArray:@[@(self.userInfoHandler.userInfo.sunFitPoints),
+                                    @(self.userInfoHandler.userInfo.monFitPoints),
+                                    @(self.userInfoHandler.userInfo.tueFitPoints),
+                                    @(self.userInfoHandler.userInfo.wenFitPoints),
+                                    @(self.userInfoHandler.userInfo.thuFitPoints),
+                                    @(self.userInfoHandler.userInfo.friFitPoints)]];
+    
+    NSMutableArray *dateDataToGraph = [[NSMutableArray alloc] init];
+    
+    NSInteger weekday = [self getWeekdayFromDate:[NSDate date]];
+    
+    for( int i=0; i<weekday; i++ )
+    {
+        [dateDataToGraph addObject: dateData[i]];
+    }
+    
+    self.fitpointGraphView.data = [NSArray arrayWithArray:dateDataToGraph];
 
     int steps = [self.userInfoHandler.userInfo.todaySteps intValue];
     self.stepsLabel.format = @"%d";
     self.stepsLabel.method = UILabelCountingMethodEaseOut;
     [self.stepsLabel countFrom:steps - 10 to:steps withDuration:0.5f];
+    
+    [self.actionTableView reloadData];
 
 }
 
@@ -145,9 +186,9 @@
 {
     TTActionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ActionCell" forIndexPath:indexPath];
     
-    cell.actionNameLabel.text = @"PUSH-UPS";
-    cell.numberOfRepsLabel.text = @"1,000 reps";
-    cell.actionImageView.image = [UIImage imageNamed:@"pushup"];
+    cell.actionNameLabel.text = ((TFGesture*)self.gestures[indexPath.row]).name;
+    cell.numberOfRepsLabel.text = [NSString stringWithFormat:@"%d Reps",[self.userInfoHandler.userInfo.gesturesPoints[indexPath.row] intValue]];
+    cell.actionImageView.image = [UIImage imageNamed:((TFGesture*)self.gestures[indexPath.row]).imageName];
     
     return cell;
 }

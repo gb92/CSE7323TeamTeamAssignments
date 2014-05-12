@@ -277,16 +277,15 @@
 
 -(void)updateInfo
 {
-    NSDictionary* fitpointsThisWeek = [self.userInfoHandler.userInfo.userStatistics objectForKey:@"fitpointsThisWeek"];
-    int goalThisWeek = [self.userInfoHandler.userInfo.goalFitPoints intValue];
+    int goalThisWeek = 15000;
     
-    self.sunView.value = [[fitpointsThisWeek objectForKey:@"Sunday"]     integerValue];
-    self.monView.value = [[fitpointsThisWeek objectForKey:@"Monday"]     integerValue];
-    self.tueView.value = [[fitpointsThisWeek objectForKey:@"Tuesday"]    integerValue];
-    self.wesView.value = [[fitpointsThisWeek objectForKey:@"Wednesday"]  integerValue];
-    self.thuView.value = [[fitpointsThisWeek objectForKey:@"Thursday"]   integerValue];
-    self.friView.value = [[fitpointsThisWeek objectForKey:@"Friday"]     integerValue];
-    self.satView.value = [[fitpointsThisWeek objectForKey:@"Saturday"]   integerValue];
+    self.sunView.value = self.userInfoHandler.userInfo.sunFitPoints;
+    self.monView.value = self.userInfoHandler.userInfo.monFitPoints;
+    self.tueView.value = self.userInfoHandler.userInfo.tueFitPoints;
+    self.wesView.value = self.userInfoHandler.userInfo.wenFitPoints;
+    self.thuView.value = self.userInfoHandler.userInfo.thuFitPoints;
+    self.friView.value = self.userInfoHandler.userInfo.friFitPoints;
+    self.satView.value = self.userInfoHandler.userInfo.satFitPoints;
     
     [self.sunView setNeedsDisplay];
     [self.monView setNeedsDisplay];

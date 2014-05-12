@@ -81,9 +81,28 @@
     [self saveState];
 }
 
+-(void) resetWeekDayData
+{
+    self.userInfo.sunFitPoints = 0;
+    self.userInfo.monFitPoints = 0;
+    self.userInfo.tueFitPoints = 0;
+    self.userInfo.wenFitPoints = 0;
+    self.userInfo.thuFitPoints = 0;
+    self.userInfo.friFitPoints = 0;
+    self.userInfo.satFitPoints = 0;
+}
+
+-(void) resetGesturesPoints
+{
+    for (int i=0; i < [self.userInfo.gesturesPoints count]; i++)
+    {
+        self.userInfo.gesturesPoints[i] = 0;
+    }
+}
 
 -(void)setUserInfoToDefaultValue
 {
+    self.userInfo.gesturesPoints = [[NSMutableArray alloc] initWithArray:@[@(0),@(0),@(0),@(0)]];
     self.userInfo.userID = @(0);
     self.userInfo.firstName = @"First Name";
     self.userInfo.lastName = @"Last Name";
@@ -91,23 +110,12 @@
     self.userInfo.goalFitPoints = @(10000);
     self.userInfo.profileImage = [UIImage imageNamed:@"noone"];
     
-    NSDictionary* fitPointsThisWeek = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       @(0),@"Sunday",
-                                       @(0),@"Monday",
-                                       @(0),@"Tuesday",
-                                       @(0),@"Wednesday",
-                                       @(0),@"Thursday",
-                                       @(0),@"Friday",
-                                       @(0),@"Saturday",
-                                       nil];
-
-    self.userInfo.userStatistics = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    fitPointsThisWeek,@"fitpointsThisWeek", nil];
+    [self resetWeekDayData];
 }
 
 -(void)retriveState
 {
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults  = [NSUserDefaults standardUserDefaults];
     
     NSString *firstname = [defaults objectForKey:@"firstName"];
     
@@ -120,6 +128,19 @@
         self.userInfo.todaySteps    = @([defaults integerForKey:@"steps"]);
         self.userInfo.goalFitPoints = @([defaults integerForKey:@"goalFitpoints"]);
         self.userInfo.userID        = @([[defaults stringForKey:@"userID"] integerValue]);
+        
+        self.userInfo.sunFitPoints = [defaults integerForKey:@"sunFitPoints"];
+        self.userInfo.monFitPoints = [defaults integerForKey:@"monFitPoints"];
+        self.userInfo.tueFitPoints = [defaults integerForKey:@"tueFitPoints"];
+        self.userInfo.wenFitPoints = [defaults integerForKey:@"wenFitPoints"];
+        self.userInfo.thuFitPoints = [defaults integerForKey:@"thuFitPoints"];
+        self.userInfo.friFitPoints = [defaults integerForKey:@"friFitPoints"];
+        self.userInfo.satFitPoints = [defaults integerForKey:@"satFitPoints"];
+        
+        for (int i=0; i < [self.userInfo.gesturesPoints count]; i++)
+        {
+            self.userInfo.gesturesPoints[i] = @([defaults integerForKey:[NSString stringWithFormat:@"gesturesPoints%d",i]]);
+        }
         
         NSData *imageData           = [defaults dataForKey:@"image"];
         self.userInfo.profileImage  = [UIImage imageWithData:imageData];
@@ -142,6 +163,19 @@
     [defaults setInteger:[self.userInfo.fitPoints intValue] forKey:@"fitpoints"];
     [defaults setInteger:[self.userInfo.goalFitPoints intValue] forKey:@"goalFitpoints"];
     [defaults setObject:[NSString stringWithFormat:@"%ld",[self.userInfo.userID integerValue]] forKey:@"userID"];
+    
+    [defaults setInteger:self.userInfo.sunFitPoints forKey:@"sunFitPoints"];
+    [defaults setInteger:self.userInfo.monFitPoints forKey:@"monFitPoints"];
+    [defaults setInteger:self.userInfo.tueFitPoints forKey:@"tueFitPoints"];
+    [defaults setInteger:self.userInfo.wenFitPoints forKey:@"wenFitPoints"];
+    [defaults setInteger:self.userInfo.thuFitPoints forKey:@"thuFitPoints"];
+    [defaults setInteger:self.userInfo.friFitPoints forKey:@"friFitPoints"];
+    [defaults setInteger:self.userInfo.satFitPoints forKey:@"satFitPoints"];
+
+    for (int i=0; i < [self.userInfo.gesturesPoints count]; i++)
+    {
+        [defaults setInteger:[self.userInfo.gesturesPoints[i] intValue] forKey:[NSString stringWithFormat:@"gesturesPoints%d",i]];
+    }
     
     [defaults setObject:imageData forKey:@"image"];
     
@@ -236,7 +270,7 @@
    NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
    
    [nowComponents setWeekday:weekDayNumber];
-   [nowComponents setWeek: [nowComponents week]-1]; //Next week
+   [nowComponents setWeek: [nowComponents week]];
    [nowComponents setHour:0]; //8a.m.
    [nowComponents setMinute:0];
    [nowComponents setSecond:0];
@@ -244,6 +278,17 @@
    NSDate *beginningOfWeek = [gregorian dateFromComponents:nowComponents];
     
     return beginningOfWeek;
+}
+
+-(NSInteger)getWeekdayFromDate:(NSDate*) date
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setLocale:[NSLocale currentLocale]];
+
+    NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:date];
+    NSInteger weekday = [weekdayComponents weekday];
+    
+    return weekday;
 }
 
 #pragma mark -
@@ -356,7 +401,6 @@
 //
 //    
 
-
     
     //Backup?
 //    [self.fbHandler getUserSteps:beginningOfWeek to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
@@ -419,6 +463,7 @@
     
 }
 
+
 #pragma mark -
 #pragma Request From Server
 //!------------------------------------------------------------------------------------
@@ -427,7 +472,7 @@
 {
     if( !self.userInfo.isDirty )
     {
-        [self.fbHandler getFitPoints:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:@[self.userInfo.userID] response:^(NSArray *usersFitPoints, NSError *error) {
+        [self.fbHandler getFitPoints:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:@[[NSString stringWithFormat:@"%@", self.userInfo.userID]] response:^(NSArray *usersFitPoints, NSError *error) {
             
             if( !error )
             {
@@ -439,11 +484,106 @@
                         self.userInfo.fitPoints = [theFitPoint[i] objectForKey:@"fitPoints"];
                     }
                 }
-            }
-            
-            if (onFinish)
-            {
-                onFinish(error);
+                
+                //! Get Weekly Stat;
+                [self.fbHandler getFitPoints:[self getDateFromWeekDay:1] to:[self getTodayAtMidNight] forIDs:@[[NSString stringWithFormat:@"%@", self.userInfo.userID]] response:^(NSArray *usersFitPoints, NSError *error) {
+                    
+                    if( !error )
+                    {
+                        if( [usersFitPoints count] > 0)
+                        {
+                            [self resetWeekDayData];
+                            
+                            NSArray *theFitPoint = [usersFitPoints[0] objectForKey:@"fitPoints" ];
+                            for (int i=0; i<[theFitPoint count]; i++)
+                            {
+                                NSDate* theDate = [theFitPoint[i] objectForKey:@"date"];
+                                NSInteger weekDay = [self getWeekdayFromDate:theDate];
+                                int thisFitPoints = [[theFitPoint[i] objectForKey:@"fitPoints"] intValue];
+                                switch (weekDay) {
+                                    case 1:
+                                        self.userInfo.sunFitPoints = thisFitPoints;
+                                        break;
+                                    case 2:
+                                        self.userInfo.monFitPoints = thisFitPoints;
+                                        break;
+                                    case 3:
+                                        self.userInfo.tueFitPoints = thisFitPoints;
+                                        break;
+                                    case 4:
+                                        self.userInfo.wenFitPoints = thisFitPoints;
+                                        break;
+                                    case 5:
+                                        self.userInfo.thuFitPoints = thisFitPoints;
+                                        break;
+                                    case 6:
+                                        self.userInfo.friFitPoints = thisFitPoints;
+                                        break;
+                                    case 7:
+                                        self.userInfo.satFitPoints = thisFitPoints;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                        
+                        //! Get Steps Stat;
+                        [self.fbHandler getUserSteps:[self getDateFromWeekDay:1] to:[self getTodayAtMidNight] forIDs:@[[NSString stringWithFormat:@"%@", self.userInfo.userID]] response:^(NSArray *usersSteps, NSError *error) {
+                            
+                            if( !error )
+                            {
+                                if( [usersSteps count] > 0)
+                                {
+                                    
+                                    NSArray *theSteps = [usersSteps[0] objectForKey:@"steps" ];
+                                    for (int i=0; i<[theSteps count]; i++)
+                                    {
+                                        NSDate* theDate = [theSteps[i] objectForKey:@"date"];
+                                        NSInteger weekDay = [self getWeekdayFromDate:theDate];
+                                        int numberOfSteps =  [[theSteps[i] objectForKey:@"steps"] intValue];
+                                        
+                                        switch (weekDay) {
+                                            case 1:
+                                                self.userInfo.sunFitPoints += numberOfSteps;
+                                                break;
+                                            case 2:
+                                                self.userInfo.monFitPoints += numberOfSteps;
+                                                break;
+                                            case 3:
+                                                self.userInfo.tueFitPoints += numberOfSteps;
+                                                break;
+                                            case 4:
+                                                self.userInfo.wenFitPoints += numberOfSteps;
+                                                break;
+                                            case 5:
+                                                self.userInfo.thuFitPoints += numberOfSteps;
+                                                break;
+                                            case 6:
+                                                self.userInfo.friFitPoints += numberOfSteps;
+                                                break;
+                                            case 7:
+                                                self.userInfo.satFitPoints += numberOfSteps;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (onFinish)
+                            {
+                                onFinish(error);
+                            }
+                            
+                        }];
+
+                        
+                    }
+
+                }];
+
             }
             
         }];
@@ -488,39 +628,15 @@
 -(void)updateUserInfo:(void(^)( TFUserModel*, NSError* error)) onFinish
 {
     [self updateSteps];
-    
-    //! ----- Sync User Info -------------------------------
-    //!
-    //if( self.userInfo.isDirty )
-    //{
-        [self syncInfoToServer:^(NSError* error)
+
+    [self syncInfoToServer:^(NSError* error)
+     {
+         if( !error )
          {
-             if( !error )
-             {
-                 [self requestInfoFromServer:nil];
-             }
-         }];
-//    }
-//    else
-//    {
-//        [self requestInfoFromServer:nil];
-//    }
-    
-    
-    //! ----- Get Friends Info -------------------------------
-    //!
-    [self.fbHandler getFriendsFitPoints:^(NSArray *friends, NSError *error) {
-        if(!error)
-        {
-            if( [friends count] > 0 )
-            {
-                NSLog(@"s : %@", [friends[0] objectForKey:@"name"] );
-            }
-        }
-        
-        if(onFinish != nil)
-            onFinish(self.userInfo, error);
-    }];
+             [self requestInfoFromServer:nil];
+         }
+     }];
+
     
     [self saveState];
 }

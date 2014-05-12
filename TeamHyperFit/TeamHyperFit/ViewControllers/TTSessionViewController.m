@@ -294,6 +294,7 @@ typedef enum
         }
         
         vc.numberRaps = gestureTypeCount[ self.activityType ];
+        self.userInfoHandler.userInfo.gesturesPoints[self.activityType] = @( [self.userInfoHandler.userInfo.gesturesPoints[self.activityType] intValue] + gestureTypeCount[self.activityType] );
         
         self.userInfoHandler.userInfo.fitPoints = @( [self.userInfoHandler.userInfo.fitPoints intValue] + vc.numberRaps * 100);
         

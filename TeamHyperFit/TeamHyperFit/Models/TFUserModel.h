@@ -11,8 +11,15 @@
 
 @interface TFUserModel : TTUserBaseModel
 
+@property (nonatomic) NSInteger sunFitPoints;
+@property (nonatomic) NSInteger monFitPoints;
+@property (nonatomic) NSInteger tueFitPoints;
+@property (nonatomic) NSInteger wenFitPoints;
+@property (nonatomic) NSInteger thuFitPoints;
+@property (nonatomic) NSInteger friFitPoints;
+@property (nonatomic) NSInteger satFitPoints;
 
-@property (strong, nonatomic) NSDictionary *userStatistics;
+@property (nonatomic) NSMutableArray *gesturesPoints;
 
 /*"male" , "female"*/
 @property (nonatomic, strong) NSString *gender;
