@@ -248,6 +248,7 @@
 
 -(void)updateFriendsInfo:(void(^)( NSError* error )) callback
 {
+    
     [self.friendsInfo removeAllObjects];
     
     [self.fbHandler getCurrentUserFriendsWithApp:^(NSArray *friends, NSError *error)
@@ -275,7 +276,7 @@
             if( [ids count] > 0 )
             {
                 //! Get Steps From Each Friends
-                [self.fbHandler getUserSteps:[self getTheDayBeforeToday:7] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *userSteps, NSError *error)
+                [self.fbHandler getUserSteps:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *userSteps, NSError *error)
                  {
                      
                      if (!error)
@@ -297,7 +298,7 @@
                          
                          
                          //! Get Fit Points From Each Friends
-                         [self.fbHandler getFitPoints:[self getTheDayBeforeToday:7] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
+                         [self.fbHandler getFitPoints:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
                           {
                               
                               if (!error)
@@ -376,7 +377,7 @@
 //    }];
     
 
-    
+
     
 //    [self.fbHandler updateCurrentUserDailySteps:@(5000) withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
 //    
@@ -427,7 +428,11 @@
             
             if( [usersFitPoints count] > 0)
             {
-                self.userInfo.fitPoints = [usersFitPoints[0] objectForKey:@"fitPoints"];
+                NSArray *theFitPoint = [usersFitPoints[0] objectForKey:@"fitPoints" ];
+                for (int i=0; i<[theFitPoint count]; i++)
+                {
+                    self.userInfo.fitPoints = [theFitPoint[i] objectForKey:@"fitPoints"];
+                }
             }
         }];
     }
