@@ -434,10 +434,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="U4e-G3-zSb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dj8-fA-sbb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -553,13 +549,7 @@
                                 </subviews>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="U4e-G3-zSb" firstAttribute="leading" secondItem="KBn-0O-XpW" secondAttribute="leading" id="9Ay-cZ-Mqm"/>
-                            <constraint firstAttribute="trailing" secondItem="U4e-G3-zSb" secondAttribute="trailing" id="QKs-EK-5c8"/>
-                            <constraint firstItem="U4e-G3-zSb" firstAttribute="top" secondItem="KBn-0O-XpW" secondAttribute="top" id="SqS-Es-3wW"/>
-                            <constraint firstItem="Wx4-GL-oe8" firstAttribute="top" secondItem="U4e-G3-zSb" secondAttribute="bottom" id="UFM-Xq-rli"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="State" id="ao4-xJ-wNl">
                         <barButtonItem key="backBarButtonItem" title="Back" id="uDc-oS-6I7"/>
@@ -595,10 +585,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="MES-Vg-hyd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4d9-fT-yxZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -727,7 +713,7 @@
                                 </subviews>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4d9-fT-yxZ" firstAttribute="leading" secondItem="tCo-Gh-BKf" secondAttribute="leading" id="1d7-hD-zhY"/>
                             <constraint firstItem="l3s-7f-0R2" firstAttribute="top" secondItem="4d9-fT-yxZ" secondAttribute="bottom" id="3Um-8z-zxB"/>
@@ -771,6 +757,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="bgImageView" destination="A9o-K0-tpI" id="n4Q-e9-TXJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKB-n1-cqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -845,10 +834,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="S20-yd-Lzh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBx-QV-lHA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -962,13 +947,7 @@
                                 </subviews>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="hYg-uw-nRn" firstAttribute="top" secondItem="S20-yd-Lzh" secondAttribute="bottom" id="KMo-wI-j58"/>
-                            <constraint firstItem="S20-yd-Lzh" firstAttribute="top" secondItem="EFQ-Nb-rhn" secondAttribute="top" id="SV5-vR-9Lh"/>
-                            <constraint firstItem="S20-yd-Lzh" firstAttribute="leading" secondItem="EFQ-Nb-rhn" secondAttribute="leading" id="YFP-LK-8wB"/>
-                            <constraint firstAttribute="trailing" secondItem="S20-yd-Lzh" secondAttribute="trailing" id="c7q-Ar-NR3"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="FriendLoading" destination="ue2-AW-2Dw" id="pFI-Th-WaM"/>

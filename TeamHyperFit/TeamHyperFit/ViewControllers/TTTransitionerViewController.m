@@ -20,6 +20,7 @@
 @property (strong, nonatomic) TTStatusViewController        *statusViewController;
 @property (strong, nonatomic) TTMainViewController          *mainViewController;
 @property (strong, nonatomic) TTFriendRankingViewController *friendViewController;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @end
 
@@ -57,6 +58,7 @@
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
+
     
 }
 
