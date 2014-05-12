@@ -78,7 +78,7 @@
     self.userInfoHandler.userInfo.age = 10;
     self.userInfoHandler.userInfo.gender = @"male"; //@"female"
     */
-	[self.agePickerView selectRow:(self.userInfoHandler.userInfo.age + MIN_AGE)
+	[self.agePickerView selectRow:(self.userInfoHandler.userInfo.age)
 					  inComponent:0
 						 animated:NO];
 	
@@ -111,6 +111,9 @@
 	self.userInfoHandler.userInfo.age = [self.agePickerView selectedRowInComponent:0];
 	self.userInfoHandler.userInfo.gender = [self.genderPickerView selectedRowInComponent:0] == 0 ? @"male" : @"female";
 	
+    [[NSUserDefaults standardUserDefaults] setInteger:self.userInfoHandler.userInfo.age forKey:@"age"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.userInfoHandler.userInfo.gender forKey:@"gender"];
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
 }
