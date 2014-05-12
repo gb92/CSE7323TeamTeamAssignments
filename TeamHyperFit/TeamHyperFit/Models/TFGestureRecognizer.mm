@@ -55,6 +55,9 @@ float *motionVector;
 BOOL CurrentlyGesturing;
 
 float *sampledGesture;
+//int windowSize = 60;
+//float threshold = .18;
+
 int windowSize = 60;
 float threshold = .18;
 

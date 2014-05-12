@@ -170,6 +170,30 @@ typedef enum
 -(void)setupUI
 {
     
+    switch (self.activityType) {
+        case 0: //Push up
+            self.gestureRecognizer.modelDataSetID = @(41);
+            NSLog(@"Use Push Up Model");
+            break;
+        case 1: //Sit up
+            self.gestureRecognizer.modelDataSetID = @(40);
+            NSLog(@"Use Set Up Model.");
+            break;
+        case 2: //Jumping Jack
+            self.gestureRecognizer.modelDataSetID = @(40);
+            NSLog(@"Use Jumping Jack Model");
+            break;
+        case 3: //Squrt
+            self.gestureRecognizer.modelDataSetID = @(40);
+            NSLog(@"Use Squart Model.");
+            break;
+        default:
+            self.gestureRecognizer.modelDataSetID = @(41);
+            NSLog(@"huh? I don't know your model?");
+            break;
+    }
+    
+    
     self.postLabel.text = self.activityName;
     self.postImageView.image = [UIImage imageNamed:self.activityImageName];
     
@@ -188,6 +212,7 @@ typedef enum
     self.modelIDLabel.text = [NSString stringWithFormat:@"%@" ,self.gestureRecognizer.modelDataSetID];
     
     self.isHeartRateEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"heartRateEnable"];
+    
 }
 
 #pragma mark -
@@ -240,7 +265,12 @@ typedef enum
         {
             gestureTypeCount[i] = 0;
         }
-        gestureTypeCount[ self.activityType ] = (int)self.resultCount;
+        
+        
+        gestureTypeCount[0] = (int)self.gestureRecognizer.pushUpNumber;
+        gestureTypeCount[1] = (int)self.gestureRecognizer.sitUpNumber;
+        gestureTypeCount[2] = (int)self.gestureRecognizer.jumpingJackNumber;
+        gestureTypeCount[3] = (int)self.gestureRecognizer.squartNumber;
         
         NSString *result = @"";
         for(int i=0; i<4; i++)
@@ -266,6 +296,10 @@ typedef enum
             
             result = [NSString stringWithFormat:@"%@ \n %@ : %d", result, gestureName, gestureTypeCount[i] ];
         }
+        
+        vc.numberRaps = gestureTypeCount[ self.activityType ];
+        
+        self.userInfoHandler.userInfo.fitPoints = @( [self.userInfoHandler.userInfo.fitPoints intValue] + vc.numberRaps * 100);
         
         vc.log = result;
         NSLog(@"%@",result);
@@ -371,7 +405,6 @@ typedef enum
 -(void)TFGestureRecognizerDidDetectEnd:(TFGestureRecognizer *)sender
 {
     [self.startSound play];
-    self.resultCount ++;
 }
 
 @end
