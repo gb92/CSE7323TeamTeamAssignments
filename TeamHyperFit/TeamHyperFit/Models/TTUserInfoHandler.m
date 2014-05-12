@@ -198,6 +198,51 @@
     self.userInfo.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 }
 
+-(NSDate*) getTodayAtMidNight
+{
+    NSDate* now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
+    
+    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
+    
+    return today;
+}
+
+-(NSDate*) getTheDayBeforeToday:(int) numberOfDays
+{
+    
+    NSDate *today = [self getTodayAtMidNight];
+    
+    NSDate *timeFromDay = [NSDate dateWithTimeInterval:-(60*60*24*numberOfDays) sinceDate:today];
+    
+    
+    return timeFromDay;
+}
+
+//! begin at Sunder = 1 to Saturnday at 7
+-(NSDate*) getDateFromWeekDay:(int) weekDayNumber
+{
+   
+   NSDate *today = [NSDate date];
+   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+   [gregorian setLocale:[NSLocale currentLocale]];
+   
+   NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
+   
+   [nowComponents setWeekday:weekDayNumber];
+   [nowComponents setWeek: [nowComponents week]-1]; //Next week
+   [nowComponents setHour:0]; //8a.m.
+   [nowComponents setMinute:0];
+   [nowComponents setSecond:0];
+   
+   NSDate *beginningOfWeek = [gregorian dateFromComponents:nowComponents];
+    
+    return beginningOfWeek;
+}
+
 #pragma mark -
 #pragma friends
 
@@ -221,68 +266,116 @@
             [self.friendsInfo addObject:friendObj];
             
         }
-        
-        callback( error );
+            NSMutableArray* ids = [[NSMutableArray alloc] init];
+            for( TTFriendModel* friend in self.friendsInfo)
+            {
+                [ids addObject:friend.userID];
+            }
+            
+            if( [ids count] > 0 )
+            {
+                //! Get Steps From Each Friends
+                [self.fbHandler getUserSteps:[self getTheDayBeforeToday:7] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *userSteps, NSError *error)
+                 {
+                     
+                     if (!error)
+                     {
+
+                         for (int j = 0; j<[userSteps count] ; j++ )
+                         {
+                             
+                             NSArray *stepsInfo = [userSteps[j] objectForKey:@"steps"];
+                             
+                             for( int i=0; i<[stepsInfo count]; i++ )
+                             {
+                                 TTFriendModel* thisFriend = [self.friendsInfo objectAtIndex:j];
+                                 
+                                 thisFriend.todaySteps = @( [thisFriend.todaySteps intValue] + (int)[[stepsInfo[i] objectForKey:@"steps"] intValue] );
+                                 
+                             }
+                         }
+                         
+                         
+                         //! Get Fit Points From Each Friends
+                         [self.fbHandler getFitPoints:[self getTheDayBeforeToday:7] to:[self getTodayAtMidNight] forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
+                          {
+                              
+                              if (!error)
+                              {
+                                  
+                                  for (int j = 0; j<[usersFitPoints count] ; j++ )
+                                  {
+                                      
+                                      NSArray *stepsInfo = [usersFitPoints[j] objectForKey:@"fitPoints"];
+                                      
+                                      for( int i=0; i<[stepsInfo count]; i++ )
+                                      {
+                                          TTFriendModel* thisFriend = [self.friendsInfo objectAtIndex:j];
+                                          
+                                          thisFriend.fitPoints = @( [thisFriend.fitPoints intValue] + (int)[[stepsInfo[i] objectForKey:@"fitPoints"] intValue] );
+                                          
+                                      }
+                                  }
+                                  
+                              }
+                              
+                              callback( error );
+                              
+                          }];
+
+                         
+                     }
+                     
+                 }];
+                
+                
+            }
         
         
     }];
     
-    NSDate *today = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    [gregorian setLocale:[NSLocale currentLocale]];
+    return;
     
-    NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
-    
-    [nowComponents setWeekday:1]; //Monday
-    [nowComponents setWeek: [nowComponents week]-1]; //Next week
-    [nowComponents setHour:0]; //8a.m.
-    [nowComponents setMinute:0];
-    [nowComponents setSecond:0];
-    
-    NSDate *beginningOfWeek = [gregorian dateFromComponents:nowComponents];
-
-    
-    NSDate* now = [NSDate date];
-    NSArray *ids = @[self.userInfo.userID];
+//    NSDate *today = [NSDate date];
+//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    [gregorian setLocale:[NSLocale currentLocale]];
 //    
-//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    NSDateComponents *nowComponents = [gregorian components:NSYearCalendarUnit | NSWeekCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:today];
 //    
-//    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+//    [nowComponents setWeekday:1]; //Monday
+//    [nowComponents setWeek: [nowComponents week]-1]; //Next week
+//    [nowComponents setHour:0]; //8a.m.
+//    [nowComponents setMinute:0];
+//    [nowComponents setSecond:0];
 //    
-//    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
+//    NSDate *beginningOfWeek = [gregorian dateFromComponents:nowComponents];
+//
 //    
-//    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
-//    
-//    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
-//    
-//    NSDate *timeToDay = [NSDate dateWithTimeInterval:-(60*60*24*2) sinceDate:today];
 
 
     
+    //Backup?
+//    [self.fbHandler getUserSteps:beginningOfWeek to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
+//    {
+//       
+//        NSLog(@">>>>%@", usersFitPoints[0]);
+//        
+//        NSArray *stepsInfo = [usersFitPoints[0] objectForKey:@"steps"];
+//        
+//        for( int i=0; i<[stepsInfo count]; i++ )
+//        {
+//            NSDictionary *dateNSteps = stepsInfo[i];
+//            
+//            NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[dateNSteps objectForKey:@"date" ]];
+//            NSInteger weekday = [weekdayComponents weekday];
+//            
+//            NSLog(@"Day : %ld (%ld steps)", (long)weekday, [[dateNSteps objectForKey:@"steps"] integerValue] );
+//        
+//        }
+//        
+//    }];
     
-    [self.fbHandler getUserSteps:beginningOfWeek to:now forIDs:ids response:^(NSArray *usersFitPoints, NSError *error)
-    {
-       
-        NSLog(@">>>>%@", usersFitPoints[0]);
-        
-        NSArray *stepsInfo = [usersFitPoints[0] objectForKey:@"steps"];
-        
-        for( int i=0; i<[stepsInfo count]; i++ )
-        {
-            NSDictionary *dateNSteps = stepsInfo[i];
-            
-            NSDateComponents *weekdayComponents =[gregorian components:NSWeekdayCalendarUnit fromDate:[dateNSteps objectForKey:@"date" ]];
-            NSInteger weekday = [weekdayComponents weekday];
-            
-            NSLog(@"Day : %ld (%ld steps)", (long)weekday, [[dateNSteps objectForKey:@"steps"] integerValue] );
-        
-        }
-        
-    }];
-    
-    
-    
-    
+
     
     
 //    [self.fbHandler updateCurrentUserDailySteps:@(5000) withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID]];
@@ -330,28 +423,12 @@
 {
     if( !self.userInfo.isDirty )
     {
-        NSDate* now = [NSDate date];
-
-          NSCalendar *calendar = [NSCalendar currentCalendar];
-        
-          unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-        
-          NSDateComponents *components = [calendar components:unitFlags fromDate:now];
-        
-          long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
-        
-          NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
-        
-          NSDate *timeToDay = [NSDate dateWithTimeInterval:-(60*60*24*1) sinceDate:today];
-        
-        [self.fbHandler getFitPoints:timeToDay to:today forIDs:@[self.userInfo.userID] response:^(NSArray *usersFitPoints, NSError *error) {
+        [self.fbHandler getFitPoints:[self getTheDayBeforeToday:1] to:[self getTodayAtMidNight] forIDs:@[self.userInfo.userID] response:^(NSArray *usersFitPoints, NSError *error) {
             
             if( [usersFitPoints count] > 0)
             {
-                NSLog(@"%@",usersFitPoints[0]);
+                self.userInfo.fitPoints = [usersFitPoints[0] objectForKey:@"fitPoints"];
             }
-            
-            //self.userInfo.fitPoints = usersFitPoints[0];
         }];
     }
     else
@@ -367,38 +444,13 @@
 #warning Vulnerable to get Attack!
     //! It is bad to do this, it vernerable for hacking.!!!!
     
-    NSDate* now = [NSDate date];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    unsigned unitFlags= NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-    
-    NSDateComponents *components = [calendar components:unitFlags fromDate:now];
-    
-    long timeToRemove=-1*([components hour]*60*60 + [components minute]*60 + [components second]);
-    
-    NSDate *today = [NSDate dateWithTimeInterval:timeToRemove sinceDate:now];
-    
-    
-    [self.fbHandler updateFitPoints:self.userInfo.fitPoints withDate:today withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID] callback:^(NSError *error) {
+    [self.fbHandler updateFitPoints:self.userInfo.fitPoints withDate:[self getTodayAtMidNight] withUserID:[NSString stringWithFormat:@"%@",self.userInfo.userID] callback:^(NSError *error) {
         
         if (onFinish) {
             onFinish(error);
         }
         
     }];
-    
-//    [self.fbHandler updateCurrentUserFitPoints: self.userInfo.fitPoints onFinish:^(NSError* error)
-//     {
-//         if( !error )
-//         {
-//             self.userInfo.isDirty = NO;
-//         }
-//         
-//         if(onFinish != nil)
-//             onFinish(error);
-//         
-//     }];
 }
 
 -(void)updateSteps

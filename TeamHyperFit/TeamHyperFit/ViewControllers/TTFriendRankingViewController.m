@@ -155,7 +155,7 @@
     TTFriendModel* friend = ((TTFriendModel*)self.userInfoHandler.friendsInfo[indexPath.row]);
     
     cell.nameLabel.text = friend.firstName;
-    cell.fitPointLabel.text = [NSString stringWithFormat:@"%d", [friend.fitPoints intValue]];
+    cell.fitPointLabel.text = [NSString stringWithFormat:@"%d", [friend.fitPoints intValue] + [friend.todaySteps intValue]];
     cell.photoCircularImageView.image = friend.profileImage;
     
     return cell;
