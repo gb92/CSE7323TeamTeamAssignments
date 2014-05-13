@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+	<title>About - Progressus Bootstrap template</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
+	<link rel="stylesheet" href="assets/css/main.css">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="about.html">About</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+	<!-- /.navbar -->
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="index.html">Home</a></li>
+			<li class="active">About</li>
+		</ol>
+
+		<div class="row">
+
+			<!-- Article main content -->
+			<article class="col-sm-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">About Team HyperFit</h1>
+				</header>
+				<h3></h3>
+				<p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300" > You may be asking yourself, “So, how does it work?” Well, it turns out Team Team’s HyperFit is incredibly simple to use! You simply place your iPhone into a custom built (bought at Best Buy) sleeve, put it on your arm and fire up the app! If logged into Facebook, you will immediately be greeted with your daily FitPoint goal and current progress as well as daily step count information. Swipe to the right and you can begin your workout! </p>
+				<p>Here, you can choose from a variety of premade exercise including pushups, jumping jacks, squats, and sit-ups. Additional exercises will be able to be added in a future update as well as a “free exercise” mode, allowing you to do whatever added exercise you want in any order you want, hassle free! After each workout, you can see a simple graph of how your heart rate has changed over the course of your workout, indicated by activity level zones.  Back to the main screen, you can swipe left to see how many of each exercise you have done for the day to keep track of your entire workout.</p>
+				<h3>Technical Details</h3>
+				<p>So you may be a developer and what to know how everything works under the hood. We shouldn’t tell you, but here at Team Team, we know we’re better than you in every way (the HyperFit app has been known to increase user confidence).</p>
+				<h4>Heart Rate Monitoring</h4>
+				<p>The heart rate monitoring system uses the camera and flash LED to determine user heart rate. Currently, each workout session is set at 30 seconds. For these 30 seconds, the flash LED is lit and the camera is exposed in 3 second chunks to avoid intensive CPU use of leaving it on throughout the duration of the session. During that time, the camera feed is analyzed for changes in color, corresponding to the pulses of blood flowing through the skin. Additionally, the algorithm is modified to include the user’s age to report the activity range the user is currently in.</p>
+				<h4>User Interface</h4>
+				<p></p>
+				<h4>Excercise Recognition</h4>
+				<p>One of the core features of HyperFit is the ability to seamlessly recognize exercises performed by the user, without the need for the user to manually specify what exercise is being performed (contrary to what the current UI suggests) or when it starts or stops. To accomplish this, we broke the task up into two separate parts: detecting the start and end of an exercise, and figuring out what that exercise is. First, to detect the start and stop of an exercise, we used filtered accelerometer data. We poll the accelerometer using CoreMotion at 100Hz to gather as many readings of Cartesian acceleration (x, y, and z) as possible. We then take the vector magnitude of each measurement (sum of the squares) and add it to a ring buffer. On a separate dispatch queue, we empty the contents of the ring buffer and examine only the unread data. Here, we utilize an averaging window over all the vector magnitudes, giving us a very smooth array of the average amount of “stuff” happening over time. We check each element of this array to see if this amount of “stuff” goes over a certain threshold (in an edge detection sense). If goes from under the threshold to over, we start recording all accelerometer data, as an exercise has begun. If it goes from over to under the threshold, we stop gathering accelerometer data as we now have a completed exercise! </p>
+				<p>To figure out what the exercise actually is, we use either SVM or KNN (adjustable) machine learning algorithms from scikit-learn. We trained the algorithms using a separate, training application where we pick an exercise, perform the exercise, and send the data to the server. Once we feel we have a sufficient number of observations of each exercise sent to the server (when we’re too tired to do another sit-up…), we train a model and the HyperFit app is ready to go. Now, not everyone takes the same amount of time to do a similar exercise. Since we gather measurements at a fixed rate, this means that each exercise detected has a variable amount of measurements. Our machine learning algorithms, however, require a fixed feature size to be able to compare each observation and report a predicted exercise label. To solve this problem, we end up down sampling each detected gesture to a fixed number of measurements.  Because each exercise is on the order of hundreds of measurements and we down sample to a feature set of 10 measurements, we did not bother with any interpolation. Instead, for non-integer sampling ratios, our algorithm selects the nearest integer index to any non-integer sample indexes, providing a fairly consistent way of extracting features (measurements) that occurred at similar times between similar exercises. Once down sampled, we send the feature set to the server for prediction, get a response, and provide feedback to the UI. Simple, right?</p>
+				<h4>Server Implementation</h4>
+				<p>We used a Tornado Server hosted on the Microsoft’s cloud platform, Azure. The Tornado implementation is a Python script that receives requests from the app to either add observations to a numbered dataset, train a model using scikit-learn with a KNN or SVM machine learning algorithm attached, or request the currently selected model to predict a label for an observation. The server response to the mobile client depends on the type of request sent. If an observation is sent up to be added to the dataset, the server responds by echoing the observation/label pair back to the client. If a request is sent to train a model for the dataset, the server responds with the re-substitution accuracy for both the KNN and SVM models trained. Finally, if a prediction request is sent, the server responds with the predicted label for the observation sent.</p>
+				<p>We are also utilizing Microsoft Azure’s Backend as a Service  Azure Mobile Services to store user information such as FitPoints and Activities. </p>
+			</article>
+			<!-- /Article -->
+
+			<!-- Sidebar -->
+			<aside class="col-sm-4 sidebar sidebar-right">
+
+				<div class="widget">
+					<h4>Meet the Team</h4>
+					<ul class="list-unstyled list-spaces">
+						<li><a href="">Matt Tonnemacher</a><br>
+							<span class="small text-muted">
+								•	Exercise Recognition Algorithm<br>
+								•	Exercise Training for ML Algorithm<br>
+								•	Exercise Feature Down Sampling Algorithm<br>
+								•	Website Text Write-Up (all this sweet text)<br>
+								•	App Testing and Calibration<br>
+								•	Video<br>
+							</span>
+						</li>
+						<li><a href="">Rita Enami</a><br>
+							<span class="small text-muted">
+								•	Heart Rate Monitoring Algorithm<br>
+								•	Video<br>
+							</span>
+						</li>
+						<li><a href="">Mark Wangwiwattanna</a><br>
+							<span class="small text-muted">
+								•	Emotional Support for Matt and Gavin’s Exercise Training<br>
+								•	Gathered Video of Matt and Gavin’s Exercise Training<br>
+								•	User Interface/Front End Design and Implementation (so pretty)<br>
+								•	Module Integration of Front and Back Ends<br>
+								•	App Testing and Calibration<br>
+								•	Video<br>
+							</span>
+						</li>
+						<li><a href="">Gavin Benedict</a><br>
+							<span class="small text-muted">
+								•	Tornado Server Setup<br>
+								•	Mongo DB Setup<br>
+								•	Facebook Integration<br>
+								•	Exercise Recognition Algorithm<br>
+								•	Exercise Training for ML Algorithm<br>
+								•	Website Setup<br>
+								•	App Testing and Calibration<br>
+								•	Video<br>
+							</span>
+						</li>
+					</ul>
+				</div>
+
+			</aside>
+			<!-- /Sidebar -->
+
+		</div>
+		<div class="row">
+			<article class="col-sm-12">
+					<header class="page-header">
+						<h1 class="page-title">Project Constraints</h1>
+					</header>
+					<h3>Constraint 1: The app must differentiate between the default exercises (doing nothing, jumping jacks, push-ups, sit-ups, and crunches) with a 90% accuracy rate. We will collect this data from 4 users with at least 5 examples per class for each user.</h3>
+					<p>70% of the time it is 100% accurate! Some exercises had problems as they were easily mixed up. Push-Ups were the biggest problem, as they were easily confused with squats and if the delay between going down and up was too long, it would register several exercises, throwing things off even more. Thresholds need to be adjusted a bit to ensure this doesn’t happen.</p>
+					<h3>Constraint 2: The heart rate will be categorized into five different zones (corresponding to common zones used by fitness applications like the Garmin forerunner). These zones classifications will be verified to be 95% accurate across five users in the different core workout sessions.</h3>
+					<p></p>
+					<h3>Constraint 3:The app must correctly display all workout information (exercises done, repetitions, and heart rate) to the user in a clear and visually pleasing way.</h3>
+					<p>The application is gorgeous. Information on each subsection of the workout is displayed immediately afterwards for the user to see rep count and heart rate over time. Additionally, the user can access daily workout information with a swipe to the right on the main screen.</p>
+		</article>
+		</div>
+	</div>	<!-- /container -->
+
+
+	<footer id="footer" class="top-space">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contact</h3>
+						<div class="widget-body">
+							<p><br>
+								<a href="mailto:#">teamteam@teamteam.com</a><br>
+								<br>
+								1234 Fake St, Dallas, TX 75275
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Follow Us</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons clearfix">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Team Team</h3>
+						<div class="widget-body">
+							<p>Team HyperFit is a student project created for <a href="http://lyle.smu.edu/~eclarson/teaching/mslc/spring2014/Home.html">CSE7323 Mobile Sensing, Learning, and Control</a>, a course from the Bobby B. Lyle School of Engineering at Southern Methodist University in Dallas, TX.</p>
+							<p></p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="#">Home</a> |
+								<a href="about.html">About</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2014, Team Team. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a>
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+	</footer>
+
+
+
+
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="assets/js/headroom.min.js"></script>
+	<script src="assets/js/jQuery.headroom.min.js"></script>
+	<script src="assets/js/template.js"></script>
+</body>
+</html>
